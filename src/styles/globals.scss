@@ -2,7 +2,47 @@
 @import '@/styles/_color.scss';
 
 :root {
-  --font-family: sans-serif;
+  @font-face {
+    font-family: 'DM-Mono-Light';
+    src: url(./../../public/fonts/DMMono-Light.ttf);
+  }
+
+  @font-face {
+    font-family: 'DM-Mono-Regular';
+    src: url(./../../public/fonts/DMMono-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: 'DM-Mono-Medium';
+    src: url(./../../public/fonts/DMMono-Medium.ttf)
+  }
+
+  --FONT-DM-MONO-LIGHT: 'DM-Mono-Light';
+  --FONT-DM-MONO-REGULAR: 'DM-Mono-Regular';
+  --FONT-DM-MONO-BOLD: 'DM-Mono-Medium';
+
+  --DARK: #{$DARK};
+  --LIGHT: #{$LIGHT};
+  --DARK-GRAY-1: #{$DARK-GRAY-1};
+  --DARK-GRAY-2: #{$DARK-GRAY-2};
+  --DARK-GRAY-3: #{$DARK-GRAY-3};
+  --BASE-GRAY-1: #{$BASE-GRAY-1};
+  --BASE-GRAY-2: #{$BASE-GRAY-2};
+  --BASE-GRAY-3: #{$BASE-GRAY-3};
+  --LIGHT-GRAY-1: #{$LIGHT-GRAY-1};
+  --LIGHT-GRAY-2: #{$LIGHT-GRAY-2};
+  --LIGHT-GRAY-3: #{$LIGHT-GRAY-3};
+  --BASE-RED-1: #{$BASE-RED-1};
+  --BASE-RED-2: #{$BASE-RED-2};
+  --DARK-RED-1: #{$DARK-RED-1};
+  --DARK-RED-2: #{$DARK-RED-2};
+  --BASE-GREEN-1: #{$BASE-GREEN-1};
+  --BASE-BLUE-1: #{$BASE-BLUE-1};
+  --DARK-BLUE-1: #{$DARK-BLUE-1};
+  --BASE-CREAM-1: #{$BASE-CREAM-1};
+  --BASE-CREAM-2: #{$BASE-CREAM-2};
+  --LIGHT-CREAM-1: #{$LIGHT-CREAM-1};
+  --BASE-YELLOW-1: #{$BASE-YELLOW-1};
 }
 
 * {
@@ -15,9 +55,7 @@ html {
   font-size: 12px;
 }
 
-body {
-  // font-family: var(--font-family);
-}
+body {}
 
 a {
   color: inherit;
