@@ -9,7 +9,7 @@ const BaseButton = ({
   name,
   shape,
   type = 'button',
-  fontSize = 'medium',
+  fontSize = 'small',
   fontWeight = 'regular',
   disabled = false,
   onClick,
