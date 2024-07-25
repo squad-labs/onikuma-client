@@ -24,7 +24,8 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="default"
-            color="default"
+            state="default"
+            children=""
         />
         <TextInput
             name="Title"
@@ -33,9 +34,44 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="Helper text"
             error={true}
-            shape="rounded"
-            color="error"
+            shape="default"
+            state="error"
             icon={<i className="icon-class"></i>}
+            children=""
+        />
+        <TextInput
+            name="Title"
+            value={value}
+            onChange={handleChange}
+            placeholder="Text"
+            helperText="This is a protip"
+            shape="default"
+            state="success"
+            children=""
+        />
+      </section>
+      <section className={cn('element-container')}>
+        <TextInput
+            name="Title"
+            value={value}
+            onChange={handleChange}
+            placeholder="Text"
+            helperText="This is a protip"
+            shape="pill"
+            state="default"
+            children=""
+        />
+        <TextInput
+            name="Title"
+            value={value}
+            onChange={handleChange}
+            placeholder="Text"
+            helperText="Helper text"
+            error={true}
+            shape="pill"
+            state="error"
+            icon={<i className="icon-class"></i>}
+            children=""
         />
         <TextInput
             name="Title"
@@ -44,7 +80,8 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="pill"
-            color="success"
+            state="success"
+            children=""
         />
       </section>
       <section className={cn('element-container')}>
@@ -55,7 +92,8 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="default"
-            color="default"
+            state="default"
+            children=""
         />
         <TextInput
             name="Title"
@@ -64,9 +102,10 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="Helper text"
             error={true}
-            shape="rounded"
-            color="error"
+            shape="default"
+            state="error"
             icon={<i className="icon-class"></i>}
+            children=""
         />
         <TextInput
             name="Title"
@@ -74,8 +113,9 @@ const TestClientPage = () => {
             onChange={handleChange}
             placeholder="Text"
             helperText="This is a protip"
-            shape="pill"
-            color="success"
+            shape="default"
+            state="success"
+            children=""
         />
       </section>
       <section className={cn('element-container')}>
@@ -85,8 +125,9 @@ const TestClientPage = () => {
             onChange={handleChange}
             placeholder="Text"
             helperText="This is a protip"
-            shape="default"
-            color="default"
+            shape="pill"
+            state="default"
+            children=""
         />
         <TextInput
             name="Title"
@@ -95,9 +136,10 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="Helper text"
             error={true}
-            shape="rounded"
-            color="error"
+            shape="pill"
+            state="error"
             icon={<i className="icon-class"></i>}
+            children=""
         />
         <TextInput
             name="Title"
@@ -106,38 +148,8 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="pill"
-            color="success"
-        />
-      </section>
-      <section className={cn('element-container')}>
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="default"
-            color="default"
-        />
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="Helper text"
-            error={true}
-            shape="rounded"
-            color="error"
-            icon={<i className="icon-class"></i>}
-        />
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="pill"
-            color="success"
+            state="success"
+            children=""
         />
       </section>
     </div>

@@ -8,8 +8,9 @@ export type InputProps = InputHTMLAttributes <HTMLInputElement> & {
     placeholder?: string;
     helperText?: string;
     error?: boolean;
-    shape?: 'default' | 'rounded' | 'pill';
-    color?: 'default' | 'error' | 'success' ;
+    shape?: 'default' | 'pill';
+    state?: 'default' | 'error' | 'success' ;
     classNames?: string[];
-    [key: string]: any;
+    children: ReactNode;
+    icon?: ReactNode;
   }

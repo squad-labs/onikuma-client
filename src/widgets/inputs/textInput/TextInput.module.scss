@@ -32,41 +32,45 @@
         right: 0.5rem;
         font-size: 1.25rem;
       }
-  
-      &.input-error .text-input {
-        border-color: red;
+
+      .input-children{
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
       }
+  
     }
   
     .helper-text {
       margin-top: 0.5rem;
       font-size: 0.875rem;
-  
-      &.helper-text-error {
-        color: red;
-      }
+      text-align: end;
+      font-family: var(--FONT-DM-MONO-REGULAR);
     }
   
     // Shapes
     &.default .text-input {
-      border-radius: 4px;
+      border-radius: 0px;
     }
   
     &.pill .text-input {
       border-radius: 50px;
     }
   
-    // Colors
+    // State
     &.default .text-input {
-      border-color: var(black);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 1);
     }
   
     &.error .text-input {
-      border-color: var(red);
+      border: 2px solid var(red);
+      color: var(red);
+      box-shadow: none;
     }
   
     &.success .text-input {
-      border-color: var(green);
+      background-color: var(--BASE-CREAM-2);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, 1);
     }
 
   }

@@ -1,28 +1,29 @@
 import React, { Fragment } from 'react';
 import styles from '@/widgets/inputs/textInput/TextInput.module.scss';
 import classNames from 'classnames/bind';
-import {InputProps} from '@/shared/types/ui/Input';
+import { InputProps } from '@/shared/types/ui/Input';
 
 const cn = classNames.bind(styles);
 
 const TextInput = ({
     name, 
-    shape, 
+    shape = 'default', 
     type = 'input',
-    fontSize = 'medium',
-    fontWeight = 'regular',
     disabled = false,
     onChange,
     value = '',
     placeholder = '',
-    color = 'default',
+    state = 'default',
     classNames = [],
+    children,
+    helperText = '',
+    icon,
     ...rest
 }: InputProps) => {
     return (
-      <div className={cn('input-wrapper', ...classNames)}>
+      <div className={cn('input-wrapper', shape, `${state}`,...classNames)}>
         <label className={cn('label')}>{name}</label>
-        <div className={cn('input-container', shape, color)}>
+        <div className={cn('input-container')}>
           <input
             {...rest}
             name={name}
@@ -34,8 +35,9 @@ const TextInput = ({
             className={cn('text-input')}
           />
           <span className={cn('icon')}></span>
-          {}
+          <div className={cn('input-children')}>{children && children}</div>
         </div>
+        <div className={cn('helper-text')}>{helperText}</div>
       </div>
     );
 }
