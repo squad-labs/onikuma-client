@@ -3,6 +3,8 @@ import React from 'react';
 import styles from '@/app/test/text-input/page.module.scss';
 import className from 'classnames/bind';
 import TextInput from '@/widgets/inputs/textInput';
+import BlackCircleIcon from '@/assets/images/black_circle.svg';
+import RedCircleIcon from '@/assets/images/red-circle.svg';
 
 const cn = className.bind(styles);
 
@@ -36,7 +38,6 @@ const TestClientPage = () => {
             error={true}
             shape="default"
             state="error"
-            icon={<i className="icon-class"></i>}
             children=""
         />
         <TextInput
@@ -70,7 +71,6 @@ const TestClientPage = () => {
             error={true}
             shape="pill"
             state="error"
-            icon={<i className="icon-class"></i>}
             children=""
         />
         <TextInput
@@ -104,7 +104,6 @@ const TestClientPage = () => {
             error={true}
             shape="default"
             state="error"
-            icon={<i className="icon-class"></i>}
             children=""
         />
         <TextInput
@@ -127,7 +126,7 @@ const TestClientPage = () => {
             helperText="This is a protip"
             shape="pill"
             state="default"
-            children=""
+            
         />
         <TextInput
             name="Title"
@@ -138,7 +137,6 @@ const TestClientPage = () => {
             error={true}
             shape="pill"
             state="error"
-            icon={<i className="icon-class"></i>}
             children=""
         />
         <TextInput

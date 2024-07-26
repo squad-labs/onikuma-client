@@ -17,7 +17,6 @@ const TextInput = ({
     classNames = [],
     children,
     helperText = '',
-    icon,
     ...rest
 }: InputProps) => {
     return (
@@ -34,8 +33,7 @@ const TextInput = ({
             placeholder={placeholder}
             className={cn('text-input')}
           />
-          <span className={cn('icon')}></span>
-          <div className={cn('input-children')}>{children && children}</div>
+          <div className={cn('icon')}>{children}</div>
         </div>
         <div className={cn('helper-text')}>{helperText}</div>
       </div>

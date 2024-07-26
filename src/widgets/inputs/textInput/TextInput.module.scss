@@ -1,10 +1,11 @@
+
 .input-wrapper {
     margin: 1rem;
   
     .label {
       display: block;
       margin-bottom: 0.5rem;
-      font-weight: bold;
+      font-weight: regular;
       font-family: var(--FONT-DM-MONO-REGULAR);
     }
   
@@ -17,9 +18,10 @@
       .text-input {
         width: 100%;
         padding: 1rem;
-        border: 2px solid var(black);
+        border: 1px solid black;
         font-family: var(--FONT-DM-MONO-REGULAR);
         font-size: smaller;
+        outline: none;
   
         &:disabled {
           background-color: var(--LIGHT);
@@ -29,8 +31,10 @@
   
       .icon {
         position: absolute;
-        right: 0.5rem;
-        font-size: 1.25rem;
+        right: 1rem;
+        width: 12px;
+        height: 12px;
+        align-items: center;
       }
 
       .input-children{
@@ -59,18 +63,41 @@
   
     // State
     &.default .text-input {
-      box-shadow: 4px 4px 0 rgba(0, 0, 0, 1);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 1);
     }
   
-    &.error .text-input {
-      border: 2px solid var(red);
-      color: var(red);
+    &.error {
+      .text-input {
+      border: 1px solid var(--BASE-RED-1);
+      color: var(--BASE-RED-1);
       box-shadow: none;
+      }
+      .helper-text {
+        text-align: start;
+        padding-left: 0.5rem;
+        position: relative;
+        padding-left: 16px;
+        color: var(--BASE-RED-1);
+      }
+
+      .helper-text::before{
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        background-image: url('/images/exclamationPoint_icon.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 0;
+        top: 0%;
+
+      }
     }
   
     &.success .text-input {
       background-color: var(--BASE-CREAM-2);
-      box-shadow: 4px 4px 0 rgba(0, 0, 0, 1);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 1);
     }
 
   }
