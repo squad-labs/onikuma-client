@@ -31,10 +31,9 @@
   
       .icon {
         position: absolute;
-        right: 1rem;
-        width: 12px;
-        height: 12px;
-        align-items: center;
+        top: 55%;
+        right: 0%;
+        transform: translate(-10px, -50%);
       }
 
       .input-children{

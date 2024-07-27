@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styles from '@/widgets/inputs/textInput/TextInput.module.scss';
 import classNames from 'classnames/bind';
-import { InputProps } from '@/shared/types/ui/Input';
+import { BaseInputProps } from '@/shared/types/ui/Input';
 
 const cn = classNames.bind(styles);
 
@@ -17,8 +17,9 @@ const TextInput = ({
     classNames = [],
     children,
     helperText = '',
+    error,
     ...rest
-}: InputProps) => {
+}: BaseInputProps) => {
     return (
       <div className={cn('input-wrapper', shape, `${state}`,...classNames)}>
         <label className={cn('label')}>{name}</label>

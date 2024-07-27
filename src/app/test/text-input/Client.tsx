@@ -27,8 +27,8 @@ const TestClientPage = () => {
             helperText="This is a protip"
             shape="default"
             state="default"
-            children=""
-        />
+        >
+        </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -60,8 +60,8 @@ const TestClientPage = () => {
             helperText="This is a protip"
             shape="pill"
             state="default"
-            children=""
-        />
+          >
+          </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -92,9 +92,9 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="default"
-            state="default"
-            children=""
-        />
+            state="default">
+            <BlackCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -103,9 +103,9 @@ const TestClientPage = () => {
             helperText="Helper text"
             error={true}
             shape="default"
-            state="error"
-            children=""
-        />
+            state="error">
+            <RedCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -113,9 +113,9 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="default"
-            state="success"
-            children=""
-        />
+            state="success">
+            <BlackCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
       </section>
       <section className={cn('element-container')}>
         <TextInput
@@ -125,9 +125,9 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="pill"
-            state="default"
-            
-        />
+            state="default">
+            <BlackCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -136,9 +136,9 @@ const TestClientPage = () => {
             helperText="Helper text"
             error={true}
             shape="pill"
-            state="error"
-            children=""
-        />
+            state="error">
+            <RedCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
         <TextInput
             name="Title"
             value={value}
@@ -146,9 +146,9 @@ const TestClientPage = () => {
             placeholder="Text"
             helperText="This is a protip"
             shape="pill"
-            state="success"
-            children=""
-        />
+            state="success">
+            <BlackCircleIcon viewBox ="0 0 16 16"/>
+        </TextInput>
       </section>
     </div>
   );
