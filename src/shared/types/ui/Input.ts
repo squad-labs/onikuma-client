@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, ReactNode} from "react";
 
-export type InputProps = InputHTMLAttributes <HTMLInputElement> & {
+export type BaseInputProps = InputHTMLAttributes <HTMLInputElement> & {
     name: string;
     disabled?: boolean;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -11,6 +11,21 @@ export type InputProps = InputHTMLAttributes <HTMLInputElement> & {
     shape?: 'default' | 'pill';
     state?: 'default' | 'error' | 'success' ;
     classNames?: string[];
-    children: ReactNode;
+    children?: ReactNode;
     icon?: ReactNode;
   }
+
+  export type OTPInputProps = InputHTMLAttributes <HTMLInputElement> & {
+    name: string;
+    disabled?: boolean;
+    onChange: (index: number, value: string) => void;
+    values: string[];
+    placeholder?: string;
+    helperText?: string;
+    error?: boolean;
+    shape?: 'default' | 'pill';
+    state?: 'default' | 'process';
+    classNames?: string[];
+    maxLength?: number;
+  }
+
