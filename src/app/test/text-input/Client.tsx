@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '@/app/test/text-input/page.module.scss';
 import className from 'classnames/bind';
 import TextInput from '@/widgets/inputs/textInput';
-import BlackCircleIcon from '@/assets/images/black_circle.svg';
+import BlackCircleIcon from '@/assets/images/black-circle.svg';
 import RedCircleIcon from '@/assets/images/red-circle.svg';
 
 const cn = className.bind(styles);

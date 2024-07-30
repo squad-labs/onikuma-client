@@ -20,7 +20,7 @@ const OTPInput = ({
 }: OTPInputProps) => {
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
-  const handleChange = (
+  const handleChange = ( /** useRef 사용해주세요 */
     index: number,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -35,13 +35,13 @@ const OTPInput = ({
     <div
       className={cn(
         'otp-input-wrapper',
-        shape,
         state,
-        { error },
         ...classNames,
       )}
     >
-      {values.map((value, index) => (
+      {values.map((value, index) => {
+        const isFocused = focusedIndex === index;
+        return (
         <input
           key={index}
           id={`${name}-${index}`}
@@ -54,9 +54,9 @@ const OTPInput = ({
           maxLength={maxLength}
           placeholder={placeholder}
           disabled={disabled}
-          className={cn('otp-input', { focused: focusedIndex === index })}
+          className={cn('otp-input', shape, isFocused && 'focused')}
         />
-      ))}
+      )})}
       <div className={cn('helper-text')}>{helperText}</div>
     </div>
   );

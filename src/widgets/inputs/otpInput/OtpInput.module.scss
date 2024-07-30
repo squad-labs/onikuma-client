@@ -1,40 +1,37 @@
 .otp-input-wrapper {
     display: flex;
     gap: 8px;
-
-    &.default {
-        border-radius: 1px;
-      }
     
-      &.pill {
-        border-radius: 50px;
-      }
+    .otp-input {
+      width: 50px;
+      height: 60px;
+      text-align: center;
+      border: 1px solid black;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 1); 
     
-      &.focused {
-        box-shadow: none;
-      }
-
-}
-
-.otp-label {
+    }
+    
+    .helper-text {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      text-align: end;
+      font-family: var(--FONT-DM-MONO-REGULAR);
+    }
+  }
+  
+  .default {
+    border-radius: 1px;
+  }
+  
+  .pill {
+    border-radius: 50px;
+  }
+  
+  .focused {
+    box-shadow: none;
+  }
+  
+  .otp-label {
     margin-bottom: 8px;
     font-weight: bold;
-}
-  
-  
-  .otp-input {
-    width: 50px;
-    height: 60px;
-    text-align: center;
-    border: 1px solid black;
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 1); 
-  
   }
-  
-  .helper-text {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    text-align: end;
-    font-family: var(--FONT-DM-MONO-REGULAR);
-  }
-  
