@@ -20,7 +20,7 @@ const OTPInput = ({
 }: OTPInputProps) => {
   const focusedIndexRef = useRef<number | null>(null);
 
-  const handleChange = ( /** useRef 사용해주세요 */
+  const handleChange = ( 
     index: number,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -40,6 +40,8 @@ const OTPInput = ({
   };
 
   return (
+    <div className={cn('otp-input-container')}>
+      {name && <label className={cn('otp-input-label')}>{name}</label>}
     <div
       className={cn(
         'otp-input-wrapper',
@@ -65,7 +67,8 @@ const OTPInput = ({
           className={cn('otp-input', shape, isFocused && 'focused')}
         />
       )})}
-      <div className={cn('helper-text')}>{helperText}</div>
+    </div>
+    <div className={cn('helper-text')}>{helperText}</div>
     </div>
   );
 };

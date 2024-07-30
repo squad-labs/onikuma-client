@@ -23,20 +23,21 @@ const TestClientPage = () => {
       <section className={cn('element-container')}>
         <OTPInput
           name="OTP"
-          label="OTP"
           values={otpValues}
           change={handleOtpChange}
           shape="pill"
+          helperText="This is a protip"
         />
-        <OTPInput
+      </section>
+      <section className={cn('element-container')}>
+      <OTPInput
           name="OTP"
-          label="OTP"
           values={otpValues}
           change={handleOtpChange}
           shape="default"
+          helperText="This is a protip"
         />
       </section>
-      <section className={cn('element-container')}></section>
     </div>
   );
 };
