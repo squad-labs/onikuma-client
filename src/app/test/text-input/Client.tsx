@@ -9,145 +9,150 @@ import RedCircleIcon from '@/assets/images/red-circle.svg';
 const cn = className.bind(styles);
 
 const TestClientPage = () => {
+  const [value, setValue] = React.useState('');
 
-    const [value, setValue] = React.useState('');
-
-    const handleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setValue(e.target.value);
-    };
+  const handleChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setValue(e.target.value);
+  };
   return (
     <div className={cn('container')}>
       <h2>Text Input</h2>
       <section className={cn('element-container')}>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="default"
-            state="default"
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="default"
+          state="default"
+        ></TextInput>
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="Helper text"
+          error={true}
+          shape="default"
+          state="error"
+          children=""
+        />
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="default"
+          state="success"
+          children=""
+        />
+      </section>
+      <section className={cn('element-container')}>
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="pill"
+          state="default"
+        ></TextInput>
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="Helper text"
+          error={true}
+          shape="pill"
+          state="error"
+          children=""
+        />
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="pill"
+          state="success"
+          children=""
+        />
+      </section>
+      <section className={cn('element-container')}>
+        <TextInput
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="default"
+          state="default"
         >
+          <BlackCircleIcon viewBox="0 0 16 16" />
         </TextInput>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="Helper text"
-            error={true}
-            shape="default"
-            state="error"
-            children=""
-        />
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="default"
-            state="success"
-            children=""
-        />
-      </section>
-      <section className={cn('element-container')}>
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="pill"
-            state="default"
-          >
-          </TextInput>
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="Helper text"
-            error={true}
-            shape="pill"
-            state="error"
-            children=""
-        />
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="pill"
-            state="success"
-            children=""
-        />
-      </section>
-      <section className={cn('element-container')}>
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="default"
-            state="default">
-            <BlackCircleIcon viewBox ="0 0 16 16"/>
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="Helper text"
+          error={true}
+          shape="default"
+          state="error"
+        >
+          <RedCircleIcon viewBox="0 0 16 16" />
         </TextInput>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="Helper text"
-            error={true}
-            shape="default"
-            state="error">
-            <RedCircleIcon viewBox ="0 0 16 16"/>
-        </TextInput>
-        <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="default"
-            state="success">
-            <BlackCircleIcon viewBox ="0 0 16 16"/>
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="default"
+          state="success"
+        >
+          <BlackCircleIcon viewBox="0 0 16 16" />
         </TextInput>
       </section>
       <section className={cn('element-container')}>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="pill"
-            state="default">
-            <BlackCircleIcon viewBox ="0 0 16 16"/>
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="pill"
+          state="default"
+        >
+          <BlackCircleIcon viewBox="0 0 16 16" />
         </TextInput>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="Helper text"
-            error={true}
-            shape="pill"
-            state="error">
-            <RedCircleIcon viewBox ="0 0 16 16"/>
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="Helper text"
+          error={true}
+          shape="pill"
+          state="error"
+        >
+          <RedCircleIcon viewBox="0 0 16 16" />
         </TextInput>
         <TextInput
-            name="Title"
-            value={value}
-            onChange={handleChange}
-            placeholder="Text"
-            helperText="This is a protip"
-            shape="pill"
-            state="success">
-            <BlackCircleIcon viewBox ="0 0 16 16"/>
+          name="Title"
+          value={value}
+          onChange={handleChange}
+          placeholder="Text"
+          helperText="This is a protip"
+          shape="pill"
+          state="success"
+        >
+          <BlackCircleIcon viewBox="0 0 16 16" />
         </TextInput>
       </section>
     </div>

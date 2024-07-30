@@ -28,4 +28,4 @@ export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   fontWeight?: 'light' | 'regular' | 'bold';
   children?: ReactNode;
   classNames?: string[];
-}
+};

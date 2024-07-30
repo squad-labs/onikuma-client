@@ -1,28 +1,40 @@
-.otp-input-wrapper{
+.otp-input-wrapper {
     display: flex;
     gap: 8px;
+
+    &.default {
+        border-radius: 1px;
+      }
+    
+      &.pill {
+        border-radius: 50px;
+      }
+    
+      &.focused {
+        box-shadow: none;
+      }
+
 }
 
-.otp-input {
+.otp-label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+  
+  
+  .otp-input {
     width: 50px;
     height: 60px;
     text-align: center;
     border: 1px solid black;
-    border-radius: 1px;
-    box-shadow: 3px 3px 0 black(0, 0, 0, 1);
-
-    &.pill .otp-input{
-        border-radius: 50px;
-    }
-
-    &.focused{
-        box-shadow: none;
-    }
-}
-
-.helper-text{
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 1); 
+  
+  }
+  
+  .helper-text {
     margin-top: 0.5rem;
-      font-size: 0.875rem;
-      text-align: end;
-      font-family: var(--FONT-DM-MONO-REGULAR);
-}
+    font-size: 0.875rem;
+    text-align: end;
+    font-family: var(--FONT-DM-MONO-REGULAR);
+  }
+  
