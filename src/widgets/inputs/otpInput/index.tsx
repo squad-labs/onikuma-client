@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from '@/widgets/inputs/otpInput/OtpInput.module.scss';
 import classNames from 'classnames/bind';
 import { OTPInputProps } from '@/shared/types/ui/Input';
@@ -18,7 +18,7 @@ const OTPInput = ({
   classNames = [],
   maxLength = 1,
 }: OTPInputProps) => {
-  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const focusedIndexRef = useRef<number | null>(null);
 
   const handleChange = ( /** useRef 사용해주세요 */
     index: number,
@@ -31,6 +31,14 @@ const OTPInput = ({
     }
   };
 
+  const handleFocus = (index: number) => {
+    focusedIndexRef.current = index;
+  };
+
+  const handleBlur = () => {
+    focusedIndexRef.current = null;
+  };
+
   return (
     <div
       className={cn(
@@ -40,7 +48,7 @@ const OTPInput = ({
       )}
     >
       {values.map((value, index) => {
-        const isFocused = focusedIndex === index;
+        const isFocused = focusedIndexRef.current === index;
         return (
         <input
           key={index}
@@ -49,8 +57,8 @@ const OTPInput = ({
           type="text"
           value={value}
           onChange={(e) => handleChange(index, e)}
-          onFocus={() => setFocusedIndex(index)}
-          onBlur={() => setFocusedIndex(null)}
+          onFocus={() => handleFocus(index)}
+          onBlur = {handleBlur}
           maxLength={maxLength}
           placeholder={placeholder}
           disabled={disabled}
