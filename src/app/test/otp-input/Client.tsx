@@ -7,14 +7,12 @@ import OTPInput from '@/widgets/inputs/otpInput';
 const cn = className.bind(styles);
 
 const TestClientPage = () => {
-  const [otpValues, setOtpValues] = React.useState<string[]>(
-    new Array(5).fill(''),
-  );
+  const [otpValues, setOtpValues] = React.useState<string>(''.padStart(5, ''));
 
   const handleOtpChange = (index: number, value: string) => {
-    const newOtpValues = [...otpValues];
+    const newOtpValues = otpValues.split('');
     newOtpValues[index] = value;
-    setOtpValues(newOtpValues);
+    setOtpValues(newOtpValues.join(''));
   };
 
   return (
@@ -30,7 +28,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-      <OTPInput
+        <OTPInput
           name="OTP"
           values={otpValues}
           change={handleOtpChange}

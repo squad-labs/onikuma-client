@@ -20,12 +20,14 @@ const OTPInput = ({
 }: OTPInputProps) => {
   const focusedIndexRef = useRef<number | null>(null);
 
-  const handleChange = ( 
+  const valueArray = values.padEnd(5, ' ').split('');
+
+  const handleChange = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     change(index, e.target.value);
-    if (e.target.value.length >= maxLength && index < values.length - 1) {
+    if (e.target.value.length >= maxLength && index < valueArray.length - 1) {
       const nextInput = document.getElementById(`${name}-${index + 1}`);
       if (nextInput) nextInput.focus();
     }
@@ -42,32 +44,28 @@ const OTPInput = ({
   return (
     <div className={cn('otp-input-container')}>
       {name && <label className={cn('otp-input-label')}>{name}</label>}
-    <div
-      className={cn(
-        'otp-input-wrapper',
-        state,
-        ...classNames,
-      )}
-    >
-      {values.map((value, index) => {
-        const isFocused = focusedIndexRef.current === index;
-        return (
-        <input
-          key={index}
-          id={`${name}-${index}`}
-          name={name}
-          type="text"
-          value={value}
-          onChange={(e) => handleChange(index, e)}
-          onFocus={() => handleFocus(index)}
-          onBlur = {handleBlur}
-          maxLength={maxLength}
-          placeholder={placeholder}
-          disabled={disabled}
-          className={cn('otp-input', shape, isFocused && 'focused')}
-        />
-      )})}
-    </div>
+      <div className={cn('otp-input-wrapper', state, ...classNames)}>
+        {valueArray.map((value, index) => {
+          const isFocused = focusedIndexRef.current === index;
+          return (
+            <input
+              key={index}
+              id={`${name}-${index}`}
+              name={name}
+              type="text"
+              value={value}
+              onChange={(e) => handleChange(index, e)}
+              onFocus={() => handleFocus(index)}
+              onBlur={handleBlur}
+              maxLength={maxLength}
+              placeholder={placeholder}
+              disabled={disabled}
+              className={cn('otp-input', shape, isFocused && 'focused')}
+              
+            />
+          );
+        })}
+      </div>
       <div className={cn('helper-text')}>{helperText}</div>
     </div>
   );
