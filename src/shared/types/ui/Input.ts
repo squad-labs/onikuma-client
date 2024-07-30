@@ -17,10 +17,9 @@ export type BaseInputProps = InputHTMLAttributes<HTMLInputElement> & {
 
 export type OTPInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
-  label: string;
   disabled?: boolean;
   change: (index: number, value: string) => void;
-  values: string[];
+  values: string;
   placeholder?: string;
   helperText?: string;
   error?: boolean;

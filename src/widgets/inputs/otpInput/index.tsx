@@ -68,7 +68,7 @@ const OTPInput = ({
         />
       )})}
     </div>
-    <div className={cn('helper-text')}>{helperText}</div>
+      <div className={cn('helper-text')}>{helperText}</div>
     </div>
   );
 };
