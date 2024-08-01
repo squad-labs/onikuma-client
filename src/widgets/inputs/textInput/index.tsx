@@ -20,6 +20,7 @@ const TextInput = ({
   error,
   ...rest
 }: BaseInputProps) => {
+
   return (
     <div className={cn('input-wrapper', shape, `${state}`, ...classNames)}>
       <label className={cn('label')}>{name}</label>
@@ -27,7 +28,7 @@ const TextInput = ({
         <input
           {...rest}
           name={name}
-          type={type}
+          type={type === 'number' ? 'number' : 'text'}
           disabled={disabled}
           onChange={onChange}
           value={value}

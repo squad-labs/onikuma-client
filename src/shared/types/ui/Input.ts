@@ -3,8 +3,8 @@ import { InputHTMLAttributes, ReactNode } from 'react';
 export type BaseInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   disabled?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string | number ;
   placeholder?: string;
   helperText?: string;
   error?: boolean;
