@@ -151,7 +151,6 @@ const TestClientPage = () => {
           helperText="This is a protip"
           shape="pill"
           state="default"
-          state="default"
         >
           <BlackCircleIcon viewBox="0 0 16 16" />
         </TextInput>
@@ -162,10 +161,12 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="This is a protip"
           shape="pill"
           state="default"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
         <TextInput
@@ -173,11 +174,13 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="Helper text"
           error={true}
           shape="pill"
           state="error"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
         <TextInput
@@ -185,10 +188,12 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="This is a protip"
           shape="pill"
           state="default"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
       </section>
@@ -198,10 +203,12 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="This is a protip"
           shape="default"
           state="default"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
         <TextInput
@@ -209,11 +216,13 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="Helper text"
           error={true}
           shape="default"
           state="error"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
         <TextInput
@@ -221,10 +230,12 @@ const TestClientPage = () => {
           type="number"
           value={value}
           onChange={handleChange}
-          placeholder="Text"
+          placeholder="number"
           helperText="This is a protip"
           shape="default"
           state="default"
+          showButtons={true}
+          allowsNegative={false}
         >
         </TextInput>
       </section>

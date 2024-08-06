@@ -13,6 +13,8 @@ export type BaseInputProps = InputHTMLAttributes<HTMLInputElement> & {
   classNames?: string[];
   children?: ReactNode;
   icon?: ReactNode;
+  showButtons?: boolean;
+  allowsNegative?: boolean;
 };
 
 export type OTPInputProps = InputHTMLAttributes<HTMLInputElement> & {
