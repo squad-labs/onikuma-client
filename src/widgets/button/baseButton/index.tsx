@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
 import styles from '@/widgets/button/baseButton/BaseButton.module.scss';
 import classNames from 'classnames/bind';
-import { ButtonProps } from '@/shared/types/ui/Button';
+import { BaseButtonProps } from '@/shared/types/ui/Button';
 
 const cn = classNames.bind(styles);
 
 const BaseButton = ({
-  name,
+  text,
   shape,
+  label,
+  colors,
+  theme,
+  role = 'button',
   type = 'button',
   fontSize = 'medium',
   fontWeight = 'regular',
@@ -17,17 +21,20 @@ const BaseButton = ({
   children = undefined,
   classNames = [],
   ...rest
-}: ButtonProps) => {
+}: BaseButtonProps) => {
   return (
     <button
       {...rest}
       onClick={onClick}
       type={type}
-      aria-label={name}
+      aria-label={label}
+      role={role}
       disabled={disabled || loading}
       className={cn(
         'base-button-container',
         `${shape}-container`,
+        `button-primary-${colors.primary}-${theme}`,
+        `button-secondary-${colors.secondary}-${theme}`,
         ...classNames,
       )}
     >
@@ -36,7 +43,7 @@ const BaseButton = ({
       ) : (
         <Fragment>
           {children && children}
-          <span className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}>{name}</span>
+          <span className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}>{text}</span>
         </Fragment>
       )}
     </button>
