@@ -1,0 +1,38 @@
+.header-container {
+  width: 100%;
+  height: 72px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--BASE-CREAM-1);
+  border-bottom: 1px solid var(--DARK-GARY-1);
+  z-index: 999;
+
+  .header-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem 0 2.5rem;
+    border-radius: 4.15rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+    &:first-child .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      .bar-wrapper {
+        margin-left: 1.4rem;
+      }
+    }
+
+    &:last-child .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1.5rem;
+    }
+  }
+}
