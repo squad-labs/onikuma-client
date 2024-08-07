@@ -1,0 +1,28 @@
+.bar-container {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.bar-size-small {
+  height: 2.75rem;
+  padding: 0 1.45rem;
+  border-radius: 1.4rem;
+}
+
+.bar-size-medium {
+  height: 3.125rem;
+  padding: 0 2.05rem;
+  border-radius: 1.625rem;
+}
+
+.bar-size-large {
+  height: 3.75rem;
+  padding: 0 2.25rem;
+  border-radius: 1.925rem;
+}
+
+.background-red {
+  background-color: var(--BASE-RED-1);
+}
