@@ -1,4 +1,12 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ColorType } from './Color';
+
+export type ButtonTheme = 'fill' | 'outline';
+
+export type ButtonColorObject = {
+  primary: ColorType;
+  secondary: ColorType;
+}
 
 export type ButtonShapeType =
   | 'shape-1'
@@ -6,10 +14,15 @@ export type ButtonShapeType =
   | 'shape-3'
   | 'shape-4'
   | 'shape-5'
-  | 'shape-6';
+  | 'shape-6'
+  | 'shape-7';
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  name: string;
+export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  text: string;
+  label: string;
+  theme: ButtonTheme;
+  role?: 'button' | 'submit' | 'reset';
+  colors: ButtonColorObject;
   disabled?: boolean;
   shape: ButtonShapeType;
   onClick: () => void;
@@ -21,7 +34,11 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  name: string;
+  text: string;
+  label: string;
+  theme: ButtonTheme;
+  colors: ButtonColorObject;
+  role?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   height: 'small' | 'medium' | 'large';
   fontSize?: 'small' | 'medium' | 'large';

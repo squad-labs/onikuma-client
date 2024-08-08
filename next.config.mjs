@@ -6,6 +6,9 @@ const nextConfig = {
     sassOptions: {
     includePaths: ["styles"],
   },
+  env: {
+    NEXT_PUBLIC_WAGMI_PROJECT_ID: process.env.WAGMI_PROJECT_ID,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

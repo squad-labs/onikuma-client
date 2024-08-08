@@ -1,7 +1,19 @@
+'use client'
 import React from 'react';
+import styles from '@/app/HomeClient.module.scss';
+import classNames from 'classnames/bind';
+import WalletConnectButton from '@/components/common/button/walletConnectButton';
+
+const cn = classNames.bind(styles);
 
 const HomeClient = () => {
-  return <div>Hello, World</div>;
+  return (
+    <div className={cn('container')}>
+      <div className={cn('inner')}>
+        <WalletConnectButton />
+      </div>
+    </div>
+  )
 };
 
 export default HomeClient;
