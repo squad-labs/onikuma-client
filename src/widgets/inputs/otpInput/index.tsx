@@ -61,7 +61,6 @@ const OTPInput = ({
               placeholder={placeholder}
               disabled={disabled}
               className={cn('otp-input', shape, isFocused && 'focused')}
-              
             />
           );
         })}

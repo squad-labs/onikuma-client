@@ -22,12 +22,11 @@ const TextInput = ({
   allowsNegative = true,
   ...rest
 }: BaseInputProps) => {
-
   const inputRef = useRef(null);
 
   const handleIncrement = () => {
     if (!disabled && inputRef.current) {
-      const currentValue = parseFloat(inputRef.current.value) || 0
+      const currentValue = parseFloat(inputRef.current.value) || 0;
       const newValue = currentValue + 1;
       inputRef.current.value = newValue;
       onChange && onChange({ target: { name, value: newValue } });
@@ -37,7 +36,9 @@ const TextInput = ({
   const handleDecrement = () => {
     if (!disabled && inputRef.current) {
       const currentValue = parseFloat(inputRef.current.value) || 0;
-      const newValue = allowsNegative ? currentValue - 1 : Math.max(currentValue - 1, 0);
+      const newValue = allowsNegative
+        ? currentValue - 1
+        : Math.max(currentValue - 1, 0);
       inputRef.current.value = newValue;
       onChange && onChange({ target: { name, value: newValue } });
     }
@@ -46,7 +47,6 @@ const TextInput = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(e);
   };
-
 
   return (
     <div className={cn('input-wrapper', shape, `${state}`, ...classNames)}>
@@ -65,9 +65,17 @@ const TextInput = ({
         />
         {showButtons && (
           <div className={cn('custom-buttons')}>
-          <button type="button" onClick={handleIncrement} className={cn('increment-button')}></button>
-          <button type="button" onClick={handleDecrement} className={cn('decrement-button')}></button>
-        </div>
+            <button
+              type="button"
+              onClick={handleIncrement}
+              className={cn('increment-button')}
+            ></button>
+            <button
+              type="button"
+              onClick={handleDecrement}
+              className={cn('decrement-button')}
+            ></button>
+          </div>
         )}
         <div className={cn('icon')}>{children}</div>
       </div>

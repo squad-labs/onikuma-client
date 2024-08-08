@@ -6,34 +6,34 @@ import { ClickButtonProps } from '@/shared/types/ui/Button';
 const cn = classNames.bind(styles);
 
 const ClickButton = ({
-    name, 
-    disabled, 
-    shape,
-    children = undefined, 
-    classNames = [],
-    ...rest
+  name,
+  disabled,
+  shape,
+  children = undefined,
+  classNames = [],
+  ...rest
 }: ClickButtonProps) => {
+  const [hasShadow, setHasShadow] = useState(true);
 
-    const [hasShadow, setHasShadow] = useState(true);
+  const handleClick = () => {
+    setHasShadow(!hasShadow);
+  };
 
-    const handleClick = () => {
-        setHasShadow(!hasShadow);
-    };
-
-    return (
-        <button 
-            className={cn(styles.clickButton, hasShadow ?  '' : styles.shadow, 
-            shape === 'round' ? styles.round : styles.square,
-            ...classNames
-        )}
-            disabled = {disabled}
-            onClick = {handleClick}
-            {...rest}
-        >
-            {children}
-        </button>
-    );
-
+  return (
+    <button
+      className={cn(
+        styles.clickButton,
+        hasShadow ? '' : styles.shadow,
+        shape === 'round' ? styles.round : styles.square,
+        ...classNames,
+      )}
+      disabled={disabled}
+      onClick={handleClick}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default ClickButton;

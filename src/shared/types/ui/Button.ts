@@ -30,10 +30,10 @@ export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   classNames?: string[];
 };
 
-export type ClickButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &{
+export type ClickButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   name: string;
   disabled?: boolean;
   shape: 'square' | 'round';
   children?: ReactNode;
   classNames?: string[];
-}
+};

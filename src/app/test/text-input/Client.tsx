@@ -167,8 +167,7 @@ const TestClientPage = () => {
           state="default"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
         <TextInput
           name="Title"
           type="number"
@@ -181,8 +180,7 @@ const TestClientPage = () => {
           state="error"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
         <TextInput
           name="Title"
           type="number"
@@ -194,8 +192,7 @@ const TestClientPage = () => {
           state="default"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
       </section>
       <section className={cn('element-container')}>
         <TextInput
@@ -209,8 +206,7 @@ const TestClientPage = () => {
           state="default"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
         <TextInput
           name="Title"
           type="number"
@@ -223,8 +219,7 @@ const TestClientPage = () => {
           state="error"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
         <TextInput
           name="Title"
           type="number"
@@ -236,8 +231,7 @@ const TestClientPage = () => {
           state="default"
           showButtons={true}
           allowsNegative={false}
-        >
-        </TextInput>
+        ></TextInput>
       </section>
     </div>
   );

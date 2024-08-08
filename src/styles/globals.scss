@@ -14,7 +14,7 @@
 
   @font-face {
     font-family: 'DM-Mono-Medium';
-    src: url(./../../public/fonts/DMMono-Medium.ttf)
+    src: url(./../../public/fonts/DMMono-Medium.ttf);
   }
 
   --FONT-DM-MONO-LIGHT: 'DM-Mono-Light';
@@ -55,7 +55,8 @@ html {
   font-size: 12px;
 }
 
-body {}
+body {
+}
 
 a {
   color: inherit;

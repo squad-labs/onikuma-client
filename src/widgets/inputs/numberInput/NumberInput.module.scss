@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     width: 18rem;
-
+  
     .text-input {
       width: 100%;
       padding: 1rem;
@@ -21,32 +21,7 @@
       font-family: var(--FONT-DM-MONO-REGULAR);
       font-size: smaller;
       outline: none;
-
-      &:disabled {
-        background-color: var(--LIGHT);
-        cursor: not-allowed;
-      }
     }
-
-    .icon {
-      position: absolute;
-      top: 55%;
-      right: 0%;
-      transform: translate(-10px, -50%);
-    }
-
-    .input-children {
-      margin-left: 0.5rem;
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  .helper-text {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    text-align: end;
-    font-family: var(--FONT-DM-MONO-REGULAR);
   }
 
   // Shapes
@@ -128,5 +103,12 @@
 
   .decrement-button {
     background-image: url('/images/number-decrement.svg');
+  }
+
+  .helper-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    text-align: end;
+    font-family: var(--FONT-DM-MONO-REGULAR);
   }
 }
