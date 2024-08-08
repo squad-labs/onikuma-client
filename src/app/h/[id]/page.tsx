@@ -5,10 +5,20 @@ import HonorClientPage from '@/app/h/[id]/client'
 
 const cn = classNames.bind(styles)
 
-const HonorPage = () => {
+type Props = {
+  params: {
+    id: string;
+  }
+}
+
+const HonorPage = ({ params }: Props) => {
+  const { id } = params;
+
   return (
     <main className={cn('container')}>
-      <HonorClientPage />
+      <HonorClientPage
+        id={id}
+      />
     </main>
   )
 }
