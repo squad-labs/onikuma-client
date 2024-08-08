@@ -4,10 +4,14 @@ import classNames from 'classnames/bind'
 
 const cn = classNames.bind(styles)
 
-const PlayClientPage = () => {
+type Props = {
+  id: string;
+}
+
+const PlayClientPage = ({ id }: Props) => {
   return (
     <div>
-      
+      <span>{id}</span>
     </div>
   )
 }

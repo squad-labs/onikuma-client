@@ -5,10 +5,19 @@ import PlayClientPage from '@/app/p/[id]/client'
 
 const cn = classNames.bind(styles)
 
-const PlayPage = () => {
+type Props = {
+  params: {
+    id: string;
+  }
+}
+
+const PlayPage = ({ params }: Props) => {
+  const { id } = params;
   return (
     <main className={cn('container')}>
-      <PlayClientPage />
+      <PlayClientPage
+        id={id}
+      />
     </main>
   )
 }
