@@ -5,10 +5,20 @@ import DashboardClientPage from '@/app/d/[id]/client'
 
 const cn = classNames.bind(styles)
 
-const DashboardPage = () => {
+type Props = {
+  params: {
+    id: string;
+  }
+}
+
+const DashboardPage = ({ params }: Props) => {
+  const { id } = params;
+
   return (
     <main className={cn('container')}>
-      <DashboardClientPage />
+      <DashboardClientPage 
+        id={id}
+      />
     </main>
   )
 }
