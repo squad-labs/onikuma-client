@@ -17,9 +17,19 @@ const NumberInput = ({
   classNames = [],
   helperText = '',
   label = '',
+  placeholder = 'number',
 }: NumberInputProps) => {
+
+  useEffect(() => {
+    if (!allowsZero && value === 0) {
+      onClick(1);
+    }
+  }, [allowsZero, value, onClick]);
+
   const handleIncrease = useCallback(() => {
-    if (typeof value === 'number') {
+    if (value === '' || value === 0) {
+      onClick(1);
+    } else if (typeof value === 'number') {
       onClick(value + 1);
     }
   }, [value, onClick]);
@@ -50,14 +60,22 @@ const NumberInput = ({
         onChange(event);
       }
     },
-    [allowsNegative, onChange],
+    [allowsNegative, allowsZero, onChange]
   );
+
+  const displayValue = value === '' ? '' : value;
 
   return (
     <div className={cn('input-wrapper', shape, `${state}`, ...classNames)}>
-        <label className={cn('label')}>{label}</label>
+      <label className={cn('label')}>{label}</label>
       <div className={cn('input-container')}>
-        <input type={'text'} value={value} onChange={handleInputChange} className={cn('text-input')} />
+        <input
+          type={'text'}
+          value={displayValue}
+          onChange={handleInputChange}
+          className={cn('text-input')}
+          placeholder={displayValue === '' ? placeholder : ''}
+        />
         <div className={cn('custom-buttons')}>
           {showIncDecButton && (
             <>
@@ -77,4 +95,5 @@ const NumberInput = ({
     </div>
   );
 };
+
 export default NumberInput;

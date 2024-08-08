@@ -33,6 +33,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="pill"
           state="default"
+          placeholder='number'
           helperText='This is a protip'
         />
         <NumberInput
@@ -42,6 +43,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="pill"
           state="error"
+          placeholder='number'
           helperText='Helper Text'
         />
         <NumberInput
@@ -51,6 +53,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="pill"
           state="success"
+          placeholder='number'
           helperText='This is a protip'
         />
       </section>
@@ -62,6 +65,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="default"
           state="default"
+          placeholder='number'
           helperText='This is a protip'
         />
         <NumberInput
@@ -71,6 +75,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="default"
           state="error"
+          placeholder='number'
           helperText='Helper Text'
         />
         <NumberInput
@@ -80,6 +85,7 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="default"
           state="success"
+          placeholder='number'
           helperText='This is a protip'
         />
       </section>

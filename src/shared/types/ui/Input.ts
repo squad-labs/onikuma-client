@@ -43,4 +43,5 @@ export type NumberInputProps = {
   children?: ReactNode;
   classNames?: string[];
   label: string;
+  placeholder?: string;
 };
