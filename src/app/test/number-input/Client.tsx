@@ -7,7 +7,7 @@ import NumberInput from '@/widgets/inputs/numberInput';
 const cn = className.bind(styles);
 
 const TestClientPage = () => {
-  const [value, setValue] = useState<number | ''>(0);
+  const [value, setValue] = useState<number | ''>('');
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

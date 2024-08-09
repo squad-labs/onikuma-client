@@ -20,6 +20,16 @@ const NumberInput = ({
   placeholder = 'number',
 }: NumberInputProps) => {
 
+  if (!allowsZero && value === 0) {
+    console.error('Value cannot be zero');
+    return ;
+  }
+
+  if (!allowsNegative && typeof value === 'number' && value < 0) {
+    console.error('Value cannot be negative');
+    return ;
+  }
+
   useEffect(() => {
     if (!allowsZero && value === 0) {
       onClick(1);
@@ -34,8 +44,11 @@ const NumberInput = ({
     }
   }, [value, onClick]);
 
+  const isDecrementDisabled =
+    (!allowsZero && value === 1) || (!allowsNegative && value === 0);
+
   const handleDecrease = useCallback(() => {
-    if (typeof value === 'number') {
+    if (!isDecrementDisabled && typeof value === 'number') {
       if (allowsNegative || value > 0) {
         if (!allowsZero && value - 1 === 0) {
           onClick('');
@@ -44,19 +57,19 @@ const NumberInput = ({
         }
       }
     }
-  }, [value, onClick, allowsNegative, allowsZero]);
+  }, [value, onClick, allowsNegative, allowsZero, isDecrementDisabled]);
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = event.target.value;
       const numericValue = Number(newValue);
 
-      if (
-        newValue === '' ||
-        (!allowsNegative && numericValue >= 0) ||
-        (allowsNegative && !isNaN(numericValue)) ||
-        (allowsZero && numericValue === 0)
-      ) {
+      const isValid = newValue === '' ||
+      (!allowsNegative && numericValue >= 0) ||
+      (allowsNegative && !isNaN(numericValue)) ||
+      (allowsZero && numericValue === 0); 
+
+      if (isValid) {
         onChange(event);
       }
     },
@@ -85,7 +98,7 @@ const NumberInput = ({
               ></button>
               <button
                 onClick={handleDecrease}
-                className={cn('decrement-button')}
+                className={cn('decrement-button', {disabled: isDecrementDisabled})}
               ></button>
             </>
           )}

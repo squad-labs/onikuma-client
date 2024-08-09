@@ -103,6 +103,11 @@
 
   .decrement-button {
     background-image: url('/images/number-decrement.svg');
+
+    &.disabled{
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 
   .helper-text {
