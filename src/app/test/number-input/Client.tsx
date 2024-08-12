@@ -26,15 +26,15 @@ const TestClientPage = () => {
     <div className={cn('container')}>
       <h2>Number Input</h2>
       <section className={cn('element-container')}>
-      <NumberInput
+        <NumberInput
           label="Title"
           value={value}
           onChange={handleChange}
           onClick={handleClick}
           shape="pill"
           state="default"
-          placeholder='number'
-          helperText='This is a protip'
+          placeholder="number"
+          helperText="This is a protip"
         />
         <NumberInput
           label="Title"
@@ -43,8 +43,8 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="pill"
           state="error"
-          placeholder='number'
-          helperText='Helper Text'
+          placeholder="number"
+          helperText="Helper Text"
         />
         <NumberInput
           label="Title"
@@ -53,20 +53,20 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="pill"
           state="success"
-          placeholder='number'
-          helperText='This is a protip'
+          placeholder="number"
+          helperText="This is a protip"
         />
       </section>
       <section className={cn('element-container')}>
-      <NumberInput
+        <NumberInput
           label="Title"
           value={value}
           onChange={handleChange}
           onClick={handleClick}
           shape="default"
           state="default"
-          placeholder='number'
-          helperText='This is a protip'
+          placeholder="number"
+          helperText="This is a protip"
         />
         <NumberInput
           label="Title"
@@ -75,8 +75,8 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="default"
           state="error"
-          placeholder='number'
-          helperText='Helper Text'
+          placeholder="number"
+          helperText="Helper Text"
         />
         <NumberInput
           label="Title"
@@ -85,8 +85,8 @@ const TestClientPage = () => {
           onClick={handleClick}
           shape="default"
           state="success"
-          placeholder='number'
-          helperText='This is a protip'
+          placeholder="number"
+          helperText="This is a protip"
         />
       </section>
     </div>

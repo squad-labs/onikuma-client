@@ -1,5 +1,5 @@
 import { NumberInputProps } from '@/shared/types/ui/Input';
-import React, { useCallback, useMemo, useEffect } from 'react';
+import React, { useCallback, useMemo, useEffect, Fragment } from 'react';
 import styles from '@/widgets/inputs/numberInput/NumberInput.module.scss';
 import classNames from 'classnames/bind';
 
@@ -19,22 +19,15 @@ const NumberInput = ({
   label = '',
   placeholder = 'number',
 }: NumberInputProps) => {
-
   if (!allowsZero && value === 0) {
     console.error('Value cannot be zero');
-    return ;
+    return;
   }
 
   if (!allowsNegative && typeof value === 'number' && value < 0) {
     console.error('Value cannot be negative');
-    return ;
+    return;
   }
-
-  useEffect(() => {
-    if (!allowsZero && value === 0) {
-      onClick(1);
-    }
-  }, [allowsZero, value, onClick]);
 
   const handleIncrease = useCallback(() => {
     if (value === '' || value === 0) {
@@ -59,24 +52,41 @@ const NumberInput = ({
     }
   }, [value, onClick, allowsNegative, allowsZero, isDecrementDisabled]);
 
+  const _isUpdateInput = useCallback((newValue: string) => {
+    // 빈 문자열이 때
+    // 빈 문자열이 아닐 때
+
+    const numericValue = Number(newValue);
+
+    console.log(numericValue);
+
+    if (newValue === '') {
+      return true;
+    } else {
+      if (isNaN(numericValue)) return false;
+      if (allowsNegative && numericValue > 0) {
+        return true;
+      }
+      if (allowsZero && numericValue === 0) {
+        return true;
+      }
+      if (numericValue >= 1) return true;
+    }
+    return false;
+  }, []);
+
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value;
-      const numericValue = Number(newValue);
-
-      const isValid = newValue === '' ||
-      (!allowsNegative && numericValue >= 0) ||
-      (allowsNegative && !isNaN(numericValue)) ||
-      (allowsZero && numericValue === 0); 
-
-      if (isValid) {
+      if (_isUpdateInput(event.target.value)) {
         onChange(event);
       }
     },
-    [allowsNegative, allowsZero, onChange]
+    [allowsNegative, allowsZero, onChange],
   );
 
-  const displayValue = value === '' ? '' : value;
+  const displayValue = useMemo(() => {
+    return value === '' ? '' : value;
+  }, [value]);
 
   return (
     <div className={cn('input-wrapper', shape, `${state}`, ...classNames)}>
@@ -91,16 +101,17 @@ const NumberInput = ({
         />
         <div className={cn('custom-buttons')}>
           {showIncDecButton && (
-            <>
+            <Fragment>
               <button
                 onClick={handleIncrease}
                 className={cn('increment-button')}
               ></button>
               <button
+                disabled={isDecrementDisabled}
                 onClick={handleDecrease}
-                className={cn('decrement-button', {disabled: isDecrementDisabled})}
+                className={cn('decrement-button')}
               ></button>
-            </>
+            </Fragment>
           )}
         </div>
       </div>
