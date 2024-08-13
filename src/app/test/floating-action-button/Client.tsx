@@ -173,6 +173,7 @@ const TestClientPage = () => {
           onClick={() => console.log('Button Clicked')}
           classNames={['button-blue']}
           disabled={true}
+          text="Enabled"
         />
         <FloatingActionButton
           name="Button"
@@ -180,6 +181,7 @@ const TestClientPage = () => {
           onClick={() => console.log('Button Clicked')}
           classNames={['button-blue']}
           disabled={false}
+          text="Enabled"
         />
         <FloatingActionButton
           name="Button"
@@ -187,6 +189,7 @@ const TestClientPage = () => {
           onClick={() => console.log('Button Clicked')}
           classNames={['button-red']}
           disabled={false}
+          text="Enabled"
         />
       </section>
     </div>
