@@ -1,9 +1,9 @@
-import React from 'react'
-import styles from '@/widgets/button/paddingButton/PaddingButton.module.scss'
-import classNames from 'classnames/bind'
-import { PaddingButtonProps } from '@/shared/types/ui/Button'
+import React from 'react';
+import styles from '@/widgets/button/paddingButton/PaddingButton.module.scss';
+import classNames from 'classnames/bind';
+import { PaddingButtonProps } from '@/shared/types/ui/Button';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 const PaddingButton = ({
   name,
@@ -24,12 +24,18 @@ const PaddingButton = ({
       type={type}
       aria-label={name}
       disabled={disabled}
-      className={cn('padding-button-container', `height-${height}`, ...classNames)}
+      className={cn(
+        'padding-button-container',
+        `height-${height}`,
+        ...classNames,
+      )}
     >
       {children && children}
-      <span className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}>{name}</span>
+      <span className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}>
+        {name}
+      </span>
     </button>
-  )
-}
+  );
+};
 
-export default PaddingButton
+export default PaddingButton;

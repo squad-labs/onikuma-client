@@ -4,4 +4,4 @@ export type BaseMetadataType = {
   image?: string;
   siteName?: string;
   asPath?: string;
-}
+};

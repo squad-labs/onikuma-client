@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styles from '@/layout/header/Header.module.scss';
 import classNames from 'classnames/bind';
 import HeaderLogo from '@/components/common/logo/headerLogo';
@@ -24,7 +24,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

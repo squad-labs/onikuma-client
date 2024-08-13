@@ -1,5 +1,5 @@
-import BaseButton from '@/widgets/button/baseButton'
-import React from 'react'
+import BaseButton from '@/widgets/button/baseButton';
+import React from 'react';
 
 const PlayGameButton = () => {
   return (
@@ -7,7 +7,7 @@ const PlayGameButton = () => {
       text={'Play Game'}
       theme={'fill'}
       colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
-      label='play-game-button'
+      label="play-game-button"
       role={'button'}
       shape={'shape-4'}
       fontSize={'large'}
@@ -17,7 +17,7 @@ const PlayGameButton = () => {
       classNames={[]}
       disabled
     />
-  )
-}
+  );
+};
 
-export default PlayGameButton
+export default PlayGameButton;

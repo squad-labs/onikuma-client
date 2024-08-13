@@ -21,5 +21,5 @@ export const COLOR = {
   BASE_CREAM_1: '#FFFCE3',
   BASE_CREAM_2: '#FDF7C3',
   LIGHT_CREAM_1: '#FFFEF7',
-  BASE_YELLOW_1: '#FFED5A'
+  BASE_YELLOW_1: '#FFED5A',
 } as const;

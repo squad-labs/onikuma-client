@@ -1,0 +1,86 @@
+.floating-action-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--LIGHT);
+  background-size: 50%;
+  background-position: center;
+  margin: 1.5rem;
+}
+
+.image-wrapper{
+  border: 1px solid var(--DARK-BLUE-1);
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.button-image{
+  width: 100%;
+  height: auto;
+}
+
+.button-text{
+  font-size: 1rem;
+}
+
+.shape-round {
+  border-radius: 50%;
+}
+
+.shape-square {
+  border-radius: 13%;
+}
+
+.shape-rectangle {
+  height: 3rem;
+  width: 7rem;
+  border-radius: 0.5rem;
+}
+
+.height-small {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.height-medium {
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.height-large {
+  height: 6rem;
+  width: 6rem;
+}
+
+.button-blue {
+  color: var(--DARK-BLUE-1);
+  border: 2px solid var(--DARK-BLUE-1);
+
+  &:disabled {
+    background-color: var(--BASE-CREAM-1);
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0.3em 0.3em var(--DARK-BLUE-1);
+    }
+  }
+}
+
+.button-red {
+  color: var(--BASE-RED-1);
+  border: 2px solid var(--BASE-RED-1);
+
+  &:disabled {
+    background-color: var(--BASE-CREAM-1);
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 4px 4px var(--BASE-RED-1);
+    }
+  }
+}

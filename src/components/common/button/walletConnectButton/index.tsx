@@ -1,11 +1,11 @@
-'use client'
-import React from 'react'
-import styles from '@/components/common/button/walletConnectButton/WalletConnectButton.module.scss'
-import classNames from 'classnames/bind'
-import BaseButton from '@/widgets/button/baseButton'
-import { useConnect } from '@/shared/hooks/useConnect'
+'use client';
+import React from 'react';
+import styles from '@/components/common/button/walletConnectButton/WalletConnectButton.module.scss';
+import classNames from 'classnames/bind';
+import BaseButton from '@/widgets/button/baseButton';
+import { useConnect } from '@/shared/hooks/useConnect';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 const WalletConnectButton = () => {
   const { handleOpen } = useConnect();
@@ -16,8 +16,8 @@ const WalletConnectButton = () => {
         text={'Connect Wallet to Start'}
         theme={'fill'}
         colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
-        label='connect-wallet-button'
-        role='button'
+        label="connect-wallet-button"
+        role="button"
         shape={'shape-7'}
         fontSize={'large'}
         fontWeight={'regular'}
@@ -26,7 +26,7 @@ const WalletConnectButton = () => {
         classNames={[]}
       />
     </div>
-  )
-}
+  );
+};
 
-export default WalletConnectButton
+export default WalletConnectButton;
