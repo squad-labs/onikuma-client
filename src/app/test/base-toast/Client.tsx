@@ -11,29 +11,14 @@ const TestClientPage = () => {
     <div className={cn('container')}>
       <h2>Base Toast</h2>
       <section className={cn('element-container')}>
-        <BaseToast
-          type='success'
-        />
-        <BaseToast
-          type='requireAction'
-        />
-        <BaseToast
-          type='error'
-        />
+        <BaseToast type="success" />
+        <BaseToast type="requireAction" />
+        <BaseToast type="error" />
       </section>
       <section className={cn('element-container')}>
-        <BaseToast
-          type='success'
-          closable={true}
-        />
-        <BaseToast
-          type='requireAction'
-          closable={true}
-        />
-        <BaseToast
-          type='error'
-          closable={true}
-        />
+        <BaseToast type="success" closable={true} />
+        <BaseToast type="requireAction" closable={true} />
+        <BaseToast type="error" closable={true} />
       </section>
     </div>
   );
