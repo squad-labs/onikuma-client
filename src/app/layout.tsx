@@ -22,9 +22,7 @@ export default function RootLayout({
           <Web3Provider>
             <WalletProvider>
               <AppProvider>
-                <Layout>
-                  {children}
-                </Layout>
+                <Layout>{children}</Layout>
               </AppProvider>
             </WalletProvider>
           </Web3Provider>

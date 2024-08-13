@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
-import styles from '@/widgets/bar/containerBar/ContainerBar.module.scss'
-import classNames from 'classnames/bind'
-import { ContainerBarProps } from '@/shared/types/ui/Bar'
+import React, { Fragment } from 'react';
+import styles from '@/widgets/bar/containerBar/ContainerBar.module.scss';
+import classNames from 'classnames/bind';
+import { ContainerBarProps } from '@/shared/types/ui/Bar';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 const ContainerBar = ({
   label,
@@ -21,7 +21,7 @@ const ContainerBar = ({
     >
       {loading ? <Fragment></Fragment> : children}
     </div>
-  )
-}
+  );
+};
 
-export default ContainerBar
+export default ContainerBar;

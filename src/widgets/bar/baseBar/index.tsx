@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 import styles from '@/styles/widgets/bar/baseBar/BaseBar.module.scss';
 import classNames from 'classnames/bind';
 import { BaseBarProps } from '@/shared/types/ui/Bar';
@@ -37,9 +37,9 @@ const BaseBar = ({
             {text}
           </span>
         </Fragment>
-      )}     
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default BaseBar
+export default BaseBar;

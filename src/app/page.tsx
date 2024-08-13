@@ -8,17 +8,18 @@ import { ResolvingMetadata } from 'next';
 type MetadataProps = {
   params: {
     id: string;
-  }
-  searchParams: { 
-    [key: string]: string | string[] | undefined 
-  }
-}
+  };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+};
 
-const cn = classNames.bind(styles);
-
-export const generateMetadata = async ({ params, searchParams }: MetadataProps, parent: ResolvingMetadata) => {
-  return getMetadata({})
-}
+export const generateMetadata = async (
+  { params, searchParams }: MetadataProps,
+  parent: ResolvingMetadata,
+) => {
+  return getMetadata({});
+};
 
 const HomePage = () => {
   return (
