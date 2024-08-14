@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import styles from '@/app/d/[id]/page.module.scss'
+import styles from '@/app/d/[id]/client.module.scss'
 import classNames from 'classnames/bind'
 import { getMetadata } from '@/shared/utils/metadata'
 import { ResolvingMetadata } from 'next'

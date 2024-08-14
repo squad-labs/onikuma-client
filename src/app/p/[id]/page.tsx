@@ -30,9 +30,11 @@ const PlayPage = ({ params }: Props) => {
   const { id } = params;
   return (
     <main className={cn('container')}>
-      <PlayClientPage
-        id={id}
-      />
+      <div className={cn('inner')}>
+        <PlayClientPage
+          id={id}
+        />
+      </div>
     </main>
   )
 }

@@ -8,11 +8,7 @@ const cn = classNames.bind(styles);
 
 const HomeClient = () => {
   return (
-    <div className={cn('container')}>
-      <div className={cn('inner')}>
-        <WalletConnectButton />
-      </div>
-    </div>
+    <WalletConnectButton />
   )
 };
 

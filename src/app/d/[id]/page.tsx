@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/app/d/[id]/client.module.scss'
+import styles from '@/app/d/[id]/page.module.scss'
 import classNames from 'classnames/bind'
 import DashboardClientPage from '@/app/d/[id]/client'
 
@@ -16,9 +16,11 @@ const DashboardPage = ({ params }: Props) => {
 
   return (
     <main className={cn('container')}>
-      <DashboardClientPage 
-        id={id}
-      />
+      <div className={cn('inner')}>
+        <DashboardClientPage 
+          id={id}
+        />
+      </div>
     </main>
   )
 }
