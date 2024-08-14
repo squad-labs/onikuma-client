@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import styles from '@/app/HomeClient.module.scss';
+import styles from '@/app/client.module.scss';
 import classNames from 'classnames/bind';
 import WalletConnectButton from '@/components/common/button/walletConnectButton';
 

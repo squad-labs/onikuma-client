@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeClient from '@/app/HomeClient';
+import HomeClient from '@/app/client';
 import { getMetadata } from '@/shared/utils/metadata';
 import { ResolvingMetadata } from 'next';
 
