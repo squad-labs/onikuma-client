@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from '@/widgets/button/floatingActionButton/FloatingActionButton.module.scss';
+import styles from '@/widgets/button/iconButton/IconButton.module.scss';
 import classNames from 'classnames/bind';
-import { FloatingActionButtonProps } from '@/shared/types/ui/Button';
+import { IconButtonProps } from '@/shared/types/ui/Button';
 
 const cn = classNames.bind(styles);
 
-const FloatingActionButton = ({
+const IconButton = ({
   name,
   onClick,
   disabled = false,
@@ -16,7 +16,7 @@ const FloatingActionButton = ({
   children = undefined,
   classNames = [],
   ...rest
-}: FloatingActionButtonProps) => {
+}: IconButtonProps) => {
   return (
     <button
       {...rest}
@@ -25,7 +25,7 @@ const FloatingActionButton = ({
       aria-label={name}
       disabled={disabled}
       className={cn(
-        'floating-action-button-container',
+        'icon-button-container',
         `shape-${shape}`,
         `height-${height}`,
         ...classNames,
@@ -40,4 +40,4 @@ const FloatingActionButton = ({
   );
 };
 
-export default FloatingActionButton;
+export default IconButton;

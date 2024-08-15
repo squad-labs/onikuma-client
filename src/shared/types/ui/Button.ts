@@ -47,7 +47,7 @@ export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   classNames?: string[];
 };
 
-export type FloatingActionButtonProps =
+export type IconButtonProps =
   ButtonHTMLAttributes<HTMLButtonElement> & {
     text?: string;
     role?: 'button' | 'submit' | 'reset';

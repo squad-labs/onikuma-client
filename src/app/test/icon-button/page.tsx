@@ -1,5 +1,5 @@
 import React from 'react';
-import TestClientPage from '@/app/test/floating-action-button/Client';
+import TestClientPage from '@/app/test/icon-button/Client';
 
 const TestPage = () => {
   return <TestClientPage />;

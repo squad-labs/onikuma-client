@@ -1,17 +1,17 @@
 'use client';
 import React from 'react';
-import styles from '@/app/test/floating-action-button/page.module.scss';
+import styles from '@/app/test/icon-button/page.module.scss';
 import className from 'classnames/bind';
-import FloatingActionButton from '@/widgets/button/floatingActionButton';
+import IconButton from '@/widgets/button/iconButton';
 
 const cn = className.bind(styles);
 
 const TestClientPage = () => {
   return (
     <div className={cn('container')}>
-      <h2>Floating Action Button</h2>
+      <h2>Icon Button</h2>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="square"
@@ -19,7 +19,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="square"
@@ -27,7 +27,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="square"
@@ -37,7 +37,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="round"
@@ -45,7 +45,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="round"
@@ -53,7 +53,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="small"
           shape="round"
@@ -63,7 +63,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="square"
@@ -71,7 +71,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="square"
@@ -79,7 +79,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="square"
@@ -89,7 +89,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="round"
@@ -97,7 +97,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="round"
@@ -105,7 +105,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="medium"
           shape="round"
@@ -115,7 +115,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="square"
@@ -123,7 +123,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="square"
@@ -131,7 +131,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="square"
@@ -141,7 +141,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="round"
@@ -149,7 +149,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={true}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="round"
@@ -157,7 +157,7 @@ const TestClientPage = () => {
           classNames={['button-blue']}
           disabled={false}
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           height="large"
           shape="round"
@@ -167,7 +167,7 @@ const TestClientPage = () => {
         />
       </section>
       <section className={cn('element-container')}>
-        <FloatingActionButton
+        <IconButton
           name="Button"
           shape="rectangle"
           onClick={() => console.log('Button Clicked')}
@@ -175,7 +175,7 @@ const TestClientPage = () => {
           disabled={true}
           text="Enabled"
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           shape="rectangle"
           onClick={() => console.log('Button Clicked')}
@@ -183,7 +183,7 @@ const TestClientPage = () => {
           disabled={false}
           text="Enabled"
         />
-        <FloatingActionButton
+        <IconButton
           name="Button"
           shape="rectangle"
           onClick={() => console.log('Button Clicked')}
