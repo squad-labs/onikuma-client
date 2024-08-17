@@ -35,8 +35,8 @@ export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;
   label: string;
-  theme: ButtonTheme;
-  colors: ButtonColorObject;
+  theme?: ButtonTheme;
+  colors?: ButtonColorObject;
   role?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   height: 'small' | 'medium' | 'large';
