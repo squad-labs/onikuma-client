@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import styles from '@/app/HomeClient.module.scss';
 import classNames from 'classnames/bind';
@@ -13,7 +13,7 @@ const HomeClient = () => {
         <WalletConnectButton />
       </div>
     </div>
-  )
+  );
 };
 
 export default HomeClient;

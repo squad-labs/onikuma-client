@@ -43,7 +43,11 @@ const BaseButton = ({
       ) : (
         <Fragment>
           {children && children}
-          <span className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}>{text}</span>
+          <span
+            className={cn('text', `text-${fontSize}`, `text-${fontWeight}`)}
+          >
+            {text}
+          </span>
         </Fragment>
       )}
     </button>

@@ -1,5 +1,5 @@
-import BaseButton from '@/widgets/button/baseButton'
-import React from 'react'
+import BaseButton from '@/widgets/button/baseButton';
+import React from 'react';
 
 const DashBoardButton = () => {
   return (
@@ -7,7 +7,7 @@ const DashBoardButton = () => {
       text={'Dashboard'}
       theme={'outline'}
       colors={{ primary: 'BASE_BLUE_1', secondary: 'LIGHT' }}
-      label='dashboard-button'
+      label="dashboard-button"
       role={'button'}
       shape={'shape-4'}
       fontSize={'large'}
@@ -16,7 +16,7 @@ const DashBoardButton = () => {
       onClick={() => console.log('Dashboard button clicked')}
       classNames={[]}
     />
-  )
-}
+  );
+};
 
-export default DashBoardButton
+export default DashBoardButton;

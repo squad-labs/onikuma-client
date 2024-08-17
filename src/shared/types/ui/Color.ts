@@ -1,3 +1,3 @@
-import { COLOR } from "@/shared/constants/COLOR";
+import { COLOR } from '@/shared/constants/COLOR';
 
 export type ColorType = keyof typeof COLOR;

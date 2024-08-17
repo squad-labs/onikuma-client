@@ -6,7 +6,7 @@ export type ButtonTheme = 'fill' | 'outline';
 export type ButtonColorObject = {
   primary: ColorType;
   secondary: ColorType;
-}
+};
 
 export type ButtonShapeType =
   | 'shape-1'
@@ -36,8 +36,8 @@ export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;
   label: string;
-  theme: ButtonTheme;
-  colors: ButtonColorObject;
+  theme?: ButtonTheme;
+  colors?: ButtonColorObject;
   role?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   height: 'small' | 'medium' | 'large';
@@ -45,4 +45,4 @@ export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   fontWeight?: 'light' | 'regular' | 'bold';
   children?: ReactNode;
   classNames?: string[];
-}
+};
