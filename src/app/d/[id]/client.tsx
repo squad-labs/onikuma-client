@@ -1,14 +1,16 @@
 'use client';
 import React from 'react';
-import styles from '@/app/d/[id]/client.module.scss';
+import styles from '@/app/d/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import { getMetadata } from '@/shared/utils/metadata';
 import { ResolvingMetadata } from 'next';
 
 const cn = classNames.bind(styles);
+const cn = classNames.bind(styles);
 
 type Props = {
   id: string;
+};
 };
 
 type MetadataProps = {
@@ -19,7 +21,18 @@ type MetadataProps = {
     [key: string]: string | string[] | undefined;
   };
 };
+  };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+};
 
+export const generateMetadata = async (
+  { params, searchParams }: MetadataProps,
+  parent: ResolvingMetadata,
+) => {
+  return getMetadata({});
+};
 export const generateMetadata = async (
   { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata,
@@ -34,5 +47,8 @@ const DashboardClientPage = ({ id }: Props) => {
     </div>
   );
 };
+  );
+};
 
+export default DashboardClientPage;
 export default DashboardClientPage;
