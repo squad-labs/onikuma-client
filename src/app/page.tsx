@@ -14,14 +14,14 @@ type MetadataProps = {
   };
 };
 
-const cn = classNames.bind(styles);
-
 export const generateMetadata = async (
   { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata,
 ) => {
   return getMetadata({});
 };
+
+const cn = classNames.bind(styles);
 
 const HomePage = () => {
   return (

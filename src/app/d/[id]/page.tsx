@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import styles from '@/app/d/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import DashboardClientPage from '@/app/d/[id]/client';
@@ -9,11 +8,6 @@ import { getMetadata } from '@/shared/utils/metadata';
 import { Dashboard, MyVote } from '@/shared/types/data/dashboard';
 import { Topic } from '@/shared/types/data/topic';
 import { DashboardProvider } from '@/context/partial/dashboardContext/DashboardProvider';
-=======
-import styles from '@/app/d/[id]/client.module.scss';
-import classNames from 'classnames/bind';
-import DashboardClientPage from '@/app/d/[id]/client';
->>>>>>> d4d0d8c (ui: adds go back home button component to page)
 
 const cn = classNames.bind(styles);
 
@@ -42,7 +36,6 @@ export const generateMetadata = async (
 const DashboardPage = async ({ params }: Props) => {
   const { id } = params;
 
-<<<<<<< HEAD
   try {
     const dashboardRes = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/detail/${id}`,
@@ -93,13 +86,4 @@ const DashboardPage = async ({ params }: Props) => {
   }
 };
 
-=======
-  return (
-    <main className={cn('container')}>
-      <DashboardClientPage id={id} />
-    </main>
-  );
-};
-
->>>>>>> d4d0d8c (ui: adds go back home button component to page)
 export default DashboardPage;
