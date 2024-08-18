@@ -19,16 +19,6 @@ const NumberInput = ({
   label = '',
   placeholder = 'number',
 }: NumberInputProps) => {
-  if (!allowsZero && value === 0) {
-    console.error('Value cannot be zero');
-    return;
-  }
-
-  if (!allowsNegative && typeof value === 'number' && value < 0) {
-    console.error('Value cannot be negative');
-    return;
-  }
-
   const handleIncrease = useCallback(() => {
     if (value === '' || value === 0) {
       onClick(1);
@@ -87,6 +77,16 @@ const NumberInput = ({
   const displayValue = useMemo(() => {
     return value === '' ? '' : value;
   }, [value]);
+  
+  if (!allowsZero && value === 0) {
+    console.error('Value cannot be zero');
+    return;
+  }
+
+  if (!allowsNegative && typeof value === 'number' && value < 0) {
+    console.error('Value cannot be negative');
+    return;
+  }
 
   return (
     <div className={cn('input-wrapper', shape, `${state}`, ...classNames)}>
@@ -105,12 +105,12 @@ const NumberInput = ({
               <button
                 onClick={handleIncrease}
                 className={cn('increment-button')}
-              ></button>
+              />
               <button
                 disabled={isDecrementDisabled}
                 onClick={handleDecrease}
                 className={cn('decrement-button')}
-              ></button>
+              />
             </Fragment>
           )}
         </div>
