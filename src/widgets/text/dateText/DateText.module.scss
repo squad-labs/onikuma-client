@@ -1,0 +1,24 @@
+.text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .4rem .8rem;
+  font-size: 12px;
+  
+  .icon {}
+
+  .text {
+    color: var(--DARK-GRAY-2);
+    font-size: 1.25em;
+  }
+
+  .start {
+    margin-left: .8rem;
+  }
+
+  .seperator {
+    color: var(--DARK-GRAY-2);
+    font-size: 1em;
+    margin: 0 .8rem;
+  }
+}
