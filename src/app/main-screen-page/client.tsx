@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '@/app/main-screen-page/client.module.scss';
 import classNames from 'classnames/bind';
 import RuleCard from '@/widgets/card/ruleCard';
+import WalletConnectButton from '@/components/common/button/walletConnectButton';
 
 const cn = classNames.bind(styles);
 
@@ -35,6 +36,9 @@ const MyClientPage = () => {
           textLine2="Win and Launch Token"
           textLine3="Get the results daily. Get it right to seal Onikuma and earn your wins. If the winner pool surpasses 5k, the token will be launched!"
         />
+      </div>
+      <div className={cn('wallet-connect-button')}>
+        <WalletConnectButton />
       </div>
     </div>
   );
