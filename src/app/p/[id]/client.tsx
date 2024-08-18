@@ -5,11 +5,11 @@ import DateText from '@/widgets/text/dateText'
 import BaseDivider from '@/widgets/divider/baseDivider'
 import { COLOR } from '@/shared/constants/COLOR'
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 type Props = {
   id: string;
-}
+};
 
 const PlayClientPage = ({ id }: Props) => {
   
@@ -25,7 +25,7 @@ const PlayClientPage = ({ id }: Props) => {
       />
       <DateText startDate='2024-08-20' />
     </div>
-  )
-}
+  );
+};
 
-export default PlayClientPage
+export default PlayClientPage;
