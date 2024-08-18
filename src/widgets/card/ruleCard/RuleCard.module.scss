@@ -1,0 +1,31 @@
+.card{
+    display: flex;
+    border: 1px solid var(--DARK-GRAY-1);
+    width: 35rem;
+    height: 12rem;
+    padding: 1rem;
+    background-color: white;
+    align-items: center;
+
+    .photo{
+        width: 30%;
+        display: flex;
+        align-items: center;
+
+        img{
+            width: 100%; 
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+    }
+}
+
+.text{
+    width: 70%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    margin-bottom: 1rem;
+}
