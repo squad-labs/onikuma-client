@@ -1,0 +1,33 @@
+.my-table{
+    border: 1.5px solid var(--BASE-GRAY-1);
+    border-collapse: collapse;
+    width: 100%;
+
+    th{
+        font-weight: lighter;
+        padding: 0.75rem;
+        font-size: 1.125rem;
+        background: var(--BASE-CREAM-1);
+    }
+
+    .th-name{
+        text-align: left;
+    }
+
+    td{
+        font-size: 1.125rem;
+        text-align: center;
+        padding: 1.5rem 0.75rem 1.5rem 0.75rem;
+        border-top: 1.5px solid var(--BASE-GRAY-2);
+        background-color: white;
+    }
+
+    .td-name{
+        text-align: left;
+        max-width: 20rem;
+    }
+}
+
+.table-row-names{
+    color: var(--BASE-BLUE-1);
+}
