@@ -10,27 +10,16 @@ type HighlightCardProps = {
   subText: string;
 };
 
-const HighlightCard = ({
-  title,
-  mainText,
-  subText,
-}: HighlightCardProps) => {
+const HighlightCard = ({ title, mainText, subText }: HighlightCardProps) => {
   return (
     <div className={cn('card')}>
-      <p className={cn('title')}>
-        {title}
-      </p>
+      <p className={cn('title')}>{title}</p>
       <div className={cn('non-title')}>
-        <p className={cn('main-text')}>
-          {mainText}
-        </p>
-        <p className={cn('sub-text')}>
-          {subText}
-        </p>
+        <p className={cn('main-text')}>{mainText}</p>
+        <p className={cn('sub-text')}>{subText}</p>
       </div>
     </div>
   );
 };
 
 export default HighlightCard;
-
