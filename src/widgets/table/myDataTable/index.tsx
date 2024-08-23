@@ -37,7 +37,11 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
       <tbody>
         {data.map((item, index) => (   
           <tr key={index}>
-            <td className={cn('td-name')}>{item.name}</td>
+            <td className={cn('td-name')}>
+              <a href="" className={cn('link')}>
+               {item.name}
+              </a>
+            </td>
             <td>
               <StatusBar
                 label = {item.status}
