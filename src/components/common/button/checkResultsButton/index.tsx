@@ -5,14 +5,14 @@ import React from 'react';
 type CheckResultsButtonProps = {
     text: string;
     primaryColor: 'BASE_BLUE_1' | 'BASE_GRAY_1' | 'BASE_RED_1';
-    secondaryColor: 'LIGHT';
+    secondaryColor: 'BASE_CREAM_1';
 }
 
 const CheckResultsButton = ({text, primaryColor, secondaryColor}: CheckResultsButtonProps) => {
   return (
     <BaseButton
       text={text}
-      theme={'outline'}
+      theme={'fill'}
       colors={{ primary: primaryColor, secondary: secondaryColor }}
       label="check-results-button"
       role={'button'}

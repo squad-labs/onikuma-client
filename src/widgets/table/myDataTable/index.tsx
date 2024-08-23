@@ -50,8 +50,8 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
             <td className={cn('td-check-results')}>
               <CheckResultsButton
                 text = {item.checkResults}
-                primaryColor = {item.checkResults.toLowerCase() === 'Hall of Honor' ? 'BASE_RED_1' : item.status.toLowerCase() === 'Ongoing' ? 'BASE_GRAY_1' : 'BASE_BLUE_1'}
-                secondaryColor= 'LIGHT' />
+                primaryColor = {item.checkResults.toLowerCase() === 'hall of honor' ? 'BASE_RED_1' : item.status.toLowerCase() === 'ongoing' ? 'DARK_GRAY_5' : 'BASE_BLUE_1'}
+                secondaryColor= 'BASE_CREAM_1' />
             </td>
           </tr>
         ))}
