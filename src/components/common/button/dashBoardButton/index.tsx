@@ -1,7 +1,15 @@
+'use client';
 import BaseButton from '@/widgets/button/baseButton';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const DashBoardButton = () => {
+type Props = {
+  id: string;
+};
+
+const DashBoardButton = ({ id }: Props) => {
+  const router = useRouter();
+
   return (
     <BaseButton
       text={'Dashboard'}
@@ -13,7 +21,7 @@ const DashBoardButton = () => {
       fontSize={'large'}
       fontWeight={'regular'}
       loading={false}
-      onClick={() => console.log('Dashboard button clicked')}
+      onClick={() => router.push(`/d/${id}`)}
       classNames={[]}
     />
   );

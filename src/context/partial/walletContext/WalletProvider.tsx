@@ -1,7 +1,7 @@
 'use client';
 import { Signer, Provider } from 'ethers';
 import { ReactNode, useState } from 'react';
-import { WalletContext } from '@/context/walletContext/WalletContext';
+import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 
 type Props = {
   children: ReactNode;

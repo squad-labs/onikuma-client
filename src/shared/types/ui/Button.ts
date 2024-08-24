@@ -47,13 +47,12 @@ export type PaddingButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   classNames?: string[];
 };
 
-export type IconButtonProps =
-  ButtonHTMLAttributes<HTMLButtonElement> & {
-    text?: string;
-    role?: 'button' | 'submit' | 'reset';
-    disabled?: boolean;
-    shape: 'round' | 'square' | 'rectangle';
-    height?: 'small' | 'medium' | 'large';
-    children?: ReactNode;
-    classNames?: string[];
-  };
+export type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  text?: string;
+  role?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  shape: 'round' | 'square' | 'rectangle';
+  height?: 'small' | 'medium' | 'large';
+  children?: ReactNode;
+  classNames?: string[];
+};

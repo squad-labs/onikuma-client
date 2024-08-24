@@ -17,6 +17,25 @@
   background-color: var(--LIGHT);
 }
 
+.button-secondary-BASE_BLUE_1-outline {
+  background-color: var(--BASE-BLUE-1);
+}
+
+.button-primary-LIGHT-outline {
+  border: 1px solid var(--LIGHT);
+
+  .text {
+    color: var(--LIGHT);
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 5px 4px var(--LIGHT);
+    }
+  }
+}
+
 .button-primary-BASE_BLUE_1-fill {
   border: 1px solid var(--BASE-BLUE-1);
   background-color: var(--BASE-BLUE-1);

@@ -48,8 +48,6 @@ const NumberInput = ({
 
     const numericValue = Number(newValue);
 
-    console.log(numericValue);
-
     if (newValue === '') {
       return true;
     } else {
@@ -77,7 +75,7 @@ const NumberInput = ({
   const displayValue = useMemo(() => {
     return value === '' ? '' : value;
   }, [value]);
-  
+
   if (!allowsZero && value === 0) {
     console.error('Value cannot be zero');
     return;

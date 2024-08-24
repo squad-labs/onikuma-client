@@ -1,0 +1,30 @@
+.tag-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-primary-DARK {
+  color: var(--DARK);
+  border: 1px solid var(--DARK);
+}
+
+.tag-secondary-LIGHT {
+  background-color: var(--LIGHT);
+}
+
+.tag-padding-short {
+  padding: .15rem .4rem;
+  border-radius: 1.2rem;
+}
+
+.tag-padding-middle {
+  padding: .3rem .8rem;
+  border-radius: 2rem;
+
+}
+
+.tag-padding-long {
+  padding: .6rem 1.6rem;
+  border-radius: 2.8rem;
+}

@@ -1,3 +1,4 @@
+'use client';
 import BaseButton from '@/widgets/button/baseButton';
 import React from 'react';
 

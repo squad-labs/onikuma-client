@@ -1,0 +1,4 @@
+export const MUTATION_KEY = {
+  POST_COMMENTS: 'POST_COMMENTS',
+  POST_LIKES: 'POST_LIKES',
+} as const;
