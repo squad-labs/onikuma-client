@@ -31,11 +31,8 @@ const IconButton = ({
         ...classNames,
       )}
     >
-      <div className={cn('image-wrapper')}>
-        <img src="" alt="" className={cn('button-image')} />
-      </div>
+      {children && children}
       {text && <span className={cn('button-text')}>{text}</span>}
-      {children}
     </button>
   );
 };

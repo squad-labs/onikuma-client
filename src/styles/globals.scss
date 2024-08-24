@@ -1,25 +1,14 @@
 @use '@/styles/_theme.scss' as *;
 @import '@/styles/_color.scss';
+@import "@/styles/_size.scss";
+@import "@/styles/_font.scss";
 
 :root {
-  @font-face {
-    font-family: 'DM-Mono-Light';
-    src: url(./../../public/fonts/DMMono-Light.ttf);
-  }
-
-  @font-face {
-    font-family: 'DM-Mono-Regular';
-    src: url(./../../public/fonts/DMMono-Regular.ttf);
-  }
-
-  @font-face {
-    font-family: 'DM-Mono-Medium';
-    src: url(./../../public/fonts/DMMono-Medium.ttf)
-  }
 
   --FONT-DM-MONO-LIGHT: 'DM-Mono-Light';
   --FONT-DM-MONO-REGULAR: 'DM-Mono-Regular';
   --FONT-DM-MONO-BOLD: 'DM-Mono-Medium';
+  --FONT-RUBIC-MONO-REGULAR: 'Rubic-Mono-Regular';
 
   --DARK: #{$DARK};
   --LIGHT: #{$LIGHT};
@@ -44,6 +33,12 @@
   --BASE-CREAM-2: #{$BASE-CREAM-2};
   --LIGHT-CREAM-1: #{$LIGHT-CREAM-1};
   --BASE-YELLOW-1: #{$BASE-YELLOW-1};
+
+  --TEXT-SIZE-EXTRA-SMALL: #{$TEXT-SIZE-EXTRA-SMALL};
+  --TEXT-SIZE-SMALL: #{$TEXT-SIZE-SMALL};
+  --TEXT-SIZE-MEDIUM: #{$TEXT-SIZE-MEDIUM};
+  --TEXT-SIZE-LARGE: #{$TEXT-SIZE-LARGE};
+  --TEXT-SIZE-EXTRA-LARGE: #{$TEXT-SIZE-EXTRA-LARGE};
 }
 
 * {

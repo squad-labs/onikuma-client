@@ -1,11 +1,19 @@
-import React from 'react'
-import styles from '@/widgets/divider/baseDivider/BaseDivider.module.scss'
-import classNames from 'classnames/bind'
-import { BaseDividerProps } from '@/shared/types/ui/Divider'
+import React from 'react';
+import styles from '@/widgets/divider/baseDivider/BaseDivider.module.scss';
+import classNames from 'classnames/bind';
+import { BaseDividerProps } from '@/shared/types/ui/Divider';
+import { COLOR } from '@/shared/constants/COLOR';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
-const BaseDivider = ({ type, color, length = 100, minLength = 0, thick = 2, radius = 0 }: BaseDividerProps) => {
+const BaseDivider = ({
+  type,
+  color,
+  length = 100,
+  minLength = 0,
+  thick = 2,
+  radius = 0,
+}: BaseDividerProps) => {
   const getDivider = () => {
     if (type === 'horizontal') {
       return (
@@ -15,11 +23,11 @@ const BaseDivider = ({ type, color, length = 100, minLength = 0, thick = 2, radi
             width: `${length}%`,
             minWidth: minLength,
             height: thick,
-            backgroundColor: color,
+            backgroundColor: COLOR[color],
             borderRadius: radius,
           }}
         />
-      )
+      );
     } else {
       return (
         <div
@@ -28,14 +36,14 @@ const BaseDivider = ({ type, color, length = 100, minLength = 0, thick = 2, radi
             height: `${length}%`,
             minHeight: minLength,
             width: thick,
-            backgroundColor: color,
+            backgroundColor: COLOR[color],
             borderRadius: radius,
           }}
         />
-      )
+      );
     }
-  }
+  };
   return getDivider();
-}
+};
 
-export default BaseDivider
+export default BaseDivider;

@@ -2,14 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .4rem .8rem;
-  font-size: 12px;
-  
+  padding: .4rem .8rem .4rem 0;
+
   .icon {}
 
   .text {
-    color: var(--DARK-GRAY-2);
-    font-size: 1.25em;
   }
 
   .start {
@@ -18,7 +15,38 @@
 
   .seperator {
     color: var(--DARK-GRAY-2);
-    font-size: 1em;
     margin: 0 .8rem;
+  }
+
+  .text-extra-small {
+    font-size: var(--TEXT-SIZE-EXTRA-SMALL);
+  }
+
+  .text-small {
+    font-size: var(--TEXT-SIZE-SMALL);
+  }
+
+  .text-medium {
+    font-size: var(--TEXT-SIZE-MEDIUM);
+  }
+  
+  .text-large {
+    font-size: var(--TEXT-SIZE-LARGE);
+  }
+
+  .text-extra-large {
+    font-size: var(--TEXT-SIZE-EXTRA-LARGE);
+  }
+
+  .text-light {
+    font-family: var(--FONT-DM-MONO-LIGHT);
+  }
+
+  .text-regular {
+    font-family: var(--FONT-DM-MONO-REGULAR);
+  }
+
+  .text-bold {
+    font-family: var(--FONT-DM-MONO-BOLD);
   }
 }

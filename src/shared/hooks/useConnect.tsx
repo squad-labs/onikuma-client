@@ -1,5 +1,5 @@
 'use client';
-import { WalletContext } from '@/context/walletContext/WalletContext';
+import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useCallback, useContext, useEffect } from 'react';
 import { useAccount, type Config, useClient } from 'wagmi';

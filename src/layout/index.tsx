@@ -1,5 +1,4 @@
-'use client';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment } from 'react';
 import Header from '@/layout/header';
 import Footer from '@/layout/footer';
 
@@ -8,13 +7,9 @@ type Props = {
 };
 
 const Layout = ({ children }: Props) => {
-  const headerShown = useMemo(() => {
-    return true;
-  }, []);
-
   return (
     <Fragment>
-      {headerShown && <Header />}
+      <Header />
       {children}
       <Footer />
     </Fragment>

@@ -1,0 +1,23 @@
+.single-container {
+  width: 50%;
+  height: 100%;
+}
+
+.double-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .text {
+    width: 100%;
+    text-align: center;
+    margin: .2rem auto;
+    font-size: 1.8rem;
+    color: var(--LIGHT);
+    font-weight: 700;
+    font-family: var(--FONT-DM-MONO-BOLD);
+  }
+}

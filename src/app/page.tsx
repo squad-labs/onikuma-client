@@ -8,11 +8,11 @@ import { ResolvingMetadata } from 'next';
 type MetadataProps = {
   params: {
     id: string;
-  }
-  searchParams: { 
-    [key: string]: string | string[] | undefined 
-  }
-}
+  };
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  };
+};
 
 const cn = classNames.bind(styles);
 

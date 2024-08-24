@@ -3,7 +3,7 @@ import '@/styles/globals.scss';
 import ReduxProvider from '@/providers/ReduxProvider';
 import AppProvider from '@/providers/AppProvider';
 import Web3Provider from '@/providers/Web3Provider';
-import { WalletProvider } from '@/context/walletContext/WalletProvider';
+import { WalletProvider } from '@/context/partial/walletContext/WalletProvider';
 import Layout from '@/layout';
 
 export const APP_STATE = process.env.STAGE;

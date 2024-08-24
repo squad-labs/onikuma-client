@@ -7,9 +7,7 @@ import WalletConnectButton from '@/components/common/button/walletConnectButton'
 const cn = classNames.bind(styles);
 
 const HomeClient = () => {
-  return (
-    <WalletConnectButton />
-  )
+  return <WalletConnectButton />;
 };
 
 export default HomeClient;

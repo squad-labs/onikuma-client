@@ -1,0 +1,41 @@
+.text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .text {
+    text-align: flex-start;
+  }
+
+  .text-extra-small {
+    font-size: var(--TEXT-SIZE-EXTRA-SMALL);
+  }
+
+  .text-small {
+    font-size: var(--TEXT-SIZE-SMALL);
+  }
+
+  .text-medium {
+    font-size: var(--TEXT-SIZE-MEDIUM);
+  }
+  
+  .text-large {
+    font-size: var(--TEXT-SIZE-LARGE);
+  }
+
+  .text-extra-large {
+    font-size: var(--TEXT-SIZE-EXTRA-LARGE);
+  }
+
+  .text-light {
+    font-family: var(--FONT-DM-MONO-LIGHT);
+  }
+
+  .text-regular {
+    font-family: var(--FONT-DM-MONO-REGULAR);
+  }
+
+  .text-bold {
+    font-family: var(--FONT-DM-MONO-BOLD);
+  }
+}
