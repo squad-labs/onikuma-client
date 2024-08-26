@@ -1,12 +1,12 @@
 import { TestToken } from '@/shared/constants/TEST';
 
-export const fetchMyData = async (token: string) => {
+export const fetchMyData = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/all-my-data`,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${TestToken}`,
         },
       },
     );
