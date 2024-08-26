@@ -8,11 +8,6 @@ import { fetchMyData } from '@/shared/api/MyData';
 
 const cn = classNames.bind(styles);
 
-type Competitor = {
-  name: string;
-  isBigggestPickerPooler: boolean;
-}
-
 type ResultItem = {
   topicId: string;
   name: string;
@@ -23,7 +18,10 @@ type ResultItem = {
   totalGain: number;
   totalPnL: number;
   isBiggestTopicPooler: boolean;
-  competitors: Competitor[];
+  competitors: {
+    name: string;
+    isBiggestPickerPooler: boolean;
+  }[];
 }
 
 const MyClientPage = () => {
@@ -44,15 +42,8 @@ const MyClientPage = () => {
         setMyTotalGain(res.myTotalGain);
         setMyTotalPnL(res.myTotalPnL);
 
-        const formattedData = res.result.map((item: ResultItem) => ({
-          name: item.name,
-          status: item.status, 
-          startAt: new Date(item.startAt).toLocaleDateString,
-          endAt: new Date(item.endAt).toLocaleDateString,
-          isHallOfHonor: item.isBiggestTopicPooler,
-        }))
+        setDataTableData(res.result);
 
-        setDataTableData(formattedData);
       } catch (err) {
         setError('Failure to fetch data');
       }

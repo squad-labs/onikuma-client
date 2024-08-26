@@ -7,13 +7,19 @@ import StatusBar from '@/widgets/bar/statusBar';
 const cn = classNames.bind(styles);
 
 type TableRow = {
+  topicId: string;
   name: string;
   status: string;
-  schedule: string;
-  pooledIn: string;
-  pnlDollars: string;
-  pnlPercent: string;
-  checkResults: string;
+  startAt: string;
+  endAt: string;
+  totalPoolIn: number;
+  totalGain: number;
+  totalPnL: number;
+  isBiggestTopicPooler: boolean;
+  competitors: {
+    name: string;
+    isBiggestPickerPooler: boolean;
+  }[];
 };
 
 type MyDataTableProps = {
@@ -47,14 +53,14 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
                 label = {item.status}
                 />
             </td>
-            <td>{item.schedule}</td>
-            <td>{item.pooledIn}</td>
-            <td>{item.pnlDollars}</td>
-            <td>{item.pnlPercent}</td>
+            <td>`{item.startAt} - {item.endAt}` </td>
+            <td>{item.totalPoolIn}</td>
+            <td>{item.totalGain}</td>
+            <td>{item.totalPnL}</td>
             <td className={cn('td-check-results')}>
               <CheckResultsButton
-                text = {item.checkResults}
-                primaryColor = {item.checkResults.toLowerCase() === 'hall of honor' ? 'BASE_RED_1' : item.status.toLowerCase() === 'ongoing' ? 'DARK_GRAY_5' : 'BASE_BLUE_1'}
+                text = {item.isBiggestTopicPooler? 'Hall of Honor' : 'Check Results'}
+                primaryColor = {item.isBiggestTopicPooler ? 'BASE_RED_1' : item.status.toLowerCase() === 'ongoing' ? 'DARK_GRAY_5' : 'BASE_BLUE_1'}
                 secondaryColor= 'BASE_CREAM_1' />
             </td>
           </tr>
