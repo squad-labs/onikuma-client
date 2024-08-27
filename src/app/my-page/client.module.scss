@@ -1,0 +1,40 @@
+.page-container{
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 155px);
+    width: calc(100vw - 80px);
+    background-color: var(--LIGHT-CREAM-1);
+    border: 2px solid var(--DARK-GRAY-1);
+    border-radius: 5px;
+    box-shadow: 4px 4px 0px var(--DARK-GRAY-1);
+    overflow: hidden;
+    position: relative;
+    margin: 3rem;
+    padding: 3rem;
+
+    h1{
+        font-size: 2rem;
+        padding-bottom: 1rem;
+    }
+
+    .data-container{
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        border: 1.5px solid var(--DARK-GRAY-1);
+        margin-bottom: 3rem;
+        padding: 2.5rem 2rem 2.5rem 2rem;
+    }
+
+    .highlights-container{
+        display: flex;
+        flex-grow: 0;
+        flex-direction: row;
+        padding-bottom: 2rem;
+    }
+
+    .my-data-table-container{
+        height: 100%;
+    }
+
+}
