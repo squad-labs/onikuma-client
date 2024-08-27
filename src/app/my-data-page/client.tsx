@@ -8,21 +8,30 @@ import { fetchMyData } from '@/shared/api/MyData';
 
 const cn = classNames.bind(styles);
 
+type Competitor = {
+  name: string;
+  isBiggestPickerPooler: boolean;
+};
+
 type ResultItem = {
   topicId: string;
   name: string;
   status: string;
   startAt: string;
   endAt: string;
-  totalPoolIn: number;
+  totalPoolIn: number; 
   totalGain: number;
   totalPnL: number;
   isBiggestTopicPooler: boolean;
-  competitors: {
-    name: string;
-    isBiggestPickerPooler: boolean;
-  }[];
-}
+  competitors: Competitor[];
+};
+
+type MyDataResponse = {
+  result: ResultItem[];
+  myTotalPoolIn: number; 
+  myTotalGain: number;
+  myTotalPnL: number;
+};
 
 const MyClientPage = () => {
 
@@ -33,23 +42,26 @@ const MyClientPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const res = await fetchMyData();
-        console.log('Fetched Data:', res);
-
-        setMyTotalPoolIn(res.myTotalPoolIn);
-        setMyTotalGain(res.myTotalGain);
-        setMyTotalPnL(res.myTotalPnL);
-
-        setDataTableData(res.result);
-
-      } catch (err) {
-        setError('Failure to fetch data');
-      }
-    }
-    loadData();
-  }, []);
+      const loadData = async () => {
+        try {
+          const res = await fetchMyData();
+          console.log('Fetched Data:', res);
+  
+          if (res && res.result) {
+            setMyTotalPoolIn(res.myTotalPoolIn);
+            setMyTotalGain(res.myTotalGain);
+            setMyTotalPnL(res.myTotalPnL);
+            setDataTableData(res.result);
+          } else {
+            throw new Error('Invalid data structure');
+          }
+        } catch (err) {
+          console.error('Error fetching data:', err);
+          setError('Failure to fetch data');
+        }
+      };
+      loadData();
+    }, []);
 
   return (
     <div className={cn('page-container')}>
