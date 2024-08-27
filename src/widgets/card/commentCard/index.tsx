@@ -5,10 +5,7 @@ import { CommentCardProps } from '@/shared/types/ui/Card';
 import LikeOutlineIcon from '@/assets/icons/like-outline.svg';
 import LikeFillIcon from '@/assets/icons/like-fill.svg';
 import { fetchRelatedTime } from '@/shared/utils/date';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 import { getCommentLikes } from '@/shared/api/Comments';
-import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 
 const cn = classNames.bind(styles);
 
@@ -22,13 +19,13 @@ const CommentCard = ({
   liked,
 }: CommentCardProps) => {
   const [likes, setLikes] = useState<number>(likeCount);
-  const queryClient = useQueryClient();
+  const [isLiked, setIsLiked] = useState<boolean>(liked);
 
   const fetchLike = useCallback(async () => {
-    console.log('fetchLike');
-    const response = await getCommentLikes({ commentId })
-    response && setLikes(response.likes)
-  }, []);
+    const response = await getCommentLikes({ commentId });
+    response && setIsLiked(response.isLiked);
+    response && setLikes(response.likes);
+  }, [isLiked, likes]);
 
   return (
     <div className={cn('card-container', isFirst && 'card-top')}>
@@ -36,13 +33,13 @@ const CommentCard = ({
       <p className={cn('text')}>{text}</p>
       <div className={cn('meta-container')}>
         <button className={cn('like-button')} onClick={fetchLike}>
-          {liked ? (
+          {isLiked ? (
             <LikeFillIcon viewBox="0 0 19 16" className={cn('icon')} />
           ) : (
             <LikeOutlineIcon viewBox="0 0 19 16" className={cn('icon')} />
           )}
         </button>
-        <span className={cn('like')}>{likeCount}</span>
+        <span className={cn('like')}>{likes}</span>
         <span className={cn('dot')}>·</span>
         <span className={cn('duration')}>{fetchRelatedTime(createdAt)}</span>
       </div>

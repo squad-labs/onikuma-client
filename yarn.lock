@@ -9059,13 +9059,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"konva@npm:^9.3.14":
-  version: 9.3.14
-  resolution: "konva@npm:9.3.14"
-  checksum: 10c0/25dff311409d3a921e7bfadd7092c22ef14665da1bef3c763ba05ca8f9ad3829dd017a60c5a7f55d2beceea860f3fe6a1b0c34d35f7396a0d7a32e69f483dea9
-  languageName: node
-  linkType: hard
-
 "language-subtag-registry@npm:^0.3.20":
   version: 0.3.23
   resolution: "language-subtag-registry@npm:0.3.23"
@@ -10133,7 +10126,6 @@ __metadata:
     ethers: "npm:^6.13.1"
     framer-motion: "npm:^11.2.12"
     jest: "npm:^29.7.0"
-    konva: "npm:^9.3.14"
     lodash-es: "npm:^4.17.21"
     moment: "npm:^2.30.1"
     next: "npm:14.1.0"

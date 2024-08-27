@@ -25,7 +25,6 @@ export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   colors: ButtonColorObject;
   disabled?: boolean;
   shape: ButtonShapeType;
-  onClick: () => void;
   fontSize?: 'small' | 'medium' | 'large';
   fontWeight?: 'light' | 'regular' | 'bold';
   loading?: boolean;

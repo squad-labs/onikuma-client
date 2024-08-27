@@ -13,6 +13,21 @@
   }
 }
 
+.button-primary-DARK_GRAY_1-outline {
+  border: 1px solid var(--DARK-GRAY-1);
+
+  .text {
+    color: var(--DARK-GRAY-1);
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 5px 4px var(--DARK-GRAY-1);
+    }
+  }
+}
+
 .button-secondary-LIGHT-outline {
   background-color: var(--LIGHT);
 }
@@ -48,6 +63,25 @@
 }
 
 .button-secondary-BASE_CREAM_1-fill {
+  .text {
+    color: var(--BASE-CREAM-1);
+  }
+}
+
+.button-primary-DARK_GRAY_1-fill {
+  border: 1px solid var(--DARK-GRAY-1);
+  background-color: var(--DARK-GRAY-1);
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+
+
+.button-secondary-LIGHT-fill {
   .text {
     color: var(--BASE-CREAM-1);
   }

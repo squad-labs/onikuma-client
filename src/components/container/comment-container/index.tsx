@@ -81,14 +81,13 @@ const CommentContainer = ({ topicId }: Props) => {
     socket?.on('comment', (data: Comment) => {
       setCommentList(() => [data, ...commentList]);
     });
-  }, [socket, comment]);
+  }, [socket, comment, commentList]);
 
   const onIntersection: IntersectionObserverCallback = (
     entries: IntersectionObserverEntry[],
   ) => {
     const target = entries[0];
 
-    console.log('fetch more comments', commentList);
     if (target.isIntersecting && !isLoading && commentList.length !== 0) {
       setPagination((prev) => prev + 1);
     }
@@ -131,7 +130,7 @@ const CommentContainer = ({ topicId }: Props) => {
           const formatedDate = `${fetchDateFormat(el.createdAt)} ${fetchTimeFormat(el.createdAt)}`;
           return (
             <CommentCard
-              key={index}
+              key={el.commentId}
               commentId={el.commentId}
               address={el.userWallet}
               text={el.contents}
