@@ -38,16 +38,58 @@ const PriceInfoCard = ({ type, title, ticker, imageUrl, price }: Props) => {
       </div>
       <div className={cn('bot-container')}>
         <div className={cn('text-wrapper')}>
-          <BaseText text={`${title} Price`} size="medium" weight="light" color="DARK_GRAY_5" />
-          <BaseText text={`$1 HONEY`} size="medium" weight="light" color="DARK" />
-          <BaseText text={`$2,027.87`} size="medium" weight="light" color="DARK_GRAY_5" />
-          <BaseText text={`+0%`} size="medium" weight='regular' color="BASE_RED_1" />
+          <BaseText
+            text={`${title} Price`}
+            size="medium"
+            weight="light"
+            color="DARK_GRAY_5"
+          />
+          <BaseText
+            text={`$1 HONEY`}
+            size="medium"
+            weight="light"
+            color="DARK"
+          />
+          <BaseText
+            text={`$2,027.87`}
+            size="medium"
+            weight="light"
+            color="DARK_GRAY_5"
+          />
+          <BaseText
+            text={`+0%`}
+            size="medium"
+            weight="regular"
+            color="BASE_RED_1"
+          />
         </div>
         <div className={cn('text-wrapper')}>
-          <BaseText text={`My Balance`} size="medium" weight="light" color="DARK_GRAY_5" />
-          <BaseText text={`$1 TRUMP`} size="medium" weight="light" color="DARK" />
-          <BaseText text={`$2,027.87 HONEY`} size="medium" weight='regular' color="DARK_GRAY_5" />
-          {type === 'top' && <BaseText text={`max`} size="medium" weight='regular' color="BASE_RED_1" />}
+          <BaseText
+            text={`My Balance`}
+            size="medium"
+            weight="light"
+            color="DARK_GRAY_5"
+          />
+          <BaseText
+            text={`$1 TRUMP`}
+            size="medium"
+            weight="light"
+            color="DARK"
+          />
+          <BaseText
+            text={`$2,027.87 HONEY`}
+            size="medium"
+            weight="regular"
+            color="DARK_GRAY_5"
+          />
+          {type === 'top' && (
+            <BaseText
+              text={`max`}
+              size="medium"
+              weight="regular"
+              color="BASE_RED_1"
+            />
+          )}
         </div>
       </div>
     </div>

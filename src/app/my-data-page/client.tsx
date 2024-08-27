@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import styles from '@/app/my-data-page/client.module.scss';
 import classNames from 'classnames/bind';
@@ -19,7 +19,7 @@ type ResultItem = {
   status: string;
   startAt: string;
   endAt: string;
-  totalPoolIn: number; 
+  totalPoolIn: number;
   totalGain: number;
   totalPnL: number;
   isBiggestTopicPooler: boolean;
@@ -28,13 +28,12 @@ type ResultItem = {
 
 type MyDataResponse = {
   result: ResultItem[];
-  myTotalPoolIn: number; 
+  myTotalPoolIn: number;
   myTotalGain: number;
   myTotalPnL: number;
 };
 
 const MyClientPage = () => {
-
   const [myTotalPoolIn, setMyTotalPoolIn] = useState<number>(0);
   const [myTotalGain, setMyTotalGain] = useState<number>(0);
   const [myTotalPnL, setMyTotalPnL] = useState<number>(0);
@@ -42,26 +41,26 @@ const MyClientPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-      const loadData = async () => {
-        try {
-          const res = await fetchMyData();
-          console.log('Fetched Data:', res);
-  
-          if (res && res.result) {
-            setMyTotalPoolIn(res.myTotalPoolIn);
-            setMyTotalGain(res.myTotalGain);
-            setMyTotalPnL(res.myTotalPnL);
-            setDataTableData(res.result);
-          } else {
-            throw new Error('Invalid data structure');
-          }
-        } catch (err) {
-          console.error('Error fetching data:', err);
-          setError('Failure to fetch data');
+    const loadData = async () => {
+      try {
+        const res = await fetchMyData();
+        console.log('Fetched Data:', res);
+
+        if (res && res.result) {
+          setMyTotalPoolIn(res.myTotalPoolIn);
+          setMyTotalGain(res.myTotalGain);
+          setMyTotalPnL(res.myTotalPnL);
+          setDataTableData(res.result);
+        } else {
+          throw new Error('Invalid data structure');
         }
-      };
-      loadData();
-    }, []);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failure to fetch data');
+      }
+    };
+    loadData();
+  }, []);
 
   return (
     <div className={cn('page-container')}>
@@ -78,10 +77,11 @@ const MyClientPage = () => {
             mainText={`$${myTotalGain || '0.00'}`}
             subText="0%"
           />
-          <HighlightCard 
-            title="PnL (%)" 
-            mainText={`$${myTotalPnL?.toFixed(2) || '0.00'}`} 
-            subText="0%" />
+          <HighlightCard
+            title="PnL (%)"
+            mainText={`$${myTotalPnL?.toFixed(2) || '0.00'}`}
+            subText="0%"
+          />
           <HighlightCard
             title="Base Asset"
             mainText="$HONEY"

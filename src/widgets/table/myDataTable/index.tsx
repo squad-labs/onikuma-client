@@ -41,27 +41,36 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (   
+        {data.map((item, index) => (
           <tr key={index}>
             <td className={cn('td-name')}>
               <a href="" className={cn('link')}>
-               {item.name}
+                {item.name}
               </a>
             </td>
             <td>
-              <StatusBar
-                label = {item.status}
-                />
+              <StatusBar label={item.status} />
             </td>
-            <td>`{item.startAt} - {item.endAt}` </td>
+            <td>
+              `{item.startAt} - {item.endAt}`{' '}
+            </td>
             <td>{item.totalPoolIn}</td>
             <td>{item.totalGain}</td>
             <td>{item.totalPnL}</td>
             <td className={cn('td-check-results')}>
               <CheckResultsButton
-                text = {item.isBiggestTopicPooler? 'Hall of Honor' : 'Check Results'}
-                primaryColor = {item.isBiggestTopicPooler ? 'BASE_RED_1' : item.status.toLowerCase() === 'ongoing' ? 'DARK_GRAY_5' : 'BASE_BLUE_1'}
-                secondaryColor= 'BASE_CREAM_1' />
+                text={
+                  item.isBiggestTopicPooler ? 'Hall of Honor' : 'Check Results'
+                }
+                primaryColor={
+                  item.isBiggestTopicPooler
+                    ? 'BASE_RED_1'
+                    : item.status.toLowerCase() === 'ongoing'
+                      ? 'DARK_GRAY_5'
+                      : 'BASE_BLUE_1'
+                }
+                secondaryColor="BASE_CREAM_1"
+              />
             </td>
           </tr>
         ))}

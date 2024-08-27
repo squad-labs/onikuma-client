@@ -69,22 +69,22 @@ const FinalOptionCard = ({
       <div className={cn('button-container')}>
         <BaseButton
           text={'Pool in'}
-          shape='shape-4'
-          label='pool-in-button'
+          shape="shape-4"
+          label="pool-in-button"
           colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
-          theme='fill'
-          fontSize='large'
-          fontWeight='regular'
+          theme="fill"
+          fontSize="large"
+          fontWeight="regular"
           onClick={() => console.log('Pool in button clicked')}
         />
         <BaseButton
           text={'Dashboard'}
-          shape='shape-4'
-          label='dashboard-button'
+          shape="shape-4"
+          label="dashboard-button"
           colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
-          theme='outline'
-          fontSize='large'
-          fontWeight='regular'
+          theme="outline"
+          fontSize="large"
+          fontWeight="regular"
           onClick={() => console.log('Pool in button clicked')}
         />
       </div>

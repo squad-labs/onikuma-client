@@ -3,12 +3,16 @@ import BaseButton from '@/widgets/button/baseButton';
 import React from 'react';
 
 type CheckResultsButtonProps = {
-    text: string;
-    primaryColor: 'BASE_BLUE_1' | 'DARK_GRAY_5' | 'BASE_RED_1';
-    secondaryColor: 'BASE_CREAM_1';
-}
+  text: string;
+  primaryColor: 'BASE_BLUE_1' | 'DARK_GRAY_5' | 'BASE_RED_1';
+  secondaryColor: 'BASE_CREAM_1';
+};
 
-const CheckResultsButton = ({text, primaryColor, secondaryColor}: CheckResultsButtonProps) => {
+const CheckResultsButton = ({
+  text,
+  primaryColor,
+  secondaryColor,
+}: CheckResultsButtonProps) => {
   return (
     <BaseButton
       text={text}
