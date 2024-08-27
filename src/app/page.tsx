@@ -5,6 +5,8 @@ import classNames from 'classnames/bind';
 import { getMetadata } from '@/shared/utils/metadata';
 import { ResolvingMetadata } from 'next';
 
+const cn = classNames.bind(styles);
+
 type MetadataProps = {
   params: {
     id: string;
@@ -14,12 +16,6 @@ type MetadataProps = {
   };
 };
 
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
-  return getMetadata({});
-};
 export const generateMetadata = async (
   { params, searchParams }: MetadataProps,
   parent: ResolvingMetadata,
