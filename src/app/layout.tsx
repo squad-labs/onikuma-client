@@ -23,6 +23,7 @@ export default function RootLayout({
             <WalletProvider>
               <AppProvider>
                 <Layout>{children}</Layout>
+                <section id="modal-root" />
               </AppProvider>
             </WalletProvider>
           </Web3Provider>

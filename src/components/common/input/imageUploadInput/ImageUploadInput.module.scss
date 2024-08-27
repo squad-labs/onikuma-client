@@ -1,0 +1,33 @@
+.input-container {
+  width: 100%;
+  border: 1px solid var(--DARK-GRAY-5);
+  background-color: var(--BASE-CREAM-1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem;
+
+  .input {
+    display: none;
+  }
+
+  .file-name {
+    color: var(--DARK);
+    font-size: var(--TEXT-SIZE-MEDIUM);
+  }
+
+  .label {
+    background-color: var(--DARK);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .8rem 1.8rem;
+    border-radius: 1.6rem;
+    cursor: pointer;
+
+    .label-text {
+      color: var(--LIGHT);
+      font-size: var(--TEXT-SIZE-MEDIUM);
+    } 
+  }
+}

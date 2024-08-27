@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
@@ -16,13 +15,18 @@ const nextConfig = {
     NEXT_PUBLIC_WAGMI_PROJECT_ID: process.env.WAGMI_PROJECT_ID,
     NEXT_PUBLIC_API_BASE_URL: process.env.API_BASE_URL,
     NEXT_PUBLIC_SOCKET_BASE_URL: process.env.SOCKET_BASE_URL,
+    NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL
   },
-  webpack(config) {
+  webpack(
+    config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+    ) {
     config.module.rules.push({
       test: /\.svg$/i,
       use: ['@svgr/webpack'],
     });
     config.externals.push("pino-pretty", "lokijs", "encoding", {
+      canvas: 'commonjs canvas',
       sharp: 'commonjs sharp',
       'utf-8-validate': 'commonjs utf-8-validate',
       bufferutil: 'commonjs bufferutil',
@@ -145,6 +149,14 @@ const nextConfig = {
         source: '/dashboards/my-data/detail/:id*',
         destination: `${process.env.API_BASE_URL}/dashboards/my-data/detail/:id*`,
       },
+      {
+        source: '/api/image',
+        destination: `${process.env.CLIENT_SERVER_URL}/api/image`,
+      },
+      {
+        source: '/api/result',
+        destination: `${process.env.CLIENT_SERVER_URL}/api/result`,
+      }
     ]
   }
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import styles from '@/layout/header/Header.module.scss';
 import classNames from 'classnames/bind';
 import HeaderLogo from '@/components/common/logo/headerLogo';
@@ -28,11 +28,11 @@ const Header = async () => {
         <div className={cn('header-inner')}>
           <HeaderLogo />
           <div className={cn('bar-wrapper')}>
-            <GameRelayBar endDate={data.endAt} />
+            <Suspense>{data && <GameRelayBar endDate={data.endAt} />}</Suspense>
           </div>
         </div>
         <div className={cn('header-inner')}>
-          <DashBoardButton id={data._id} />
+          <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
           <PlayGameButton />
         </div>
       </div>

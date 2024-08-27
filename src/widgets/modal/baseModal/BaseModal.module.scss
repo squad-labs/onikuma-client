@@ -1,0 +1,17 @@
+.container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  user-select: none;
+  z-index: 9999999;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.DARK_OPACITY_5-background {
+  background-color: var(--DARK-OPACITY-5);
+}

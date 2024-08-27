@@ -69,7 +69,5 @@ export const getCommentLikes = async ({
     });
     console.log(res.data);
     return res.data;
-  } catch (error) {
-
-  }
+  } catch (error) {}
 };

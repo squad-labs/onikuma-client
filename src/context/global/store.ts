@@ -1,7 +1,11 @@
 'use client';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import alertSlice from '@/context/global/slice/alertSlice';
+import modalSlice from '@/context/global/slice/modalSlice';
 
 const rootReducer = combineReducers({
+  alert: alertSlice,
+  modal: modalSlice,
   // Add reducers here
 });
 
