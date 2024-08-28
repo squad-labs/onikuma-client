@@ -31,14 +31,11 @@ const BaseDropdown = ({
   return (
     <div className={cn(`dropdown-container`)}>
       <div className={cn('dropdown-label')}>
-        {labelIcon && (<img src={labelIcon} className={cn('label-icon')}></img>)}
+        {labelIcon && <img src={labelIcon} className={cn('label-icon')}></img>}
         {label}
       </div>
-      <button
-        className={cn(`dropdown-button`)}
-        onClick={toggleDropdown}
-      >
-        <img src={buttonImage} alt="" className={cn('button-image')}/>
+      <button className={cn(`dropdown-button`)} onClick={toggleDropdown}>
+        <img src={buttonImage} alt="" className={cn('button-image')} />
       </button>
       {isOpen && (
         <div className={cn('dropdown-content')}>
@@ -50,7 +47,11 @@ const BaseDropdown = ({
             >
               <div className={cn('option-container')}>
                 {optionIcons[index] && (
-                <img src={optionIcons[index]} alt={option} className="option-icon" />
+                  <img
+                    src={optionIcons[index]}
+                    alt={option}
+                    className="option-icon"
+                  />
                 )}
                 {option}
               </div>
@@ -62,4 +63,4 @@ const BaseDropdown = ({
   );
 };
 
-export default BaseDropdown; 
+export default BaseDropdown;
