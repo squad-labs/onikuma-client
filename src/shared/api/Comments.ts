@@ -14,6 +14,7 @@ export const postCommnets = async (params: PostCommentsParams) => {
       },
     });
 
+    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);
