@@ -8,7 +8,6 @@ import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
 import { cookies } from 'next/headers';
 import { Topic } from '@/shared/types/data/topic';
 import { generateRound } from '@/shared/utils/random';
-import axios from 'axios';
 
 const cn = classNames.bind(styles);
 
@@ -41,15 +40,13 @@ const PlayPage = async ({ params }: Props) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/on-going`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIxOGQ0ZWY3NDBhYWY2ODZlZDcxZDAiLCJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MjQ2NDYyNzQsImV4cCI6MTcyNzIzODI3NH0.jtH_CYK2MQ1H7mklh3nvVSqdsuhZaqzyV0I5Lg1Jnng`,
         },
       },
     );
-
-    console.log(res);
 
     const data: Topic = await res.json();
 

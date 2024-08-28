@@ -1,4 +1,10 @@
-export type ModalType = 'PoolInModal' | 'DashboardModal' | 'ShareTopicModal' | 'ShareResultModal';
+import { PollResult } from '@/shared/types/data/dashboard';
+
+export type ModalType =
+  | 'PoolInModal'
+  | 'PoolResutlModal'
+  | 'ShareTopicModal'
+  | 'ShareResultModal';
 
 export type ShareTopicModalProps = {
   topicId: string;
@@ -17,7 +23,6 @@ export type ShareTopicModalProps = {
   ];
 };
 
-
 export type ShareResultModalProps = {
   topicId: string;
   title: string;
@@ -26,11 +31,12 @@ export type ShareResultModalProps = {
   option: {
     name: string;
     imageUrl: string;
-  }
-}
+  };
+};
 
 export type PoolInModalProps = {
   topicId: string;
+  value: string;
   title: string;
   imageUrl: string;
   poolAmount: number;
@@ -40,4 +46,6 @@ export type PoolInModalProps = {
   roundTokenName: string;
   roundTicker: string;
   roundTokenPrice: string;
-}
+};
+
+export type PoolResultModalProps = PollResult & {};

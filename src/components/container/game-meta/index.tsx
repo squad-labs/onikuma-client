@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import styles from '@/components/container/game-meta/GameMetaContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -18,9 +18,10 @@ type Props = {
   startAt: string;
   endAt: string;
   title: string;
-  status: string;
-  isFinal: boolean;
+  status?: string;
+  isFinal?: boolean;
   label: string;
+  onlyDate?: boolean;
 };
 
 const GameMetaContainer = ({
@@ -31,6 +32,7 @@ const GameMetaContainer = ({
   status,
   isFinal,
   label,
+  onlyDate = false,
 }: Props) => {
   const dispatch = useDispatch();
   const { options, currentIndex } = useContext(RoundContext);
@@ -49,18 +51,22 @@ const GameMetaContainer = ({
         </div>
       )}
       <div className={cn('round-container')}>
-        <BaseText
-          text={status}
-          color={'DARK_GRAY_2'}
-          size={'medium'}
-          weight={'regular'}
-        />
-        <BaseDivider
-          type={'vertical'}
-          color={'DARK_GRAY_2'}
-          length={50}
-          thick={1.5}
-        />
+        {status && (
+          <Fragment>
+            <BaseText
+              text={status}
+              color={'DARK_GRAY_2'}
+              size={'medium'}
+              weight={'regular'}
+            />
+            <BaseDivider
+              type={'vertical'}
+              color={'DARK_GRAY_2'}
+              length={50}
+              thick={1.5}
+            />
+          </Fragment>
+        )}
         <DateText
           startDate={startAt}
           endDate={endAt}
@@ -76,7 +82,7 @@ const GameMetaContainer = ({
           size={'extra-large'}
           weight={'bold'}
         />
-        {!isFinal && (
+        {isFinal || onlyDate || (
           <IconButton
             name="Button"
             height={'medium'}
@@ -103,10 +109,10 @@ const GameMetaContainer = ({
                           options[currentIndex[options.length - 1 - roundIndex]]
                             .imgUrl,
                       },
-                    ] 
+                    ],
                   },
                 }),
-              )
+              );
             }}
             classNames={['button-blue']}
           >

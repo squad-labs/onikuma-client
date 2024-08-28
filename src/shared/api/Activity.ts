@@ -26,21 +26,46 @@ type PostVoteParams = {
   topicId: string;
   winner: string;
   loser: string;
-}
+};
 
-export const postVote = async({ topicId, winner, loser }: PostVoteParams) => {
+export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
   try {
-    const res = await axios.post(`/activities/vote/${topicId}`, {
-      winner,
-      loser,
-    }, {
-      headers: {
-        Authorization: `Bearer ${TestToken}`,
+    const res = await axios.post(
+      `/activities/vote/${topicId}`,
+      {
+        winner,
+        loser,
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${TestToken}`,
+        },
+      },
+    );
 
     return res.data;
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+type GetRecentActivity = {
+  topicId: string;
+};
+
+export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
+  try {
+    const res = await axios.get(
+      `/activities/all/${topicId}?page=${1}&pageSize=${10}`,
+      {
+        headers: {
+          Authorization: `Bearer ${TestToken}`,
+        },
+      },
+    );
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

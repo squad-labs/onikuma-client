@@ -1,4 +1,6 @@
 import { TopicStatus } from '@/shared/types/data/topic';
+import axios from 'axios';
+import { TestToken } from '@/shared/constants/TEST';
 
 export const getTopicById = async (id: string, token: string) => {
   try {
@@ -34,6 +36,21 @@ export const getTopicByStatus = async (status: TopicStatus, token: string) => {
       return await res.json();
     }
   } catch (err) {
+    return err;
+  }
+};
+
+export const getTopicList = async () => {
+  try {
+    const res = await axios.get('/topics/titles', {
+      headers: {
+        Authorization: `Bearer ${TestToken}`,
+      },
+    });
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
     return err;
   }
 };

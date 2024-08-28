@@ -79,6 +79,7 @@ const CommentContainer = ({ topicId }: Props) => {
 
   useEffect(() => {
     socket?.on('comment', (data: Comment) => {
+      console.log('comment data', data);
       setCommentList(() => [data, ...commentList]);
     });
   }, [socket, comment, commentList]);

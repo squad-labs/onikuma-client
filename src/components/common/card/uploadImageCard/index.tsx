@@ -4,12 +4,24 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import ImageUploadInput from '@/components/common/input/imageUploadInput';
 import BaseButton from '@/widgets/button/baseButton';
+import { COLOR } from '@/shared/constants/COLOR';
 
 const cn = classNames.bind(styles);
 
-const UploadImageCard = () => {
+type Props = {
+  withBorder: boolean;
+  withbackGround: boolean;
+};
+
+const UploadImageCard = ({ withBorder, withbackGround }: Props) => {
   return (
-    <div className={cn('card-container')}>
+    <div
+      className={cn('card-container')}
+      style={{
+        border: withBorder ? `1px solid ${COLOR['DARK']}` : 'none',
+        backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
+      }}
+    >
       <BaseText
         text="You pooled in the biggest for Donald Trump!"
         color="DARK"

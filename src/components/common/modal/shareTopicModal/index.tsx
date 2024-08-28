@@ -24,7 +24,7 @@ const ShareTopicModal = ({
   dateText,
   options,
 }: ShareTopicModalProps) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.GET_SHARE_IMAGE],
@@ -41,10 +41,14 @@ const ShareTopicModal = ({
   }, []);
 
   const handleCloseModal = useCallback(() => {
-    dispatch(CLOSE_MODAL())
-  }, [dispatch])
+    dispatch(CLOSE_MODAL());
+  }, [dispatch]);
 
-  useOnClickOutside({ ref: modalRef, handler: handleCloseModal, mouseEvent: 'click' })
+  useOnClickOutside({
+    ref: modalRef,
+    handler: handleCloseModal,
+    mouseEvent: 'click',
+  });
   return (
     <BaseModal background={'DARK_OPACITY_5'}>
       <div className={cn('modal-inner')} ref={modalRef}>

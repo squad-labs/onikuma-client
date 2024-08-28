@@ -107,7 +107,19 @@ const nextConfig = {
       },
       {
         source: '/activities/all/:id*',
-        destination: `${process.env.API_BASE_URL}/activities/all/:id*`,
+        has: [
+          {
+            type: 'query',
+            key: 'page',
+            value: '(?<page>.*)',
+          },
+          {
+            type: 'query',
+            key: 'pageSize',
+            value: '(?<pageSize>.*)',
+          }
+        ],
+        destination: `${process.env.API_BASE_URL}/activities/all/:id*?page=:page&pageSize=:pageSize`,
       },
       {
         source: '/activities/vote/:id*',
@@ -156,6 +168,10 @@ const nextConfig = {
       {
         source: '/api/result',
         destination: `${process.env.CLIENT_SERVER_URL}/api/result`,
+      },
+      {
+        source: '/api/poll-result',
+        destination: `${process.env.CLIENT_SERVER_URL}/api/poll-result`,
       }
     ]
   }

@@ -16,6 +16,7 @@ const cn = classNames.bind(styles);
 type Props = {
   topicId: string;
   title: string;
+  value: string;
   imageUrl: string;
   poolAmount: number;
   baseTicker: string;
@@ -32,13 +33,14 @@ const FinalOptionCard = ({
   imageUrl,
   baseTicker,
   poolAmount,
+  value,
   baseTokenName,
   baseTokenPrice,
   roundTicker,
   roundTokenName,
   roundTokenPrice,
 }: Props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
 
   return (
@@ -93,21 +95,24 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => {
-            dispatch(OPEN_MODAL({
-              name: 'PoolInModal',
-              data: {
-                topicId: topicId,
-                title: title,
-                imageUrl: imageUrl,
-                poolAmount: 100, 
-                baseTicker: 'HONEY',
-                baseTokenName: 'HONEY',
-                baseTokenPrice: 0.002,
-                roundTicker: 'VITA',
-                roundTokenName: 'VITALIK',
-                roundTokenPrice: 0.001,
-              }
-            }))
+            dispatch(
+              OPEN_MODAL({
+                name: 'PoolInModal',
+                data: {
+                  topicId: topicId,
+                  title: title,
+                  value: value,
+                  imageUrl: imageUrl,
+                  poolAmount: 100,
+                  baseTicker: 'HONEY',
+                  baseTokenName: 'HONEY',
+                  baseTokenPrice: 0.002,
+                  roundTicker: 'VITA',
+                  roundTokenName: 'VITALIK',
+                  roundTokenPrice: 0.001,
+                },
+              }),
+            );
           }}
         />
         <BaseButton

@@ -9,10 +9,16 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import GenerateVoiceInput from '@/components/common/input/generateVoiceInput';
 import BaseButton from '@/widgets/button/baseButton';
+import { COLOR } from '@/shared/constants/COLOR';
 
 const cn = classNames.bind(styles);
 
-const UploadVoiceCard = () => {
+type Props = {
+  withBorder: boolean;
+  withbackGround: boolean;
+};
+
+const UploadVoiceCard = ({ withBorder, withbackGround }: Props) => {
   const [value, setValue] = useState<string>('');
 
   const handleOnChange = useCallback(
@@ -31,7 +37,13 @@ const UploadVoiceCard = () => {
   );
 
   return (
-    <div className={cn('card-container')}>
+    <div
+      className={cn('card-container')}
+      style={{
+        border: withBorder ? `1px solid ${COLOR['DARK']}` : 'none',
+        backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
+      }}
+    >
       <BaseText
         text="You pooled in the biggest for the entire Onikuma!"
         color="DARK"

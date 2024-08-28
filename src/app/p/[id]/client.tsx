@@ -14,7 +14,6 @@ import { useRound } from '@/shared/hooks/useRound';
 import { useSelector } from 'react-redux';
 import { getModal } from '@/context/global/slice/modalSlice';
 import ShareTopicModal from '@/components/common/modal/shareTopicModal';
-import ShareResultModal from '@/components/common/modal/shareResultModal';
 import PoolInModal from '@/components/common/modal/poolInModal';
 
 const cn = classNames.bind(styles);
@@ -28,8 +27,6 @@ const PlayClientPage = ({ id, topic }: Props) => {
   const { options, currentIndex } = useContext(RoundContext);
   const { roundIndex, roundStatus, isFinal } = useRound(RoundContext);
   const modal = useSelector(getModal);
-
-  console.log('modal', modal)
 
   return (
     <CommentProvider id={id}>
@@ -63,6 +60,7 @@ const PlayClientPage = ({ id, topic }: Props) => {
               <FinalOptionCard
                 topicId={id}
                 title={topic.name}
+                value={options[0].name}
                 imageUrl={options[0].imgUrl}
                 poolAmount={1000}
                 baseTokenName={'HONEY'}
@@ -113,29 +111,34 @@ const PlayClientPage = ({ id, topic }: Props) => {
           </div>
         </div>
       )}
-      {modal.name === 'ShareTopicModal' && modal.data && 'options' in modal.data && (
-        <ShareTopicModal
-          topicId={modal.data.topicId}
-          title={modal.data.title}
-          roundText={modal.data.roundText}
-          dateText={modal.data.dateText}
-          options={modal.data.options}
-        />
-      )}
-      {modal.name === 'PoolInModal' && modal.data && 'poolAmount' in modal.data && (
-        <PoolInModal
-          topicId={modal.data.topicId}
-          title={modal.data.title}
-          imageUrl={modal.data.imageUrl}
-          poolAmount={modal.data.poolAmount}
-          baseTicker={modal.data.baseTicker}
-          baseTokenName={modal.data.baseTokenName}
-          baseTokenPrice={modal.data.baseTokenPrice}
-          roundTicker={modal.data.roundTicker}
-          roundTokenName={modal.data.roundTokenName}
-          roundTokenPrice={modal.data.roundTokenPrice}
-        />
-      )}
+      {modal.name === 'ShareTopicModal' &&
+        modal.data &&
+        'options' in modal.data && (
+          <ShareTopicModal
+            topicId={modal.data.topicId}
+            title={modal.data.title}
+            roundText={modal.data.roundText}
+            dateText={modal.data.dateText}
+            options={modal.data.options}
+          />
+        )}
+      {modal.name === 'PoolInModal' &&
+        modal.data &&
+        'poolAmount' in modal.data && (
+          <PoolInModal
+            topicId={modal.data.topicId}
+            title={modal.data.title}
+            value={modal.data.value}
+            imageUrl={modal.data.imageUrl}
+            poolAmount={modal.data.poolAmount}
+            baseTicker={modal.data.baseTicker}
+            baseTokenName={modal.data.baseTokenName}
+            baseTokenPrice={modal.data.baseTokenPrice}
+            roundTicker={modal.data.roundTicker}
+            roundTokenName={modal.data.roundTokenName}
+            roundTokenPrice={modal.data.roundTokenPrice}
+          />
+        )}
     </CommentProvider>
   );
 };

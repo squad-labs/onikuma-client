@@ -3,6 +3,7 @@ export type ActivityTypeResponse = ActicityMetaType & {
 };
 
 export type ActivityType = {
+  activityId: string;
   topicId: string;
   userWallet: string;
   poolIn: number;

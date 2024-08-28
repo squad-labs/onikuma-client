@@ -1,3 +1,4 @@
+'use client';
 import { Option } from '@/shared/types/data/topic';
 import { createContext, Dispatch, SetStateAction } from 'react';
 

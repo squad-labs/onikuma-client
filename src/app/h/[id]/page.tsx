@@ -5,6 +5,7 @@ import HonorClientPage from '@/app/h/[id]/client';
 import { getMetadata } from '@/shared/utils/metadata';
 import { ResolvingMetadata } from 'next';
 import { Topic } from '@/shared/types/data/topic';
+import { HonorType } from '@/shared/types/data/honor';
 
 const cn = classNames.bind(styles);
 
@@ -35,7 +36,7 @@ const HonorPage = async ({ params }: Props) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/on-going`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/hall-of-honor/${id}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -44,11 +45,12 @@ const HonorPage = async ({ params }: Props) => {
       },
     );
 
-    const data: Topic = await res.json();
+    const data: HonorType = await res.json();
+
     return (
       <main className={cn('container')}>
         <div className={cn('inner')}>
-          <HonorClientPage id={id} topic={data} />
+          <HonorClientPage id={id} honor={data} />
         </div>
       </main>
     );

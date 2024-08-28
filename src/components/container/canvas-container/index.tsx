@@ -22,20 +22,27 @@ type Props = {
   }[];
 };
 
-const CanvasContainer = ({ topicId, roundText, dateText, title, type, ...rest }: Props) => {
+const CanvasContainer = ({
+  topicId,
+  roundText,
+  dateText,
+  title,
+  type,
+  ...rest
+}: Props) => {
   const { next } = useContext(RoundContext);
 
   const handleSelect = useCallback(
     (text: string) => {
       next(text);
       const loser = rest.source.find((source) => source.text !== text);
-      
+
       if (loser) {
         voteMutation.mutate({
           topicId,
           winner: text,
-          loser: loser?.text,  
-        })
+          loser: loser?.text,
+        });
       }
     },
     [type, rest],
@@ -45,9 +52,9 @@ const CanvasContainer = ({ topicId, roundText, dateText, title, type, ...rest }:
     mutationKey: [MUTATION_KEY.POST_VOTE, topicId, roundText],
     mutationFn: postVote,
     onSuccess: (data) => {
-      console.log('data', data)
-    }
-  })
+      console.log('data', data);
+    },
+  });
 
   if (type === 'single') {
     return (
@@ -78,7 +85,7 @@ const CanvasContainer = ({ topicId, roundText, dateText, title, type, ...rest }:
         base={rest.source[0].base}
         flip={rest.source[0].flip}
         onClick={() => {
-          handleSelect(rest.source[0].text)
+          handleSelect(rest.source[0].text);
         }}
       />
       <span className={cn('text')}>VS</span>
@@ -92,7 +99,7 @@ const CanvasContainer = ({ topicId, roundText, dateText, title, type, ...rest }:
         base={rest.source[1].base}
         flip={rest.source[1].flip}
         onClick={() => {
-          handleSelect(rest.source[1].text)
+          handleSelect(rest.source[1].text);
         }}
       />
     </div>
