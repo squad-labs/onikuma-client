@@ -67,7 +67,6 @@ export const getCommentLikes = async ({
         Authorization: `Bearer ${TestToken}`,
       },
     });
-    console.log(res.data);
     return res.data;
   } catch (error) {}
 };

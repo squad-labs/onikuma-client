@@ -1,24 +1,25 @@
-import React, { useCallback, useRef } from 'react'
-import styles from '@/components/common/modal/poolInModal/PoolInModal.module.scss'
-import classNames from 'classnames/bind'
-import { PoolInModalProps } from '@/shared/types/ui/Modal'
-import BaseModal from '@/widgets/modal/baseModal'
-import BaseText from '@/widgets/text/baseText'
-import Image from 'next/image'
-import PriceInfoCard from '@/components/common/card/priceInfoCard'
-import BaseButton from '@/widgets/button/baseButton'
-import { CLOSE_MODAL } from '@/context/global/slice/modalSlice'
-import { useDispatch } from 'react-redux'
-import useOnClickOutside from '@/shared/hooks/useOnClick'
-import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY'
-import { postPoolIn } from '@/shared/api/Activity'
-import { useMutation } from '@tanstack/react-query'
+import React, { useCallback, useRef } from 'react';
+import styles from '@/components/common/modal/poolInModal/PoolInModal.module.scss';
+import classNames from 'classnames/bind';
+import { PoolInModalProps } from '@/shared/types/ui/Modal';
+import BaseModal from '@/widgets/modal/baseModal';
+import BaseText from '@/widgets/text/baseText';
+import Image from 'next/image';
+import PriceInfoCard from '@/components/common/card/priceInfoCard';
+import BaseButton from '@/widgets/button/baseButton';
+import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
+import { useDispatch } from 'react-redux';
+import useOnClickOutside from '@/shared/hooks/useOnClick';
+import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
+import { postPoolIn } from '@/shared/api/Activity';
+import { useMutation } from '@tanstack/react-query';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 const PoolInModal = ({
   topicId,
   title,
+  value,
   imageUrl,
   poolAmount,
   baseTicker,
@@ -26,14 +27,14 @@ const PoolInModal = ({
   baseTokenPrice,
   roundTicker,
   roundTokenName,
-  roundTokenPrice
+  roundTokenPrice,
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleCloseModal = useCallback(() => {
-    dispatch(CLOSE_MODAL())
-  }, [dispatch])
+    dispatch(CLOSE_MODAL());
+  }, [dispatch]);
 
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
@@ -43,21 +44,25 @@ const PoolInModal = ({
     },
     onError: (error) => {
       console.log(error);
-    }
+    },
   });
 
   const handlePoolIn = useCallback(() => {
     poolInMutation.mutate({
       topicId: topicId,
       topicToken: poolAmount,
-      reserveToken: 0,
-      pickerName: baseTokenName,
+      reserveToken: 100,
+      pickerName: value,
     });
-  }, [topicId, poolAmount, baseTokenName]);
+  }, [topicId, poolAmount, title, value]);
 
-  useOnClickOutside({ ref: modalRef, handler: handleCloseModal, mouseEvent: 'click' })
+  useOnClickOutside({
+    ref: modalRef,
+    handler: handleCloseModal,
+    mouseEvent: 'click',
+  });
   return (
-    <BaseModal background='DARK_OPACITY_5'>
+    <BaseModal background="DARK_OPACITY_5">
       <div className={cn('modal-inner')} ref={modalRef}>
         <p className={cn('modal-title')}>{title}</p>
         <div className={cn('text-container')}>
@@ -72,7 +77,7 @@ const PoolInModal = ({
           <div className={cn('image-container')}>
             <Image
               src={imageUrl}
-              alt='image'
+              alt="image"
               width={1200}
               height={1200}
               priority={true}
@@ -104,9 +109,9 @@ const PoolInModal = ({
             theme="fill"
             fontSize="large"
             fontWeight="regular"
-            shape='shape-4'
+            shape="shape-4"
             onClick={() => {
-              handlePoolIn()
+              handlePoolIn();
             }}
           />
           <BaseButton
@@ -122,7 +127,7 @@ const PoolInModal = ({
         </div>
       </div>
     </BaseModal>
-  )
-}
+  );
+};
 
-export default PoolInModal
+export default PoolInModal;

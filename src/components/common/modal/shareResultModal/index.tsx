@@ -1,38 +1,39 @@
-import React, { useCallback, useRef } from 'react'
-import styles from '@/components/common/modal/shareResultModal/ShareResultModal.module.scss'
-import classNames from 'classnames/bind'
-import { ShareResultModalProps } from '@/shared/types/ui/Modal'
-import { useDispatch } from 'react-redux'
-import { useQuery } from '@tanstack/react-query'
-import { QUERY_KEY } from '@/shared/constants/QUERY_KEY'
-import { getResultImage } from '@/shared/api/Image'
-import { CLOSE_MODAL } from '@/context/global/slice/modalSlice'
-import useOnClickOutside from '@/shared/hooks/useOnClick'
-import { Copy } from '@/shared/utils/clipboard'
-import BaseModal from '@/widgets/modal/baseModal'
-import BaseText from '@/widgets/text/baseText'
+import React, { useCallback, useRef } from 'react';
+import styles from '@/components/common/modal/shareResultModal/ShareResultModal.module.scss';
+import classNames from 'classnames/bind';
+import { ShareResultModalProps } from '@/shared/types/ui/Modal';
+import { useDispatch } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
+import { getResultImage } from '@/shared/api/Image';
+import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
+import useOnClickOutside from '@/shared/hooks/useOnClick';
+import { Copy } from '@/shared/utils/clipboard';
+import BaseModal from '@/widgets/modal/baseModal';
+import BaseText from '@/widgets/text/baseText';
 import Image from 'next/image';
-import BaseButton from '@/widgets/button/baseButton'
+import BaseButton from '@/widgets/button/baseButton';
 
-const cn = classNames.bind(styles)
+const cn = classNames.bind(styles);
 
 const ShareResultModal = ({
   topicId,
   title,
   roundText,
   dateText,
-  option
+  option,
 }: ShareResultModalProps) => {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.GET_RESULT_IMAGE],
-    queryFn: () => getResultImage({ topicId, title, roundText, dateText, option }),
-  })
+    queryFn: () =>
+      getResultImage({ topicId, title, roundText, dateText, option }),
+  });
 
   const handleCloseModal = useCallback(() => {
-    dispatch(CLOSE_MODAL())
-  }, [dispatch])
+    dispatch(CLOSE_MODAL());
+  }, [dispatch]);
 
   const handleCopy = useCallback(() => {
     Copy({
@@ -42,8 +43,11 @@ const ShareResultModal = ({
     });
   }, []);
 
-
-  useOnClickOutside({ ref: modalRef, handler: handleCloseModal, mouseEvent: 'click' })
+  useOnClickOutside({
+    ref: modalRef,
+    handler: handleCloseModal,
+    mouseEvent: 'click',
+  });
   return (
     <BaseModal background={'DARK_OPACITY_5'}>
       <div className={cn('modal-inner')} ref={modalRef}>
@@ -83,7 +87,7 @@ const ShareResultModal = ({
         </div>
       </div>
     </BaseModal>
-  )
-}
+  );
+};
 
-export default ShareResultModal
+export default ShareResultModal;

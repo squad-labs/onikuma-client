@@ -85,19 +85,21 @@ const AppProvider = ({ children }: Props) => {
             ticker={'HONEY'}
             amount={item.poolIn}
             pickerName={'HONEY'}
-            createAt={`${fetchRelatedTime(item.createdAt)} ago`}
+            createAt={`${fetchRelatedTime(item.createdAt)}`}
           />
         );
       })}
-      {modal.name === 'ShareResultModal' && modal.data && 'option' in modal.data && (
-        <ShareResultModal
-          topicId={modal.data.topicId}
-          title={modal.data.title}
-          roundText={modal.data.roundText}
-          dateText={modal.data.dateText}
-          option={modal.data.option}
-        />
-      )}
+      {modal.name === 'ShareResultModal' &&
+        modal.data &&
+        'option' in modal.data && (
+          <ShareResultModal
+            topicId={modal.data.topicId}
+            title={modal.data.title}
+            roundText={modal.data.roundText}
+            dateText={modal.data.dateText}
+            option={modal.data.option}
+          />
+        )}
     </Fragment>
   );
 };

@@ -1,13 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/context/global/store';
-import { ModalType, PoolInModalProps, ShareResultModalProps, ShareTopicModalProps } from '@/shared/types/ui/Modal';
+import {
+  ModalType,
+  PoolInModalProps,
+  PoolResultModalProps,
+  ShareResultModalProps,
+  ShareTopicModalProps,
+} from '@/shared/types/ui/Modal';
 
 export interface IModalState<T> {
   name: ModalType | undefined;
-  data: T
+  data: T;
 }
 
-type ModalProps = ShareResultModalProps | ShareTopicModalProps | PoolInModalProps | undefined;
+type ModalProps =
+  | ShareResultModalProps
+  | ShareTopicModalProps
+  | PoolInModalProps
+  | PoolResultModalProps
+  | undefined;
 
 const initialState: IModalState<ModalProps> = {
   name: undefined,

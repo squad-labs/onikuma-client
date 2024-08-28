@@ -24,3 +24,11 @@ export type Option = {
 };
 
 export type TopicStatus = 'upComing' | 'onGoing' | 'completed';
+
+export type TopicListItem = {
+  _id: string;
+  name: string;
+  status: TopicStatus;
+  startAt: string;
+  endAt: string;
+};

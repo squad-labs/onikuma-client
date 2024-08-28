@@ -4,11 +4,217 @@ import {
   CanvasRenderingContext2D,
   loadImage,
 } from 'canvas';
-import { ShareResultModalProps, ShareTopicModalProps } from '@/shared/types/ui/Modal';
+import {
+  ShareResultModalProps,
+  ShareTopicModalProps,
+} from '@/shared/types/ui/Modal';
 import { COLOR } from '@/shared/constants/COLOR';
 import path from 'path';
+import { PollResult } from '@/shared/types/data/dashboard';
+import {
+  getNumberSign,
+  numberSuffix,
+  thousandFormat,
+} from '@/shared/utils/number';
+import { ColorType } from '@/shared/types/ui/Color';
+import { GraphColorMap } from '@/components/container/graph-container';
 
-export const generateResultImage = async({
+export const generatePollResultImage = async ({
+  topicId,
+  competitors,
+  totalGain,
+  totalPnL,
+  totalPoolIn,
+}: PollResult) => {
+  const canvas = createCanvas(2000, 1600);
+  const ctx = canvas.getContext('2d');
+
+  const {
+    data: { poolIn },
+  } = competitors.reduce((prev, current) => {
+    return prev.data.poolIn > current.data.poolIn ? prev : current;
+  });
+
+  registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
+    family: 'DMMono-Light',
+  });
+
+  registerFont(path.resolve('./public/fonts/DMMono-Regular.ttf'), {
+    family: 'DMMono-Regular',
+  });
+
+  registerFont(path.resolve('./public/fonts/DMMono-Medium.ttf'), {
+    family: 'DMMono-Medium',
+    weight: 'bold',
+  });
+
+  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+    family: 'RubikMono-Regular',
+  });
+
+  ctx.fillStyle = COLOR.LIGHT_CREAM_1;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.beginPath();
+  ctx.lineWidth = 8;
+  ctx.fillStyle = COLOR.DARK;
+  ctx.rect(0, 0, canvas.width, canvas.height);
+  ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.font = '52px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK_GRAY_2;
+  ctx.fillText('Your poll results', canvas.width / 2, 96);
+
+  ctx.font = '32px DMMono-Regular';
+  ctx.fillStyle = COLOR.DARK_GRAY_2;
+  ctx.fillText('You have won', canvas.width / 2 - 280, 176);
+
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillStyle = getNumberSign(totalGain).color;
+  ctx.fillText(
+    `${getNumberSign(totalGain).sign}${totalGain} $HONEY (${getNumberSign(totalGain).sign}${totalPnL}%)`,
+    canvas.width / 2,
+    176,
+  );
+
+  ctx.font = '32px DMMono-Regular';
+  ctx.fillStyle = COLOR.DARK_GRAY_2;
+  ctx.fillText('in total!', canvas.width / 2 + 240, 176);
+
+  ctx.textAlign = 'start';
+  ctx.font = '44px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK;
+  ctx.fillText('Total volume locked', 120, 290);
+
+  ctx.textAlign = 'start';
+  ctx.font = '42px DMMono-Regular';
+  ctx.fillStyle = COLOR.DARK_GRAY_5;
+  ctx.fillText('($HONEY)', 630, 290);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK_GRAY_5;
+  ctx.fillText('My Pool', canvas.width - 560, 290);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK_GRAY_5;
+  ctx.fillText('PnL ($)', canvas.width - 340, 290);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK_GRAY_5;
+  ctx.fillText('PnL (%)', canvas.width - 120, 290);
+
+  const xGap = 60;
+  const yGap = 130;
+
+  competitors.forEach((competitor, index) => {
+    const sign = getNumberSign(competitor.data.poolIn);
+
+    ctx.textAlign = 'start';
+    ctx.font = '32px DMMono-Medium';
+    ctx.fillStyle = COLOR.DARK;
+    ctx.fillText(
+      `${index + 1}${numberSuffix(index + 1)}`,
+      120,
+      430 + index * yGap,
+    );
+
+    ctx.textAlign = 'start';
+    ctx.font = '32px DMMono-Medium';
+    ctx.fillStyle = COLOR.DARK_GRAY_5;
+    ctx.fillText(`${competitor.name}`, 200 + xGap, 430 + index * yGap);
+
+    const chunk = poolIn / 100;
+    const ratio = Math.floor(competitor.data.poolIn / chunk);
+    const image = generateResultGraphImage(GraphColorMap[index + 1], ratio);
+    ctx.drawImage(image, 550, 375 + index * yGap);
+
+    ctx.textAlign = 'end';
+    ctx.font = '32px DMMono-Medium';
+    ctx.fillStyle = COLOR[sign.color];
+    ctx.fillText(
+      `${sign.sign}$${thousandFormat(competitor.data.poolIn)}`,
+      canvas.width - 560,
+      430 + index * yGap,
+    );
+
+    ctx.textAlign = 'end';
+    ctx.font = '32px DMMono-Medium';
+    ctx.fillStyle = COLOR[sign.color];
+    ctx.fillText(
+      `${sign.sign}$${thousandFormat(competitor.data.gain)}`,
+      canvas.width - 340,
+      430 + index * yGap,
+    );
+
+    ctx.textAlign = 'end';
+    ctx.font = '32px DMMono-Medium';
+    ctx.fillStyle = COLOR[sign.color];
+    ctx.fillText(
+      `${sign.sign}%${thousandFormat(competitor.data.pnl)}`,
+      canvas.width - 120,
+      430 + index * yGap,
+    );
+  });
+
+  ctx.textAlign = 'start';
+  ctx.font = '44px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK;
+  ctx.fillText('Total', 120, 1480);
+
+  const totalSign = getNumberSign(totalGain);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillStyle = COLOR[totalSign.color];
+  ctx.fillText(`${totalSign.sign}$${totalPoolIn}`, canvas.width - 560, 1480);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillText(`${totalSign.sign}$${totalGain}`, canvas.width - 340, 1480);
+
+  ctx.textAlign = 'end';
+  ctx.font = '32px DMMono-Medium';
+  ctx.fillText(`${totalSign.sign}%${totalPnL}`, canvas.width - 120, 1480);
+
+  const buffer = canvas.toBuffer('image/png');
+
+  return buffer;
+};
+
+export const generateResultGraphImage = (color: ColorType, range: number) => {
+  const canvas = createCanvas(550, 90);
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = COLOR.BASE_CREAM_1;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = range === 0 ? COLOR['BASE_CREAM_1'] : COLOR[color];
+  ctx.fillRect(0, 0, (canvas.width / 100) * range, canvas.height);
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = COLOR.DARK_GRAY_2;
+  ctx.rect(0, 0, canvas.width, canvas.height);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.lineWidth = 1;
+  ctx.fillStyle = COLOR.DARK_GRAY_4;
+  ctx.rect(
+    (canvas.width / 100) * range,
+    0,
+    (canvas.width / 100) * range + 1,
+    canvas.height,
+  );
+  ctx.stroke();
+
+  return canvas;
+};
+
+export const generateResultImage = async ({
   topicId,
   title,
   roundText,
@@ -33,17 +239,12 @@ export const generateResultImage = async({
 
   registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
     family: 'RubikMono-Regular',
-  }); 
+  });
 
   ctx.fillStyle = COLOR.LIGHT;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  ctx.beginPath();
-  ctx.lineWidth = 8;
-  ctx.fillStyle = COLOR.DARK;
-  ctx.rect(0, 0, canvas.width, canvas.height);
-  ctx.stroke();
 
+  ctx.beginPath();
   ctx.lineWidth = 8;
   ctx.fillStyle = COLOR.DARK;
   ctx.rect(0, 0, canvas.width, canvas.height);
@@ -61,10 +262,7 @@ export const generateResultImage = async({
   ctx.rect(220, 0, 200, 0);
   ctx.stroke();
 
-  const myOption = await loadOptionImage(
-    option.name,
-    option.imageUrl,
-  );
+  const myOption = await loadOptionImage(option.name, option.imageUrl);
   ctx.drawImage(myOption, 120, 270);
 
   const calendar = await loadStaticImage('./public/icons/calendar.png');
@@ -82,8 +280,8 @@ export const generateResultImage = async({
 
   const buffer = canvas.toBuffer('image/png');
 
-  return buffer; 
-}
+  return buffer;
+};
 
 export const generateShareImage = async ({
   topicId,

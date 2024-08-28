@@ -23,7 +23,17 @@ type Props = {
   onClick: (text: string) => void;
 };
 
-const ImageOptionCard = ({ topicId, roundText, dateText, title, type, text, base, flip, onClick }: Props) => {
+const ImageOptionCard = ({
+  topicId,
+  roundText,
+  dateText,
+  title,
+  type,
+  text,
+  base,
+  flip,
+  onClick,
+}: Props) => {
   const dispatch = useDispatch();
 
   return (
@@ -51,24 +61,27 @@ const ImageOptionCard = ({ topicId, roundText, dateText, title, type, text, base
               fontSize={'medium'}
               loading={false}
               onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
+                event.preventDefault();
+                event.stopPropagation();
 
-                dispatch(OPEN_MODAL({
-                  name: 'PoolInModal',
-                  data: {
-                    topicId: topicId,
-                    title: title,
-                    imageUrl: base,
-                    poolAmount: 100, 
-                    baseTicker: 'HONEY',
-                    baseTokenName: 'HONEY',
-                    baseTokenPrice: 0.002,
-                    roundTicker: 'VITA',
-                    roundTokenName: 'VITALIK',
-                    roundTokenPrice: 0.001,
-                  }
-                }))
+                dispatch(
+                  OPEN_MODAL({
+                    name: 'PoolInModal',
+                    data: {
+                      topicId: topicId,
+                      title: title,
+                      value: text,
+                      imageUrl: base,
+                      poolAmount: 100,
+                      baseTicker: 'HONEY',
+                      baseTokenName: 'HONEY',
+                      baseTokenPrice: 0.002,
+                      roundTicker: 'VITA',
+                      roundTokenName: 'VITALIK',
+                      roundTokenPrice: 0.001,
+                    },
+                  }),
+                );
               }}
             />
           )}
@@ -77,22 +90,24 @@ const ImageOptionCard = ({ topicId, roundText, dateText, title, type, text, base
               <IconButton
                 name="share-button"
                 onClick={(event) => {
-                  event.preventDefault()
-                  event.stopPropagation()
+                  event.preventDefault();
+                  event.stopPropagation();
 
-                  dispatch(OPEN_MODAL({
-                    name: 'ShareResultModal',
-                    data: {
-                      topicId: topicId,
-                      title: title,
-                      roundText: roundText,
-                      dateText: dateText,
-                      option: {
-                        name: text,
-                        imageUrl: base,
-                      }
-                    }
-                  }))
+                  dispatch(
+                    OPEN_MODAL({
+                      name: 'ShareResultModal',
+                      data: {
+                        topicId: topicId,
+                        title: title,
+                        roundText: roundText,
+                        dateText: dateText,
+                        option: {
+                          name: text,
+                          imageUrl: base,
+                        },
+                      },
+                    }),
+                  );
                 }}
                 shape="round"
                 height="small"
