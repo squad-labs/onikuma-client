@@ -1,15 +1,17 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';
 import MyDataTable from '@/widgets/table/myDataTable';
-import { fetchMyData } from '@/shared/api/MyData';
+import { getMyData } from '@/shared/api/MyData';
+import { useQueryClient } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 
 type Competitor = {
   name: string;
+  imgUrl: string; 
   isBiggestPickerPooler: boolean;
 };
 
@@ -23,45 +25,41 @@ type ResultItem = {
   totalGain: number;
   totalPnL: number;
   isBiggestTopicPooler: boolean;
-  competitors: Competitor[];
-};
+  competitors: Competitor[];};
 
 type MyDataResponse = {
-  result: ResultItem[];
+  result: ResultItem[]; 
   myTotalPoolIn: number; 
-  myTotalGain: number;
+  totalCostPnL: number;
   myTotalPnL: number;
 };
 
 const MyClientPage = () => {
-
-  const [myTotalPoolIn, setMyTotalPoolIn] = useState<number>(0);
-  const [myTotalGain, setMyTotalGain] = useState<number>(0);
-  const [myTotalPnL, setMyTotalPnL] = useState<number>(0);
+  const [highlights, setHighlights] = useState({
+    myTotalPoolIn: 0,
+    myTotalGain: 0,
+    myTotalPnL: 0,
+  });
   const [dataTableData, setDataTableData] = useState<ResultItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+
+  const getData = useCallback(async () => {
+    console.log('fetchLike');
+    const response: MyDataResponse = await getMyData();
+    console.log('API Response:', response);
+    if (response) {
+      setHighlights ({
+        myTotalPoolIn: response.myTotalPoolIn,
+        myTotalGain: response.totalCostPnL,
+        myTotalPnL: response.myTotalPnL,
+    });
+    setDataTableData(response.result);
+  }
+  }, []);
 
   useEffect(() => {
-      const loadData = async () => {
-        try {
-          const res = await fetchMyData();
-          console.log('Fetched Data:', res);
-  
-          if (res && res.result) {
-            setMyTotalPoolIn(res.myTotalPoolIn);
-            setMyTotalGain(res.myTotalGain);
-            setMyTotalPnL(res.myTotalPnL);
-            setDataTableData(res.result);
-          } else {
-            throw new Error('Invalid data structure');
-          }
-        } catch (err) {
-          console.error('Error fetching data:', err);
-          setError('Failure to fetch data');
-        }
-      };
-      loadData();
-    }, []);
+    getData();  
+  }, [getData]);
 
   return (
     <div className={cn('page-container')}>
@@ -70,17 +68,17 @@ const MyClientPage = () => {
         <div className={cn('highlights-container')}>
           <HighlightCard
             title="Total Pooled in Amount"
-            mainText={`$${myTotalPoolIn || '0.00'}`}
+            mainText={`$${highlights.myTotalPoolIn ?? '0.00'}`}
             subText="0%"
           />
           <HighlightCard
             title="Total Earnings / Loss"
-            mainText={`$${myTotalGain || '0.00'}`}
+            mainText={`$${highlights.myTotalGain ?? '0.00'}`}
             subText="0%"
           />
           <HighlightCard 
             title="PnL (%)" 
-            mainText={`$${myTotalPnL?.toFixed(2) || '0.00'}`} 
+            mainText={`${highlights.myTotalPnL ?? '0.00'}`} 
             subText="0%" />
           <HighlightCard
             title="Base Asset"
@@ -97,3 +95,5 @@ const MyClientPage = () => {
 };
 
 export default MyClientPage;
+
+
