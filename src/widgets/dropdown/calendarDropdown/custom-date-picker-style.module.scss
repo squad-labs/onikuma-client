@@ -1,0 +1,16 @@
+.custom-datepicker {
+    .react-datepicker__header {
+        font-family: var(--FONT-DM-MONO-REGULAR);
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        border: 1px solid var(--DARK-GRAY-1);
+    }
+}
+
+.react-datepicker__month-container {
+    background-color: #081833;
+    color: #969eac;
+    font-size: 1rem;
+    font-family: 'Mulish';
+}  

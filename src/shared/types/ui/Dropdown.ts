@@ -9,3 +9,12 @@ export type BaseDropdownProps = {
     urls?: string[]; 
     buttonImage: string;
 }
+
+export type CalendarDropdownProps = {
+    label?: string; 
+    labelIcon?: string;
+    buttonImage: string;
+    initialStartDate: Date | undefined; 
+    initialEndDate: Date | undefined;
+    onDateChange: (startDate: Date | undefined, endDate: Date | undefined) => void;
+}
