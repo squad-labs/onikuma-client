@@ -28,7 +28,11 @@ type MyDataTableProps = {
 
 const formatDateString = (dateString: string) => {
   const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  };
   return date.toLocaleDateString(undefined, options);
 };
 
@@ -39,12 +43,12 @@ const formatDollar = (value: number) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(value);
-  return formattedNumber; 
-}
+  return formattedNumber;
+};
 
 const formatSign = (value: number) => {
-   return value >= 0 ? '+' : ''; 
-}
+  return value >= 0 ? '+' : '';
+};
 
 const MyDataTable = ({ data }: MyDataTableProps) => {
   return (
@@ -61,25 +65,39 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((item, index) => (   
+        {data.map((item, index) => (
           <tr key={index}>
-            <td className={cn('td-name')}>
-               {item.name}
-            </td>
+            <td className={cn('td-name')}>{item.name}</td>
             <td>
-              <StatusBar
-                label = {item.status}
-                />
+              <StatusBar label={item.status} />
             </td>
             <td>{`${formatDateString(item.startAt)} ~ ${formatDateString(item.endAt)}`}</td>
-            <td>{formatSign(item.totalPoolIn)}{formatDollar(item.totalPoolIn)}</td>
-            <td>{formatSign(item.totalCostPnL)}{formatDollar(item.totalCostPnL)}</td>
-            <td>{formatSign(item.totalPercentPnL)}{formatDollar(item.totalPercentPnL)}%</td>
+            <td>
+              {formatSign(item.totalPoolIn)}
+              {formatDollar(item.totalPoolIn)}
+            </td>
+            <td>
+              {formatSign(item.totalCostPnL)}
+              {formatDollar(item.totalCostPnL)}
+            </td>
+            <td>
+              {formatSign(item.totalPercentPnL)}
+              {formatDollar(item.totalPercentPnL)}%
+            </td>
             <td className={cn('td-check-results')}>
               <CheckResultsButton
-                text = {item.isBiggestTopicPooler? 'Hall of Honor' : 'Check Results'}
-                primaryColor = {item.isBiggestTopicPooler ? 'BASE_RED_1' : item.status.toLowerCase() === 'ongoing' ? 'DARK_GRAY_5' : 'BASE_BLUE_1'}
-                secondaryColor= 'BASE_CREAM_1' />
+                text={
+                  item.isBiggestTopicPooler ? 'Hall of Honor' : 'Check Results'
+                }
+                primaryColor={
+                  item.isBiggestTopicPooler
+                    ? 'BASE_RED_1'
+                    : item.status.toLowerCase() === 'ongoing'
+                      ? 'DARK_GRAY_5'
+                      : 'BASE_BLUE_1'
+                }
+                secondaryColor="BASE_CREAM_1"
+              />
             </td>
           </tr>
         ))}

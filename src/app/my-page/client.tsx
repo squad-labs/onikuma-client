@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
@@ -11,7 +11,7 @@ const cn = classNames.bind(styles);
 
 type Competitor = {
   name: string;
-  imgUrl: string; 
+  imgUrl: string;
   isBiggestPickerPooler: boolean;
 };
 
@@ -21,15 +21,16 @@ type ResultItem = {
   status: string;
   startAt: string;
   endAt: string;
-  totalPoolIn: number; 
+  totalPoolIn: number;
   totalCostPnL: number;
   totalPercentPnL: number;
   isBiggestTopicPooler: boolean;
-  competitors: Competitor[];};
+  competitors: Competitor[];
+};
 
 type MyDataResponse = {
-  result: ResultItem[]; 
-  myTotalPoolIn: number; 
+  result: ResultItem[];
+  myTotalPoolIn: number;
   totalCostPnL: number;
   myTotalPnL: number;
 };
@@ -47,24 +48,24 @@ const MyClientPage = () => {
     const response: MyDataResponse = await getMyData();
     console.log('API Response:', response);
     if (response) {
-      setHighlights ({
+      setHighlights({
         myTotalPoolIn: response.myTotalPoolIn,
         myTotalGain: response.totalCostPnL,
         myTotalPnL: response.myTotalPnL,
-    });
-    setDataTableData(response.result);
-  }
+      });
+      setDataTableData(response.result);
+    }
   }, []);
 
   useEffect(() => {
     getData();
   }, [getData]);
-  
+
   const formattedTotalGain = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(Math.abs(highlights.myTotalGain));
 
   const signTotalGain = highlights.myTotalGain < 0 ? '-' : '+';
@@ -83,13 +84,14 @@ const MyClientPage = () => {
           />
           <HighlightCard
             title="Total Earnings / Loss"
-            mainText={`${signTotalGain}${formattedTotalGain}`} 
+            mainText={`${signTotalGain}${formattedTotalGain}`}
             subText="0%"
           />
-          <HighlightCard 
-            title="PnL (%)" 
-            mainText={`${signPnL}${highlights.myTotalPnL}%`} 
-            subText="0%" />
+          <HighlightCard
+            title="PnL (%)"
+            mainText={`${signPnL}${highlights.myTotalPnL}%`}
+            subText="0%"
+          />
           <HighlightCard
             title="Base Asset"
             mainText="$HONEY"
@@ -105,5 +107,3 @@ const MyClientPage = () => {
 };
 
 export default MyClientPage;
-
-

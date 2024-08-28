@@ -1,27 +1,26 @@
-import React from 'react';
+'use client'
+import React, { ReactNode } from 'react';
 import styles from '@/widgets/card/ruleCard/RuleCard.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
 type RuleCardProps = {
-  photo: string;
   textLine1: string;
   textLine2: string;
   textLine3: string;
+  children: ReactNode;
 };
 
 const RuleCard = ({
-  photo,
+  children,
   textLine1,
   textLine2,
   textLine3,
 }: RuleCardProps) => {
   return (
     <div className={cn('card')}>
-      <div className={cn('photo')}>
-        <img src={photo} alt="Rule Card" />
-      </div>
+      <div className={cn('photo')}>{children}</div>
       <div className={cn('text')}>
         <p>{textLine1}</p>
         <h2>{textLine2}</h2>

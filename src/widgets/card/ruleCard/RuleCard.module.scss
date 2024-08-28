@@ -9,15 +9,10 @@
 
     .photo{
         width: 30%;
+        aspect-ratio: 1 / 1;
         display: flex;
         align-items: center;
-
-        img{
-            width: 100%; 
-            height: auto;
-            display: block;
-            border-radius: 10px;
-        }
+    position: relative;
     }
 }
 
