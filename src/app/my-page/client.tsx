@@ -22,8 +22,8 @@ type ResultItem = {
   startAt: string;
   endAt: string;
   totalPoolIn: number; 
-  totalGain: number;
-  totalPnL: number;
+  totalCostPnL: number;
+  totalPercentPnL: number;
   isBiggestTopicPooler: boolean;
   competitors: Competitor[];};
 
@@ -57,9 +57,16 @@ const MyClientPage = () => {
   }
   }, []);
 
-  useEffect(() => {
-    getData();  
-  }, [getData]);
+  const number = highlights.myTotalPnL;
+
+  const formattedNumber = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(Math.abs(number));
+
+  const sign = number >= 0 ? '+' : '-';
 
   return (
     <div className={cn('page-container')}>
@@ -73,7 +80,7 @@ const MyClientPage = () => {
           />
           <HighlightCard
             title="Total Earnings / Loss"
-            mainText={`$${highlights.myTotalGain ?? '0.00'}`}
+            mainText={`${sign}${formattedNumber}`} 
             subText="0%"
           />
           <HighlightCard 

@@ -1,6 +1,7 @@
 .bar-container{
     border: 1.5px solid var(--BASE-BLUE-1);
     border-radius: 15px; 
+    padding: 0.25rem;
 
     p{
         font-weight: 100;
@@ -11,7 +12,7 @@
         color: var(--BASE-CREAM-1);
     };
     
-    &.bar-completed{
+    &.bar-Ended{
         background-color: var(--BASE-CREAM-1);
         color: var(--BASE-BLUE-1);
     };
