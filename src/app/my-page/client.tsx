@@ -44,7 +44,6 @@ const MyClientPage = () => {
   const queryClient = useQueryClient();
 
   const getData = useCallback(async () => {
-    console.log('fetchLike');
     const response: MyDataResponse = await getMyData();
     console.log('API Response:', response);
     if (response) {
@@ -57,16 +56,20 @@ const MyClientPage = () => {
   }
   }, []);
 
-  const number = highlights.myTotalPnL;
-
-  const formattedNumber = new Intl.NumberFormat('en-US', {
+  useEffect(() => {
+    getData();
+  }, [getData]);
+  
+  const formattedTotalGain = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
-  }).format(Math.abs(number));
+  }).format(Math.abs(highlights.myTotalGain));
 
-  const sign = number >= 0 ? '+' : '-';
+  const signTotalGain = highlights.myTotalGain < 0 ? '-' : '+';
+
+  const signPnL = highlights.myTotalPnL < 0 ? '' : '+';
 
   return (
     <div className={cn('page-container')}>
@@ -80,12 +83,12 @@ const MyClientPage = () => {
           />
           <HighlightCard
             title="Total Earnings / Loss"
-            mainText={`${sign}${formattedNumber}`} 
+            mainText={`${signTotalGain}${formattedTotalGain}`} 
             subText="0%"
           />
           <HighlightCard 
             title="PnL (%)" 
-            mainText={`${highlights.myTotalPnL ?? '0.00'}`} 
+            mainText={`${signPnL}${highlights.myTotalPnL}%`} 
             subText="0%" />
           <HighlightCard
             title="Base Asset"

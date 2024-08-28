@@ -32,6 +32,20 @@ const formatDateString = (dateString: string) => {
   return date.toLocaleDateString(undefined, options);
 };
 
+const formatDollar = (value: number) => {
+  const formattedNumber = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(value);
+  return formattedNumber; 
+}
+
+const formatSign = (value: number) => {
+   return value >= 0 ? '+' : ''; 
+}
+
 const MyDataTable = ({ data }: MyDataTableProps) => {
   return (
     <table className={cn('my-table')}>
@@ -57,10 +71,10 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
                 label = {item.status}
                 />
             </td>
-            <td>{`${formatDateString(item.startAt)} - ${formatDateString(item.endAt)}`}</td>
-            <td>${item.totalPoolIn}</td>
-            <td>${item.totalCostPnL}</td>
-            <td>{item.totalPercentPnL}%</td>
+            <td>{`${formatDateString(item.startAt)} ~ ${formatDateString(item.endAt)}`}</td>
+            <td>{formatSign(item.totalPoolIn)}{formatDollar(item.totalPoolIn)}</td>
+            <td>{formatSign(item.totalCostPnL)}{formatDollar(item.totalCostPnL)}</td>
+            <td>{formatSign(item.totalPercentPnL)}{formatDollar(item.totalPercentPnL)}%</td>
             <td className={cn('td-check-results')}>
               <CheckResultsButton
                 text = {item.isBiggestTopicPooler? 'Hall of Honor' : 'Check Results'}
