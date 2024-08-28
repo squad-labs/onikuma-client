@@ -20,7 +20,7 @@ type Props = {
 const cn = classNames.bind(styles);
 
 const TopicDropdown = ({ value }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
   const dropdownRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
   const { data, isLoading, error } = useQuery({
@@ -28,11 +28,15 @@ const TopicDropdown = ({ value }: Props) => {
     queryFn: () => getTopicList(),
   });
 
-  useOnClickOutside({ ref: dropdownRef, handler: () => setOpen(false), mouseEvent: 'click' });
+  useOnClickOutside({
+    ref: dropdownRef,
+    handler: () => setOpen(false),
+    mouseEvent: 'click',
+  });
 
   const handleOnClick = (topicId: string) => {
     router.push(`/d/${topicId}`);
-  }
+  };
 
   return (
     <div className={cn('dropdown-container')}>
@@ -53,10 +57,14 @@ const TopicDropdown = ({ value }: Props) => {
         <div className={cn('dropdown-list')}>
           {data?.map((item: TopicListItem) => {
             return (
-              <button 
-                key={item._id} 
-                className={cn('list-item', { able: item._id === value.id, disable: item._id !== value.id })} 
-                onClick={() => handleOnClick(item._id)}>
+              <button
+                key={item._id}
+                className={cn('list-item', {
+                  able: item._id === value.id,
+                  disable: item._id !== value.id,
+                })}
+                onClick={() => handleOnClick(item._id)}
+              >
                 <span className={cn('item-text')}>{item.name}</span>
               </button>
             );

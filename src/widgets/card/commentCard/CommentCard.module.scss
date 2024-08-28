@@ -6,13 +6,13 @@
   border-bottom: 1px solid var(--DARK-GRAY-1);
   background-color: var(--LIGHT);
 
-  .address { 
+  .address {
     color: var(--DARK-GRAY-5);
     font-size: var(--TEXT-SIZE-MEDIUM);
   }
 
   .text {
-    padding-top: .8rem;
+    padding-top: 0.8rem;
     color: var(--DARK-GRAY-1);
     font-size: var(--TEXT-SIZE-MEDIUM);
   }
@@ -30,7 +30,7 @@
       background-color: transparent;
       outline: none;
       border: none;
-      
+
       .icon {
         &:hover {
           cursor: pointer;
@@ -39,13 +39,13 @@
     }
 
     .like {
-      margin-left: .4rem;
+      margin-left: 0.4rem;
       color: var(--BASE-RED-1);
       font-size: var(--TEXT-SIZE-MEDIUM);
     }
 
     .dot {
-      margin: 0 .6rem;
+      margin: 0 0.6rem;
       font-size: var(--TEXT-SIZE-LARGE);
     }
 
