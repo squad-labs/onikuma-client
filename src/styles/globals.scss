@@ -1,10 +1,9 @@
 @use '@/styles/_theme.scss' as *;
 @import '@/styles/_color.scss';
-@import "@/styles/_size.scss";
-@import "@/styles/_font.scss";
+@import '@/styles/_size.scss';
+@import '@/styles/_font.scss';
 
 :root {
-
   --FONT-DM-MONO-LIGHT: 'DM-Mono-Light';
   --FONT-DM-MONO-REGULAR: 'DM-Mono-Regular';
   --FONT-DM-MONO-BOLD: 'DM-Mono-Medium';
@@ -33,7 +32,7 @@
   --LIGHT-OPACITY-7: #{$LIGHT-OPACITY-7};
   --LIGHT-OPACITY-8: #{$LIGHT-OPACITY-8};
   --LIGHT-OPACITY-9: #{$LIGHT-OPACITY-9};
-   
+
   --DARK-GRAY-1: #{$DARK-GRAY-1};
   --DARK-GRAY-2: #{$DARK-GRAY-2};
   --DARK-GRAY-3: #{$DARK-GRAY-3};
@@ -79,7 +78,7 @@ body {
   height: 100vh;
   font-family: var(--FONT-DM-MONO-REGULAR);
   font-size: 1rem;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 main {

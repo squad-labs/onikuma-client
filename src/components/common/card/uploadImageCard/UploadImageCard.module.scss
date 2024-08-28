@@ -6,19 +6,19 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1rem;
-  
+
   .text-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
-    gap: .3rem;
+    gap: 0.3rem;
   }
 
   .input-wrapper {
     width: 100%;
-    margin-top: .4rem;
+    margin-top: 0.4rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -29,6 +29,6 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: .8rem;
+    gap: 0.8rem;
   }
 }

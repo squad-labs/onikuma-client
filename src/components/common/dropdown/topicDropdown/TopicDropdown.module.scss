@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--BASE-BLUE-1);
-    padding: .6rem 2rem;
+    padding: 0.6rem 2rem;
     gap: 1rem;
     border-radius: 2rem;
     border: 1px solid var(--LIGHT);
@@ -27,7 +27,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: .4rem;
+      margin-top: 0.4rem;
     }
   }
 
@@ -46,7 +46,7 @@
     transform: translate(0, 4px);
     border-radius: 1rem;
     box-shadow: 10px 10px 5px var(--DARK-OPACITY-5);
-    z-index:  999;
+    z-index: 999;
     max-height: 18rem;
 
     .list-item {

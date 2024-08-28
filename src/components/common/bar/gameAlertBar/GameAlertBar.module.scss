@@ -3,7 +3,7 @@
   bottom: 0;
   position: absolute;
   animation-name: appearFromBottom;
-  animation-duration: .2s;
+  animation-duration: 0.2s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
   transform: translate(-50%, -50%);
@@ -14,7 +14,7 @@
   bottom: 0;
   position: absolute;
   animation-name: disappearToBottom;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
   transform: translate(-50%, -50%);
@@ -31,7 +31,7 @@
   background-color: var(--BASE-CREAM-1);
   border-radius: 1rem;
   z-index: 999999;
-  gap: .6rem;
+  gap: 0.6rem;
 }
 
 @keyframes appearFromBottom {

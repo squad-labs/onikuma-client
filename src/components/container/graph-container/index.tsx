@@ -35,8 +35,7 @@ export const GraphColorMap: GraphColorMapType = {
 };
 
 const GraphContainer = ({ type, dashboard }: Props) => {
-
-  console.log(dashboard)
+  console.log(dashboard);
 
   const largestVote = useMemo(() => {
     return dashboard.totalData.reduce((prev, current) => {
