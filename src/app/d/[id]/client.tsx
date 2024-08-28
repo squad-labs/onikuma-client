@@ -1,5 +1,4 @@
 'use client';
-<<<<<<< HEAD
 import React, { Suspense } from 'react';
 import styles from '@/app/d/[id]/client.module.scss';
 import classNames from 'classnames/bind';
@@ -15,20 +14,12 @@ import CommentContainer from '@/components/container/comment-container';
 import { CommentProvider } from '@/context/partial/commentContext/CommentProvider';
 import MyVoteContainer from '@/components/container/my-vote-container';
 import TopicDropdown from '@/components/common/dropdown/topicDropdown';
-=======
-import React from 'react';
-import styles from '@/app/d/[id]/page.module.scss';
-import classNames from 'classnames/bind';
-import { getMetadata } from '@/shared/utils/metadata';
-import { ResolvingMetadata } from 'next';
->>>>>>> d4d0d8c (ui: adds go back home button component to page)
 
 const cn = classNames.bind(styles);
 
 type Props = {
   id: string;
 };
-<<<<<<< HEAD
 
 const DashboardClientPage = ({ id }: Props) => {
   const dashboard = useDashboard();
@@ -77,31 +68,4 @@ const DashboardClientPage = ({ id }: Props) => {
   );
 };
 
-=======
-
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
-  return getMetadata({});
-};
-
-const DashboardClientPage = ({ id }: Props) => {
-  return (
-    <div>
-      <span>{id}</span>
-    </div>
-  );
-};
-
->>>>>>> d4d0d8c (ui: adds go back home button component to page)
 export default DashboardClientPage;
