@@ -21,3 +21,9 @@ export type ContainerBarProps = {
   loading?: boolean;
   classNames?: string[];
 };
+
+export type StatusBarProps = {
+  label: string;
+  children?: ReactNode;
+  classNames?: string[];
+};
