@@ -13,8 +13,8 @@ type TableRow = {
   startAt: string;
   endAt: string;
   totalPoolIn: number;
-  totalGain: number;
-  totalPnL: number;
+  totalCostPnL: number;
+  totalPercentPnL: number;
   isBiggestTopicPooler: boolean;
   competitors: {
     name: string;
@@ -24,6 +24,12 @@ type TableRow = {
 
 type MyDataTableProps = {
   data: TableRow[];
+};
+
+const formatDateString = (dateString: string) => {
+  const date = new Date(dateString);
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return date.toLocaleDateString(undefined, options);
 };
 
 const MyDataTable = ({ data }: MyDataTableProps) => {
@@ -44,19 +50,17 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
         {data.map((item, index) => (   
           <tr key={index}>
             <td className={cn('td-name')}>
-              <a href="" className={cn('link')}>
                {item.name}
-              </a>
             </td>
             <td>
               <StatusBar
                 label = {item.status}
                 />
             </td>
-            <td>`{item.startAt} - {item.endAt}` </td>
-            <td>{item.totalPoolIn}</td>
-            <td>{item.totalGain}</td>
-            <td>{item.totalPnL}</td>
+            <td>{`${formatDateString(item.startAt)} - ${formatDateString(item.endAt)}`}</td>
+            <td>${item.totalPoolIn}</td>
+            <td>${item.totalCostPnL}</td>
+            <td>{item.totalPercentPnL}%</td>
             <td className={cn('td-check-results')}>
               <CheckResultsButton
                 text = {item.isBiggestTopicPooler? 'Hall of Honor' : 'Check Results'}
