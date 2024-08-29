@@ -4,15 +4,13 @@ import classNames from 'classnames/bind';
 import DashboardClientPage from '@/app/d/[id]/client';
 
 const cn = classNames.bind(styles);
-const cn = classNames.bind(styles);
 
 type Props = {
   params: {
     id: string;
   };
 };
-  };
-};
+  
 
 const DashboardPage = ({ params }: Props) => {
   const { id } = params;
@@ -23,8 +21,5 @@ const DashboardPage = ({ params }: Props) => {
     </main>
   );
 };
-  );
-};
-
-export default DashboardPage;
+ 
 export default DashboardPage;

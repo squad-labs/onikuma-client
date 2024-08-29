@@ -10,7 +10,6 @@ const ShareButton = ({
   startIconImage,
   closeIconImage,
   otherIconImages = [],
-  ...rest
 }: ShareButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
