@@ -11,10 +11,8 @@ const TestClientPage = () => {
     <div className={cn('container')}>
       <h2>Share Button</h2>
       <section className={cn('element-container')}>
-        <ShareSocialsButton
-          buttonDirection = "left"/>
-        <ShareSocialsButton
-          buttonDirection = "down"/>
+        <ShareSocialsButton buttonDirection="left" />
+        <ShareSocialsButton buttonDirection="down" />
       </section>
     </div>
   );

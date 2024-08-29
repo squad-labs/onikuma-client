@@ -61,7 +61,7 @@ export type ShareButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   disabled?: boolean;
   direction: 'left' | 'down';
   classNames?: string[];
-  startIconImage: string; 
+  startIconImage: string;
   closeIconImage: string;
   otherIconImages?: string[];
 };
