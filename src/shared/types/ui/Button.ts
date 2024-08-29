@@ -56,3 +56,12 @@ export type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode;
   classNames?: string[];
 };
+
+export type ShareButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  disabled?: boolean;
+  direction: 'left' | 'down';
+  classNames?: string[];
+  startIconImage: string; 
+  closeIconImage: string;
+  otherIconImages?: string[];
+};

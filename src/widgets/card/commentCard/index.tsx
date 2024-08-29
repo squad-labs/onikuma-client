@@ -26,8 +26,8 @@ const CommentCard = ({
 
   const fetchLike = useCallback(async () => {
     console.log('fetchLike');
-    const response = await getCommentLikes({ commentId })
-    response && setLikes(response.likes)
+    const response = await getCommentLikes({ commentId });
+    response && setLikes(response.likes);
   }, []);
 
   return (
