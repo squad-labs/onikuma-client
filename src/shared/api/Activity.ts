@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { TestToken } from '@/shared/constants/TEST';
+import { headers } from 'next/headers';
+import { getCookie } from 'cookies-next';
 
 type PostPoolInParams = {
   topicId: string;
@@ -69,3 +71,26 @@ export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
     console.log(error);
   }
 };
+
+export type GetTopicTokenPriceParams = {
+  topicId: string;
+  amount: string;
+}
+
+export const getTopicTokenPrice = async({ topicId, amount }: GetTopicTokenPriceParams) => {
+  try {
+    const token = getCookie('token');
+    const res = await axios.post(`/activities/buy-estimation/${topicId}`, {
+      amount
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

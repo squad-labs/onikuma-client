@@ -6,7 +6,7 @@ import { useAccount, type Config, useClient } from 'wagmi';
 import type { Chain, Client, Transport } from 'viem';
 import { BrowserProvider } from 'ethers';
 import { chain as AppChain } from '@/config/web3Config';
-import { switchChain } from '@wagmi/core';
+import { disconnect, switchChain } from '@wagmi/core';
 import { wagmiConfig } from '@/config/web3Config';
 
 export const useConnect = () => {
@@ -49,10 +49,12 @@ export const useConnect = () => {
   };
 
   useEffect(() => {
-    if (client?.chain.id !== AppChain.id) {
-      switchChain(wagmiConfig, { chainId: AppChain.id });
-    }
-  }, [
+    try {
+      if (client?.chain.id !== AppChain.id) {
+        switchChain(wagmiConfig, { chainId: AppChain.id });
+      }
+    } catch (error) {}
+   }, [
     client,
     AppChain,
     address,
@@ -132,6 +134,10 @@ export const useConnect = () => {
     isReconnecting,
   ]);
 
+  const handleDisconnect = useCallback(async () => {
+    await disconnect(wagmiConfig);
+  }, []);
+
   return {
     handleOpen,
     handleClose,
@@ -139,5 +145,6 @@ export const useConnect = () => {
     getSigner,
     getConnect,
     getChain,
+    handleDisconnect,
   };
 };

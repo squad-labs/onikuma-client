@@ -1,14 +1,24 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
 import styles from '@/components/common/input/imageUploadInput/ImageUploadInput.module.scss';
 import classNames from 'classnames/bind';
 
 const cn = classNames.bind(styles);
 
-const ImageUploadInput = () => {
-  const [fileName, setFileName] = useState<string>('Hello, World');
-  const [imageFile, setImageFile] = useState<File | Blob | null>(null);
+type Props = {
+  fileName: string;
+  setFileName: Dispatch<SetStateAction<string>>;
+  imageFile: File | Blob | null;
+  setImageFile: Dispatch<SetStateAction<File | Blob | null>>;
+}
 
+const ImageUploadInput = ({
+  fileName,
+  setFileName,
+  imageFile,
+  setImageFile
+}: Props) => {
   const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    console.log("event", event);
     const file = event.target.files?.[0] || null;
 
     if (file) {
@@ -27,9 +37,9 @@ const ImageUploadInput = () => {
       <p className={cn('file-name')}>{fileName || ''}</p>
       <input
         id="image-upload"
-        type="image"
+        type="file"
         accept="image/*"
-        onChange={handleOnChange}
+        onChange={(event) => handleOnChange(event)}
         className={cn('input')}
       />
       <label htmlFor="image-upload" className={cn('label')}>

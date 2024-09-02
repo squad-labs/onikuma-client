@@ -1,13 +1,15 @@
 'use client';
-import React from 'react';
+import React, { use } from 'react';
 import styles from '@/components/common/button/walletConnectButton/WalletConnectButton.module.scss';
 import classNames from 'classnames/bind';
 import BaseButton from '@/widgets/button/baseButton';
 import { useConnect } from '@/shared/hooks/useConnect';
+import { useAuth } from '@/shared/hooks/useAuth';
 
 const cn = classNames.bind(styles);
 
 const WalletConnectButton = () => {
+  const { login } = useAuth({ autoLogin: true });
   const { handleOpen } = useConnect();
 
   return (

@@ -104,9 +104,9 @@ const FinalOptionCard = ({
                   baseTicker: 'HONEY',
                   baseTokenName: 'HONEY',
                   baseTokenPrice: 0.002,
-                  roundTicker: 'VITA',
-                  roundTokenName: 'VITALIK',
-                  roundTokenPrice: 0.001,
+                  roundTicker: roundTicker,
+                  roundTokenName: roundTokenName,
+                  roundTokenPrice: roundTokenPrice,
                 },
               }),
             );

@@ -1,20 +1,20 @@
-.bar-container{
-    border: 2px solid var(--BASE-BLUE-1);
-    border-radius: 15px;
-    padding: 0.25rem;
+.bar-container {
+  border: 2px solid var(--BASE-BLUE-1);
+  border-radius: 15px;
+  padding: 0.25rem;
 
-    p{
-        font-weight: 100;
-        padding: 0.05rem;
-    }
+  p {
+    font-weight: 100;
+    padding: 0.05rem;
+  }
 
-    &.bar-ongoing{
-        background-color: var(--BASE-BLUE-1);
-        color: var(--BASE-CREAM-1);
-    };
-    
-    &.bar-ended{
-        background-color: var(--BASE-CREAM-1);
-        color: var(--BASE-BLUE-1);
-    };
-};
+  &.bar-ongoing {
+    background-color: var(--BASE-BLUE-1);
+    color: var(--BASE-CREAM-1);
+  }
+
+  &.bar-ended {
+    background-color: var(--BASE-CREAM-1);
+    color: var(--BASE-BLUE-1);
+  }
+}

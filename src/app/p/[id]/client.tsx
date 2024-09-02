@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useEffect, useState } from 'react';
 import styles from '@/app/p/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GameMetaContainer from '@/components/container/game-meta';
@@ -24,9 +24,22 @@ type Props = {
 };
 
 const PlayClientPage = ({ id, topic }: Props) => {
-  const { options, currentIndex } = useContext(RoundContext);
+  const [tokenPrice, setTokenPrice] = useState<string>('');
+  const { ticker, getTokenPrice, options, currentIndex } = useContext(RoundContext);
   const { roundIndex, roundStatus, isFinal } = useRound(RoundContext);
   const modal = useSelector(getModal);
+
+  useEffect(() => {
+    const _getTokenPrice = async () => {
+      try {
+        const token = await getTokenPrice('1');
+        setTokenPrice(String(token))
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    _getTokenPrice()
+  }, [])
 
   return (
     <CommentProvider id={id}>
@@ -45,6 +58,7 @@ const PlayClientPage = ({ id, topic }: Props) => {
                 flip: options[0].biggestImgUrl,
               },
             ]}
+            amount={tokenPrice}
           />
           <div className={cn('info-container')}>
             <GameMetaContainer
@@ -65,10 +79,10 @@ const PlayClientPage = ({ id, topic }: Props) => {
                 poolAmount={1000}
                 baseTokenName={'HONEY'}
                 baseTicker={'HONEY'}
-                baseTokenPrice={'0.01'}
-                roundTokenName={'TRUMP'}
-                roundTicker={'TRUMP'}
-                roundTokenPrice={'0.001'}
+                baseTokenPrice={'1'}
+                roundTokenName={ticker}
+                roundTicker={ticker}
+                roundTokenPrice={tokenPrice}
               />
             </Suspense>
           </div>
@@ -106,6 +120,7 @@ const PlayClientPage = ({ id, topic }: Props) => {
                     .biggestImgUrl,
                 },
               ]}
+              amount={tokenPrice}
             />
             <CommentContainer topicId={id} />
           </div>

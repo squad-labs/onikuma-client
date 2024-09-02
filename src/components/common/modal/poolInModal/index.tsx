@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import styles from '@/components/common/modal/poolInModal/PoolInModal.module.scss';
 import classNames from 'classnames/bind';
 import { PoolInModalProps } from '@/shared/types/ui/Modal';
@@ -13,6 +13,8 @@ import useOnClickOutside from '@/shared/hooks/useOnClick';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { postPoolIn } from '@/shared/api/Activity';
 import { useMutation } from '@tanstack/react-query';
+import { RoundContext } from '@/context/partial/roundContext/RoundContext';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -30,6 +32,9 @@ const PoolInModal = ({
   roundTokenPrice,
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const [tokenPrice, setTokenPrice] = useState<string>('');
+  const { ticker, mintToken, getTokenPrice } = useContext(RoundContext)
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleCloseModal = useCallback(() => {
@@ -40,6 +45,7 @@ const PoolInModal = ({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
+      dispatch(CLOSE_MODAL());
       console.log(data);
     },
     onError: (error) => {
@@ -61,6 +67,17 @@ const PoolInModal = ({
     handler: handleCloseModal,
     mouseEvent: 'click',
   });
+
+  useEffect(() => {
+    if (poolAmount === undefined) return
+    const _getTokenPrice = async() => {
+      const token = await getTokenPrice(poolAmount.toString())
+      setTokenPrice(String(token))
+      console.log('token', token)
+    }
+    _getTokenPrice()
+  }, [poolAmount])
+
   return (
     <BaseModal background="DARK_OPACITY_5">
       <div className={cn('modal-inner')} ref={modalRef}>
@@ -111,7 +128,7 @@ const PoolInModal = ({
             fontWeight="regular"
             shape="shape-4"
             onClick={() => {
-              handlePoolIn();
+              mintToken(ticker, handlePoolIn)
             }}
           />
           <BaseButton
@@ -122,7 +139,7 @@ const PoolInModal = ({
             theme="outline"
             fontSize="large"
             fontWeight="regular"
-            onClick={() => {}}
+            onClick={() => router.push(`/d/${topicId}`)}
           />
         </div>
       </div>

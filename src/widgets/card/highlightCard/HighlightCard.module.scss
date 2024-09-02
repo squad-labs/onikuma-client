@@ -1,32 +1,30 @@
-.card{
-    border: 1px solid var(--DARK-GRAY-1);
-    width: 25%;
-    height: auto;
-    padding: 1.5rem;
-    background-color: var(--BASE-CREAM-1);
-    overflow: hidden;
+.card {
+  border: 1px solid var(--DARK-GRAY-1);
+  width: 25%;
+  height: auto;
+  padding: 1.5rem;
+  background-color: var(--BASE-CREAM-1);
+  overflow: hidden;
 
-    .title{
-        margin-bottom: 1rem;
-        color: var(--BASE-BLUE-1);
-    }
+  .title {
+    margin-bottom: 1rem;
+    color: var(--BASE-BLUE-1);
+  }
 
-    .non-title{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%; 
-    }
+  .non-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 
-    .main-text{
-        font-size: 1.75rem;
-        color: var(--DARK-GRAY-1);
-    }
+  .main-text {
+    font-size: 1.75rem;
+    color: var(--DARK-GRAY-1);
+  }
 
-    .sub-text{
-        color: var(--DARK-GRAY-5);
-        font-size: 1rem;
-    }
+  .sub-text {
+    color: var(--DARK-GRAY-5);
+    font-size: 1rem;
+  }
 }
-
-

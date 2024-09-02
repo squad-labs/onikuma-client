@@ -9,6 +9,7 @@ import { getTopicByStatus } from '@/shared/api/Topics';
 import { TestToken } from '@/shared/constants/TEST';
 import { TopicMetadata } from '@/shared/types/data/topic';
 import dynamic from 'next/dynamic';
+import AuthDropdown from '@/components/common/dropdown/authDropdown';
 
 const GameRelayBar = dynamic(
   () => import('@/components/common/bar/gameRelayBar'),
@@ -32,6 +33,7 @@ const Header = async () => {
           </div>
         </div>
         <div className={cn('header-inner')}>
+          <AuthDropdown />
           <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
           <PlayGameButton />
         </div>

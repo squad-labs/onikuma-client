@@ -3,6 +3,10 @@ import { Option } from '@/shared/types/data/topic';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface IRoundContext {
+  ticker: string;
+  setTicker: Dispatch<SetStateAction<string>>;
+  getTokenPrice: (amount: string) => Promise<number | string>;
+  mintToken: (symbol: string, callback: () => void) => void;
   currentRound: 8 | 4 | 2 | 1;
   setCurrentRound: Dispatch<SetStateAction<8 | 4 | 2 | 1>>;
   options: Option[];
@@ -14,6 +18,10 @@ export interface IRoundContext {
 }
 
 const defaultValue: IRoundContext = {
+  ticker: '',
+  setTicker: () => {},
+  getTokenPrice: async() => 0,
+  mintToken: () => {},
   currentRound: 8,
   setCurrentRound: () => {},
   options: [],

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import FlipIcon from '@/assets/icons/flip.svg';
 import ShareIcon from '@/assets/icons/share.svg';
 import { useDispatch } from 'react-redux';
 import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
+import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 
 const cn = classNames.bind(styles);
 
@@ -17,6 +18,7 @@ type Props = {
   dateText: string;
   title: string;
   type: 'single' | 'double';
+  amount: string;
   text: string;
   base: string;
   flip?: string;
@@ -29,12 +31,14 @@ const ImageOptionCard = ({
   dateText,
   title,
   type,
+  amount,
   text,
   base,
   flip,
   onClick,
 }: Props) => {
   const dispatch = useDispatch();
+  const { ticker } = useContext(RoundContext)
 
   return (
     <div className={cn(`image-inner`)}>
@@ -75,10 +79,10 @@ const ImageOptionCard = ({
                       poolAmount: 100,
                       baseTicker: 'HONEY',
                       baseTokenName: 'HONEY',
-                      baseTokenPrice: 0.002,
-                      roundTicker: 'VITA',
-                      roundTokenName: 'VITALIK',
-                      roundTokenPrice: 0.001,
+                      baseTokenPrice: 0.001,
+                      roundTicker: ticker,
+                      roundTokenName: ticker,
+                      roundTokenPrice: amount,
                     },
                   }),
                 );

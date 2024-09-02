@@ -23,6 +23,7 @@ const alertState = createSlice({
     SET_ALERT_DATA: (state, action) => {
       state.total++;
       const newAlert: ActivitySliceType = {
+        activityId: action.payload.activityId,
         topicId: action.payload.topicId,
         userWallet: action.payload.userWallet,
         poolIn: action.payload.poolIn,
