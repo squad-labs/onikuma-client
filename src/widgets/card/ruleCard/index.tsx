@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { ReactNode } from 'react';
 import styles from '@/widgets/card/ruleCard/RuleCard.module.scss';
 import classNames from 'classnames/bind';

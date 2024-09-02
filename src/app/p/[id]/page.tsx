@@ -43,13 +43,13 @@ const PlayPage = async ({ params }: Props) => {
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/detail/${id}`,
       {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIxOGQ0ZWY3NDBhYWY2ODZlZDcxZDAiLCJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MjQ2NDYyNzQsImV4cCI6MTcyNzIzODI3NH0.jtH_CYK2MQ1H7mklh3nvVSqdsuhZaqzyV0I5Lg1Jnng`,
+          Authorization: `Bearer ${cookie?.value}`,
         },
       },
     );
 
     const data: Topic = await res.json();
-
+    console.log('data', data);
     return (
       <main className={cn('container')}>
         <div className={cn('inner')}>

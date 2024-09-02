@@ -122,6 +122,10 @@ const nextConfig = {
         destination: `${process.env.API_BASE_URL}/activities/all/:id*?page=:page&pageSize=:pageSize`,
       },
       {
+        source: '/activities/buy-estimation/:id*',
+        destination: `${process.env.API_BASE_URL}/activities/buy-estimation/:id*`,
+      },
+      {
         source: '/activities/vote/:id*',
         destination: `${process.env.API_BASE_URL}/activities/vote/:id*`,
       },

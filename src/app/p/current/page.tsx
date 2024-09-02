@@ -38,6 +38,7 @@ const GameCurrentPage = async () => {
     );
 
     const data: Topic = await res.json();
+    console.log('data', data);
 
     return (
       <main className={cn('container')}>

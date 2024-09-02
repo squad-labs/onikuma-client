@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 import styles from '@/components/container/canvas-container/CanvasContainer.module.scss';
 import classNames from 'classnames/bind';
 import ImageOptionCard from '@/components/common/card/imageOptionCard';
@@ -14,6 +14,7 @@ type Props = {
   roundText: string;
   dateText: string;
   title: string;
+  amount?: string;
   type: 'single' | 'double';
   source: {
     text: string;
@@ -27,6 +28,7 @@ const CanvasContainer = ({
   roundText,
   dateText,
   title,
+  amount = '',
   type,
   ...rest
 }: Props) => {
@@ -68,6 +70,7 @@ const CanvasContainer = ({
           text={rest.source[0].text}
           base={rest.source[0].base}
           flip={rest.source[0].flip}
+          amount={amount}
           onClick={() => {}}
         />
       </div>
@@ -84,6 +87,7 @@ const CanvasContainer = ({
         text={rest.source[0].text}
         base={rest.source[0].base}
         flip={rest.source[0].flip}
+        amount={amount}
         onClick={() => {
           handleSelect(rest.source[0].text);
         }}
@@ -98,6 +102,7 @@ const CanvasContainer = ({
         text={rest.source[1].text}
         base={rest.source[1].base}
         flip={rest.source[1].flip}
+        amount={amount}
         onClick={() => {
           handleSelect(rest.source[1].text);
         }}

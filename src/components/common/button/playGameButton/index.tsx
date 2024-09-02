@@ -1,8 +1,18 @@
 'use client';
 import BaseButton from '@/widgets/button/baseButton';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useMemo } from 'react';
+import { useAccount } from 'wagmi';
 
 const PlayGameButton = () => {
+  const router = useRouter();
+  const { address, isConnected } = useAccount()
+
+  const renderButton = useMemo(() => {
+    if (address && isConnected) return true;
+    return false;    
+  }, [address, isConnected])
+
   return (
     <BaseButton
       text={'Play Game'}
@@ -14,9 +24,9 @@ const PlayGameButton = () => {
       fontSize={'large'}
       fontWeight={'regular'}
       loading={false}
-      onClick={() => console.log('Play Game button clicked')}
+      onClick={() => router.push('/p/current')}
       classNames={[]}
-      disabled
+      disabled={!renderButton}
     />
   );
 };

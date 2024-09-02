@@ -4,73 +4,32 @@ import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';
 import MyDataTable from '@/widgets/table/myDataTable';
-import { getMyData } from '@/shared/api/MyData';
-import { useQueryClient } from '@tanstack/react-query';
+import { MyData, MyTotalData, UserTopic } from '@/shared/types/data/my-data';
 
 const cn = classNames.bind(styles);
 
-type Competitor = {
-  name: string;
-  imgUrl: string;
-  isBiggestPickerPooler: boolean;
-};
+type Props = {
+  myData: MyData
+}
 
-type ResultItem = {
-  topicId: string;
-  name: string;
-  status: string;
-  startAt: string;
-  endAt: string;
-  totalPoolIn: number;
-  totalCostPnL: number;
-  totalPercentPnL: number;
-  isBiggestTopicPooler: boolean;
-  competitors: Competitor[];
-};
-
-type MyDataResponse = {
-  result: ResultItem[];
-  myTotalPoolIn: number;
-  totalCostPnL: number;
-  myTotalPnL: number;
-};
-
-const MyClientPage = () => {
-  const [highlights, setHighlights] = useState({
-    myTotalPoolIn: 0,
-    myTotalGain: 0,
-    myTotalPnL: 0,
+const MyClientPage = ({ myData }: Props) => {
+  const [total, setTotal] = useState<MyTotalData>({ 
+    myTotalPoolIn: myData.myTotalPoolIn,
+    totalCostPnL: myData.totalCostPnL,
+    myTotalPnL: myData.myTotalPnL,
   });
-  const [dataTableData, setDataTableData] = useState<ResultItem[]>([]);
-  const queryClient = useQueryClient();
-
-  const getData = useCallback(async () => {
-    const response: MyDataResponse = await getMyData();
-    console.log('API Response:', response);
-    if (response) {
-      setHighlights({
-        myTotalPoolIn: response.myTotalPoolIn,
-        myTotalGain: response.totalCostPnL,
-        myTotalPnL: response.myTotalPnL,
-      });
-      setDataTableData(response.result);
-    }
-  }, []);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
+  const [dataTableData, setDataTableData] = useState<UserTopic[]>(myData.result);
 
   const formattedTotalGain = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(Math.abs(highlights.myTotalGain));
+  }).format(Math.abs(total.totalCostPnL));
 
-  const signTotalGain = highlights.myTotalGain < 0 ? '-' : '+';
+  const signTotalGain = total.totalCostPnL < 0 ? '-' : '+';
 
-  const signPnL = highlights.myTotalPnL < 0 ? '' : '+';
+  const signPnL = total.myTotalPnL < 0 ? '' : '+';
 
   return (
     <div className={cn('page-container')}>
@@ -79,7 +38,7 @@ const MyClientPage = () => {
         <div className={cn('highlights-container')}>
           <HighlightCard
             title="Total Pooled in Amount"
-            mainText={`$${highlights.myTotalPoolIn ?? '0.00'}`}
+            mainText={`$${total.myTotalPoolIn ?? '0.00'}`}
             subText="0%"
           />
           <HighlightCard
@@ -89,7 +48,7 @@ const MyClientPage = () => {
           />
           <HighlightCard
             title="PnL (%)"
-            mainText={`${signPnL}${highlights.myTotalPnL}%`}
+            mainText={`${signPnL}${total.myTotalPnL}%`}
             subText="0%"
           />
           <HighlightCard

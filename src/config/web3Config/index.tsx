@@ -1,4 +1,4 @@
-import { berachainTestnet } from 'wagmi/chains';
+import { berachainTestnetbArtio } from 'wagmi/chains';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 
 export const PROJECT_ID = process.env.NEXT_PUBLIC_WAGMI_PROJECT_ID || null;
@@ -7,8 +7,7 @@ if (!PROJECT_ID) {
   throw new Error('PROJECT_ID is required');
 }
 
-export const chain =
-  process.env.STAGE === 'production' ? berachainTestnet : berachainTestnet;
+export const chain = berachainTestnetbArtio;
 
 const metadata = {
   name: 'Onikuma',

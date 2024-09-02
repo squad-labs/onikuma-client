@@ -2,6 +2,9 @@
 import { ReactNode, useCallback, useState } from 'react';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { Option, Topic } from '@/shared/types/data/topic';
+import { mintclub, wei } from 'watchman-tool-sdk'
+import { getTopicTokenPrice } from '@/shared/api/Activity';
+import { TokenPriceType } from '@/shared/types/data/token';
 
 type RoundList = {
   first: number[];
@@ -16,6 +19,7 @@ type Props = {
 };
 
 const RoundProvider = ({ children, topic, round }: Props) => {
+  const [ticker, setTicker] = useState<string>(topic.ticker);
   const [currentRound, setCurrentRound] = useState<8 | 4 | 2 | 1>(8);
   const [options, setOptions] = useState<Option[]>(topic.competitors);
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
@@ -50,10 +54,46 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     [options, selectedOptions, currentIndex, currentRound],
   );
 
+  const getTokenPrice = useCallback(async(amount: string) => {
+    try {
+      const token: TokenPriceType = await getTopicTokenPrice({ topicId: topic._id, amount })
+
+      return token.estimation;
+    } catch (error) {
+      console.log(error)
+    }
+    return 0
+  }, [])
+
+  const mintToken = async(symbol: string, callback: () => void) => {
+    const account = await mintclub.wallet.connect()
+    const network = await mintclub.network('berachaintestnetbartio')
+    try {
+      const token = await network.token(symbol)
+      console.log('token', token)
+      await token.buy({
+        amount: wei(1, 18),
+        onSuccess: (data) => {
+          console.log('data', data)
+          callback()
+        },
+        onError: (error) => {
+          console.log('error', error)
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <RoundContext.Provider
       value={{
         next,
+        ticker,
+        setTicker,
+        getTokenPrice,
+        mintToken,
         selectedOptions,
         currentRound,
         setCurrentRound,

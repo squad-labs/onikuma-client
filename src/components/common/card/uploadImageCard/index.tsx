@@ -1,19 +1,45 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from '@/components/common/card/uploadImageCard/UploadImageCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import ImageUploadInput from '@/components/common/input/imageUploadInput';
 import BaseButton from '@/widgets/button/baseButton';
 import { COLOR } from '@/shared/constants/COLOR';
+import { useMutation } from '@tanstack/react-query';
+import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
+import { postFlipImage } from '@/shared/api/Image';
 
 const cn = classNames.bind(styles);
 
 type Props = {
+  topicId: string;
+  pickerName: string;
   withBorder: boolean;
   withbackGround: boolean;
 };
 
-const UploadImageCard = ({ withBorder, withbackGround }: Props) => {
+const UploadImageCard = ({ topicId, pickerName, withBorder, withbackGround }: Props) => {
+  const [fileName, setFileName] = useState<string>('');
+  const [imageFile, setImageFile] = useState<File | Blob | null>(null);
+
+  const uploadImageMutation = useMutation({
+    mutationKey: [MUTATION_KEY.POST_UPLOAD_IMAGE],
+    mutationFn: postFlipImage,
+    onSuccess: (data) => {
+      console.log(data);
+    }
+  })
+
+  const handleUploadImage = useCallback(() => {
+    if (imageFile) {
+      uploadImageMutation.mutate({
+        topicId: topicId,
+        file: imageFile,
+        pickerName: pickerName
+      })
+    }
+  }, [fileName, imageFile])
+  
   return (
     <div
       className={cn('card-container')}
@@ -43,7 +69,12 @@ const UploadImageCard = ({ withBorder, withbackGround }: Props) => {
         />
       </div>
       <div className={cn('input-wrapper')}>
-        <ImageUploadInput />
+        <ImageUploadInput
+          fileName={fileName}
+          setFileName={setFileName}
+          imageFile={imageFile}
+          setImageFile={setImageFile}
+        />
       </div>
       <div className={cn('button-wrapper')}>
         <BaseButton
@@ -55,7 +86,7 @@ const UploadImageCard = ({ withBorder, withbackGround }: Props) => {
           theme="fill"
           fontSize="large"
           fontWeight="regular"
-          onClick={() => {}}
+          onClick={() => handleUploadImage()}
         />
         <BaseButton
           text="Skip this"

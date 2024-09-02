@@ -1,6 +1,7 @@
 export type Topic = {
   _id: string;
   name: string;
+  ticker: string;
   biggestTopicVoiceUrl: string;
   status: TopicStatus;
   startAt: string;

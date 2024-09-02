@@ -45,7 +45,8 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "validator": "^13.12.0",
-    "wagmi": "^2.9.7"
+    "wagmi": "^2.9.7",
+    "watchman-tool-sdk": "^0.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

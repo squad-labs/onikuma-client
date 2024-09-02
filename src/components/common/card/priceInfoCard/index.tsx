@@ -71,7 +71,7 @@ const PriceInfoCard = ({ type, title, ticker, imageUrl, price }: Props) => {
             color="DARK_GRAY_5"
           />
           <BaseText
-            text={`$1 TRUMP`}
+            text={`$1 ${title}`}
             size="medium"
             weight="light"
             color="DARK"

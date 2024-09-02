@@ -24,10 +24,6 @@ type Props = {
 
 const HonorClientPage = ({ id, honor }: Props) => {
   const modal = useSelector(getModal);
-  const { data, isLoading, error } = useQuery({
-    queryKey: [QUERY_KEY.GET_POLL_RESULT, id],
-    queryFn: () => getPollResult({ topicId: id }),
-  });
 
   if (honor.competitors.length === 0) {
     return <div>error</div>;
@@ -60,7 +56,12 @@ const HonorClientPage = ({ id, honor }: Props) => {
           isFinal={true}
         />
         <div className={cn('card-wrapper')}>
-          <UploadImageCard withBorder withbackGround />
+          <UploadImageCard 
+            topicId={id}
+            pickerName={honor.competitors[0].name}
+            withBorder 
+            withbackGround
+          />
           <UploadVoiceCard withBorder withbackGround />
         </div>
       </div>
