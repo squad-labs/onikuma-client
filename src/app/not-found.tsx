@@ -32,7 +32,7 @@ const NotFound = () => {
           <h1>
             Oops... <br /> Page not found
           </h1>
-          <p>This page doesn't exist or was removed!</p>
+          <p>This page doesn&rsquo;t exist or was removed!</p>
           <p>We suggest you back to home.</p>
           <div className={cn('home-button-container')}>
             <ErrorButton />

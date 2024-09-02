@@ -3,7 +3,6 @@ import styles from '@/app/p/current/page.module.scss';
 import { Topic } from '@/shared/types/data/topic';
 import { getMetadata } from '@/shared/utils/metadata';
 import { generateRound } from '@/shared/utils/random';
-import { ResolvingMetadata } from 'next';
 import React from 'react';
 import classNames from 'classnames/bind';
 import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
@@ -18,7 +17,7 @@ type MetadataProps = {
   };
 };
 
-export const generateMetadata = async (parent: ResolvingMetadata) => {
+export const generateMetadata = async () => {
   return getMetadata({});
 };
 
