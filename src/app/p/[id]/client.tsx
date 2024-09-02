@@ -25,7 +25,8 @@ type Props = {
 
 const PlayClientPage = ({ id, topic }: Props) => {
   const [tokenPrice, setTokenPrice] = useState<string>('');
-  const { ticker, getTokenPrice, options, currentIndex } = useContext(RoundContext);
+  const { ticker, getTokenPrice, options, currentIndex } =
+    useContext(RoundContext);
   const { roundIndex, roundStatus, isFinal } = useRound(RoundContext);
   const modal = useSelector(getModal);
 
@@ -33,13 +34,13 @@ const PlayClientPage = ({ id, topic }: Props) => {
     const _getTokenPrice = async () => {
       try {
         const token = await getTokenPrice('1');
-        setTokenPrice(String(token))
+        setTokenPrice(String(token));
       } catch (error) {
         console.log(error);
       }
-    }
-    _getTokenPrice()
-  }, [])
+    };
+    _getTokenPrice();
+  }, []);
 
   return (
     <CommentProvider id={id}>

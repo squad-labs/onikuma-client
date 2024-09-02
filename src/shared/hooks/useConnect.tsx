@@ -54,7 +54,7 @@ export const useConnect = () => {
         switchChain(wagmiConfig, { chainId: AppChain.id });
       }
     } catch (error) {}
-   }, [
+  }, [
     client,
     AppChain,
     address,

@@ -39,23 +39,29 @@ type PostFlipImageParms = {
   topicId: string;
   file: File | Blob;
   pickerName: string;
-}
+};
 
-export const postFlipImage = async({ topicId, file, pickerName }: PostFlipImageParms) => {
+export const postFlipImage = async ({
+  topicId,
+  file,
+  pickerName,
+}: PostFlipImageParms) => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('pickerName', pickerName);
 
   try {
     const token = getCookie('token');
-    const res = await axios.post(`/api/topics/biggest-picker-image/${topicId}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
+    const res = await axios.post(
+      `/api/topics/biggest-picker-image/${topicId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     return res.data;
-  } catch (error) {
-
-  }
-}
+  } catch (error) {}
+};

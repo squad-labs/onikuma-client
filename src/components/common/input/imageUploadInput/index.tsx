@@ -1,4 +1,10 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useState,
+} from 'react';
 import styles from '@/components/common/input/imageUploadInput/ImageUploadInput.module.scss';
 import classNames from 'classnames/bind';
 
@@ -9,16 +15,16 @@ type Props = {
   setFileName: Dispatch<SetStateAction<string>>;
   imageFile: File | Blob | null;
   setImageFile: Dispatch<SetStateAction<File | Blob | null>>;
-}
+};
 
 const ImageUploadInput = ({
   fileName,
   setFileName,
   imageFile,
-  setImageFile
+  setImageFile,
 }: Props) => {
   const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    console.log("event", event);
+    console.log('event', event);
     const file = event.target.files?.[0] || null;
 
     if (file) {

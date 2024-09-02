@@ -18,7 +18,12 @@ type Props = {
   withbackGround: boolean;
 };
 
-const UploadImageCard = ({ topicId, pickerName, withBorder, withbackGround }: Props) => {
+const UploadImageCard = ({
+  topicId,
+  pickerName,
+  withBorder,
+  withbackGround,
+}: Props) => {
   const [fileName, setFileName] = useState<string>('');
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
 
@@ -27,19 +32,19 @@ const UploadImageCard = ({ topicId, pickerName, withBorder, withbackGround }: Pr
     mutationFn: postFlipImage,
     onSuccess: (data) => {
       console.log(data);
-    }
-  })
+    },
+  });
 
   const handleUploadImage = useCallback(() => {
     if (imageFile) {
       uploadImageMutation.mutate({
         topicId: topicId,
         file: imageFile,
-        pickerName: pickerName
-      })
+        pickerName: pickerName,
+      });
     }
-  }, [fileName, imageFile])
-  
+  }, [fileName, imageFile]);
+
   return (
     <div
       className={cn('card-container')}

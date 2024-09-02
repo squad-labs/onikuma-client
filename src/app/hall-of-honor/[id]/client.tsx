@@ -36,10 +36,10 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
         />
         <div className={cn('upload-image-wrapper')}>
           <div className={cn('card-wrapper')}>
-            <UploadImageCard 
+            <UploadImageCard
               topicId={id}
               pickerName={honor.competitors[0].name}
-              withBorder={false} 
+              withBorder={false}
               withbackGround={false}
             />
           </div>

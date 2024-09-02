@@ -38,7 +38,7 @@ const ImageOptionCard = ({
   onClick,
 }: Props) => {
   const dispatch = useDispatch();
-  const { ticker } = useContext(RoundContext)
+  const { ticker } = useContext(RoundContext);
 
   return (
     <div className={cn(`image-inner`)}>

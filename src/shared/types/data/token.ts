@@ -1,5 +1,5 @@
 export type TokenPriceType = {
-  ticker: string,
+  ticker: string;
   estimation: string;
   royalty: string;
-}
+};

@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styles from '@/components/common/modal/poolInModal/PoolInModal.module.scss';
 import classNames from 'classnames/bind';
 import { PoolInModalProps } from '@/shared/types/ui/Modal';
@@ -34,7 +40,7 @@ const PoolInModal = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const [tokenPrice, setTokenPrice] = useState<string>('');
-  const { ticker, mintToken, getTokenPrice } = useContext(RoundContext)
+  const { ticker, mintToken, getTokenPrice } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleCloseModal = useCallback(() => {
@@ -69,14 +75,14 @@ const PoolInModal = ({
   });
 
   useEffect(() => {
-    if (poolAmount === undefined) return
-    const _getTokenPrice = async() => {
-      const token = await getTokenPrice(poolAmount.toString())
-      setTokenPrice(String(token))
-      console.log('token', token)
-    }
-    _getTokenPrice()
-  }, [poolAmount])
+    if (poolAmount === undefined) return;
+    const _getTokenPrice = async () => {
+      const token = await getTokenPrice(poolAmount.toString());
+      setTokenPrice(String(token));
+      console.log('token', token);
+    };
+    _getTokenPrice();
+  }, [poolAmount]);
 
   return (
     <BaseModal background="DARK_OPACITY_5">
@@ -128,7 +134,7 @@ const PoolInModal = ({
             fontWeight="regular"
             shape="shape-4"
             onClick={() => {
-              mintToken(ticker, handlePoolIn)
+              mintToken(ticker, handlePoolIn);
             }}
           />
           <BaseButton

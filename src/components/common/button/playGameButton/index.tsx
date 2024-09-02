@@ -6,12 +6,12 @@ import { useAccount } from 'wagmi';
 
 const PlayGameButton = () => {
   const router = useRouter();
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAccount();
 
   const renderButton = useMemo(() => {
     if (address && isConnected) return true;
-    return false;    
-  }, [address, isConnected])
+    return false;
+  }, [address, isConnected]);
 
   return (
     <BaseButton

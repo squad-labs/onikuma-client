@@ -9,16 +9,18 @@ import { MyData, MyTotalData, UserTopic } from '@/shared/types/data/my-data';
 const cn = classNames.bind(styles);
 
 type Props = {
-  myData: MyData
-}
+  myData: MyData;
+};
 
 const MyClientPage = ({ myData }: Props) => {
-  const [total, setTotal] = useState<MyTotalData>({ 
+  const [total, setTotal] = useState<MyTotalData>({
     myTotalPoolIn: myData.myTotalPoolIn,
     totalCostPnL: myData.totalCostPnL,
     myTotalPnL: myData.myTotalPnL,
   });
-  const [dataTableData, setDataTableData] = useState<UserTopic[]>(myData.result);
+  const [dataTableData, setDataTableData] = useState<UserTopic[]>(
+    myData.result,
+  );
 
   const formattedTotalGain = new Intl.NumberFormat('en-US', {
     style: 'currency',

@@ -19,8 +19,8 @@ export type MyTotalData = {
   myTotalPoolIn: number;
   totalCostPnL: number;
   myTotalPnL: number;
-}
+};
 
 export type MyData = MyTotalData & {
   result: UserTopic[];
-}
+};

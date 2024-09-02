@@ -74,22 +74,28 @@ export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
 export type GetTopicTokenPriceParams = {
   topicId: string;
   amount: string;
-}
+};
 
-export const getTopicTokenPrice = async({ topicId, amount }: GetTopicTokenPriceParams) => {
+export const getTopicTokenPrice = async ({
+  topicId,
+  amount,
+}: GetTopicTokenPriceParams) => {
   try {
     const token = getCookie('token');
-    const res = await axios.post(`/api/activities/buy-estimation/${topicId}`, {
-      amount
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
+    const res = await axios.post(
+      `/api/activities/buy-estimation/${topicId}`,
+      {
+        amount,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     return res.data;
   } catch (error) {
     console.log(error);
   }
-}
+};

@@ -20,7 +20,7 @@ export interface IRoundContext {
 const defaultValue: IRoundContext = {
   ticker: '',
   setTicker: () => {},
-  getTokenPrice: async() => 0,
+  getTokenPrice: async () => 0,
   mintToken: () => {},
   currentRound: 8,
   setCurrentRound: () => {},

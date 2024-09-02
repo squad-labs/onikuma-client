@@ -3,10 +3,7 @@ import styles from '@/components/container/graph-container/GraphContainer.module
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import GraphBlock from '@/widgets/block/graphBlock';
-import {
-  numberSuffix,
-  thousandFormat,
-} from '@/shared/utils/number';
+import { numberSuffix, thousandFormat } from '@/shared/utils/number';
 import { Dashboard, DashboardDataType } from '@/shared/types/data/dashboard';
 import { ColorType } from '@/shared/types/ui/Color';
 import Image from 'next/image';

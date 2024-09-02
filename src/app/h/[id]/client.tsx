@@ -56,10 +56,10 @@ const HonorClientPage = ({ id, honor }: Props) => {
           isFinal={true}
         />
         <div className={cn('card-wrapper')}>
-          <UploadImageCard 
+          <UploadImageCard
             topicId={id}
             pickerName={honor.competitors[0].name}
-            withBorder 
+            withBorder
             withbackGround
           />
           <UploadVoiceCard withBorder withbackGround />

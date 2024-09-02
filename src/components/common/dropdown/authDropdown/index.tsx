@@ -9,14 +9,14 @@ import BaseText from '@/widgets/text/baseText';
 import { getShortenAddress } from '@/shared/utils/format';
 import ArrowDownIcon from '@/assets/icons/open-dropdown.svg';
 import ProfileIcon from '@/assets/icons/profile.svg';
-import DisconnectIcon from '@/assets/icons/disconnect.svg'
+import DisconnectIcon from '@/assets/icons/disconnect.svg';
 import { useAuth } from '@/shared/hooks/useAuth';
 
 const cn = classNames.bind(styles);
 
 const AuthDropdown = () => {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   const { address } = useAccount();
   const { logout } = useAuth({ autoLogin: false });
   const [open, setOpen] = useState<boolean>(false);
@@ -29,8 +29,8 @@ const AuthDropdown = () => {
   });
 
   const isMyPage = useMemo(() => {
-    return pathname === '/my-page'
-  }, [pathname])
+    return pathname === '/my-page';
+  }, [pathname]);
 
   if (!address) return null;
 
@@ -49,36 +49,40 @@ const AuthDropdown = () => {
         />
         <ArrowDownIcon viewBox="0 0 24 24" className={cn('icon')} />
       </button>
-      {open && <div className={cn('dropdown-list')}>
-        <button 
-        onClick={() => router.push('/my-page')}
-        className={cn('list-item', {
-          able: isMyPage,
-          disable: !isMyPage
-        })}>
-          <ProfileIcon viewBox="0 0 24 24" className={cn('icon')} />
-          <BaseText
-            text={'View my data'}
-            size={'medium'}
-            weight={'regular'}
-            color={'DARK'}
-          />
-        </button>
-        <button 
-        onClick={() => {
-          logout()
-          router.refresh()
-        }}
-        className={cn('list-item', { disable: true })}>
-          <DisconnectIcon viewBox="0 0 24 24" className={cn('icon')} />
-          <BaseText
-            text={'Disconnect'}
-            size={'medium'}
-            weight={'regular'}
-            color={'DARK'}
-          />
-        </button>
-      </div>}
+      {open && (
+        <div className={cn('dropdown-list')}>
+          <button
+            onClick={() => router.push('/my-page')}
+            className={cn('list-item', {
+              able: isMyPage,
+              disable: !isMyPage,
+            })}
+          >
+            <ProfileIcon viewBox="0 0 24 24" className={cn('icon')} />
+            <BaseText
+              text={'View my data'}
+              size={'medium'}
+              weight={'regular'}
+              color={'DARK'}
+            />
+          </button>
+          <button
+            onClick={() => {
+              logout();
+              router.refresh();
+            }}
+            className={cn('list-item', { disable: true })}
+          >
+            <DisconnectIcon viewBox="0 0 24 24" className={cn('icon')} />
+            <BaseText
+              text={'Disconnect'}
+              size={'medium'}
+              weight={'regular'}
+              color={'DARK'}
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

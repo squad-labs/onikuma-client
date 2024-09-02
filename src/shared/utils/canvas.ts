@@ -170,7 +170,11 @@ export const generatePollResultImage = async ({
   ctx.textAlign = 'end';
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = COLOR[totalSign.color];
-  ctx.fillText(`${totalSign.sign}$${thousandFormat(totalPoolIn)}`, canvas.width - 560, 1480);
+  ctx.fillText(
+    `${totalSign.sign}$${thousandFormat(totalPoolIn)}`,
+    canvas.width - 560,
+    1480,
+  );
 
   ctx.textAlign = 'end';
   ctx.font = '32px DMMono-Medium';
