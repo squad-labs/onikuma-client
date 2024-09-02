@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';

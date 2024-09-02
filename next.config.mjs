@@ -62,51 +62,51 @@ const nextConfig = {
   rewrites: async() => {
     return [
       {
-        source: '/users/login',
-        destination: `${process.env.API_BASE_URL}/users/login`,
+        source: '/api/users/login',
+        destination: `${process.env.API_BASE_URL}/api/users/login`,
       },
       {
-        source: '/users/detail',
-        destination: `${process.env.API_BASE_URL}/users/detail`,
+        source: '/api/users/detail',
+        destination: `${process.env.API_BASE_URL}/api/users/detail`,
       },
       {
-        source: '/users/refresh',
-        destination: `${process.env.API_BASE_URL}/users/refresh`,
+        source: '/api/users/refresh',
+        destination: `${process.env.API_BASE_URL}/api/users/refresh`,
       },
       {
-        source: '/topics/create',
-        destination: `${process.env.API_BASE_URL}/topics/create`,
+        source: '/api/topics/create',
+        destination: `${process.env.API_BASE_URL}/api/topics/create`,
       },
       {
-        source: '/topics/titles',
-        destination: `${process.env.API_BASE_URL}/topics/titles`,
+        source: '/api/topics/titles',
+        destination: `${process.env.API_BASE_URL}/api/topics/titles`,
       },
       {
-        source: '/topics/detail/:id*',
-        destination: `${process.env.API_BASE_URL}/topics/detail/:id*`,
+        source: '/api/topics/detail/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/detail/:id*`,
       },
       {
-        source: '/topics/on-going',
-        destination: `${process.env.API_BASE_URL}/topics/on-going`,
+        source: '/api/topics/on-going',
+        destination: `${process.env.API_BASE_URL}/api/topics/on-going`,
       },
       {
-        source: '/topics/biggest-topic-voice/:id*',
-        destination: `${process.env.API_BASE_URL}/topics/biggest-topic-voice/:id*`,
+        source: '/api/topics/biggest-topic-voice/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/biggest-topic-voice/:id*`,
       },
       {
-        source: '/topics/biggest-picker-image/:id*',
-        destination: `${process.env.API_BASE_URL}/topics/biggest-picker-image/:id*`,
+        source: '/api/topics/biggest-picker-image/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/biggest-picker-image/:id*`,
       },
       {
-        source: '/topics/share-image/:id*',
-        destination: `${process.env.API_BASE_URL}/topics/share-image/:id*`,
+        source: '/api/topics/share-image/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/share-image/:id*`,
       },
       {
-        source: '/activities/pool-in',
-        destination: `${process.env.API_BASE_URL}/activities/pool-in`,
+        source: '/api/activities/pool-in',
+        destination: `${process.env.API_BASE_URL}/api/activities/pool-in`,
       },
       {
-        source: '/activities/all/:id*',
+        source: '/api/activities/all/:id*',
         has: [
           {
             type: 'query',
@@ -119,22 +119,22 @@ const nextConfig = {
             value: '(?<pageSize>.*)',
           }
         ],
-        destination: `${process.env.API_BASE_URL}/activities/all/:id*?page=:page&pageSize=:pageSize`,
+        destination: `${process.env.API_BASE_URL}/api/activities/all/:id*?page=:page&pageSize=:pageSize`,
       },
       {
-        source: '/activities/buy-estimation/:id*',
-        destination: `${process.env.API_BASE_URL}/activities/buy-estimation/:id*`,
+        source: '/api/activities/buy-estimation/:id*',
+        destination: `${process.env.API_BASE_URL}/api/activities/buy-estimation/:id*`,
       },
       {
-        source: '/activities/vote/:id*',
-        destination: `${process.env.API_BASE_URL}/activities/vote/:id*`,
+        source: '/api/activities/vote/:id*',
+        destination: `${process.env.API_BASE_URL}/api/activities/vote/:id*`,
       },
       {
-        source: '/comments',
-        destination: `${process.env.API_BASE_URL}/comments`,
+        source: '/api/comments',
+        destination: `${process.env.API_BASE_URL}/api/comments`,
       },
       {
-        source: '/comments/all/:id*',
+        source: '/api/comments/all/:id*',
         has: [
           {
             type: 'query',
@@ -147,23 +147,23 @@ const nextConfig = {
             value: '(?<pageSize>.*)',
           }
         ],
-        destination: `${process.env.API_BASE_URL}/comments/all/:id*?page=:page&pageSize=:pageSize`,
+        destination: `${process.env.API_BASE_URL}/api/comments/all/:id*?page=:page&pageSize=:pageSize`,
       },
       {
-        source: '/comments/likes/:id*',
-        destination: `${process.env.API_BASE_URL}/comments/likes/:id*`,
+        source: '/api/comments/likes/:id*',
+        destination: `${process.env.API_BASE_URL}/api/comments/likes/:id*`,
       },
       {
-        source: '/dashboards/detail/:id*',
-        destination: `${process.env.API_BASE_URL}/dashboards/detail/:id*`,
+        source: '/api/dashboards/detail/:id*',
+        destination: `${process.env.API_BASE_URL}/api/dashboards/detail/:id*`,
       },
       {
-        source: '/dashboards/all-my-data',
-        destination: `${process.env.API_BASE_URL}/dashboards/all-my-data`,
+        source: '/api/dashboards/all-my-data',
+        destination: `${process.env.API_BASE_URL}/api/dashboards/all-my-data`,
       },
       {
-        source: '/dashboards/my-data/detail/:id*',
-        destination: `${process.env.API_BASE_URL}/dashboards/my-data/detail/:id*`,
+        source: '/api/dashboards/my-data/detail/:id*',
+        destination: `${process.env.API_BASE_URL}/api/dashboards/my-data/detail/:id*`,
       },
       {
         source: '/api/image',

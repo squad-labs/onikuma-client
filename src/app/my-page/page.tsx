@@ -29,7 +29,7 @@ const MyPage = async () => {
   const cookie = cookies().get('token');
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/all-my-data`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboards/all-my-data`, {
       headers: {
         Authorization: `Bearer ${cookie?.value}`,
       },

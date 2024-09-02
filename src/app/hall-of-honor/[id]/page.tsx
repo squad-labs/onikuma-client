@@ -36,7 +36,7 @@ const HallOfHonorPage = async ({ params }: Props) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/hall-of-honor/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboards/hall-of-honor/${id}`,
       {
         headers: {
           'Content-Type': 'application/json',

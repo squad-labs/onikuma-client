@@ -7,7 +7,7 @@ type UserLoginParams = {
 
 export const userLogin = async (params: UserLoginParams) => {
   try {
-    const res = await axios.post('/users/login', params);
+    const res = await axios.post('/api/users/login', params);
 
     return res.data;
   } catch (error) {
@@ -17,7 +17,7 @@ export const userLogin = async (params: UserLoginParams) => {
 
 export const userRefresh = async (params: UserLoginParams) => {
   try {
-    const res = await axios.post('/users/refresh', params);
+    const res = await axios.post('/api/users/refresh', params);
 
     return res.data;
   } catch (error) {

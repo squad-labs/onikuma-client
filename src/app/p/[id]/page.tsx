@@ -40,7 +40,7 @@ const PlayPage = async ({ params }: Props) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/detail/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer ${cookie?.value}`,

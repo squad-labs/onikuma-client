@@ -38,7 +38,7 @@ const DashboardPage = async ({ params }: Props) => {
 
   try {
     const dashboardRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/detail/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboards/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,
@@ -47,7 +47,7 @@ const DashboardPage = async ({ params }: Props) => {
     );
 
     const topicRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/detail/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,
@@ -56,7 +56,7 @@ const DashboardPage = async ({ params }: Props) => {
     );
 
     const myRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/dashboards/my-voting/${id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/dashboards/my-voting/${id}`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,

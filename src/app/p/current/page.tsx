@@ -29,7 +29,7 @@ const GameCurrentPage = async () => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/topics/on-going`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/on-going`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,

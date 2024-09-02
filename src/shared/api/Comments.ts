@@ -8,7 +8,7 @@ type PostCommentsParams = {
 
 export const postCommnets = async (params: PostCommentsParams) => {
   try {
-    const res = await axios.post('/comments', params, {
+    const res = await axios.post('/api/comments', params, {
       headers: {
         Authorization: `Bearer ${TestToken}`,
       },
@@ -35,7 +35,7 @@ export const getAllComments = async ({
 }: GetAllCommentsParams) => {
   try {
     const res = await axios.get(
-      `/comments/all/${topicId}?page=${page}&pageSize=${pageSize}`,
+      `/api/comments/all/${topicId}?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,
@@ -63,7 +63,7 @@ export const getCommentLikes = async ({
   commentId,
 }: GetCommentLikesProps): Promise<CommentLikesResponse | undefined> => {
   try {
-    const res = await axios.get(`/comments/likes/${commentId}`, {
+    const res = await axios.get(`/api/comments/likes/${commentId}`, {
       headers: {
         Authorization: `Bearer ${TestToken}`,
       },

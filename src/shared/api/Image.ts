@@ -48,7 +48,7 @@ export const postFlipImage = async({ topicId, file, pickerName }: PostFlipImageP
 
   try {
     const token = getCookie('token');
-    const res = await axios.post(`/topics/biggest-picker-image/${topicId}`, formData, {
+    const res = await axios.post(`/api/topics/biggest-picker-image/${topicId}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       }

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { TestToken } from '@/shared/constants/TEST';
-import { headers } from 'next/headers';
 import { getCookie } from 'cookies-next';
 
 type PostPoolInParams = {
@@ -12,7 +11,7 @@ type PostPoolInParams = {
 
 export const postPoolIn = async (params: PostPoolInParams) => {
   try {
-    const res = await axios.post('/activities/pool-in', params, {
+    const res = await axios.post('/api/activities/pool-in', params, {
       headers: {
         Authorization: `Bearer ${TestToken}`,
       },
@@ -33,7 +32,7 @@ type PostVoteParams = {
 export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
   try {
     const res = await axios.post(
-      `/activities/vote/${topicId}`,
+      `/api/activities/vote/${topicId}`,
       {
         winner,
         loser,
@@ -58,7 +57,7 @@ type GetRecentActivity = {
 export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
   try {
     const res = await axios.get(
-      `/activities/all/${topicId}?page=${1}&pageSize=${10}`,
+      `/api/activities/all/${topicId}?page=${1}&pageSize=${10}`,
       {
         headers: {
           Authorization: `Bearer ${TestToken}`,
@@ -80,7 +79,7 @@ export type GetTopicTokenPriceParams = {
 export const getTopicTokenPrice = async({ topicId, amount }: GetTopicTokenPriceParams) => {
   try {
     const token = getCookie('token');
-    const res = await axios.post(`/activities/buy-estimation/${topicId}`, {
+    const res = await axios.post(`/api/activities/buy-estimation/${topicId}`, {
       amount
     },
     {

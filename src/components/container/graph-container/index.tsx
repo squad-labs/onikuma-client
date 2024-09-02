@@ -5,7 +5,6 @@ import BaseText from '@/widgets/text/baseText';
 import GraphBlock from '@/widgets/block/graphBlock';
 import {
   numberSuffix,
-  sumNumberArray,
   thousandFormat,
 } from '@/shared/utils/number';
 import { Dashboard, DashboardDataType } from '@/shared/types/data/dashboard';
@@ -35,8 +34,6 @@ export const GraphColorMap: GraphColorMapType = {
 };
 
 const GraphContainer = ({ type, dashboard }: Props) => {
-  console.log(dashboard);
-
   const largestVote = useMemo(() => {
     return dashboard.totalData.reduce((prev, current) => {
       return prev.vote > current.vote ? prev : current;
