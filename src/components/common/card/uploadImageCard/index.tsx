@@ -30,9 +30,7 @@ const UploadImageCard = ({
   const uploadImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_UPLOAD_IMAGE],
     mutationFn: postFlipImage,
-    onSuccess: (data) => {
-      console.log(data);
-    },
+    onSuccess: () => {},
   });
 
   const handleUploadImage = useCallback(() => {

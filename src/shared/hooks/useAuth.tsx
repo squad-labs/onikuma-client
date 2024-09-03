@@ -13,14 +13,13 @@ type Props = {
 
 export const useAuth = ({ autoLogin = false }: Props) => {
   const { isConnected, address } = useAccount();
-  const { getSigner, handleDisconnect } = useConnect();
+  const { handleDisconnect } = useConnect();
 
   const loginMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_LOGIN, address],
     mutationFn: userLogin,
     onSuccess: (data) => {
       setCookie('token', data.accessToken);
-      console.log(data);
     },
   });
 

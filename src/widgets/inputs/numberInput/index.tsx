@@ -1,5 +1,5 @@
 import { NumberInputProps } from '@/shared/types/ui/Input';
-import React, { useCallback, useMemo, useEffect, Fragment } from 'react';
+import React, { useCallback, useMemo, Fragment } from 'react';
 import styles from '@/widgets/inputs/numberInput/NumberInput.module.scss';
 import classNames from 'classnames/bind';
 
@@ -43,9 +43,6 @@ const NumberInput = ({
   }, [value, onClick, allowsNegative, allowsZero, isDecrementDisabled]);
 
   const _isUpdateInput = useCallback((newValue: string) => {
-    // 빈 문자열이 때
-    // 빈 문자열이 아닐 때
-
     const numericValue = Number(newValue);
 
     if (newValue === '') {
@@ -77,12 +74,10 @@ const NumberInput = ({
   }, [value]);
 
   if (!allowsZero && value === 0) {
-    console.error('Value cannot be zero');
     return;
   }
 
   if (!allowsNegative && typeof value === 'number' && value < 0) {
-    console.error('Value cannot be negative');
     return;
   }
 

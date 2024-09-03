@@ -24,7 +24,7 @@ const CheckResultsButton = ({
       fontSize={'medium'}
       fontWeight={'regular'}
       loading={false}
-      onClick={() => console.log('${text} button clicked')}
+      onClick={() => {}}
       classNames={[]}
     />
   );

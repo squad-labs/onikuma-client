@@ -12,5 +12,6 @@ export const Copy = async ({
     onSuccess();
   } catch (error) {
     onError();
+    return error;
   }
 };

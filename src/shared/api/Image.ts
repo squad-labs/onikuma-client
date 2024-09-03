@@ -10,8 +10,8 @@ export const getShareImage = async (params: ShareTopicModalProps) => {
   try {
     const res = await axios.post('/api/image', params);
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -20,8 +20,8 @@ export const getResultImage = async (params: ShareResultModalProps) => {
     const res = await axios.post('/api/result', params);
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -30,8 +30,8 @@ export const getPollResultImage = async (params: PollResult) => {
     const res = await axios.post('/api/poll-result', params);
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -63,5 +63,7 @@ export const postFlipImage = async ({
     );
 
     return res.data;
-  } catch (error) {}
+  } catch (err) {
+    return err;
+  }
 };

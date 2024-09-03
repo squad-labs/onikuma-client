@@ -1,10 +1,11 @@
 'use client';
-import { ReactNode, useCallback, useState } from 'react';
+import React, { ReactNode, useCallback, useState } from 'react';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { Option, Topic } from '@/shared/types/data/topic';
 import { mintclub, wei } from 'watchman-tool-sdk';
 import { getTopicTokenPrice } from '@/shared/api/Activity';
 import { TokenPriceType } from '@/shared/types/data/token';
+import axios from 'axios';
 
 type RoundList = {
   first: number[];
@@ -63,29 +64,29 @@ const RoundProvider = ({ children, topic, round }: Props) => {
 
       return token.estimation;
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        return 0;
+      }
+      return 0;
     }
-    return 0;
   }, []);
 
   const mintToken = async (symbol: string, callback: () => void) => {
-    const account = await mintclub.wallet.connect();
     const network = await mintclub.network('berachaintestnetbartio');
     try {
       const token = await network.token(symbol);
-      console.log('token', token);
       await token.buy({
         amount: wei(1, 18),
-        onSuccess: (data) => {
-          console.log('data', data);
+        onSuccess: () => {
           callback();
         },
-        onError: (error) => {
-          console.log('error', error);
-        },
+        onError: () => {},
       });
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        return;
+      }
+      return;
     }
   };
 

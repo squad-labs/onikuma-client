@@ -39,17 +39,15 @@ const AppProvider = ({ children }: Props) => {
     setSocket(socket);
 
     function onError(error: Error) {
-      console.log('socket error', error);
+      throw new Error(error.message);
     }
 
     function onConnect() {
       setIsConnected(true);
-      console.log('socket connected');
     }
 
     function onDisconnect() {
       setIsConnected(false);
-      console.log('socket disconnected');
     }
 
     socket.on('connect', onConnect);
@@ -66,9 +64,7 @@ const AppProvider = ({ children }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log('socket app providers', socket);
     socket?.on('activity', (activity: ActivityType) => {
-      console.log('game response', activity);
       dispatch(SET_ALERT_DATA(activity));
     });
   }, [socket, isConnected]);

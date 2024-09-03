@@ -20,7 +20,6 @@ import { ColorType } from '@/shared/types/ui/Color';
 import { GraphColorMap } from '@/components/container/graph-container';
 
 export const generatePollResultImage = async ({
-  topicId,
   competitors,
   totalGain,
   totalPnL,
@@ -219,7 +218,6 @@ export const generateResultGraphImage = (color: ColorType, range: number) => {
 };
 
 export const generateResultImage = async ({
-  topicId,
   title,
   roundText,
   dateText,
@@ -288,7 +286,6 @@ export const generateResultImage = async ({
 };
 
 export const generateShareImage = async ({
-  topicId,
   title,
   roundText,
   dateText,

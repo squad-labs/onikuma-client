@@ -1,5 +1,5 @@
 'use client';
-import React, { use } from 'react';
+import React, { useMemo } from 'react';
 import styles from '@/components/common/button/walletConnectButton/WalletConnectButton.module.scss';
 import classNames from 'classnames/bind';
 import BaseButton from '@/widgets/button/baseButton';
@@ -8,12 +8,17 @@ import { useAuth } from '@/shared/hooks/useAuth';
 
 const cn = classNames.bind(styles);
 
-const WalletConnectButton = () => {
-  const { login } = useAuth({ autoLogin: true });
+type Props = {
+  type: 'home' | 'header';
+};
+
+const WalletConnectButton = ({ type }: Props) => {
+  const isHome = useMemo(() => type === 'home', [type]);
+  useAuth({ autoLogin: true });
   const { handleOpen } = useConnect();
 
   return (
-    <div className={cn('button-wrapper')}>
+    <div className={cn(isHome && 'button-wrapper')}>
       <BaseButton
         text={'Connect Wallet to Start'}
         theme={'fill'}

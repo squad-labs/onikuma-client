@@ -1,9 +1,8 @@
 .share-button-container {
- 
   .expanding-buttons {
     display: flex;
     transition: transform 0.05s ease;
- 
+
     .expandable-button {
       width: 42px;
       height: 42px;
@@ -40,7 +39,7 @@
     flex-direction: row-reverse;
     transform: translateX(-198px) translateY(-52px);
   }
-} 
+}
 
 .share-button-container-open-down {
   .expanding-buttons {
@@ -49,8 +48,10 @@
   }
 }
 
-.share-button-container-closed-left, .share-button-container-closed-down {
-  .expanding-buttons, .expanding-buttons {
+.share-button-container-closed-left,
+.share-button-container-closed-down {
+  .expanding-buttons,
+  .expanding-buttons {
     transform: scale(0);
     visibility: hidden;
   }

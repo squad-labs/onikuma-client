@@ -53,9 +53,7 @@ const CanvasContainer = ({
   const voteMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_VOTE, topicId, roundText],
     mutationFn: postVote,
-    onSuccess: (data) => {
-      console.log('data', data);
-    },
+    onSuccess: () => {},
   });
 
   if (type === 'single') {

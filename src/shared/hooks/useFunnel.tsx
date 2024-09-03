@@ -1,4 +1,4 @@
-import { Children, isValidElement, useState } from 'react';
+import React, { Children, isValidElement, useState } from 'react';
 
 export default function useFunnel<T extends readonly string[]>(
   steps: T,

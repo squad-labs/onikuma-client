@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -34,7 +34,7 @@ const ImageOptionCard = ({
   amount,
   text,
   base,
-  flip,
+  // flip,
   onClick,
 }: Props) => {
   const dispatch = useDispatch();
@@ -126,7 +126,7 @@ const ImageOptionCard = ({
           <div className={cn('icon-button-container')}>
             <IconButton
               name="flip-button"
-              onClick={() => console.log('Flip button clicked')}
+              onClick={() => {}}
               shape="round"
               height="small"
               classNames={['button-blue']}

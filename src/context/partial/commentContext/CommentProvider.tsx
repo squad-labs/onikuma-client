@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { CommentContext } from '@/context/partial/commentContext/CommentContext';
 import { CommentSocketType } from '@/shared/types/etc/Socket';
 import { io } from 'socket.io-client';
@@ -9,7 +9,7 @@ type Props = {
   id: string;
 };
 
-const CommentProvider = ({ children, id }: Props) => {
+const CommentProvider = ({ children }: Props) => {
   const [comment, setComment] = useState<string>('');
   const [isConnected, setIsConnected] = useState(false);
   const [socket, setSocket] = useState<CommentSocketType | null>(null);
@@ -29,17 +29,15 @@ const CommentProvider = ({ children, id }: Props) => {
     setSocket(socket);
 
     function onError(error: Error) {
-      console.log('socket error', error);
+      throw new Error(error.message);
     }
 
     function onConnect() {
       setIsConnected(true);
-      console.log('socket connected');
     }
 
     function onDisconnect() {
       setIsConnected(false);
-      console.log('socket disconnected');
     }
 
     socket.on('connect', onConnect);

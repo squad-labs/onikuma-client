@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styles from '@/widgets/bar/statusBar/StatusBar.module.scss';
 import classNames from 'classnames/bind';
 import { StatusBarProps } from '@/shared/types/ui/Bar';

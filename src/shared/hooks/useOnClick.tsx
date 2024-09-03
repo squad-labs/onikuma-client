@@ -8,14 +8,17 @@ export default function useOnClickOutside<T extends HTMLElement = HTMLElement>({
 }: {
   ref: RefObject<T>;
   handler: () => void;
-  mouseEvent: string;
+  mouseEvent: keyof DocumentEventMap;
 }) {
   useEffect(() => {
-    const listener = (event: any) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+    const listener = (event: Event) => {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
-      handler();
+
+      if (event instanceof MouseEvent) {
+        handler();
+      }
     };
 
     document.addEventListener(mouseEvent, listener);
@@ -23,5 +26,5 @@ export default function useOnClickOutside<T extends HTMLElement = HTMLElement>({
     return () => {
       document.removeEventListener(mouseEvent, listener);
     };
-  }, []);
+  }, [ref, handler, mouseEvent]);
 }

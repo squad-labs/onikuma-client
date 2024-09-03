@@ -3,7 +3,6 @@ import styles from '@/app/p/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import PlayClientPage from '@/app/p/[id]/client';
 import { getMetadata } from '@/shared/utils/metadata';
-import type { ResolvingMetadata } from 'next';
 import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
 import { cookies } from 'next/headers';
 import { Topic } from '@/shared/types/data/topic';
@@ -17,19 +16,7 @@ type Props = {
   };
 };
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
+export const generateMetadata = async () => {
   return getMetadata({});
 };
 
@@ -49,7 +36,6 @@ const PlayPage = async ({ params }: Props) => {
     );
 
     const data: Topic = await res.json();
-    console.log('data', data);
     return (
       <main className={cn('container')}>
         <div className={cn('inner')}>
@@ -60,8 +46,7 @@ const PlayPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    console.log('err', err);
-    return <div>error</div>;
+    return err;
   }
 };
 

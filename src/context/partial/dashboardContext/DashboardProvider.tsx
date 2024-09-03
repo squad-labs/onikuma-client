@@ -2,7 +2,7 @@
 import { DashboardContext } from '@/context/partial/dashboardContext/DashboardContext';
 import { Dashboard, MyVote } from '@/shared/types/data/dashboard';
 import { Topic } from '@/shared/types/data/topic';
-import { ReactNode, useContext, useState } from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 
 type Props = {
   children: ReactNode;

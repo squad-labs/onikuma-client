@@ -39,7 +39,7 @@ const PoolInModal = ({
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [tokenPrice, setTokenPrice] = useState<string>('');
+  const [tokenPrice, setTokenPrice] = useState<string>(baseTokenPrice);
   const { ticker, mintToken, getTokenPrice } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -50,13 +50,10 @@ const PoolInModal = ({
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       dispatch(CLOSE_MODAL());
-      console.log(data);
     },
-    onError: (error) => {
-      console.log(error);
-    },
+    onError: () => {},
   });
 
   const handlePoolIn = useCallback(() => {
@@ -79,7 +76,6 @@ const PoolInModal = ({
     const _getTokenPrice = async () => {
       const token = await getTokenPrice(poolAmount.toString());
       setTokenPrice(String(token));
-      console.log('token', token);
     };
     _getTokenPrice();
   }, [poolAmount]);
@@ -113,7 +109,7 @@ const PoolInModal = ({
               title={baseTokenName}
               ticker={`$${baseTicker}`}
               imageUrl="https://s2.coinmarketcap.com/static/img/coins/64x64/10948.png"
-              price={baseTokenPrice}
+              price={tokenPrice}
             />
             <PriceInfoCard
               type={'bottom'}

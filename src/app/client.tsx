@@ -45,7 +45,7 @@ const MyClientPage = () => {
         </RuleCard>
       </div>
       <div className={cn('wallet-connect-button')}>
-        <WalletConnectButton />
+        <WalletConnectButton type={'home'} />
       </div>
     </div>
   );

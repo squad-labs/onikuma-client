@@ -1,10 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';
 import MyDataTable from '@/widgets/table/myDataTable';
-import { MyData, MyTotalData, UserTopic } from '@/shared/types/data/my-data';
+import { MyData } from '@/shared/types/data/my-data';
 
 const cn = classNames.bind(styles);
 
@@ -13,14 +13,13 @@ type Props = {
 };
 
 const MyClientPage = ({ myData }: Props) => {
-  const [total, setTotal] = useState<MyTotalData>({
-    myTotalPoolIn: myData.myTotalPoolIn,
-    totalCostPnL: myData.totalCostPnL,
-    myTotalPnL: myData.myTotalPnL,
-  });
-  const [dataTableData, setDataTableData] = useState<UserTopic[]>(
-    myData.result,
-  );
+  const total = useMemo(() => {
+    return {
+      myTotalPoolIn: myData.myTotalPoolIn,
+      totalCostPnL: myData.totalCostPnL,
+      myTotalPnL: myData.myTotalPnL,
+    };
+  }, [myData]);
 
   const formattedTotalGain = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -60,7 +59,7 @@ const MyClientPage = ({ myData }: Props) => {
           />
         </div>
         <div className={cn('my-data-table-container')}>
-          <MyDataTable data={dataTableData} />
+          <MyDataTable data={myData.result} />
         </div>
       </div>
     </div>

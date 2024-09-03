@@ -14,11 +14,9 @@ export const postCommnets = async (params: PostCommentsParams) => {
       },
     });
 
-    console.log(res.data);
     return res.data;
-  } catch (error) {
-    console.log(error);
-    return error;
+  } catch (err) {
+    return err;
   }
 };
 
@@ -45,6 +43,7 @@ export const getAllComments = async ({
 
     return res.data;
   } catch (error) {
+    if (axios.isAxiosError(error)) return [];
     return [];
   }
 };
@@ -53,15 +52,7 @@ type GetCommentLikesProps = {
   commentId: string;
 };
 
-type CommentLikesResponse = {
-  commentId: string;
-  likes: number;
-  isLiked: boolean;
-};
-
-export const getCommentLikes = async ({
-  commentId,
-}: GetCommentLikesProps): Promise<CommentLikesResponse | undefined> => {
+export const getCommentLikes = async ({ commentId }: GetCommentLikesProps) => {
   try {
     const res = await axios.get(`/api/comments/likes/${commentId}`, {
       headers: {
@@ -69,5 +60,7 @@ export const getCommentLikes = async ({
       },
     });
     return res.data;
-  } catch (error) {}
+  } catch (err) {
+    return err;
+  }
 };

@@ -15,6 +15,6 @@ export const getPollResult = async ({ topicId }: GetPollResultParams) => {
 
     return res.data;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };

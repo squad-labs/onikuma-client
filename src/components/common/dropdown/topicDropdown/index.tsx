@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from '@/components/common/dropdown/topicDropdown/TopicDropdown.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -23,7 +23,7 @@ const TopicDropdown = ({ value }: Props) => {
   const router = useRouter();
   const dropdownRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: [QUERY_KEY, value.id],
     queryFn: () => getTopicList(),
   });

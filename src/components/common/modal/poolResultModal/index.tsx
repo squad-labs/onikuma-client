@@ -15,7 +15,6 @@ import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 const cn = classNames.bind(styles);
 
 const PoolResultModal = ({
-  topicId,
   totalGain,
   totalPnL,
   totalPoolIn,

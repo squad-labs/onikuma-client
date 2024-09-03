@@ -53,8 +53,7 @@ const CommentContainer = ({ topicId }: Props) => {
   const postCommentMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_COMMENTS],
     mutationFn: postCommnets,
-    onSuccess: (data: Comment) => {
-      console.log(data);
+    onSuccess: () => {
       setComment('');
     },
   });
@@ -79,7 +78,6 @@ const CommentContainer = ({ topicId }: Props) => {
 
   useEffect(() => {
     socket?.on('comment', (data: Comment) => {
-      console.log('comment data', data);
       setCommentList(() => [data, ...commentList]);
     });
   }, [socket, comment, commentList]);
@@ -101,7 +99,7 @@ const CommentContainer = ({ topicId }: Props) => {
     });
 
     const observerTarget = document.querySelector('#observer-block');
-    observerTarget && observer.observe(observerTarget);
+    if (observerTarget) observer.observe(observerTarget);
 
     return () => {
       observer.disconnect();

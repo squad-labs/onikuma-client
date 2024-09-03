@@ -26,7 +26,7 @@ const ShareTopicModal = ({
 }: ShareTopicModalProps) => {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_SHARE_IMAGE],
     queryFn: () =>
       getShareImage({ topicId, title, roundText, dateText, options }),

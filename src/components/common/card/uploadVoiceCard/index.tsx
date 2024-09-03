@@ -1,9 +1,4 @@
-import React, {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import styles from '@/components/common/card/uploadVoiceCard/UploadVoiceCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -28,13 +23,7 @@ const UploadVoiceCard = ({ withBorder, withbackGround }: Props) => {
     [],
   );
 
-  const handleKeyUp = useCallback(
-    (event: KeyboardEvent<HTMLTextAreaElement>) => {
-      if (value.length !== 0 && event.key === 'Enter') {
-      }
-    },
-    [],
-  );
+  const handleKeyUp = useCallback(() => {}, []);
 
   return (
     <div

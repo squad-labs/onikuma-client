@@ -3,7 +3,6 @@ import styles from '@/app/d/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import DashboardClientPage from '@/app/d/[id]/client';
 import { TestToken } from '@/shared/constants/TEST';
-import { ResolvingMetadata } from 'next';
 import { getMetadata } from '@/shared/utils/metadata';
 import { Dashboard, MyVote } from '@/shared/types/data/dashboard';
 import { Topic } from '@/shared/types/data/topic';
@@ -17,19 +16,7 @@ type Props = {
   };
 };
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
+export const generateMetadata = async () => {
   return getMetadata({});
 };
 
@@ -81,8 +68,7 @@ const DashboardPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    console.error(err);
-    return <div>error</div>;
+    return err;
   }
 };
 

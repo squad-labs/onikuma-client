@@ -15,23 +15,25 @@ const BaseToast = ({
   onClose,
   children = undefined,
   classNames = [],
-  ...rest
 }: BaseToastProps) => {
-
   const content = useMemo(() => {
     switch (type) {
-      case 'success': return TOAST_SRC.SUCCESS
-      case 'error': return TOAST_SRC.ERROR
-      case 'requireAction': return TOAST_SRC.REQUIRE_ACTION
-      default: return TOAST_SRC.ERROR
+      case 'success':
+        return TOAST_SRC.SUCCESS;
+      case 'error':
+        return TOAST_SRC.ERROR;
+      case 'requireAction':
+        return TOAST_SRC.REQUIRE_ACTION;
+      default:
+        return TOAST_SRC.ERROR;
     }
-  }, [type])
+  }, [type]);
 
   return (
     <div className={cn('toast-container', ...classNames)}>
-      <Image 
-        src={content.imageSrc} 
-        alt={`${type} icon`} 
+      <Image
+        src={content.imageSrc}
+        alt={`${type} icon`}
         className={cn('toast-icon')}
         width={120}
         height={120}
@@ -46,9 +48,7 @@ const BaseToast = ({
         {children}
       </div>
       {closable && (
-        <button 
-          onClick={onClose} 
-          className={cn('toast-close-button')}>
+        <button onClick={onClose} className={cn('toast-close-button')}>
           &times;
         </button>
       )}

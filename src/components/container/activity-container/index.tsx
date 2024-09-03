@@ -18,7 +18,7 @@ type Props = {
 };
 
 const ActivityContainer = ({ topicId }: Props) => {
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
     queryFn: () => getRecentActivity({ topicId }),
   });

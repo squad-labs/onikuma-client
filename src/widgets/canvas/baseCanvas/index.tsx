@@ -6,14 +6,7 @@ import Image from 'next/image';
 
 const cn = classNames.bind(styles);
 
-const BaseCanvas = ({
-  bgImage,
-  name,
-  stickers,
-  text,
-  width,
-  height,
-}: BaseCanvasProps) => {
+const BaseCanvas = ({ bgImage, name, width, height }: BaseCanvasProps) => {
   return (
     <div className={cn('container')}>
       <Image

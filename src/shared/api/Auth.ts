@@ -10,8 +10,8 @@ export const userLogin = async (params: UserLoginParams) => {
     const res = await axios.post('/api/users/login', params);
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -20,7 +20,7 @@ export const userRefresh = async (params: UserLoginParams) => {
     const res = await axios.post('/api/users/refresh', params);
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };

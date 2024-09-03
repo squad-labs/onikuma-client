@@ -35,8 +35,8 @@ const PlayClientPage = ({ id, topic }: Props) => {
       try {
         const token = await getTokenPrice('1');
         setTokenPrice(String(token));
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        return err;
       }
     };
     _getTokenPrice();

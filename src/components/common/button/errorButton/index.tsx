@@ -11,7 +11,7 @@ const ErrorButton = () => {
       height="medium"
       fontSize="large"
       fontWeight="regular"
-      onClick={() => console.log('Button Clicked')}
+      onClick={() => {}}
       classNames={['button-blue']}
     />
   );

@@ -1,6 +1,6 @@
 import { TopicStatus } from '@/shared/types/data/topic';
 import axios from 'axios';
-import { TestToken } from '@/shared/constants/TEST';
+import { getCookie } from 'cookies-next';
 
 export const getTopicById = async (id: string, token: string) => {
   try {
@@ -21,7 +21,8 @@ export const getTopicById = async (id: string, token: string) => {
   }
 };
 
-export const getTopicByStatus = async (status: TopicStatus, token: string) => {
+export const getTopicByStatus = async (status: TopicStatus) => {
+  const token = getCookie('token');
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/titles?status=${status}`,
@@ -41,16 +42,17 @@ export const getTopicByStatus = async (status: TopicStatus, token: string) => {
 };
 
 export const getTopicList = async () => {
+  const token = getCookie('token');
+
   try {
     const res = await axios.get('/api/topics/titles', {
       headers: {
-        Authorization: `Bearer ${TestToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
     return res.data;
   } catch (err) {
-    console.log(err);
     return err;
   }
 };

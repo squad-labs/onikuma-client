@@ -22,6 +22,7 @@ export const useConnect = () => {
       open();
     } catch (e) {
       open();
+      return e;
     }
   };
 
@@ -30,6 +31,7 @@ export const useConnect = () => {
       close();
     } catch (e) {
       close();
+      return e;
     }
   };
 
@@ -53,7 +55,9 @@ export const useConnect = () => {
       if (client?.chain.id !== AppChain.id) {
         switchChain(wagmiConfig, { chainId: AppChain.id });
       }
-    } catch (error) {}
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
   }, [
     client,
     AppChain,

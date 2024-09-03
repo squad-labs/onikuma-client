@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from '@/components/common/card/finalOptionCard/FinalOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -29,7 +29,6 @@ const FinalOptionCard = ({
   title,
   imageUrl,
   baseTicker,
-  poolAmount,
   value,
   baseTokenName,
   baseTokenPrice,

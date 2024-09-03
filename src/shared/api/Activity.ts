@@ -18,8 +18,8 @@ export const postPoolIn = async (params: PostPoolInParams) => {
     });
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -45,8 +45,8 @@ export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
     );
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -66,8 +66,8 @@ export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
     );
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };
 
@@ -95,7 +95,7 @@ export const getTopicTokenPrice = async ({
     );
 
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return err;
   }
 };

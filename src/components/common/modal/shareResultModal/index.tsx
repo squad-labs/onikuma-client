@@ -25,7 +25,7 @@ const ShareResultModal = ({
 }: ShareResultModalProps) => {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_RESULT_IMAGE],
     queryFn: () =>
       getResultImage({ topicId, title, roundText, dateText, option }),

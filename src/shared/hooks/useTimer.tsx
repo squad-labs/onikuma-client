@@ -5,7 +5,7 @@ const useTimer = (endTime?: string) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const getTimeList = useCallback((start: number, end: number) => {
-    let numList = [];
+    const numList = [];
     for (let i = start; i <= end; i++) {
       if (i < 10) {
         numList.push('0' + i.toString());

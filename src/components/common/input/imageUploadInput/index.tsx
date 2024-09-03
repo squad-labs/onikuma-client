@@ -3,7 +3,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
-  useState,
 } from 'react';
 import styles from '@/components/common/input/imageUploadInput/ImageUploadInput.module.scss';
 import classNames from 'classnames/bind';
@@ -17,14 +16,8 @@ type Props = {
   setImageFile: Dispatch<SetStateAction<File | Blob | null>>;
 };
 
-const ImageUploadInput = ({
-  fileName,
-  setFileName,
-  imageFile,
-  setImageFile,
-}: Props) => {
+const ImageUploadInput = ({ fileName, setFileName, setImageFile }: Props) => {
   const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    console.log('event', event);
     const file = event.target.files?.[0] || null;
 
     if (file) {

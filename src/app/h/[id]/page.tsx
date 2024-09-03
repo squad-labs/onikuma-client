@@ -3,8 +3,6 @@ import styles from '@/app/h/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import HonorClientPage from '@/app/h/[id]/client';
 import { getMetadata } from '@/shared/utils/metadata';
-import { ResolvingMetadata } from 'next';
-import { Topic } from '@/shared/types/data/topic';
 import { HonorType } from '@/shared/types/data/honor';
 
 const cn = classNames.bind(styles);
@@ -15,19 +13,7 @@ type Props = {
   };
 };
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
+export const generateMetadata = async () => {
   return getMetadata({});
 };
 
@@ -55,8 +41,7 @@ const HonorPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    console.log(err);
-    return <div>error</div>;
+    return err;
   }
 };
 

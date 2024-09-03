@@ -7,11 +7,13 @@ export const TOAST_SRC = {
   ERROR: {
     imageSrc: '/images/toast-error.svg',
     presetMessage: 'Error occurred',
-    presetSecondaryMessage: 'Connection error. Unable to connect to the server at present',
+    presetSecondaryMessage:
+      'Connection error. Unable to connect to the server at present',
   },
   REQUIRE_ACTION: {
     imageSrc: '/images/toast-actionreq.svg',
     presetMessage: 'Action required',
-    presetSecondaryMessage: 'Incomplete fields. Please fill in all required information now',
+    presetSecondaryMessage:
+      'Incomplete fields. Please fill in all required information now',
   },
-}
+};

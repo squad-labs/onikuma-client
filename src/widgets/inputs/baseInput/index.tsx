@@ -17,7 +17,6 @@ const BaseInput = ({
   classNames = [],
   children,
   helperText = '',
-  error,
   ...rest
 }: BaseInputProps) => {
   return (

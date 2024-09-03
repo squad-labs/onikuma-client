@@ -2,7 +2,6 @@ import React from 'react';
 import styles from '@/app/hall-of-honor/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import { getMetadata } from '@/shared/utils/metadata';
-import { ResolvingMetadata } from 'next';
 import { TestToken } from '@/shared/constants/TEST';
 import { HonorType } from '@/shared/types/data/honor';
 import HallOfHonorClientPage from '@/app/hall-of-honor/[id]/client';
@@ -15,20 +14,12 @@ type Props = {
   };
 };
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
-  return getMetadata({});
+export const generateMetadata = async () => {
+  return getMetadata({
+    title: 'Hall of Honor',
+    siteName: 'Onikuma | Hall of Honor',
+    description: 'Hall of Honor',
+  });
 };
 
 const HallOfHonorPage = async ({ params }: Props) => {
@@ -55,8 +46,7 @@ const HallOfHonorPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    console.log(err);
-    return <div>error</div>;
+    return err;
   }
 };
 

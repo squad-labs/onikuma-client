@@ -2,26 +2,13 @@ import React from 'react';
 import styles from '@/app/my-page/page.module.scss';
 import classNames from 'classnames/bind';
 import MyClientPage from '@/app/my-page/client';
-import type { ResolvingMetadata } from 'next';
 import { getMetadata } from '@/shared/utils/metadata';
 import { cookies } from 'next/headers';
 import { MyData } from '@/shared/types/data/my-data';
 
 const cn = classNames.bind(styles);
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export const generateMetadata = async (
-  { params, searchParams }: MetadataProps,
-  parent: ResolvingMetadata,
-) => {
+export const generateMetadata = async () => {
   return getMetadata({});
 };
 
@@ -39,16 +26,14 @@ const MyPage = async () => {
     );
 
     const data: MyData = await res.json();
-    console.log('data', data);
 
     return (
       <main className={cn('container')}>
         <MyClientPage myData={data} />
       </main>
     );
-  } catch (error) {
-    console.error(error);
-    return <div>error</div>;
+  } catch (err) {
+    return err;
   }
 };
 

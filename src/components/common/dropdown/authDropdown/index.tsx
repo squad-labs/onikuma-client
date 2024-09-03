@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import styles from '@/components/common/dropdown/authDropdown/AuthDropdown.module.scss';
 import classNames from 'classnames/bind';
 import { useAccount } from 'wagmi';

@@ -1,7 +1,6 @@
 import {
   BaseFontWeight,
   BaseLengthSize,
-  BaseRadius,
   BaseSize,
 } from '@/shared/types/ui/Base';
 import { ButtonColorObject } from '@/shared/types/ui/Button';

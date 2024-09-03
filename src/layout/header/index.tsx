@@ -4,9 +4,7 @@ import classNames from 'classnames/bind';
 import HeaderLogo from '@/components/common/logo/headerLogo';
 import DashBoardButton from '@/components/common/button/dashBoardButton';
 import PlayGameButton from '@/components/common/button/playGameButton';
-import { cookies } from 'next/headers';
 import { getTopicByStatus } from '@/shared/api/Topics';
-import { TestToken } from '@/shared/constants/TEST';
 import { TopicMetadata } from '@/shared/types/data/topic';
 import dynamic from 'next/dynamic';
 import AuthDropdown from '@/components/common/dropdown/authDropdown';
@@ -19,8 +17,7 @@ const GameRelayBar = dynamic(
 const cn = classNames.bind(styles);
 
 const Header = async () => {
-  const cookie = cookies().get('token');
-  const res = await getTopicByStatus('onGoing', TestToken);
+  const res = await getTopicByStatus('onGoing');
   const data: TopicMetadata = res[0];
 
   return (

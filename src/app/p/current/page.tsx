@@ -8,15 +8,6 @@ import classNames from 'classnames/bind';
 import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
 import PlayClientPage from '@/app/p/[id]/client';
 
-type MetadataProps = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
 export const generateMetadata = async () => {
   return getMetadata({});
 };
@@ -37,7 +28,6 @@ const GameCurrentPage = async () => {
     );
 
     const data: Topic = await res.json();
-    console.log('data', data);
 
     return (
       <main className={cn('container')}>
@@ -49,8 +39,7 @@ const GameCurrentPage = async () => {
       </main>
     );
   } catch (err) {
-    console.log('err', err);
-    return <div>error</div>;
+    return err;
   }
 };
 

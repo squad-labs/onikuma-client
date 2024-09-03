@@ -35,7 +35,7 @@ const translateTimeZone = (updated_at: string) => {
 export const fetchRelatedTime = (updated_at: string) => {
   const seconds = (+new Date() - translateTimeZone(updated_at)) / 1000;
   return Object.entries(TimeMap).reduce((text, [time, value]) => {
-    if (seconds >= value)
+    if (seconds >= value && time)
       return `${createTimeText(seconds, value, TimeTextMap[value])} ago`;
     return text;
   }, 'Just before');

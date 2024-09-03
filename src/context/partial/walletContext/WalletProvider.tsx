@@ -1,6 +1,6 @@
 'use client';
 import { Signer, Provider } from 'ethers';
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 
 type Props = {
