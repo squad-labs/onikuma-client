@@ -6,7 +6,7 @@ import pluginReact from "eslint-plugin-react";
 
 export default [
   {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
-  {ignores: ["node_modules", ".next", ".yarn", ".prettierrc.js", "jest.config.js", "next.config.mjs", "tsconfig.json", "babel.config.js"]},
+  {ignores: ["node_modules", ".next", ".yarn", "stories",".prettierrc.js", "jest.config.js", "next.config.mjs", "tsconfig.json", "babel.config.js"]},
   {languageOptions: { globals: globals.browser }},
   {rules: { 
     "no-console": "warn", 

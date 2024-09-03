@@ -10,11 +10,12 @@ const cn = classNames.bind(styles);
 
 type Props = {
   type: 'home' | 'header';
+  autoLogin: boolean;
 };
 
-const WalletConnectButton = ({ type }: Props) => {
+const WalletConnectButton = ({ type, autoLogin }: Props) => {
   const isHome = useMemo(() => type === 'home', [type]);
-  useAuth({ autoLogin: true });
+  useAuth({ autoLogin });
   const { handleOpen } = useConnect();
 
   return (
