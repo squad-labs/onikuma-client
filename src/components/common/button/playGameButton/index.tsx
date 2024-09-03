@@ -51,7 +51,7 @@ const PlayGameButton = () => {
           />
         );
       } else {
-        return <WalletConnectButton type={'header'} />;
+        return <WalletConnectButton type={'header'} autoLogin={false} />;
       }
     }
   }, [router, address, isConnected]);
