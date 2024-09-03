@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '@/widgets/button/shareButton/ShareButton.module.scss';
 import classNames from 'classnames/bind';
 import { ShareButtonProps } from '@/shared/types/ui/Button';
+import Image from 'next/image';
 
 const cn = classNames.bind(styles);
 
@@ -17,7 +18,7 @@ const ShareButton = ({
   return (
     <div
       className={cn(
-        `share-button-container${isOpen ? '-open' : '-closed'}-${direction}`,
+        'share-button-container', `share-button-container${isOpen ? '-open' : '-closed'}-${direction}`,
       )}
     >
       <button
@@ -25,16 +26,30 @@ const ShareButton = ({
         onClick={toggleOpen}
       >
         {isOpen ? (
-          <img src={closeIconImage} />
+          <Image 
+            src={closeIconImage}
+            alt={'close-button'}
+            width={24}
+            height={24}
+          />
         ) : (
-          <img src={startIconImage} alt="" />
+          <Image 
+            src={startIconImage} 
+            alt=""
+            width={24}
+            height={24}
+          />
         )}
       </button>
-
       <div className={cn('expanding-buttons')}>
         {otherIconImages.map((icon, index) => (
           <button key={index} className={cn('expandable-button')}>
-            <img src={icon} />
+            <Image 
+              src={icon}
+              alt={'expanding-button'}
+              width={24}
+              height={24}
+            />
           </button>
         ))}
       </div>

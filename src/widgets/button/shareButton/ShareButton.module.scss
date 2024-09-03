@@ -1,50 +1,57 @@
 .share-button-container {
+ 
+  .expanding-buttons {
+    display: flex;
+    transition: transform 0.05s ease;
+ 
+    .expandable-button {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--BASE-BLUE-1);
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+  }
+
+  .main-button,
+  .close-button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid var(--BASE-BLUE-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    position: relative;
+  }
+
+  .close-button {
+    background-color: var(--BASE-BLUE-1);
+  }
 }
 
-.main-button,
-.close-button {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1.5px solid var(--BASE-BLUE-1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
+.share-button-container-open-left {
+  .expanding-buttons {
+    flex-direction: row-reverse;
+    transform: translateX(-198px) translateY(-52px);
+  }
+} 
+
+.share-button-container-open-down {
+  .expanding-buttons {
+    flex-direction: column;
+    transform: translateX(-9px) translateY(10px);
+  }
 }
 
-.close-button {
-  background-color: var(--BASE-BLUE-1);
-}
-
-.expanding-buttons {
-  display: flex;
-  transition: transform 0.05s ease;
-}
-
-.share-button-container-open-left .expanding-buttons {
-  flex-direction: row-reverse;
-  transform: translateX(-198px) translateY(-52px);
-}
-
-.share-button-container-open-down .expanding-buttons {
-  flex-direction: column;
-  transform: translateX(-9px) translateY(10px);
-}
-
-.share-button-container-closed-left .expanding-buttons,
-.share-button-container-closed-down .expanding-buttons {
-  transform: scale(0);
-  visibility: hidden;
-}
-
-.expandable-button {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1.5px solid var(--BASE-BLUE-1);
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.share-button-container-closed-left, .share-button-container-closed-down {
+  .expanding-buttons, .expanding-buttons {
+    transform: scale(0);
+    visibility: hidden;
+  }
 }
