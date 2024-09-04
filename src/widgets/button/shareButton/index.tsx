@@ -17,8 +17,14 @@ const ShareButton = ({
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const handleButtonClick = (link: string) => {
-    if (link === 'COPY_LINK') {
+    if (link === 'SHARE_CURRENT_LINK') {
       navigator.clipboard.writeText(window.location.href)
+    }
+    else if (link === 'SHARE_TWEET_X') {
+      const tweetText = encodeURIComponent("Check this out at Onikuma!");
+      const tweetUrl = encodeURIComponent(window.location.href);
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
+      window.open(twitterUrl, '_blank');
     }
     else if (link) {
       window.open(link, '_blank');
