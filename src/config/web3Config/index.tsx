@@ -2,7 +2,7 @@ import { berachainTestnetbArtio } from 'wagmi/chains';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { cookieStorage, createStorage } from 'wagmi';
 
-export const PROJECT_ID = '976e4b48f8136ff45351dd5de059c930';
+export const PROJECT_ID = '8e39a17b39827f78c1e26dafe972c92f';
 
 if (!PROJECT_ID) {
   throw new Error('PROJECT_ID is required');
