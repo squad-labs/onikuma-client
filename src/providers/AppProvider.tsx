@@ -24,50 +24,50 @@ const AppProvider = ({ children }: Props) => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [socket, setSocket] = useState<ActivitySocketType | null>(null);
 
-  useEffect(() => {
-    const socket: ActivitySocketType = io(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/activity`,
-      {
-        transports: ['websocket'],
-        addTrailingSlash: true,
-        rejectUnauthorized: false,
-        agent: false,
-        upgrade: false,
-      },
-    ).connect();
+  // useEffect(() => {
+  //   const socket: ActivitySocketType = io(
+  //     `${process.env.NEXT_PUBLIC_API_BASE_URL}/activity`,
+  //     {
+  //       transports: ['websocket'],
+  //       addTrailingSlash: true,
+  //       rejectUnauthorized: false,
+  //       agent: false,
+  //       upgrade: false,
+  //     },
+  //   ).connect();
 
-    setSocket(socket);
+  //   setSocket(socket);
 
-    function onError(error: Error) {
-      throw new Error(error.message);
-    }
+  //   function onError(error: Error) {
+  //     throw new Error(error.message);
+  //   }
 
-    function onConnect() {
-      setIsConnected(true);
-    }
+  //   function onConnect() {
+  //     setIsConnected(true);
+  //   }
 
-    function onDisconnect() {
-      setIsConnected(false);
-    }
+  //   function onDisconnect() {
+  //     setIsConnected(false);
+  //   }
 
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-    socket.on('error', onError);
+  //   socket.on('connect', onConnect);
+  //   socket.on('disconnect', onDisconnect);
+  //   socket.on('error', onError);
 
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-      socket.off('error', onError);
+  //   return () => {
+  //     socket.off('connect', onConnect);
+  //     socket.off('disconnect', onDisconnect);
+  //     socket.off('error', onError);
 
-      socket.disconnect();
-    };
-  }, []);
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    socket?.on('activity', (activity: ActivityType) => {
-      dispatch(SET_ALERT_DATA(activity));
-    });
-  }, [socket, isConnected]);
+  // useEffect(() => {
+  //   socket?.on('activity', (activity: ActivityType) => {
+  //     dispatch(SET_ALERT_DATA(activity));
+  //   });
+  // }, [socket, isConnected]);
 
   return (
     <Fragment>
