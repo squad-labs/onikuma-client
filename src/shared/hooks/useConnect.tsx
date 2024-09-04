@@ -43,7 +43,11 @@ export const useConnect = () => {
       name: chain.name,
     };
 
-    return new BrowserProvider(window.ethereum, network);
+    const provider = new BrowserProvider(window.ethereum, network);
+
+    console.log(provider)
+
+    return provider;
   };
 
   const getAsyncSigner = async (provider: BrowserProvider, address: string) => {
