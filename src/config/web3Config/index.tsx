@@ -1,5 +1,6 @@
-import { base, berachainTestnetbArtio } from 'wagmi/chains';
+import { berachainTestnetbArtio } from 'wagmi/chains';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
+import { cookieStorage, createStorage } from 'wagmi';
 
 export const PROJECT_ID = '976e4b48f8136ff45351dd5de059c930';
 
@@ -26,4 +27,8 @@ export const wagmiConfig = defaultWagmiConfig({
   enableInjected: true,
   enableWalletConnect: false,
   enableCoinbase: false,
+  syncConnectedChain: true,
+  storage: createStorage({
+    storage: cookieStorage,
+  })
 });
