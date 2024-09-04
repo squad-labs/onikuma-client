@@ -13,7 +13,7 @@ if (!PROJECT_ID) {
   createWeb3Modal({
     wagmiConfig: wagmiConfig,
     projectId: PROJECT_ID,
-    allWallets: 'HIDE'
+    allWallets: 'SHOW'
   });
 }
 
