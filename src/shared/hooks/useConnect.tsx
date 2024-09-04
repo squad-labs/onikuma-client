@@ -41,7 +41,6 @@ export const useConnect = () => {
     const network = {
       chainId: chain.id,
       name: chain.name,
-      ensAddress: chain.contracts?.ensRegistry?.address,
     };
 
     return new BrowserProvider(window.ethereum, network);
@@ -52,12 +51,14 @@ export const useConnect = () => {
   };
 
   useEffect(() => {
-    try {
-      if (client?.chain.id !== AppChain.id) {
-        switchChain(wagmiConfig, { chainId: AppChain.id });
+    if (client && address && isConnected) {
+      try {
+        if (client?.chain.id !== AppChain.id) {
+          switchChain(wagmiConfig, { chainId: AppChain.id });
+        }
+      } catch (error) {
+        axios.isAxiosError(error)
       }
-    } catch (error) {
-      axios.isAxiosError(error)
     }
   }, [
     client,
