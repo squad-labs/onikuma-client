@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import BaseButton from '@/widgets/button/baseButton';
 import IconButton from '@/widgets/button/iconButton';
-import FlipIcon from '@/assets/icons/flip.svg';
-import ShareIcon from '@/assets/icons/share.svg';
 import { useDispatch } from 'react-redux';
 import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -34,12 +34,17 @@ const ImageOptionCard = ({
   amount,
   text,
   base,
-  // flip,
+  flip,
   onClick,
 }: Props) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { ticker } = useContext(RoundContext);
 
+  const handleFlip = useCallback(() => {
+    setIsFlipped(!isFlipped)
+  }, [])
+  console.log(flip)
   return (
     <div className={cn(`image-inner`)}>
       <div className={cn('image-wrapper')}>
@@ -67,7 +72,6 @@ const ImageOptionCard = ({
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-
                 dispatch(
                   OPEN_MODAL({
                     name: 'PoolInModal',
@@ -96,7 +100,6 @@ const ImageOptionCard = ({
                 onClick={(event) => {
                   event.preventDefault();
                   event.stopPropagation();
-
                   dispatch(
                     OPEN_MODAL({
                       name: 'ShareResultModal',
@@ -118,7 +121,15 @@ const ImageOptionCard = ({
                 classNames={['button-blue']}
               >
                 <div className={cn('button-inner')}>
-                  <ShareIcon viewBox="0 0 24 24" />
+                  <Image
+                    src={getStaticSrc('icon', ICON_SRC_PATH.SRC.SHARE)}
+                    alt="share"
+                    width={22}
+                    height={20}
+                    priority
+                    quality={100}
+                    className={cn('share-icon')}
+                  />
                 </div>
               </IconButton>
             </div>
@@ -126,13 +137,21 @@ const ImageOptionCard = ({
           <div className={cn('icon-button-container')}>
             <IconButton
               name="flip-button"
-              onClick={() => {}}
+              onClick={() => handleFlip()}
               shape="round"
               height="small"
               classNames={['button-blue']}
             >
               <div className={cn('button-inner')}>
-                <FlipIcon viewBox="0 0 25 24" />
+                <Image
+                  src={getStaticSrc('icon', ICON_SRC_PATH.SRC.FLIP)}
+                  alt="share"
+                  width={24}
+                  height={22}
+                  priority
+                  quality={100}
+                  className={cn('flip-icon')}
+                />
               </div>
             </IconButton>
           </div>

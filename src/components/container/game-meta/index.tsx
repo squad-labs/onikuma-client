@@ -5,11 +5,13 @@ import BaseText from '@/widgets/text/baseText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import DateText from '@/widgets/text/dateText';
 import IconButton from '@/widgets/button/iconButton';
-import ShareIcon from '@/assets/icons/share.svg';
 import { useDispatch } from 'react-redux';
 import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRound } from '@/shared/hooks/useRound';
+import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -116,7 +118,15 @@ const GameMetaContainer = ({
             }}
             classNames={['button-blue']}
           >
-            <ShareIcon viewBox="0 0 24 24" />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.SHARE)}
+              alt="share"
+              width={20}
+              height={22}
+              priority
+              quality={100}
+              className={cn('share-icon')}
+            />
           </IconButton>
         )}
       </div>

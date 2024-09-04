@@ -2,10 +2,11 @@ import React from 'react';
 import styles from '@/components/container/my-vote-container/MyVoteContainer.module.scss';
 import classNames from 'classnames/bind';
 import { MyVote } from '@/shared/types/data/dashboard';
-import DownloadSvg from '@/assets/icons/download.svg';
 import BaseText from '@/widgets/text/baseText';
 import Image from 'next/image';
 import { thousandFormat } from '@/shared/utils/number';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -39,7 +40,14 @@ const MyVoteContainer = ({ myVote }: Props) => {
               weight="bold"
               text="Name"
             />
-            <DownloadSvg viewBox="0 0 16 16" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DOWNLOAD)}
+              alt="download"
+              width={16}
+              height={16}
+              priority
+              className={cn('icon')}
+            />
           </div>
           <div className={cn('header-inner-right')}>
             <div className={cn('inner-text')}>
@@ -68,7 +76,14 @@ const MyVoteContainer = ({ myVote }: Props) => {
               weight="bold"
               text="Name"
             />
-            <DownloadSvg viewBox="0 0 16 16" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DOWNLOAD)}
+              alt="download"
+              width={16}
+              height={16}
+              priority
+              className={cn('icon')}
+            />
           </div>
           <div className={cn('header-inner-right')}>
             <div className={cn('inner-text')}>

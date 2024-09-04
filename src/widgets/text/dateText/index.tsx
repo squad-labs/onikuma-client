@@ -1,9 +1,11 @@
 import React, { Fragment, useMemo } from 'react';
 import styles from '@/widgets/text/dateText/DateText.module.scss';
 import classNames from 'classnames/bind';
-import CalendarIcon from '@/assets/icons/calendar.svg';
 import { DateTextProps } from '@/shared/types/ui/Text';
 import { COLOR } from '@/shared/constants/COLOR';
+import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -30,7 +32,16 @@ const DateText = ({
 
   return (
     <div className={cn('text-container')}>
-      {withIcon && <CalendarIcon className={cn('icon')} viewBox="0 0 24 24" />}
+      {withIcon && (
+        <Image
+          src={getStaticSrc('icon', ICON_SRC_PATH.SRC.CALENDAR)}
+          alt='calendar'
+          width={24}
+          height={24}
+          priority
+          className={cn('icon')}
+        />
+      )}
       <span
         className={cn('text', 'start', `text-${size}`, `text-${weight}`)}
         style={inlineStyle}
