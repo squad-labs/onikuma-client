@@ -19,4 +19,4 @@ export const TOAST_SRC = {
     presetSecondaryMessage:
       'Incomplete fields. Please fill in all required information now',
   },
-};
+} as const;

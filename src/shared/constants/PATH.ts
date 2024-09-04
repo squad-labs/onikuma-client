@@ -17,7 +17,7 @@ export const ICON_SRC_PATH = {
     TEXT: '/text.svg',
     X: '/x.svg',
   },
-};
+} as const;
 
 export const IMAGE_SRC_PATH = {
   BASE_DIR: '/images',
@@ -30,4 +30,4 @@ export const IMAGE_SRC_PATH = {
     TOAST_ERROR: '/toast-error.svg',
     TOAST_SUCCESS: '/toast-success.svg',
   },
-};
+} as const;
