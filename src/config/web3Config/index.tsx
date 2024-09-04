@@ -1,4 +1,4 @@
-import { base, berachainTestnetbArtio, mainnet } from 'wagmi/chains';
+import { base, berachainTestnetbArtio } from 'wagmi/chains';
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 
 export const PROJECT_ID = '976e4b48f8136ff45351dd5de059c930';
@@ -19,7 +19,7 @@ const metadata = {
 };
 
 export const wagmiConfig = defaultWagmiConfig({
-  chains: [base],
+  chains: [chain],
   projectId: PROJECT_ID,
   metadata,
   ssr: true,
