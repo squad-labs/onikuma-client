@@ -54,7 +54,7 @@ export const useConnect = () => {
     if (client && address && isConnected) {
       try {
         if (client?.chain.id !== AppChain.id) {
-          switchChain(wagmiConfig, { chainId: AppChain.id });
+          // switchChain(wagmiConfig, { chainId: AppChain.id });
         }
       } catch (error) {
         axios.isAxiosError(error)
