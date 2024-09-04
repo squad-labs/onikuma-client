@@ -3,11 +3,12 @@ import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useCallback, useContext, useEffect } from 'react';
 import { useAccount, type Config, useClient } from 'wagmi';
-import type { Chain, Client, Transport } from 'viem';
 import { BrowserProvider } from 'ethers';
 import { chain as AppChain } from '@/config/web3Config';
 import { disconnect, switchChain } from '@wagmi/core';
 import { wagmiConfig } from '@/config/web3Config';
+import type { Chain, Client, Transport } from 'viem';
+import axios from 'axios';
 
 export const useConnect = () => {
   const { open, close } = useWeb3Modal();
@@ -56,7 +57,7 @@ export const useConnect = () => {
         switchChain(wagmiConfig, { chainId: AppChain.id });
       }
     } catch (error) {
-      throw new Error(JSON.stringify(error));
+      axios.isAxiosError(error)
     }
   }, [
     client,
