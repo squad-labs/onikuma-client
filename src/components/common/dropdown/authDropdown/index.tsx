@@ -7,10 +7,10 @@ import { usePathname, useRouter } from 'next/navigation';
 import useOnClickOutside from '@/shared/hooks/useOnClick';
 import BaseText from '@/widgets/text/baseText';
 import { getShortenAddress } from '@/shared/utils/format';
-import ArrowDownIcon from '@/assets/icons/open-dropdown.svg';
-import ProfileIcon from '@/assets/icons/profile.svg';
-import DisconnectIcon from '@/assets/icons/disconnect.svg';
 import { useAuth } from '@/shared/hooks/useAuth';
+import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -47,7 +47,13 @@ const AuthDropdown = () => {
           weight={'regular'}
           color={'DARK'}
         />
-        <ArrowDownIcon viewBox="0 0 24 24" className={cn('icon')} />
+        <Image
+          src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DROPDOWN)}
+          alt="dropdown"
+          width={24}
+          height={24}
+          className={cn('dropdown-icon')}
+        />
       </button>
       {open && (
         <div className={cn('dropdown-list')}>
@@ -58,7 +64,13 @@ const AuthDropdown = () => {
               disable: !isMyPage,
             })}
           >
-            <ProfileIcon viewBox="0 0 24 24" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.PROFILE)}
+              alt="profile"
+              width={24}
+              height={24}
+              className={cn('icon')}
+            />
             <BaseText
               text={'View my data'}
               size={'medium'}
@@ -73,7 +85,13 @@ const AuthDropdown = () => {
             }}
             className={cn('list-item', { disable: true })}
           >
-            <DisconnectIcon viewBox="0 0 24 24" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DISCONNECT)}
+              alt="disconnect"
+              width={24}
+              height={24}
+              className={cn('icon')}
+            />
             <BaseText
               text={'Disconnect'}
               size={'medium'}

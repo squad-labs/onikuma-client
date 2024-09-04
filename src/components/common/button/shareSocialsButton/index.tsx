@@ -1,4 +1,6 @@
 'use client';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import { getStaticSrc } from '@/shared/utils/etc';
 import ShareButton from '@/widgets/button/shareButton';
 import React from 'react';
 
@@ -10,12 +12,12 @@ const ShareSocialsButton = ({ buttonDirection }: Props) => {
   return (
     <ShareButton
       direction={buttonDirection}
-      startIconImage="/icons/share-icon.svg"
-      closeIconImage="/icons/close-icon.svg"
+      startIconImage={getStaticSrc('icon', ICON_SRC_PATH.SRC.SHARE)}
+      closeIconImage={getStaticSrc('icon', ICON_SRC_PATH.SRC.CLOSE)}
       otherIconImages={[
-        '/icons/copy-icon.svg',
-        '/icons/link-icon.svg',
-        '/icons/x-icon.svg',
+        getStaticSrc('icon', ICON_SRC_PATH.SRC.COPY),
+        getStaticSrc('icon', ICON_SRC_PATH.SRC.LINK),
+        getStaticSrc('icon', ICON_SRC_PATH.SRC.X),
       ]}
     />
   );

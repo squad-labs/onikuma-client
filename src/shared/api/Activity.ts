@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { TestToken } from '@/shared/constants/TEST';
 import { getCookie } from 'cookies-next';
 
 type PostPoolInParams = {
@@ -10,10 +9,12 @@ type PostPoolInParams = {
 };
 
 export const postPoolIn = async (params: PostPoolInParams) => {
+  const token = getCookie('token');
+
   try {
     const res = await axios.post('/api/activities/pool-in', params, {
       headers: {
-        Authorization: `Bearer ${TestToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -30,6 +31,8 @@ type PostVoteParams = {
 };
 
 export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
+  const token = getCookie('token');
+  
   try {
     const res = await axios.post(
       `/api/activities/vote/${topicId}`,
@@ -39,7 +42,7 @@ export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${TestToken}`,
+          Authorization: `Bearer ${token}`,
         },
       },
     );
@@ -55,12 +58,14 @@ type GetRecentActivity = {
 };
 
 export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
+  const token = getCookie('token');
+  
   try {
     const res = await axios.get(
       `/api/activities/all/${topicId}?page=${1}&pageSize=${10}`,
       {
         headers: {
-          Authorization: `Bearer ${TestToken}`,
+          Authorization: `Bearer ${token}`,
         },
       },
     );

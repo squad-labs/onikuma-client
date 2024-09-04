@@ -2,13 +2,15 @@ import React, { useRef, useState } from 'react';
 import styles from '@/components/common/dropdown/topicDropdown/TopicDropdown.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
-import ArrowDownSvg from '@/assets/icons/arrow-down.svg';
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 import { getTopicList } from '@/shared/api/Topics';
 import { TopicListItem } from '@/shared/types/data/topic';
 import useOnClickOutside from '@/shared/hooks/useOnClick';
 import { useRouter } from 'next/navigation';
+import { getStaticSrc } from '@/shared/utils/etc';
+import Image from 'next/image';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 type Props = {
   value: {
@@ -51,7 +53,15 @@ const TopicDropdown = ({ value }: Props) => {
           weight={'regular'}
           color={'LIGHT'}
         />
-        <ArrowDownSvg viewBox="0 0 24 24" className={cn('icon')} />
+        <Image
+          src={getStaticSrc('icon', ICON_SRC_PATH.SRC.ARROW_DOWN)}
+          alt="dropdown"
+          width={24}
+          height={24}
+          priority
+          quality={100}
+          className={cn('icon')}
+        />
       </button>
       {open && (
         <div className={cn('dropdown-list')}>
