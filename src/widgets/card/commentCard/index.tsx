@@ -2,11 +2,12 @@ import React, { useCallback, useState } from 'react';
 import styles from '@/widgets/card/commentCard/CommentCard.module.scss';
 import classNames from 'classnames/bind';
 import { CommentCardProps } from '@/shared/types/ui/Card';
-import LikeOutlineIcon from '@/assets/icons/like-outline.svg';
-import LikeFillIcon from '@/assets/icons/like-fill.svg';
 import { fetchRelatedTime } from '@/shared/utils/date';
 import { getCommentLikes } from '@/shared/api/Comments';
 import { getShortenAddress } from '@/shared/utils/format';
+import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -37,9 +38,23 @@ const CommentCard = ({
       <div className={cn('meta-container')}>
         <button className={cn('like-button')} onClick={fetchLike}>
           {isLiked ? (
-            <LikeFillIcon viewBox="0 0 19 16" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.LIKE_FILL)}
+              alt="like-fill"
+              width={19}
+              height={16}
+              priority
+              className={cn('icon')}
+            />
           ) : (
-            <LikeOutlineIcon viewBox="0 0 19 16" className={cn('icon')} />
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.LIKE_OUTLINE)}
+              alt="like-outline"
+              width={19}
+              height={16}
+              priority
+              className={cn('icon')}
+            />
           )}
         </button>
         <span className={cn('like')}>{likes}</span>

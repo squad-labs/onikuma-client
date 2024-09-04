@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from '@/components/common/etc/tableHeader/TableHeader.module.scss';
 import classNames from 'classnames/bind';
-import DownloadSvg from '@/assets/icons/download.svg';
 import BaseText from '@/widgets/text/baseText';
+import Image from 'next/image';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import { getStaticSrc } from '@/shared/utils/etc';
 
 const cn = classNames.bind(styles);
 
@@ -15,7 +17,13 @@ const TableHeader = ({ onlyName }: Props) => {
     <div className={cn('container')}>
       <div className={cn('name-wrapper')}>
         <BaseText size="medium" color="BASE_BLUE_1" weight="bold" text="Name" />
-        <DownloadSvg viewBox="0 0 16 16" className={cn('icon')} />
+        <Image
+          src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DOWNLOAD)}
+          alt="download"
+          width={16}
+          height={16}
+          className={cn('icon')}
+        />
       </div>
       {onlyName || (
         <BaseText

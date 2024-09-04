@@ -4,7 +4,9 @@ import styles from '@/app/client.module.scss';
 import classNames from 'classnames/bind';
 import RuleCard from '@/widgets/card/ruleCard';
 import WalletConnectButton from '@/components/common/button/walletConnectButton';
-import CardImage from '@/assets/images/card-image.svg';
+import Image from 'next/image';
+import { IMAGE_SRC_PATH } from '@/shared/constants/PATH';
+import { getStaticSrc } from '@/shared/utils/etc';
 
 const cn = classNames.bind(styles);
 
@@ -19,7 +21,15 @@ const MyClientPage = () => {
           textLine2="Pool in"
           textLine3="Pool on who gets the largest pool to join the battle"
         >
-          <CardImage viewBox="0 0 160 152" />
+          <Image
+            src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CARD)}
+            alt="rule-card"
+            width={160}
+            height={152}
+            className={cn('card-image')}
+            priority
+            quality={100}
+          />
         </RuleCard>
 
         <RuleCard
@@ -27,21 +37,45 @@ const MyClientPage = () => {
           textLine2="Vote Early"
           textLine3="Vote early for cheaper stakes, or later with more data but higher stakes."
         >
-          <CardImage viewBox="0 0 160 152" />
+          <Image
+            src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CARD)}
+            alt="rule-card"
+            width={160}
+            height={152}
+            className={cn('card-image')}
+            priority
+            quality={100}
+          />
         </RuleCard>
         <RuleCard
           textLine1="Step 3"
           textLine2="Strategize"
           textLine3="Cut through the noise and get the average opinion among the players on who will get the largest TVL."
         >
-          <CardImage viewBox="0 0 160 152" />
+          <Image
+            src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CARD)}
+            alt="rule-card"
+            width={160}
+            height={152}
+            className={cn('card-image')}
+            priority
+            quality={100}
+          />
         </RuleCard>
         <RuleCard
           textLine1="Step 4"
           textLine2="Win and Launch Token"
           textLine3="Get the results daily. Get it right to seal Onikuma and earn your wins. If the winner pool surpasses 5k, the token will be launched!"
         >
-          <CardImage viewBox="0 0 160 152" />
+          <Image
+            src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CARD)}
+            alt="rule-card"
+            width={160}
+            height={152}
+            className={cn('card-image')}
+            priority
+            quality={100}
+          />
         </RuleCard>
       </div>
       <div className={cn('wallet-connect-button')}>

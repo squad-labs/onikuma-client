@@ -2,8 +2,10 @@ import { getMetadata } from '@/shared/utils/metadata';
 import styles from '@/app/not-found.module.scss';
 import classNames from 'classnames/bind';
 import React from 'react';
-import ErrorSvg from '@/assets/images/error-image.svg';
 import ErrorButton from '@/components/common/button/errorButton';
+import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { IMAGE_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -32,7 +34,15 @@ const NotFound = () => {
           </div>
         </div>
         <div className={cn('image-container')}>
-          <ErrorSvg className={cn('image')} />
+          <Image
+            src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.ERROR)}
+            alt="error"
+            width={498}
+            height={499}
+            priority
+            quality={100}
+            className={cn('image')}
+          />
         </div>
       </div>
     </main>
