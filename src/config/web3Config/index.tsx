@@ -22,8 +22,4 @@ export const wagmiConfig = defaultWagmiConfig({
   chains: [chain],
   projectId: PROJECT_ID,
   metadata,
-  ssr: true,
-  enableInjected: true,
-  enableWalletConnect: false,
-  enableCoinbase: false,
 });
