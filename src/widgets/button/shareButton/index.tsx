@@ -18,18 +18,16 @@ const ShareButton = ({
 
   const handleButtonClick = (link: string) => {
     if (link === 'SHARE_CURRENT_LINK') {
-      navigator.clipboard.writeText(window.location.href)
-    }
-    else if (link === 'SHARE_TWEET_X') {
-      const tweetText = encodeURIComponent("Check this out at Onikuma!");
+      navigator.clipboard.writeText(window.location.href);
+    } else if (link === 'SHARE_TWEET_X') {
+      const tweetText = encodeURIComponent('Check this match out at Onikuma!');
       const tweetUrl = encodeURIComponent(window.location.href);
       const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
       window.open(twitterUrl, '_blank');
-    }
-    else if (link) {
+    } else if (link) {
       window.open(link, '_blank');
     }
-  }
+  };
 
   return (
     <div
@@ -55,10 +53,11 @@ const ShareButton = ({
       </button>
       <div className={cn('expanding-buttons')}>
         {otherIconImages.map((icon, index) => (
-          <button 
-          key={index} 
-          className={cn('expandable-button')}
-          onClick = {()=> handleButtonClick(links[index])}>
+          <button
+            key={index}
+            className={cn('expandable-button')}
+            onClick={() => handleButtonClick(links[index])}
+          >
             <Image src={icon} alt={'expanding-button'} width={24} height={24} />
           </button>
         ))}
