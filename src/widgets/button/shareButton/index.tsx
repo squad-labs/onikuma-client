@@ -11,9 +11,19 @@ const ShareButton = ({
   startIconImage,
   closeIconImage,
   otherIconImages = [],
+  links = [],
 }: ShareButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => setIsOpen(!isOpen);
+
+  const handleButtonClick = (link: string) => {
+    if (link === 'COPY_LINK') {
+      navigator.clipboard.writeText(window.location.href)
+    }
+    else if (link) {
+      window.open(link, '_blank');
+    }
+  }
 
   return (
     <div
@@ -39,7 +49,10 @@ const ShareButton = ({
       </button>
       <div className={cn('expanding-buttons')}>
         {otherIconImages.map((icon, index) => (
-          <button key={index} className={cn('expandable-button')}>
+          <button 
+          key={index} 
+          className={cn('expandable-button')}
+          onClick = {()=> handleButtonClick(links[index])}>
             <Image src={icon} alt={'expanding-button'} width={24} height={24} />
           </button>
         ))}

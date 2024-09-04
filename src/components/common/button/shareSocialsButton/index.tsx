@@ -17,6 +17,11 @@ const ShareSocialsButton = ({ buttonDirection }: Props) => {
         '/icons/link-icon.svg',
         '/icons/x-icon.svg',
       ]}
+      links={[
+        'COPY_LINK',
+        '',
+        ''
+      ]}
     />
   );
 };
