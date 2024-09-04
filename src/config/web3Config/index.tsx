@@ -12,7 +12,7 @@ export const chain = berachainTestnetbArtio;
 const metadata = {
   name: 'Onikuma',
   description: 'Onikuma',
-  url: window.location.href,
+  url: 'https://onikuma-dev.vercel.app',
   icons: [
     'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/%EC%8B%AC%EB%B3%BC0708+1.png',
   ],
