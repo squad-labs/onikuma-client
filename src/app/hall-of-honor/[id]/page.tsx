@@ -2,9 +2,9 @@ import React from 'react';
 import styles from '@/app/hall-of-honor/[id]/page.module.scss';
 import classNames from 'classnames/bind';
 import { getMetadata } from '@/shared/utils/metadata';
-import { TestToken } from '@/shared/constants/TEST';
 import { HonorType } from '@/shared/types/data/honor';
 import HallOfHonorClientPage from '@/app/hall-of-honor/[id]/client';
+import { cookies } from 'next/headers';
 
 const cn = classNames.bind(styles);
 
@@ -24,6 +24,7 @@ export const generateMetadata = async () => {
 
 const HallOfHonorPage = async ({ params }: Props) => {
   const { id } = params;
+  const cookie = cookies().get('token');
 
   try {
     const res = await fetch(
@@ -31,7 +32,7 @@ const HallOfHonorPage = async ({ params }: Props) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${TestToken}`,
+          Authorization: `Bearer ${cookie?.value}`,
         },
       },
     );

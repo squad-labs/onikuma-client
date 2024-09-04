@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -34,12 +34,17 @@ const ImageOptionCard = ({
   amount,
   text,
   base,
-  // flip,
+  flip,
   onClick,
 }: Props) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const dispatch = useDispatch();
   const { ticker } = useContext(RoundContext);
 
+  const handleFlip = useCallback(() => {
+    setIsFlipped(!isFlipped)
+  }, [])
+  console.log(flip)
   return (
     <div className={cn(`image-inner`)}>
       <div className={cn('image-wrapper')}>
@@ -67,7 +72,6 @@ const ImageOptionCard = ({
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-
                 dispatch(
                   OPEN_MODAL({
                     name: 'PoolInModal',
@@ -96,7 +100,6 @@ const ImageOptionCard = ({
                 onClick={(event) => {
                   event.preventDefault();
                   event.stopPropagation();
-
                   dispatch(
                     OPEN_MODAL({
                       name: 'ShareResultModal',
@@ -134,7 +137,7 @@ const ImageOptionCard = ({
           <div className={cn('icon-button-container')}>
             <IconButton
               name="flip-button"
-              onClick={() => {}}
+              onClick={() => handleFlip()}
               shape="round"
               height="small"
               classNames={['button-blue']}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TestToken } from '@/shared/constants/TEST';
+import { getCookie } from 'cookies-next';
 
 type PostCommentsParams = {
   topicId: string;
@@ -7,10 +7,12 @@ type PostCommentsParams = {
 };
 
 export const postCommnets = async (params: PostCommentsParams) => {
+  const token = getCookie('token');
+
   try {
     const res = await axios.post('/api/comments', params, {
       headers: {
-        Authorization: `Bearer ${TestToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -31,12 +33,14 @@ export const getAllComments = async ({
   page,
   pageSize,
 }: GetAllCommentsParams) => {
+  const token = getCookie('token');
+
   try {
     const res = await axios.get(
       `/api/comments/all/${topicId}?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
-          Authorization: `Bearer ${TestToken}`,
+          Authorization: `Bearer ${token}`,
         },
       },
     );
@@ -53,10 +57,12 @@ type GetCommentLikesProps = {
 };
 
 export const getCommentLikes = async ({ commentId }: GetCommentLikesProps) => {
+  const token = getCookie('token');
+  
   try {
     const res = await axios.get(`/api/comments/likes/${commentId}`, {
       headers: {
-        Authorization: `Bearer ${TestToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     return res.data;

@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { TestToken } from '@/shared/constants/TEST';
+import { getCookie } from 'cookies-next';
 
 export const getMyData = async () => {
+  const token = getCookie('token');
+
   try {
     const response = await axios.get('/api/dashboards/all-my-data', {
       headers: {
-        Authorization: `Bearer ${TestToken}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
