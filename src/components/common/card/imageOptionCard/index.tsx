@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { Fragment, useCallback, useContext, useState } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -42,21 +42,43 @@ const ImageOptionCard = ({
   const { ticker } = useContext(RoundContext);
 
   const handleFlip = useCallback(() => {
+    console.log('flip');
     setIsFlipped(!isFlipped);
-  }, []);
-  
-  return (
-    <div className={cn(`image-inner`)}>
-      <div className={cn('image-wrapper')}>
-        <button className={cn('image-button')} onClick={() => onClick(text)}>
+  }, [isFlipped]);
+
+  const handleShowImage = useCallback(() => {
+    if (!flip) {
+      return (
+        <Image
+          src={base}
+          alt={text}
+          fill={true}
+          sizes="100%"
+          priority={true}
+          className={cn('image')}
+        />
+      );
+    } else {
+      return (
+        <div className={cn('flip-wrapper')}>
           <Image
-            src={base}
+            src={isFlipped ? flip : base}
             alt={text}
             fill={true}
             sizes="100%"
             priority={true}
-            className={cn('image')}
+            className={cn(isFlipped ? 'flipped' : 'unflipped')}
           />
+        </div>
+      )
+    }
+  }, [isFlipped, text, base, flip]);
+
+  return (
+    <div className={cn(`image-inner`)}>
+      <div className={cn('image-wrapper')}>
+        <button className={cn('image-button')} onClick={() => onClick(text)}>
+          {handleShowImage()}
           <span className={cn('option-text')}>{text}</span>
         </button>
         <div className={cn('button-container')}>

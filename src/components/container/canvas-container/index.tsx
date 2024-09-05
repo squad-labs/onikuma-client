@@ -34,13 +34,12 @@ const CanvasContainer = ({
 }: Props) => {
   const { next } = useContext(RoundContext);
   const [selected, setSelected] = useState<string | undefined>(undefined);
-  
+
   const handleSelect = useCallback(
     (text: string) => {
       setSelected(text);
 
       setTimeout(() => {
-        console.log(text);
         const loser = rest.source.find((source) => source.text !== text);
         if (loser) {
           voteMutation.mutate({
@@ -51,7 +50,7 @@ const CanvasContainer = ({
         }
         setSelected(undefined);
         next(text);
-      }, 2000)
+      }, 2000);
     },
     [type, rest],
   );
@@ -66,7 +65,7 @@ const CanvasContainer = ({
     if (selected === undefined) {
       return '';
     } else if (value === selected) {
-      return 'selected'
+      return 'selected';
     }
     return 'unselected';
   };
