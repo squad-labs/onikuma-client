@@ -22,7 +22,7 @@ export const generateMetadata = async () => {
 
 const PlayPage = async ({ params }: Props) => {
   const { id } = params;
-  const cookie = cookies().get('token');
+  const cookie = cookies().get('accessToken');
   const round = generateRound();
 
   try {

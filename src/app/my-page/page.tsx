@@ -13,7 +13,7 @@ export const generateMetadata = async () => {
 };
 
 const MyPage = async () => {
-  const cookie = cookies().get('token');
+  const cookie = cookies().get('accessToken');
 
   try {
     const res = await fetch(

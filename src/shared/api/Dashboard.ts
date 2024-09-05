@@ -6,7 +6,7 @@ type GetPollResultParams = {
 };
 
 export const getPollResult = async ({ topicId }: GetPollResultParams) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   
   try {
     const res = await axios.get(`/api/dashboards/my-data/detail/${topicId}`, {

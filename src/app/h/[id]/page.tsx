@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import HonorClientPage from '@/app/h/[id]/client';
 import { getMetadata } from '@/shared/utils/metadata';
 import { HonorType } from '@/shared/types/data/honor';
+import { cookies } from 'next/headers';
 
 const cn = classNames.bind(styles);
 
@@ -19,6 +20,7 @@ export const generateMetadata = async () => {
 
 const HonorPage = async ({ params }: Props) => {
   const { id } = params;
+  const cookie = cookies().get('accessToken');
 
   try {
     const res = await fetch(
@@ -26,7 +28,7 @@ const HonorPage = async ({ params }: Props) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmIxOGQ0ZWY3NDBhYWY2ODZlZDcxZDAiLCJ0b2tlblR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MjI5MjAyODMsImV4cCI6MTcyNTUxMjI4M30.sdsioOpOm_qZi8LXt8j1V3N5Uv-U24EEPuIkMh6ufmM`,
+          Authorization: `Bearer ${cookie?.value}`,
         },
       },
     );

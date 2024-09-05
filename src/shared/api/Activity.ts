@@ -9,7 +9,7 @@ type PostPoolInParams = {
 };
 
 export const postPoolIn = async (params: PostPoolInParams) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   try {
     const res = await axios.post('/api/activities/pool-in', params, {
@@ -31,7 +31,7 @@ type PostVoteParams = {
 };
 
 export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   
   try {
     const res = await axios.post(
@@ -58,7 +58,7 @@ type GetRecentActivity = {
 };
 
 export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   
   try {
     const res = await axios.get(

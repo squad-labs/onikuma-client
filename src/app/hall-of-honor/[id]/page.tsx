@@ -24,7 +24,7 @@ export const generateMetadata = async () => {
 
 const HallOfHonorPage = async ({ params }: Props) => {
   const { id } = params;
-  const cookie = cookies().get('token');
+  const cookie = cookies().get('accessToken');
 
   try {
     const res = await fetch(
