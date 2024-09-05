@@ -24,7 +24,6 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   });
 
   const login = async () => {
-    console.log('address', address);
     if (!address) return;
     const timezone = getTimezone();
 
@@ -37,16 +36,11 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   };
 
   useEffect(() => {
-    console.log('isConnected', isConnected);
-    console.log('address', address);
-
     if (autoLogin) {
       const token = getCookie('accessToken');
 
-      console.log('accessToken', token)
       if (isConnected && address) {
         if (!token || token === 'undefined') {
-          console.log("check")
           login();
         }
       }
