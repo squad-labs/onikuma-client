@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import styles from '@/components/common/card/imageOptionCard/ImageOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';

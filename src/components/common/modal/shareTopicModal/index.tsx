@@ -14,6 +14,8 @@ import { Copy } from '@/shared/utils/clipboard';
 import useOnClickOutside from '@/shared/hooks/useOnClick';
 import { useDispatch } from 'react-redux';
 import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
+import DateText from '@/widgets/text/dateText';
+import BaseDivider from '@/widgets/divider/baseDivider';
 
 const cn = classNames.bind(styles);
 
@@ -49,6 +51,7 @@ const ShareTopicModal = ({
     handler: handleCloseModal,
     mouseEvent: 'click',
   });
+
   return (
     <BaseModal background={'DARK_OPACITY_5'}>
       <div className={cn('modal-inner')} ref={modalRef}>
@@ -76,7 +79,55 @@ const ShareTopicModal = ({
           />
         </div>
         <div className={cn('image-container')}>
-          {data && (
+          <div className={cn('game-meta')}>
+            <BaseText
+              text={roundText}
+              size="medium"
+              color="DARK_GRAY_2"
+              weight="light"
+            />
+            <BaseDivider
+              type={'vertical'}
+              color={'DARK_GRAY_2'}
+              minLength={18}
+              thick={1}
+            />
+            <DateText
+              startDate={dateText}
+              size="medium"
+              color='DARK_GRAY_2'
+              weight='light'
+            />
+          </div>
+          <div className={cn('game-title')}>
+            <BaseText
+              text={title}
+              size="large"
+              color="DARK"
+              weight="bold"
+            />
+          </div>
+          <div className={cn('option-container')}>
+            <div className={cn('image-wrapper')}>
+              <Image
+                src={options[0].imageUrl}
+                alt={options[0].name}
+                fill={true}
+                priority={true}
+                className={cn('image')}
+              />
+            </div>
+            <div className={cn('image-wrapper')}>
+              <Image
+                src={options[1].imageUrl}
+                alt={options[1].name}
+                fill={true}
+                priority={true}
+                className={cn('image')}
+              />
+            </div>
+          </div>
+          {/* {data && (
             <Image
               src={data}
               alt="share"
@@ -84,7 +135,7 @@ const ShareTopicModal = ({
               priority={true}
               className={cn('image')}
             />
-          )}
+          )} */}
         </div>
       </div>
     </BaseModal>
