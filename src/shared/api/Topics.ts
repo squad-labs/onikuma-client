@@ -22,7 +22,7 @@ export const getTopicById = async (id: string, token: string) => {
 };
 
 export const getTopicByStatus = async (status: TopicStatus) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/titles?status=${status}`,
@@ -42,7 +42,7 @@ export const getTopicByStatus = async (status: TopicStatus) => {
 };
 
 export const getTopicList = async () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   try {
     const res = await axios.get('/api/topics/titles', {

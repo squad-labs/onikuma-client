@@ -16,7 +16,7 @@ const cn = classNames.bind(styles);
 
 const GameCurrentPage = async () => {
   const round = generateRound();
-  const cookie = cookies().get('token');
+  const cookie = cookies().get('accessToken');
 
   try {
     const res = await fetch(

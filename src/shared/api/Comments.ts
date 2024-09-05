@@ -7,7 +7,7 @@ type PostCommentsParams = {
 };
 
 export const postCommnets = async (params: PostCommentsParams) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   try {
     const res = await axios.post('/api/comments', params, {
@@ -33,7 +33,7 @@ export const getAllComments = async ({
   page,
   pageSize,
 }: GetAllCommentsParams) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
 
   try {
     const res = await axios.get(
@@ -57,7 +57,7 @@ type GetCommentLikesProps = {
 };
 
 export const getCommentLikes = async ({ commentId }: GetCommentLikesProps) => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   
   try {
     const res = await axios.get(`/api/comments/likes/${commentId}`, {

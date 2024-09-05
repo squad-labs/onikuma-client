@@ -73,15 +73,17 @@ html {
 }
 
 body {
-  padding-top: 72px;
-  width: 100vw;
-  height: 100vh;
+  padding-top: 72px !important;
+  width: 100vw !important;
+  height: 100vh !important;
   font-family: var(--FONT-DM-MONO-REGULAR);
   font-size: 1rem;
   overflow-x: hidden;
 }
 
 main {
+  width: 100vw !important;
+  min-height: calc(100vh - 72px) !important;
   background-color: var(--BASE-RED-1);
 }
 

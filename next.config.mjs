@@ -19,21 +19,12 @@ const nextConfig = {
   },
   webpack(
     config,
-    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
     ) {
     config.module.rules.push({
       test: /\.svg$/i,
       use: ['@svgr/webpack'],
     });
-    config.externals.push("pino-pretty", "lokijs", "encoding", {
-      canvas: 'commonjs canvas',
-      sharp: 'commonjs sharp',
-      'utf-8-validate': 'commonjs utf-8-validate',
-      bufferutil: 'commonjs bufferutil',
-    }
-    );
-    config.resolve.fallback = { fs: false, net: false, tls: false }
-
+    config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
   async headers() {

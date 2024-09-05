@@ -1,5 +1,6 @@
 import 'ress';
 import '@/styles/globals.scss';
+import '@rainbow-me/rainbowkit/styles.css';
 import React from 'react';
 import ReduxProvider from '@/providers/ReduxProvider';
 import AppProvider from '@/providers/AppProvider';

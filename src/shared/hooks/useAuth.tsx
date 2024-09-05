@@ -19,7 +19,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
     mutationKey: [MUTATION_KEY.POST_LOGIN, address],
     mutationFn: userLogin,
     onSuccess: (data) => {
-      setCookie('token', data.accessToken);
+      setCookie('accessToken', data.accessToken);
     },
   });
 
@@ -31,13 +31,13 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   };
 
   const logout = async () => {
-    setCookie('token', undefined);
+    setCookie('accessToken', undefined);
     handleDisconnect();
   };
 
   useEffect(() => {
     if (autoLogin) {
-      const token = getCookie('token');
+      const token = getCookie('accessToken');
 
       if (isConnected && address) {
         if (!token || token === 'undefined') {

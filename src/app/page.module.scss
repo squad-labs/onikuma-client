@@ -1,6 +1,4 @@
 .container {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,8 +6,8 @@
 
   .inner {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: calc(100vw - 8rem);
+    height: calc(100vh - 8rem - 72px);
     background-color: var(--LIGHT-CREAM-1);
     border: 3px solid var(--DARK-GRAY-4);
     border-radius: 1rem;

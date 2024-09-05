@@ -63,4 +63,5 @@ export type ShareButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   startIconImage: string;
   closeIconImage: string;
   otherIconImages?: string[];
+  links?: string[];
 };

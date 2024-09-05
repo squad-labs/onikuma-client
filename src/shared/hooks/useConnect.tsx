@@ -1,49 +1,62 @@
 'use client';
 import { WalletContext } from '@/context/partial/walletContext/WalletContext';
-import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useCallback, useContext, useEffect } from 'react';
 import { useAccount, type Config, useClient } from 'wagmi';
-import type { Chain, Client, Transport } from 'viem';
 import { BrowserProvider } from 'ethers';
-import { chain as AppChain } from '@/config/web3Config';
+import { chain as AppChain, config } from '@/config/web3Config';
 import { disconnect, switchChain } from '@wagmi/core';
-import { wagmiConfig } from '@/config/web3Config';
+import type { Chain, Client, Transport } from 'viem';
+import axios from 'axios';
+import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit';
 
 export const useConnect = () => {
-  const { open, close } = useWeb3Modal();
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  
   const client = useClient<Config>({ chainId: AppChain.id });
   const { signer, setSigner, provider, setProvider } =
     useContext(WalletContext);
   const { address, isConnected, isConnecting, isDisconnected, isReconnecting } =
     useAccount();
 
-  const handleOpen = () => {
+  const handleModal = () => {
+    if (address && isConnected) {
+      handleAccountModal();
+    } else {
+      handleConnectModal();
+    }
+  }
+
+  const handleConnectModal = () => {
     try {
-      open();
+      if (openConnectModal) openConnectModal();
     } catch (e) {
-      open();
+      if (openConnectModal) openConnectModal();
       return e;
     }
   };
 
-  const handleClose = () => {
+  const handleAccountModal = () => {
     try {
-      close();
+      if (openAccountModal) openAccountModal();
     } catch (e) {
-      close();
+      if (openAccountModal) openAccountModal();
       return e;
     }
-  };
+  }
 
   const clientToProvider = (client: Client<Transport, Chain>) => {
     const { chain } = client;
     const network = {
       chainId: chain.id,
       name: chain.name,
-      ensAddress: chain.contracts?.ensRegistry?.address,
     };
 
-    return new BrowserProvider(window.ethereum, network);
+    const provider = new BrowserProvider(window.ethereum, network);
+
+    console.log('provider', provider)
+
+    return provider;
   };
 
   const getAsyncSigner = async (provider: BrowserProvider, address: string) => {
@@ -51,12 +64,14 @@ export const useConnect = () => {
   };
 
   useEffect(() => {
-    try {
-      if (client?.chain.id !== AppChain.id) {
-        switchChain(wagmiConfig, { chainId: AppChain.id });
+    if (client && address && isConnected) {
+      try {
+        if (client?.chain.id !== AppChain.id) {
+          switchChain(config, { chainId: AppChain.id });
+        }
+      } catch (error) {
+        axios.isAxiosError(error)
       }
-    } catch (error) {
-      throw new Error(JSON.stringify(error));
     }
   }, [
     client,
@@ -139,12 +154,13 @@ export const useConnect = () => {
   ]);
 
   const handleDisconnect = useCallback(async () => {
-    await disconnect(wagmiConfig);
+    await disconnect(config);
   }, []);
 
   return {
-    handleOpen,
-    handleClose,
+    handleModal,
+    handleConnectModal,
+    handleAccountModal,
     getProvider,
     getSigner,
     getConnect,
