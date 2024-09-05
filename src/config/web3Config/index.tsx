@@ -2,7 +2,7 @@ import { berachainTestnetbArtio } from 'wagmi/chains';
 import { cookieStorage, createStorage } from 'wagmi';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 
-export const PROJECT_ID = '8e39a17b39827f78c1e26dafe972c92f';
+export const PROJECT_ID = process.env.NEXT_PUBLIC_WAGMI_PROJECT_ID;
 
 if (!PROJECT_ID) {
   throw new Error('PROJECT_ID is required');
