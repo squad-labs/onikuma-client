@@ -2,7 +2,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
-import {  config } from '@/config/web3Config';
+import { config } from '@/config/web3Config';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 
 const queryClient = new QueryClient();

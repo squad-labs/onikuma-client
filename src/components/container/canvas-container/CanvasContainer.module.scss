@@ -10,14 +10,73 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
+  gap: 3rem;
+
+  .option-container {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .selected {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: scaleIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  .unselected {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: scaleOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
 
   .text {
-    width: 100%;
-    text-align: center;
-    margin: 0.2rem auto;
-    font-size: 1.8rem;
-    color: var(--LIGHT);
-    font-weight: 700;
-    font-family: var(--FONT-DM-MONO-BOLD);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--BASE-BLUE-1);
+    font-family: var(--FONT-RUBIC-MONO-REGULAR);
+    z-index: 999;
+    font-size: var(--TEXT-SIZE-LARGE);
+    text-shadow:
+      1.5px 1.5px 0 var(--LIGHT),
+      -1.5px -1.5px 0 var(--LIGHT),
+      1.5px -1.5px 0 var(--LIGHT),
+      -1.5px 1.5px 0 var(--LIGHT);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    height: 50%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    height: 50%;
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+    display: none;
   }
 }

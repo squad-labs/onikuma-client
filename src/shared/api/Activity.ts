@@ -32,7 +32,7 @@ type PostVoteParams = {
 
 export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
   const token = getCookie('accessToken');
-  
+
   try {
     const res = await axios.post(
       `/api/activities/vote/${topicId}`,
@@ -59,7 +59,7 @@ type GetRecentActivity = {
 
 export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
   const token = getCookie('accessToken');
-  
+
   try {
     const res = await axios.get(
       `/api/activities/all/${topicId}?page=${1}&pageSize=${10}`,
