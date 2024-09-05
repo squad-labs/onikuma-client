@@ -43,8 +43,10 @@ export const useAuth = ({ autoLogin = false }: Props) => {
     if (autoLogin) {
       const token = getCookie('accessToken');
 
+      console.log('accessToken', token)
       if (isConnected && address) {
         if (!token || token === 'undefined') {
+          console.log("check")
           login();
         }
       }

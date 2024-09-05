@@ -54,7 +54,7 @@ export const useConnect = () => {
 
     const provider = new BrowserProvider(window.ethereum, network);
 
-    console.log(provider)
+    console.log('provider', provider)
 
     return provider;
   };
