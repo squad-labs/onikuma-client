@@ -19,6 +19,7 @@ const ShareSocialsButton = ({ buttonDirection }: Props) => {
         getStaticSrc('icon', ICON_SRC_PATH.SRC.LINK),
         getStaticSrc('icon', ICON_SRC_PATH.SRC.X),
       ]}
+      links={['', 'SHARE_CURRENT_LINK', 'SHARE_TWEET_X']}
     />
   );
 };
