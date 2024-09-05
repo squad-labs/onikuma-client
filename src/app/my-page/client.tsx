@@ -25,18 +25,21 @@ const MyClientPage = ({ myData }: Props) => {
     };
   }, [myData]);
 
-  const formattedTotalGain = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Math.abs(total.totalCostPnL));
+  const { signTotalGain, signPnL, isBlurred, formattedTotalGain } = useMemo(() => {
+    const signTotalGain = total.totalCostPnL < 0 ? '-' : '+';
+    const signPnL = total.myTotalPnL < 0 ? '' : '+';
+    const isBlurred = myData.result?.length !== 10;
+    
+    const formattedTotalGain = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(Math.abs(total.totalCostPnL));
 
-  const signTotalGain = total.totalCostPnL < 0 ? '-' : '+';
+    return { signTotalGain, signPnL, isBlurred, formattedTotalGain };
+  }, [total, myData.result]);
 
-  const signPnL = total.myTotalPnL < 0 ? '' : '+';
-
-  const isBlurred = myData.result?.length !== 10;
 
   return (
     <div className={cn('page-container')}>
