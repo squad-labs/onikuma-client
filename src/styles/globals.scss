@@ -82,6 +82,8 @@ body {
 }
 
 main {
+  width: 100vw !important;
+  height: calc(100vh - 72px) !important;
   background-color: var(--BASE-RED-1);
 }
 

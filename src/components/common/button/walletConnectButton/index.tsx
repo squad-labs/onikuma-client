@@ -16,7 +16,7 @@ type Props = {
 const WalletConnectButton = ({ type, autoLogin }: Props) => {
   const isHome = useMemo(() => type === 'home', [type]);
   useAuth({ autoLogin });
-  const { handleOpen } = useConnect();
+  const { handleModal } = useConnect();
 
   return (
     <div className={cn(isHome && 'button-wrapper')}>
@@ -30,7 +30,7 @@ const WalletConnectButton = ({ type, autoLogin }: Props) => {
         fontSize={'large'}
         fontWeight={'regular'}
         loading={false}
-        onClick={handleOpen}
+        onClick={handleModal}
         classNames={[]}
       />
     </div>

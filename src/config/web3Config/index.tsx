@@ -1,6 +1,6 @@
 import { berachainTestnetbArtio } from 'wagmi/chains';
-import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { cookieStorage, createStorage } from 'wagmi';
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 
 export const PROJECT_ID = '8e39a17b39827f78c1e26dafe972c92f';
 
@@ -19,15 +19,12 @@ const metadata = {
   ],
 };
 
-export const wagmiConfig = defaultWagmiConfig({
-  chains: [chain],
+
+export const config = getDefaultConfig({
+  appName: metadata.name,
   projectId: PROJECT_ID,
-  metadata,
+  chains: [chain],
   ssr: true,
-  enableInjected: true,
-  enableWalletConnect: false,
-  enableCoinbase: false,
-  syncConnectedChain: true,
   storage: createStorage({
     storage: cookieStorage,
   })
