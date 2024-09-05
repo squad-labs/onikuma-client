@@ -42,9 +42,9 @@ const ImageOptionCard = ({
   const { ticker } = useContext(RoundContext);
 
   const handleFlip = useCallback(() => {
-    setIsFlipped(!isFlipped)
-  }, [])
-  console.log(flip)
+    setIsFlipped(!isFlipped);
+  }, []);
+  
   return (
     <div className={cn(`image-inner`)}>
       <div className={cn('image-wrapper')}>
@@ -57,6 +57,7 @@ const ImageOptionCard = ({
             priority={true}
             className={cn('image')}
           />
+          <span className={cn('option-text')}>{text}</span>
         </button>
         <div className={cn('button-container')}>
           {type === 'double' && (

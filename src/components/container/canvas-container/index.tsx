@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import styles from '@/components/container/canvas-container/CanvasContainer.module.scss';
 import classNames from 'classnames/bind';
 import ImageOptionCard from '@/components/common/card/imageOptionCard';
@@ -33,19 +33,25 @@ const CanvasContainer = ({
   ...rest
 }: Props) => {
   const { next } = useContext(RoundContext);
-
+  const [selected, setSelected] = useState<string | undefined>(undefined);
+  
   const handleSelect = useCallback(
     (text: string) => {
-      next(text);
-      const loser = rest.source.find((source) => source.text !== text);
+      setSelected(text);
 
-      if (loser) {
-        voteMutation.mutate({
-          topicId,
-          winner: text,
-          loser: loser?.text,
-        });
-      }
+      setTimeout(() => {
+        console.log(text);
+        const loser = rest.source.find((source) => source.text !== text);
+        if (loser) {
+          voteMutation.mutate({
+            topicId,
+            winner: text,
+            loser: loser.text,
+          });
+        }
+        setSelected(undefined);
+        next(text);
+      }, 2000)
     },
     [type, rest],
   );
@@ -55,6 +61,15 @@ const CanvasContainer = ({
     mutationFn: postVote,
     onSuccess: () => {},
   });
+
+  const isSelected = (value: string) => {
+    if (selected === undefined) {
+      return '';
+    } else if (value === selected) {
+      return 'selected'
+    }
+    return 'unselected';
+  };
 
   if (type === 'single') {
     return (
@@ -76,35 +91,39 @@ const CanvasContainer = ({
   }
   return (
     <div className={cn(`${type}-container`)}>
-      <ImageOptionCard
-        type={'double'}
-        topicId={topicId}
-        roundText={roundText}
-        dateText={dateText}
-        title={title}
-        text={rest.source[0].text}
-        base={rest.source[0].base}
-        flip={rest.source[0].flip}
-        amount={amount}
-        onClick={() => {
-          handleSelect(rest.source[0].text);
-        }}
-      />
-      <span className={cn('text')}>VS</span>
-      <ImageOptionCard
-        type={'double'}
-        topicId={topicId}
-        roundText={roundText}
-        dateText={dateText}
-        title={title}
-        text={rest.source[1].text}
-        base={rest.source[1].base}
-        flip={rest.source[1].flip}
-        amount={amount}
-        onClick={() => {
-          handleSelect(rest.source[1].text);
-        }}
-      />
+      <div className={cn('option-container', isSelected(rest.source[1].text))}>
+        <ImageOptionCard
+          type={'double'}
+          topicId={topicId}
+          roundText={roundText}
+          dateText={dateText}
+          title={title}
+          text={rest.source[1].text}
+          base={rest.source[1].base}
+          flip={rest.source[1].flip}
+          amount={amount}
+          onClick={() => {
+            handleSelect(rest.source[1].text);
+          }}
+        />
+      </div>
+      {selected ? null : <span className={cn('text')}>VS</span>}
+      <div className={cn('option-container', isSelected(rest.source[0].text))}>
+        <ImageOptionCard
+          type={'double'}
+          topicId={topicId}
+          roundText={roundText}
+          dateText={dateText}
+          title={title}
+          text={rest.source[0].text}
+          base={rest.source[0].base}
+          flip={rest.source[0].flip}
+          amount={amount}
+          onClick={() => {
+            handleSelect(rest.source[0].text);
+          }}
+        />
+      </div>
     </div>
   );
 };

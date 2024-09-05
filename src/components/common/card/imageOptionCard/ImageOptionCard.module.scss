@@ -25,6 +25,22 @@
         object-fit: cover;
         border: 1px solid var(--BASE-BLUE-1);
       }
+
+      .option-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-family: var(--FONT-RUBIC-MONO-REGULAR);
+        color: var(--BASE-RED-1);
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        font-size: var(--TEXT-SIZE-LARGE);
+        text-shadow: 
+          1.5px 1.5px 0 var(--LIGHT),  
+          -1.5px -1.5px 0 var(--LIGHT),
+          1.5px -1.5px 0 var(--LIGHT),
+          -1.5px 1.5px 0 var(--LIGHT);
+      }
     }
 
     .button-container {

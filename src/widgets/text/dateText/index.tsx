@@ -35,7 +35,7 @@ const DateText = ({
       {withIcon && (
         <Image
           src={getStaticSrc('icon', ICON_SRC_PATH.SRC.CALENDAR)}
-          alt='calendar'
+          alt="calendar"
           width={24}
           height={24}
           priority

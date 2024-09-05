@@ -19,7 +19,6 @@ const metadata = {
   ],
 };
 
-
 export const config = getDefaultConfig({
   appName: metadata.name,
   projectId: PROJECT_ID,
@@ -27,5 +26,5 @@ export const config = getDefaultConfig({
   ssr: true,
   storage: createStorage({
     storage: cookieStorage,
-  })
+  }),
 });

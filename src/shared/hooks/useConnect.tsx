@@ -12,7 +12,7 @@ import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit';
 export const useConnect = () => {
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
-  
+
   const client = useClient<Config>({ chainId: AppChain.id });
   const { signer, setSigner, provider, setProvider } =
     useContext(WalletContext);
@@ -25,7 +25,7 @@ export const useConnect = () => {
     } else {
       handleConnectModal();
     }
-  }
+  };
 
   const handleConnectModal = () => {
     try {
@@ -43,7 +43,7 @@ export const useConnect = () => {
       if (openAccountModal) openAccountModal();
       return e;
     }
-  }
+  };
 
   const clientToProvider = (client: Client<Transport, Chain>) => {
     const { chain } = client;
@@ -54,7 +54,7 @@ export const useConnect = () => {
 
     const provider = new BrowserProvider(window.ethereum, network);
 
-    console.log('provider', provider)
+    console.log('provider', provider);
 
     return provider;
   };
@@ -70,7 +70,7 @@ export const useConnect = () => {
           switchChain(config, { chainId: AppChain.id });
         }
       } catch (error) {
-        axios.isAxiosError(error)
+        axios.isAxiosError(error);
       }
     }
   }, [

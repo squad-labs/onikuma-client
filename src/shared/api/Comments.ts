@@ -58,7 +58,7 @@ type GetCommentLikesProps = {
 
 export const getCommentLikes = async ({ commentId }: GetCommentLikesProps) => {
   const token = getCookie('accessToken');
-  
+
   try {
     const res = await axios.get(`/api/comments/likes/${commentId}`, {
       headers: {
