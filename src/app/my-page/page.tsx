@@ -29,7 +29,9 @@ const MyPage = async () => {
 
     return (
       <main className={cn('container')}>
-        <MyClientPage myData={data} />
+        <div className={cn('inner')}>
+          <MyClientPage myData={data} />
+        </div>
       </main>
     );
   } catch (err) {
