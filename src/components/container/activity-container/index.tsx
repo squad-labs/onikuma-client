@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from '@/components/container/activity-container/ActivityContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -22,11 +22,14 @@ const ActivityContainer = ({ topicId }: Props) => {
     queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
     queryFn: () => getRecentActivity({ topicId }),
   });
+
+  const isBlurred = useMemo(() => !data || data.length === 0, [data]);
+
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
         <BaseText
-          text="Latist Activities"
+          text="Latest Activities"
           color={'DARK'}
           size={'large'}
           weight="regular"
@@ -36,9 +39,15 @@ const ActivityContainer = ({ topicId }: Props) => {
         <TableHeader onlyName={true} />
       </div>
       <div className={cn('table-body')}>
+        {isBlurred && (
+          <div className={cn('overlay')}>
+            <div className={cn('message')}>
+              <p>No transaction yet!</p>
+            </div>
+          </div>
+        )}
         {data?.map((item: ActivityType, index: number) => {
           const isLastRow = index === data.length - 1;
-
           return (
             <div
               className={cn('item-wrapper')}
