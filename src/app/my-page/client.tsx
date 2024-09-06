@@ -25,21 +25,22 @@ const MyClientPage = ({ myData }: Props) => {
     };
   }, [myData]);
 
-  const { signTotalGain, signPnL, isBlurred, formattedTotalGain } =
-    useMemo(() => {
-      const signTotalGain = total.totalCostPnL < 0 ? '-' : '+';
-      const signPnL = total.myTotalPnL < 0 ? '' : '+';
-      const isBlurred = myData.result?.length !== 10;
+  const { signTotalGain, signPnL, formattedTotalGain } = useMemo(() => {
+    const signTotalGain = total.totalCostPnL < 0 ? '-' : '+';
+    const signPnL = total.myTotalPnL < 0 ? '' : '+';
+    const formattedTotalGain = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(Math.abs(total.totalCostPnL));
 
-      const formattedTotalGain = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(Math.abs(total.totalCostPnL));
+    return { signTotalGain, signPnL, formattedTotalGain };
+  }, [total]);
 
-      return { signTotalGain, signPnL, isBlurred, formattedTotalGain };
-    }, [total, myData.result]);
+  const isBlurred = useMemo(() => {
+    return myData.result?.length !== 10;
+  }, [myData.result]);
 
   return (
     <div className={cn('page-container')}>
