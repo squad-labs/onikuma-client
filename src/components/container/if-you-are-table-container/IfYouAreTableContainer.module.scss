@@ -23,18 +23,7 @@
         width: 75%;
         align-items: center;
         justify-content: flex-start;
-
-        .h-my-ranking {
-          display: flex;
-          width: 33%;
-          padding-left: 1rem;
-        }
-
-        .h-wallet-address {
-          display: flex;
-          width: 67%;
-          padding-left: 1rem;
-        }
+        padding-left: 1rem;
       }
 
       .header-inner-right {
@@ -42,7 +31,7 @@
         width: 25%;
         align-items: center;
         justify-content: flex-end;
-        padding-right: 3rem;
+        padding-right: 2rem;
       }
     }
   }
@@ -53,12 +42,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     .list-item {
       width: 100%;
       display: flex;
       flex-direction: row;
-      padding: 1.5rem 0 1.5rem 0;
+      padding: 3.38rem 0 3.38rem 0;
+      border-bottom: 1px solid #c1c1c1;
 
       .item-inner-left {
         width: 75%;
@@ -66,19 +57,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-
-        .i-my-ranking {
-          display: flex;
-          justify-content: center;
-          width: 33%;
-        }
-
-        .i-wallet-address {
-          width: 67%;
-          display: flex;
-          justify-content: flex-start;
-          padding-left: 1rem;
-        }
+        padding-left: 1rem;
       }
 
       .item-inner-right {
@@ -86,6 +65,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        padding-right: 1rem;
       }
     }
   }

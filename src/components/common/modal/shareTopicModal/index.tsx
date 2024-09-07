@@ -95,17 +95,12 @@ const ShareTopicModal = ({
             <DateText
               startDate={dateText}
               size="medium"
-              color='DARK_GRAY_2'
-              weight='light'
+              color="DARK_GRAY_2"
+              weight="light"
             />
           </div>
           <div className={cn('game-title')}>
-            <BaseText
-              text={title}
-              size="large"
-              color="DARK"
-              weight="bold"
-            />
+            <BaseText text={title} size="large" color="DARK" weight="bold" />
           </div>
           <div className={cn('option-container')}>
             <div className={cn('image-wrapper')}>

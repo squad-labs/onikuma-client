@@ -70,7 +70,7 @@ const ImageOptionCard = ({
             className={cn(isFlipped ? 'flipped' : 'unflipped')}
           />
         </div>
-      )
+      );
     }
   }, [isFlipped, text, base, flip]);
 
