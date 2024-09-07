@@ -14,6 +14,9 @@ type Props = {
 };
 
 const MyClientPage = ({ myData }: Props) => {
+
+  console.log(myData);
+
   const total = useMemo(() => {
     return {
       myTotalPoolIn: myData.myTotalPoolIn ?? 0,
