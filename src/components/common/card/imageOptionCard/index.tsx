@@ -9,6 +9,7 @@ import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { getStaticSrc } from '@/shared/utils/etc';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import ShareGameButton from '@/components/common/button/shareGameButton';
 
 const cn = classNames.bind(styles);
 
@@ -42,7 +43,6 @@ const ImageOptionCard = ({
   const { ticker } = useContext(RoundContext);
 
   const handleFlip = useCallback(() => {
-    console.log('flip');
     setIsFlipped(!isFlipped);
   }, [isFlipped]);
 
@@ -70,7 +70,7 @@ const ImageOptionCard = ({
             className={cn(isFlipped ? 'flipped' : 'unflipped')}
           />
         </div>
-      )
+      );
     }
   }, [isFlipped, text, base, flip]);
 
@@ -117,52 +117,20 @@ const ImageOptionCard = ({
             />
           )}
           {type === 'single' && (
-            <div>
-              <IconButton
-                name="share-button"
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  dispatch(
-                    OPEN_MODAL({
-                      name: 'ShareResultModal',
-                      data: {
-                        topicId: topicId,
-                        title: title,
-                        roundText: roundText,
-                        dateText: dateText,
-                        option: {
-                          name: text,
-                          imageUrl: base,
-                        },
-                      },
-                    }),
-                  );
-                }}
-                shape="round"
-                height="small"
-                classNames={['button-blue']}
-              >
-                <div className={cn('button-inner')}>
-                  <Image
-                    src={getStaticSrc('icon', ICON_SRC_PATH.SRC.SHARE)}
-                    alt="share"
-                    width={22}
-                    height={20}
-                    priority
-                    quality={100}
-                    className={cn('share-icon')}
-                  />
-                </div>
-              </IconButton>
-            </div>
+            <ShareGameButton
+              topicId={topicId}
+              title={title}
+              status={roundText}
+              startAt={dateText}
+              buttonDirection="down"
+            />
           )}
           <div className={cn('icon-button-container')}>
             <IconButton
               name="flip-button"
               onClick={() => handleFlip()}
               shape="round"
-              height="small"
+              height={type === 'single' ? 'medium' : 'small'}
               classNames={['button-blue']}
             >
               <div className={cn('button-inner')}>

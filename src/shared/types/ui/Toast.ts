@@ -1,11 +1,18 @@
 import { ReactNode } from 'react';
 
+export type ToastType = 'success' | 'error' | 'info' | 'link';
+
 export type BaseToastProps = {
-  type?: 'success' | 'error' | 'requireAction';
-  message?: string;
-  secondaryMessage?: string;
-  closable?: boolean;
-  onClose?: () => void;
+  toastId: number;
+  index: number;
+  type?: ToastType;
+  text?: {
+    primaryText: string;
+    secondaryText: string;
+  };
+  canClose: boolean;
+  autoClose: {
+    duration: number;
+  } | null;
   children?: ReactNode;
-  classNames?: string[];
 };

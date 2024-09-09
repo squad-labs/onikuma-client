@@ -5,10 +5,12 @@ import {
   getAlertData,
   SET_ALERT_DATA,
 } from '@/context/global/slice/alertSlice';
-import { getModal } from '@/context/global/slice/modalSlice';
+import { CLOSE_MODAL, getModal } from '@/context/global/slice/modalSlice';
+import { getToast, ToastType } from '@/context/global/slice/toastSlice';
 import { ActivityType } from '@/shared/types/data/activity';
 import { ActivitySocketType } from '@/shared/types/etc/Socket';
 import { fetchRelatedTime } from '@/shared/utils/date';
+import BaseToast from '@/widgets/toast/baseToast';
 import React, { ReactNode, Fragment, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { io } from 'socket.io-client';
@@ -21,6 +23,7 @@ const AppProvider = ({ children }: Props) => {
   const dispatch = useDispatch();
   const alertData = useSelector(getAlertData);
   const modal = useSelector(getModal);
+  const toast = useSelector(getToast);
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [socket, setSocket] = useState<ActivitySocketType | null>(null);
 
@@ -69,6 +72,22 @@ const AppProvider = ({ children }: Props) => {
     });
   }, [socket, isConnected]);
 
+  useEffect(() => {
+    addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        dispatch(CLOSE_MODAL());
+      }
+    });
+
+    return () => {
+      removeEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          dispatch(CLOSE_MODAL());
+        }
+      });
+    };
+  }, []);
+
   return (
     <Fragment>
       {children}
@@ -82,6 +101,18 @@ const AppProvider = ({ children }: Props) => {
             amount={item.poolIn}
             pickerName={'HONEY'}
             createAt={`${fetchRelatedTime(item.createdAt)}`}
+          />
+        );
+      })}
+      {toast.data?.map((item: ToastType) => {
+        return (
+          <BaseToast
+            key={item.toastId}
+            type={item.type}
+            index={item.index}
+            toastId={item.toastId}
+            canClose={item.canClose}
+            autoClose={item.autoClose}
           />
         );
       })}

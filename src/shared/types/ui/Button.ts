@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { ColorType } from './Color';
+import { ColorType } from '@/shared/types/ui/Color';
+import { LinkShare } from '@/shared/types/data/link';
 
 export type ButtonTheme = 'fill' | 'outline';
 
@@ -62,6 +63,5 @@ export type ShareButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   classNames?: string[];
   startIconImage: string;
   closeIconImage: string;
-  otherIconImages?: string[];
-  links?: string[];
+  contents: LinkShare[];
 };

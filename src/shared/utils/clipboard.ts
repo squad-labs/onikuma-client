@@ -15,3 +15,5 @@ export const Copy = async ({
     return error;
   }
 };
+
+export const copyImage = async () => {};
