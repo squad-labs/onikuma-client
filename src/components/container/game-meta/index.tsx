@@ -85,15 +85,17 @@ const GameMetaContainer = ({
           size={'extra-large'}
           weight={'bold'}
         />
-        {isFinal || onlyDate || (
-          <ShareGameButton
-            topicId={topicId}
-            title={title}
-            status={status}
-            startAt={startAt}
-            buttonDirection="left"
-          />
-        )}
+        {isFinal ||
+          onlyDate ||
+          (status && (
+            <ShareGameButton
+              topicId={topicId}
+              title={title}
+              status={status}
+              startAt={startAt}
+              buttonDirection="left"
+            />
+          ))}
       </div>
     </section>
   );
