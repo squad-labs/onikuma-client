@@ -5,7 +5,7 @@ import { getCookie } from 'cookies-next';
 export const getTopicById = async (id: string, token: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/66bb07efff419cee8c3888e1`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

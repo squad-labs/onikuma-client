@@ -3,28 +3,26 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   sassOptions: {
-    includePaths: ["styles"],
+    includePaths: ['styles'],
   },
   images: {
     domains: [
       'dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com',
-      's2.coinmarketcap.com'
-    ]
+      's2.coinmarketcap.com',
+    ],
   },
   env: {
     NEXT_PUBLIC_WAGMI_PROJECT_ID: process.env.WAGMI_PROJECT_ID,
     NEXT_PUBLIC_API_BASE_URL: process.env.API_BASE_URL,
     NEXT_PUBLIC_SOCKET_BASE_URL: process.env.SOCKET_BASE_URL,
-    NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL
+    NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL,
   },
-  webpack(
-    config,
-    ) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       use: ['@svgr/webpack'],
     });
-    config.externals.push("pino-pretty", "lokijs", "encoding");
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
   async headers() {
@@ -44,13 +42,14 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+            value:
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
           },
         ],
       },
-    ]
+    ];
   },
-  rewrites: async() => {
+  rewrites: async () => {
     return [
       {
         source: '/api/users/login',
@@ -108,7 +107,7 @@ const nextConfig = {
             type: 'query',
             key: 'pageSize',
             value: '(?<pageSize>.*)',
-          }
+          },
         ],
         destination: `${process.env.API_BASE_URL}/api/activities/all/:id*?page=:page&pageSize=:pageSize`,
       },
@@ -136,7 +135,7 @@ const nextConfig = {
             type: 'query',
             key: 'pageSize',
             value: '(?<pageSize>.*)',
-          }
+          },
         ],
         destination: `${process.env.API_BASE_URL}/api/comments/all/:id*?page=:page&pageSize=:pageSize`,
       },
@@ -167,9 +166,9 @@ const nextConfig = {
       {
         source: '/api/poll-result',
         destination: `${process.env.CLIENT_SERVER_URL}/api/poll-result`,
-      }
-    ]
-  }
+      },
+    ];
+  },
 };
 
 export default nextConfig;

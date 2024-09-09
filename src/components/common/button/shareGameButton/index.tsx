@@ -39,55 +39,15 @@ const ShareGameButton = ({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'topic'],
     mutationFn: getShareImage,
     onSuccess: async (data: ImageShareType) => {
+      console.log('data', data);
+
       const image = data.imageUrl;
       handleCopyImage(image);
     },
-  });
-
-  const handleCopyImage = useCallback(
-    async (url: string) => {
-      console.log('url', url);
-      await fetch(url)
-        .then((res) => {
-          console.log('res', res);
-          return res.blob();
-        })
-        .then((blob) => {
-          console.log(blob);
-          const item = [
-            new ClipboardItem({
-              'image/png': blob,
-            }),
-          ];
-          console.log('item', item);
-          navigator.clipboard
-            .write(item)
-            .then(() => {
-              dispatch(
-                SET_TOAST({
-                  type: 'link',
-                  canClose: true,
-                  autoClose: {
-                    duration: 3000,
-                  },
-                }),
-              );
-            })
-            .catch(() => {
-              dispatch(
-                SET_TOAST({
-                  type: 'info',
-                  canClose: true,
-                  autoClose: {
-                    duration: 3000,
-                  },
-                }),
-              );
-            });
-        });
+    onError: (error) => {
+      console.log('error', error);
     },
-    [dispatch, buttonDirection, options, currentIndex, roundIndex],
-  );
+  });
 
   const getResultShareImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'result'],
@@ -99,6 +59,54 @@ const ShareGameButton = ({
       handleCopyImage(image);
     },
   });
+
+  const handleCopyImage = useCallback(
+    async (url: string) => {
+      console.log('url', url);
+
+      if (url) {
+        await fetch(url)
+          .then((res) => {
+            console.log('res', res);
+            return res.blob();
+          })
+          .then((blob) => {
+            console.log(blob);
+            const item = [
+              new ClipboardItem({
+                'image/png': blob,
+              }),
+            ];
+            console.log('item', item);
+            navigator.clipboard
+              .write(item)
+              .then(() => {
+                dispatch(
+                  SET_TOAST({
+                    type: 'link',
+                    canClose: true,
+                    autoClose: {
+                      duration: 3000,
+                    },
+                  }),
+                );
+              })
+              .catch(() => {
+                dispatch(
+                  SET_TOAST({
+                    type: 'info',
+                    canClose: true,
+                    autoClose: {
+                      duration: 3000,
+                    },
+                  }),
+                );
+              });
+          });
+      }
+    },
+    [dispatch, buttonDirection, options, currentIndex, roundIndex],
+  );
 
   const imageHandler = useCallback(() => {
     if (buttonDirection === 'left') {
@@ -133,7 +141,15 @@ const ShareGameButton = ({
         },
       });
     }
-  }, [dispatch, options, buttonDirection]);
+  }, [
+    dispatch,
+    options,
+    buttonDirection,
+    roundIndex,
+    startAt,
+    status,
+    currentIndex,
+  ]);
 
   const modalHandler = useCallback(() => {
     if (buttonDirection === 'left') {

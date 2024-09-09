@@ -17,7 +17,6 @@ import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 import DateText from '@/widgets/text/dateText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
-import { getCookie } from 'cookies-next';
 
 const cn = classNames.bind(styles);
 
@@ -28,23 +27,8 @@ const ShareTopicModal = ({
   dateText,
   options,
 }: ShareTopicModalProps) => {
-  const cookie = getCookie('accessToken') ?? '';
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useQuery({
-    queryKey: [QUERY_KEY.GET_SHARE_IMAGE],
-    queryFn: () =>
-      getShareImage({
-        topicId,
-        title,
-        roundText,
-        dateText,
-        options,
-        token: cookie,
-      }),
-  });
-
-  console.log(data);
 
   const handleCopy = useCallback(() => {
     Copy({

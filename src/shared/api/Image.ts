@@ -6,37 +6,6 @@ import {
 import { PollResult } from '@/shared/types/data/dashboard';
 import { getCookie } from 'cookies-next';
 
-type PostShareImageParams = {
-  topicId: string;
-  file: File | Blob;
-  token: string;
-};
-
-export const postShareImage = async ({
-  topicId,
-  file,
-  token,
-}: PostShareImageParams) => {
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const res = await axios.post(
-      `${process.env.API_BASE_URL}/api/topics/share-image/${topicId}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-
-    return res.data;
-  } catch (err) {
-    return err;
-  }
-};
-
 export const getShareImage = async (
   params: ShareTopicModalProps & {
     token: string;
