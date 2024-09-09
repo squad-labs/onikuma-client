@@ -38,11 +38,9 @@ const ShareGameButton = ({
   const getTopicShareImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'topic'],
     mutationFn: getShareImage,
-    onSuccess: async (data: ImageShareType) => {
+    onSuccess: async (data) => {
       console.log('data', data);
-
-      const image = data.imageUrl;
-      handleCopyImage(image);
+      handleCopyImage(data);
     },
     onError: (error) => {
       console.log('error', error);
@@ -52,58 +50,47 @@ const ShareGameButton = ({
   const getResultShareImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'result'],
     mutationFn: getResultImage,
-    onSuccess: async (data) => {
-      const image = data.imageUrl;
+    onSuccess: async (data: ArrayBuffer) => {
+      const blob = new Blob([data], { type: 'image/png' });
 
-      console.log('data', data);
-      handleCopyImage(image);
+      console.log(blob);
+      handleCopyImage(blob);
     },
   });
 
   const handleCopyImage = useCallback(
-    async (url: string) => {
-      console.log('url', url);
+    async (data: Blob) => {
+      const item = [
+        new ClipboardItem({
+          'image/png': data,
+        }),
+      ];
 
-      if (url) {
-        await fetch(url)
-          .then((res) => {
-            console.log('res', res);
-            return res.blob();
-          })
-          .then((blob) => {
-            console.log(blob);
-            const item = [
-              new ClipboardItem({
-                'image/png': blob,
-              }),
-            ];
-            console.log('item', item);
-            navigator.clipboard
-              .write(item)
-              .then(() => {
-                dispatch(
-                  SET_TOAST({
-                    type: 'link',
-                    canClose: true,
-                    autoClose: {
-                      duration: 3000,
-                    },
-                  }),
-                );
-              })
-              .catch(() => {
-                dispatch(
-                  SET_TOAST({
-                    type: 'info',
-                    canClose: true,
-                    autoClose: {
-                      duration: 3000,
-                    },
-                  }),
-                );
-              });
-          });
-      }
+      await navigator.clipboard
+        .write(item)
+        .then(() => {
+          dispatch(
+            SET_TOAST({
+              type: 'link',
+              canClose: true,
+              autoClose: {
+                duration: 3000,
+              },
+            }),
+          );
+        })
+        .catch((error) => {
+          console.log('error', error);
+          dispatch(
+            SET_TOAST({
+              type: 'info',
+              canClose: true,
+              autoClose: {
+                duration: 3000,
+              },
+            }),
+          );
+        });
     },
     [dispatch, buttonDirection, options, currentIndex, roundIndex],
   );

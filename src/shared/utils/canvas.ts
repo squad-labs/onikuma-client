@@ -267,7 +267,9 @@ export const generateResultImage = async ({
   const myOption = await loadOptionImage(option.name, option.imageUrl);
   ctx.drawImage(myOption, 120, 270);
 
-  const calendar = await loadStaticImage('/icons/calendar.png');
+  const calendar = await loadStaticImage(
+    path.resolve('./public/icons/calendar.png'),
+  );
   ctx.drawImage(calendar, 355, 60);
 
   ctx.textAlign = 'start';

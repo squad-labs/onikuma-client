@@ -22,7 +22,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   console.log('res', res);
 
-  return new NextResponse(JSON.stringify(await res.json()));
+  const data = await res.json();
+
+  console.log('data', data);
+
+  const blob = await fetch(data.imageUrl);
+
+  return new NextResponse(await blob.arrayBuffer());
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
