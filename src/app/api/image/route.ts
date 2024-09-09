@@ -20,15 +20,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     },
   );
 
-  console.log('res', res);
-
   const data = await res.json();
-
-  console.log('data', data);
-
-  const blob = await fetch(data.imageUrl);
-
-  return new NextResponse(await blob.arrayBuffer());
+  const blob = await (await fetch(data.imageUrl)).blob();
+  return new NextResponse(blob);
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
