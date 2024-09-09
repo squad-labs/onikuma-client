@@ -34,20 +34,20 @@ export const generatePollResultImage = async ({
     return prev.data.poolIn > current.data.poolIn ? prev : current;
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Light.ttf'), {
     family: 'DMMono-Light',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Regular.ttf'), {
     family: 'DMMono-Regular',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Medium.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Medium.ttf'), {
     family: 'DMMono-Medium',
     weight: 'bold',
   });
 
-  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/RubikMonoOne-Regular.ttf'), {
     family: 'RubikMono-Regular',
   });
 
@@ -226,20 +226,20 @@ export const generateResultImage = async ({
   const canvas = createCanvas(2200, 1200);
   const ctx = canvas.getContext('2d');
 
-  registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Light.ttf'), {
     family: 'DMMono-Light',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Regular.ttf'), {
     family: 'DMMono-Regular',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Medium.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Medium.ttf'), {
     family: 'DMMono-Medium',
     weight: 'bold',
   });
 
-  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/RubikMonoOne-Regular.ttf'), {
     family: 'RubikMono-Regular',
   });
 
@@ -267,7 +267,7 @@ export const generateResultImage = async ({
   const myOption = await loadOptionImage(option.name, option.imageUrl);
   ctx.drawImage(myOption, 120, 270);
 
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
+  const calendar = await loadStaticImage('@/assets/icons/calendar.png');
   ctx.drawImage(calendar, 355, 60);
 
   ctx.textAlign = 'start';
@@ -294,20 +294,20 @@ export const generateShareImage = async ({
   const canvas = createCanvas(2200, 1200);
   const ctx = canvas.getContext('2d');
 
-  registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Light.ttf'), {
     family: 'DMMono-Light',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Regular.ttf'), {
     family: 'DMMono-Regular',
   });
 
-  registerFont(path.resolve('./public/fonts/DMMono-Medium.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/DMMono-Medium.ttf'), {
     family: 'DMMono-Medium',
     weight: 'bold',
   });
 
-  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/RubikMonoOne-Regular.ttf'), {
     family: 'RubikMono-Regular',
   });
 
@@ -332,7 +332,7 @@ export const generateShareImage = async ({
   ctx.rect(220, 0, 200, 0);
   ctx.stroke();
 
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
+  const calendar = await loadStaticImage('@/assets/icons/calendar.png');
   ctx.drawImage(calendar, 525, 60);
 
   ctx.textAlign = 'start';
@@ -386,7 +386,7 @@ export const loadOptionImage = async (title: string, imageUrl: string) => {
   const canvas = createCanvas(870, 870);
   const ctx = canvas.getContext('2d');
 
-  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+  registerFont(path.resolve('@/assets/fonts/RubikMonoOne-Regular.ttf'), {
     family: 'RubikMono-Regular',
   });
 
