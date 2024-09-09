@@ -1,5 +1,5 @@
 .modal-inner {
-  width: 60%;
+  width: 50%;
   background-color: var(--BASE-CREAM-1);
   display: flex;
   flex-direction: column;
@@ -56,12 +56,29 @@
       align-items: center;
       justify-content: space-between;
       gap: 6rem;
+      margin-bottom: 1rem;
+      position: relative;
+
+      .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--BASE-BLUE-1);
+        font-family: var(--FONT-RUBIC-MONO-REGULAR);
+        font-size: var(--TEXT-SIZE-LARGE);
+        text-shadow:
+          1.5px 1.5px 0 var(--LIGHT),
+          -1.5px -1.5px 0 var(--LIGHT),
+          1.5px -1.5px 0 var(--LIGHT),
+          -1.5px 1.5px 0 var(--LIGHT);
+        text-align: center;
+      }
       
-      .image-wrapper {
+      .image-container {
         flex: 1;
-        position: relative;
         aspect-ratio: 1 / 1;
-        padding: 1rem;
+        padding: .8rem;
         background-color: var(--LIGHT);
         border: 1px solid var(--DARK);
         border-radius: 1rem;
@@ -70,14 +87,33 @@
         align-items: center;
         justify-content: center;
 
-        .image {
-          width: calc(100% - 4rem);
-          height: calc(100% - 4rem);
-          margin: 1rem;
-          object-fit: cover;
-          overflow: hidden;
-          border-radius: 1rem;
-          border: 1px solid var(--DARK);
+        .image-wrapper {
+          position: relative;
+          width: calc(100% - 1rem);
+          height: calc(100% - 1rem);
+
+          .image {
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 1px solid var(--DARK);
+          }
+
+          .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-family: var(--FONT-RUBIC-MONO-REGULAR);
+            color: var(--BASE-RED-1);
+            transform: translate(-50%, -50%);
+            font-size: var(--TEXT-SIZE-LARGE);
+            text-shadow:
+              1.5px 1.5px 0 var(--LIGHT),
+              -1.5px -1.5px 0 var(--LIGHT),
+              1.5px -1.5px 0 var(--LIGHT),
+              -1.5px 1.5px 0 var(--LIGHT);
+            text-align: center;
+          }
         }
       }
     }

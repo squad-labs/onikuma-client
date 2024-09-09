@@ -1,3 +1,4 @@
+import { postShareImage } from '@/shared/api/Image';
 import { generatePollResultImage } from '@/shared/utils/canvas';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -5,8 +6,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const params = await req.json();
   const image = await generatePollResultImage(params);
 
-  const dataUrl = `data:image/png;base64,${image.toString('base64')}`;
-  return new NextResponse(dataUrl);
+  const res = await postShareImage({
+    topicId: params.topicId,
+    file: new Blob([image]),
+    token: params.token,
+  });
+
+  return new NextResponse(JSON.stringify(res));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {

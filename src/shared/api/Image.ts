@@ -6,7 +6,42 @@ import {
 import { PollResult } from '@/shared/types/data/dashboard';
 import { getCookie } from 'cookies-next';
 
-export const getShareImage = async (params: ShareTopicModalProps) => {
+type PostShareImageParams = {
+  topicId: string;
+  file: File | Blob;
+  token: string;
+};
+
+export const postShareImage = async ({
+  topicId,
+  file,
+  token,
+}: PostShareImageParams) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await axios.post(
+      `${process.env.API_BASE_URL}/api/topics/share-image/${topicId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getShareImage = async (
+  params: ShareTopicModalProps & {
+    token: string;
+  },
+) => {
   try {
     const res = await axios.post('/api/image', params);
     return res.data;
@@ -15,7 +50,11 @@ export const getShareImage = async (params: ShareTopicModalProps) => {
   }
 };
 
-export const getResultImage = async (params: ShareResultModalProps) => {
+export const getResultImage = async (
+  params: ShareResultModalProps & {
+    token: string;
+  },
+) => {
   try {
     const res = await axios.post('/api/result', params);
 
@@ -25,7 +64,11 @@ export const getResultImage = async (params: ShareResultModalProps) => {
   }
 };
 
-export const getPollResultImage = async (params: PollResult) => {
+export const getPollResultImage = async (
+  params: PollResult & {
+    token: string;
+  },
+) => {
   try {
     const res = await axios.post('/api/poll-result', params);
 

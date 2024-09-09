@@ -33,11 +33,13 @@ const CanvasContainer = ({
   ...rest
 }: Props) => {
   const { next } = useContext(RoundContext);
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [selected, setSelected] = useState<string | undefined>(undefined);
 
   const handleSelect = useCallback(
     (text: string) => {
       setSelected(text);
+      setIsPending(true);
 
       setTimeout(() => {
         const loser = rest.source.find((source) => source.text !== text);
@@ -50,7 +52,8 @@ const CanvasContainer = ({
         }
         setSelected(undefined);
         next(text);
-      }, 2000);
+        setIsPending(false);
+      }, 1000);
     },
     [type, rest],
   );
@@ -102,7 +105,7 @@ const CanvasContainer = ({
           flip={rest.source[1].flip}
           amount={amount}
           onClick={() => {
-            handleSelect(rest.source[1].text);
+            !isPending && handleSelect(rest.source[1].text);
           }}
         />
       </div>
@@ -119,7 +122,7 @@ const CanvasContainer = ({
           flip={rest.source[0].flip}
           amount={amount}
           onClick={() => {
-            handleSelect(rest.source[0].text);
+            !isPending && handleSelect(rest.source[0].text);
           }}
         />
       </div>
