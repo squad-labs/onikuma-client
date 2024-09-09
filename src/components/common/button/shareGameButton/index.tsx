@@ -11,6 +11,7 @@ import { LinkShare } from '@/shared/types/data/link';
 import { getStaticSrc } from '@/shared/utils/etc';
 import ShareButton from '@/widgets/button/shareButton';
 import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
@@ -57,50 +58,42 @@ const ShareGameButton = ({
 
   const handleCopyImage = useCallback(
     async (data: ImageShareType) => {
-      const image = await fetch(
-        'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/Topic/240909-083859-111.png',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'image/png',
-          },
-        },
-      ).then((res) => res.blob());
+      const image = await axios.get(data.imageUrl);
 
-      console.log(image);
-      const blob = new Blob([image], { type: 'image/png' });
+      console.log('image', image);
+      // const blob = new Blob([image], { type: 'image/png' });
 
-      const item = [
-        new ClipboardItem({
-          'image/png': blob,
-        }),
-      ];
+      // const item = [
+      //   new ClipboardItem({
+      //     'image/png': blob,
+      //   }),
+      // ];
 
-      await navigator.clipboard
-        .write(item)
-        .then(() => {
-          dispatch(
-            SET_TOAST({
-              type: 'link',
-              canClose: true,
-              autoClose: {
-                duration: 3000,
-              },
-            }),
-          );
-        })
-        .catch((error) => {
-          console.log('error', error);
-          dispatch(
-            SET_TOAST({
-              type: 'info',
-              canClose: true,
-              autoClose: {
-                duration: 3000,
-              },
-            }),
-          );
-        });
+      // await navigator.clipboard
+      //   .write(item)
+      //   .then(() => {
+      //     dispatch(
+      //       SET_TOAST({
+      //         type: 'link',
+      //         canClose: true,
+      //         autoClose: {
+      //           duration: 3000,
+      //         },
+      //       }),
+      //     );
+      //   })
+      //   .catch((error) => {
+      //     console.log('error', error);
+      //     dispatch(
+      //       SET_TOAST({
+      //         type: 'info',
+      //         canClose: true,
+      //         autoClose: {
+      //           duration: 3000,
+      //         },
+      //       }),
+      //     );
+      //   });
     },
     [dispatch, buttonDirection, options, currentIndex, roundIndex],
   );
