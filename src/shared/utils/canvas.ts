@@ -332,7 +332,9 @@ export const generateShareImage = async ({
   ctx.rect(220, 0, 200, 0);
   ctx.stroke();
 
-  const calendar = await loadStaticImage('public/icons/calendar.png');
+  const calendar = await loadStaticImage(
+    path.resolve('./public/icons/calendar.png'),
+  );
   ctx.drawImage(calendar, 525, 60);
 
   ctx.textAlign = 'start';
