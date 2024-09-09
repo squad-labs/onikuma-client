@@ -19,10 +19,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       },
     },
   );
-
-  const data = await res.json();
-  const blob = await (await fetch(data.imageUrl)).blob();
-  return new NextResponse(blob);
+  return new NextResponse(JSON.stringify(await res.json()));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
