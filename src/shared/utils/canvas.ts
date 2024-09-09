@@ -267,7 +267,7 @@ export const generateResultImage = async ({
   const myOption = await loadOptionImage(option.name, option.imageUrl);
   ctx.drawImage(myOption, 120, 270);
 
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
+  const calendar = await loadStaticImage('/icons/calendar.png');
   ctx.drawImage(calendar, 355, 60);
 
   ctx.textAlign = 'start';
@@ -332,7 +332,7 @@ export const generateShareImage = async ({
   ctx.rect(220, 0, 200, 0);
   ctx.stroke();
 
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
+  const calendar = await loadStaticImage('public/icons/calendar.png');
   ctx.drawImage(calendar, 525, 60);
 
   ctx.textAlign = 'start';
