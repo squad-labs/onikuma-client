@@ -16,6 +16,8 @@ import { useDispatch } from 'react-redux';
 import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 import DateText from '@/widgets/text/dateText';
 import BaseDivider from '@/widgets/divider/baseDivider';
+import { SET_TOAST } from '@/context/global/slice/toastSlice';
+import { getCookie } from 'cookies-next';
 
 const cn = classNames.bind(styles);
 
@@ -26,18 +28,38 @@ const ShareTopicModal = ({
   dateText,
   options,
 }: ShareTopicModalProps) => {
+  const cookie = getCookie('accessToken') ?? '';
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_SHARE_IMAGE],
     queryFn: () =>
-      getShareImage({ topicId, title, roundText, dateText, options }),
+      getShareImage({
+        topicId,
+        title,
+        roundText,
+        dateText,
+        options,
+        token: cookie,
+      }),
   });
+
+  console.log(data);
 
   const handleCopy = useCallback(() => {
     Copy({
       value: window.location.href,
-      onSuccess: () => {},
+      onSuccess: () => {
+        dispatch(
+          SET_TOAST({
+            type: 'link',
+            canClose: true,
+            autoClose: {
+              duration: 3000,
+            },
+          }),
+        );
+      },
       onError: () => {},
     });
   }, []);
@@ -95,47 +117,40 @@ const ShareTopicModal = ({
             <DateText
               startDate={dateText}
               size="medium"
-              color='DARK_GRAY_2'
-              weight='light'
+              color="DARK_GRAY_2"
+              weight="light"
             />
           </div>
           <div className={cn('game-title')}>
-            <BaseText
-              text={title}
-              size="large"
-              color="DARK"
-              weight="bold"
-            />
+            <BaseText text={title} size="large" color="DARK" weight="bold" />
           </div>
           <div className={cn('option-container')}>
-            <div className={cn('image-wrapper')}>
-              <Image
-                src={options[0].imageUrl}
-                alt={options[0].name}
-                fill={true}
-                priority={true}
-                className={cn('image')}
-              />
+            <div className={cn('image-container')}>
+              <div className={cn('image-wrapper')}>
+                <Image
+                  src={options[0].imageUrl}
+                  alt={options[0].name}
+                  fill={true}
+                  priority={true}
+                  className={cn('image')}
+                />
+                <span className={cn('text')}>{options[0].name}</span>
+              </div>
             </div>
-            <div className={cn('image-wrapper')}>
-              <Image
-                src={options[1].imageUrl}
-                alt={options[1].name}
-                fill={true}
-                priority={true}
-                className={cn('image')}
-              />
+            <span className={cn('center-text')}>VS</span>
+            <div className={cn('image-container')}>
+              <div className={cn('image-wrapper')}>
+                <Image
+                  src={options[1].imageUrl}
+                  alt={options[1].name}
+                  fill={true}
+                  priority={true}
+                  className={cn('image')}
+                />
+                <span className={cn('text')}>{options[1].name}</span>
+              </div>
             </div>
           </div>
-          {/* {data && (
-            <Image
-              src={data}
-              alt="share"
-              fill={true}
-              priority={true}
-              className={cn('image')}
-            />
-          )} */}
         </div>
       </div>
     </BaseModal>

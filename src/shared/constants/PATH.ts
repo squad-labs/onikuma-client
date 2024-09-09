@@ -16,6 +16,7 @@ export const ICON_SRC_PATH = {
     SHARE: '/share.svg',
     TEXT: '/text.svg',
     X: '/x.svg',
+    CLOSE_TOAST: '/close-toast.svg',
   },
 } as const;
 

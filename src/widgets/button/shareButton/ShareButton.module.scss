@@ -1,58 +1,413 @@
-.share-button-container {
-  .expanding-buttons {
-    display: flex;
-    transition: transform 0.05s ease;
+.button-wrapper {
+  display: flex;
+  position: relative;
 
-    .expandable-button {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1.5px solid var(--BASE-BLUE-1);
-      margin: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+
+  .button-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 999;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .icon-wrapper {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: tranform 0.3s;
+      grid-area: 1 / 1 / 1 / 1;
       display: flex;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0.6rem;
+      background-color: var(--LIGHT-CREAM-1);
+      border-radius: 50%;
+
+      .share-left-icon {
+        margin-right: 2px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        transition: all 0.5s;
+        transform-style: preserve-3d;
+        transform: perspective(120px) rotateY(0deg);
+      }
+
+      .close-left-icon {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        transition: all 0.5s;
+        transform-style: preserve-3d;
+        transform: perspective(120px) rotateY(180deg);
+      }
+
+      .share-down-icon {
+        margin-right: 2px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        transition: all 0.5s;
+        transform-style: preserve-3d;
+        transform: perspective(120px) rotateX(0deg);
+      }
+
+      .close-down-icon {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        object-fit: cover;
+        transition: all 0.5s;
+        transform-style: preserve-3d;
+        transform: perspective(120px) rotateX(180deg);
+      }
+
+      &.isOpen {
+        width: 100%;
+        height: 100%;
+        background-color: var(--BASE-BLUE-1);
+        overflow: hidden;
+        border-radius: 50%;
+      }
     }
   }
 
-  .main-button,
-  .close-button {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1.5px solid var(--BASE-BLUE-1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    position: relative;
+  .button-list-left-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
   }
 
-  .close-button {
-    background-color: var(--BASE-BLUE-1);
+  .button-list-left-wrapper-1 {
+    animation: appearLeft-1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 4;
+  }
+
+  .button-list-left-wrapper-2 {
+    animation: appearLeft-2;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 3;
+  }
+
+  .button-list-left-wrapper-3 {
+    animation: appearLeft-3;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 2;
+  }
+
+  .button-list-left-wrapper-4 {
+    animation: appearLeft-4;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 1;
+  }
+
+  .button-list-left-wrapper-hide-1 {
+    animation: disappearLeft-1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 4;
+  }
+
+  .button-list-left-wrapper-hide-2 {
+    animation: disappearLeft-2;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 3;
+  }
+
+  .button-list-left-wrapper-hide-3 {
+    animation: disappearLeft-3;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 2;
+  }
+
+  .button-list-left-wrapper-hide-4 {
+    animation: disappearLeft-4;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 1;
+  }
+
+  .button-list-down-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .button-list-down-wrapper-1 {
+    animation: appearDown-1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 4;
+  }
+
+  .button-list-down-wrapper-2 {
+    animation: appearDown-2;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 3;
+  }
+
+  .button-list-down-wrapper-3 {
+    animation: appearDown-3;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 2;
+  }
+
+  .button-list-down-wrapper-4 {
+    animation: appearDown-4;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 1;
+  }
+
+  .button-list-down-wrapper-hide-1 {
+    animation: disappearDown-1;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 4;
+  }
+
+  .button-list-down-wrapper-hide-2 {
+    animation: disappearDown-2;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 3;
+  }
+
+  .button-list-down-wrapper-hide-3 {
+    animation: disappearDown-3;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 2;
+  }
+
+  .button-list-down-wrapper-hide-4 {
+    animation: disappearDown-4;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 1;
   }
 }
 
-.share-button-container-open-left {
-  .expanding-buttons {
-    flex-direction: row-reverse;
-    transform: translateX(-198px) translateY(-52px);
+.button-wrapper-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
-.share-button-container-open-down {
-  .expanding-buttons {
-    flex-direction: column;
-    transform: translateX(-9px) translateY(10px);
+.button-wrapper-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
-.share-button-container-closed-left,
-.share-button-container-closed-down {
-  .expanding-buttons,
-  .expanding-buttons {
-    transform: scale(0);
-    visibility: hidden;
+@keyframes appearLeft-1 {
+  0% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+  100% {
+    transform: translate(calc(-100% - 1rem), -50%);
+  }
+}
+
+@keyframes disappearLeft-1 {
+  0% {
+    transform: translate(calc(-100% - 1rem), -50%);
+  }
+  100% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+}
+
+@keyframes appearLeft-2 {
+  0% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+  100% {
+    transform: translate(calc(-200% - 2rem), -50%);
+  }
+}
+
+@keyframes disappearLeft-2 {
+  0% {
+    transform: translate(calc(-200% - 2rem), -50%);
+  }
+  100% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+}
+
+@keyframes appearLeft-3 {
+  0% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+  100% {
+    transform: translate(calc(-300% - 3rem), -50%);
+  }
+}
+
+@keyframes disappearLeft-3 {
+  0% {
+    transform: translate(calc(-300% - 3rem), -50%);
+  }
+  100% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+}
+
+@keyframes appearLeft-4 {
+  0% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+  100% {
+    transform: translate(calc(-400% - 4rem), -50%);
+  }
+}
+
+@keyframes disappearLeft-4 {
+  0% {
+    transform: translate(calc(-400% - 4rem), -50%);
+  }
+  100% {
+    transform: translate(0, -50%);
+    display: none;
+  }
+}
+
+@keyframes appearDown-1 {
+  0% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+  100% {
+    transform: translate(-50%, calc(100% + 1rem));
+  }
+}
+
+@keyframes disappearDown-1 {
+  0% {
+    transform: translate(-50%, calc(100% + 1rem));
+  }
+  100% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+}
+
+@keyframes appearDown-2 {
+  0% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+  100% {
+    transform: translate(-50%, calc(200% + 2rem));
+  }
+}
+
+@keyframes disappearDown-2 {
+  0% {
+    transform: translate(-50%, calc(200% + 2rem));
+  }
+  100% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+}
+
+@keyframes appearDown-3 {
+  0% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+  100% {
+    transform: translate(-50%, calc(300% + 3rem));
+  }
+}
+
+@keyframes disappearDown-3 {
+  0% {
+    transform: translate(-50%, calc(300% + 3rem));
+  }
+  100% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+}
+
+@keyframes appearDown-4 {
+  0% {
+    transform: translate(-50%, 0);
+    display: none;
+  }
+  100% {
+    transform: translate(-50%, calc(400% + 4rem));
+  }
+}
+
+@keyframes disappearDown-4 {
+  0% {
+    transform: translate(-50%, calc(400% + 4rem));
+  }
+  100% {
+    transform: translate(-50%, 0);
+    display: none;
   }
 }

@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from '@/widgets/button/shareButton/ShareButton.module.scss';
 import classNames from 'classnames/bind';
 import { ShareButtonProps } from '@/shared/types/ui/Button';
 import Image from 'next/image';
+import IconButton from '@/widgets/button/iconButton';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import { LinkShare } from '@/shared/types/data/link';
 
 const cn = classNames.bind(styles);
 
@@ -10,58 +14,86 @@ const ShareButton = ({
   direction,
   startIconImage,
   closeIconImage,
-  otherIconImages = [],
-  links = [],
+  contents = [],
 }: ShareButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState<boolean | undefined>();
+  const toggleOpen = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
-  const handleButtonClick = (link: string) => {
-    if (link === 'SHARE_CURRENT_LINK') {
-      navigator.clipboard.writeText(window.location.href);
-    } else if (link === 'SHARE_TWEET_X') {
-      const tweetText = encodeURIComponent('Check this match out at Onikuma!');
-      const tweetUrl = encodeURIComponent(window.location.href);
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
-      window.open(twitterUrl, '_blank');
-    } else if (link) {
-      window.open(link, '_blank');
-    }
-  };
+  const renderIcon = useCallback(() => {
+    return isOpen ? (
+      <Image
+        src={closeIconImage}
+        alt="close"
+        width={24}
+        height={22}
+        priority
+        quality={100}
+        className={cn(`close-${direction}-icon`)}
+      />
+    ) : (
+      <Image
+        src={startIconImage}
+        alt="share"
+        width={24}
+        height={22}
+        priority
+        quality={100}
+        className={cn(`share-${direction}-icon`)}
+      />
+    );
+  }, [isOpen]);
 
   return (
-    <div
-      className={cn(
-        'share-button-container',
-        `share-button-container${isOpen ? '-open' : '-closed'}-${direction}`,
-      )}
-    >
-      <button
-        className={cn(`${isOpen ? 'close-button' : 'main-button'}`)}
-        onClick={toggleOpen}
-      >
-        {isOpen ? (
-          <Image
-            src={closeIconImage}
-            alt={'close-button'}
-            width={24}
-            height={24}
-          />
-        ) : (
-          <Image src={startIconImage} alt="" width={24} height={24} />
-        )}
-      </button>
-      <div className={cn('expanding-buttons')}>
-        {otherIconImages.map((icon, index) => (
-          <button
+    <div className={cn('button-wrapper', `button-wrapper-${direction}`)}>
+      {contents.map((content: LinkShare, index: number) => {
+        const handler = content.handler;
+        return (
+          <div
             key={index}
-            className={cn('expandable-button')}
-            onClick={() => handleButtonClick(links[index])}
+            className={cn(
+              `button-list-${direction}-wrapper`,
+              isOpen
+                ? `button-list-${direction}-wrapper-${index + 1}`
+                : isOpen !== undefined
+                  ? `button-list-${direction}-wrapper-hide-${index + 1}`
+                  : null,
+            )}
           >
-            <Image src={icon} alt={'expanding-button'} width={24} height={24} />
-          </button>
-        ))}
-      </div>
+            <IconButton
+              name={content.name}
+              onClick={() => handler && handler()}
+              shape="round"
+              height="medium"
+              classNames={['button-blue']}
+            >
+              <div className={cn('button-inner')}>
+                <div className={cn('icon-wrapper')}>
+                  <Image
+                    src={getStaticSrc('icon', ICON_SRC_PATH.SRC[content.icon])}
+                    alt={content.name}
+                    width={24}
+                    height={22}
+                    priority
+                    quality={100}
+                    className={cn('icon')}
+                  />
+                </div>
+              </div>
+            </IconButton>
+          </div>
+        );
+      })}
+      <IconButton
+        name="share-option-expand-button"
+        onClick={toggleOpen}
+        shape="round"
+        height="medium"
+        classNames={['button-blue']}
+      >
+        <div className={cn('button-inner')}>
+          <div className={cn('icon-wrapper', { isOpen })}>{renderIcon()}</div>
+        </div>
+      </IconButton>
     </div>
   );
 };

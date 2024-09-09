@@ -20,7 +20,12 @@ const IconButton = ({
   return (
     <button
       {...rest}
-      onClick={onClick}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        onClick && onClick(event);
+      }}
       type={type}
       aria-label={name}
       disabled={disabled}

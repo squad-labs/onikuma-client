@@ -12,6 +12,7 @@ import { useRound } from '@/shared/hooks/useRound';
 import Image from 'next/image';
 import { getStaticSrc } from '@/shared/utils/etc';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import ShareGameButton from '@/components/common/button/shareGameButton';
 
 const cn = classNames.bind(styles);
 
@@ -84,51 +85,17 @@ const GameMetaContainer = ({
           size={'extra-large'}
           weight={'bold'}
         />
-        {isFinal || onlyDate || (
-          <IconButton
-            name="Button"
-            height={'medium'}
-            shape="round"
-            onClick={() => {
-              dispatch(
-                OPEN_MODAL({
-                  name: 'ShareTopicModal',
-                  data: {
-                    topicId: topicId,
-                    title: title,
-                    roundText: status,
-                    dateText: startAt,
-                    options: [
-                      {
-                        name: options[currentIndex[roundIndex]].name,
-                        imageUrl: options[currentIndex[roundIndex]].imgUrl,
-                      },
-                      {
-                        name: options[
-                          currentIndex[options.length - 1 - roundIndex]
-                        ].name,
-                        imageUrl:
-                          options[currentIndex[options.length - 1 - roundIndex]]
-                            .imgUrl,
-                      },
-                    ],
-                  },
-                }),
-              );
-            }}
-            classNames={['button-blue']}
-          >
-            <Image
-              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.SHARE)}
-              alt="share"
-              width={20}
-              height={22}
-              priority
-              quality={100}
-              className={cn('share-icon')}
+        {isFinal ||
+          onlyDate ||
+          (status && (
+            <ShareGameButton
+              topicId={topicId}
+              title={title}
+              status={status}
+              startAt={startAt}
+              buttonDirection="left"
             />
-          </IconButton>
-        )}
+          ))}
       </div>
     </section>
   );

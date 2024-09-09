@@ -13,6 +13,7 @@ import BaseModal from '@/widgets/modal/baseModal';
 import BaseText from '@/widgets/text/baseText';
 import Image from 'next/image';
 import BaseButton from '@/widgets/button/baseButton';
+import { getCookie } from 'cookies-next';
 
 const cn = classNames.bind(styles);
 
@@ -24,11 +25,19 @@ const ShareResultModal = ({
   option,
 }: ShareResultModalProps) => {
   const dispatch = useDispatch();
+  const cookie = getCookie('accessToken') ?? '';
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_RESULT_IMAGE],
     queryFn: () =>
-      getResultImage({ topicId, title, roundText, dateText, option }),
+      getResultImage({
+        topicId,
+        title,
+        roundText,
+        dateText,
+        option,
+        token: cookie,
+      }),
   });
 
   const handleCloseModal = useCallback(() => {

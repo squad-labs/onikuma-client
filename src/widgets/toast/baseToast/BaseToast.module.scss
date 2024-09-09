@@ -1,15 +1,25 @@
 .toast-container {
-  width: 24rem;
+  position: absolute;
+  top: calc(2rem + 72px);
+  right: 2rem;
+  width: 30rem;
+  height: 6.9rem;
   border: 2px solid var(--DARK-GRAY-1);
   box-shadow: 2px 2px var(--DARK-GRAY-1);
   border-radius: 0.7rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: var(--BASE-CREAM-1);
+  animation-name: slideFromRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+  z-index: 999999999;
 
   .toast-icon {
-    width: 2rem;
-    height: 2rem;
+    width: 3.25rem;
+    height: 3.25rem;
     margin: 1rem;
   }
 
@@ -20,7 +30,7 @@
     flex-direction: column;
     font-family: var(--FONT-DM-MONO-REGULAR);
     color: var(--DARK-GRAY-1);
-    font-size: 1rem;
+    font-size: 1.4rem;
 
     .toast-message-success {
       color: var(--BASE-GREEN-1);
@@ -31,16 +41,60 @@
     }
 
     .toast-secondary-message {
-      font-size: 0.8rem;
+      margin-top: 2px;
+      font-size: 1.1rem;
       color: var(--DARK-GRAY-1);
     }
   }
 
   .toast-close-button {
-    font-size: 2rem;
-    color: var(--BASE-GRAY-1);
-    align-self: flex-start;
-    margin-top: -0.2rem;
-    margin-right: 0.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%, 50%);
+
+    .close-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+}
+
+.toast-container-hide {
+  animation-name: slideToRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
+
+@keyframes slideFromRight {
+  0% {
+    display: none;
+    right: 2rem;
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
+  100% {
+    display: flex;
+    right: 2rem;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes slideToRight {
+  0% {
+    display: flex;
+    right: 2rem;
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    display: none;
+    right: 2rem;
+    opacity: 0;
+    transform: translate(100%, 0);
   }
 }
