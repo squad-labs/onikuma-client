@@ -19,7 +19,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       },
     },
   );
-  return new NextResponse(JSON.stringify(await res.json()));
+
+  const data = await res.json();
+  return new NextResponse(JSON.stringify(data));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {

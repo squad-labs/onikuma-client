@@ -51,49 +51,50 @@ const ShareGameButton = ({
   const getResultShareImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'result'],
     mutationFn: getResultImage,
-    onSuccess: async (data: ImageShareType) => {
+    onSuccess: async (data) => {
       handleCopyImage(data);
     },
   });
 
   const handleCopyImage = useCallback(
     async (data: ImageShareType) => {
-      const image = await axios.get(data.imageUrl);
+      const blob = await axios.get(data.imageUrl, {
+        headers: {
+          'Content-Type': 'image/png',
+        },
+      });
 
-      console.log('image', image);
-      // const blob = new Blob([image], { type: 'image/png' });
+      const item = [
+        new ClipboardItem({
+          'image/png': blob.data,
+        }),
+      ];
 
-      // const item = [
-      //   new ClipboardItem({
-      //     'image/png': blob,
-      //   }),
-      // ];
-
-      // await navigator.clipboard
-      //   .write(item)
-      //   .then(() => {
-      //     dispatch(
-      //       SET_TOAST({
-      //         type: 'link',
-      //         canClose: true,
-      //         autoClose: {
-      //           duration: 3000,
-      //         },
-      //       }),
-      //     );
-      //   })
-      //   .catch((error) => {
-      //     console.log('error', error);
-      //     dispatch(
-      //       SET_TOAST({
-      //         type: 'info',
-      //         canClose: true,
-      //         autoClose: {
-      //           duration: 3000,
-      //         },
-      //       }),
-      //     );
-      //   });
+      await navigator.clipboard
+        .write(item)
+        .then(() => {
+          dispatch(
+            SET_TOAST({
+              type: 'link',
+              canClose: true,
+              autoClose: {
+                duration: 3000,
+              },
+            }),
+          );
+        })
+        .catch((error) => {
+          console.log('error', error);
+          dispatch(
+            SET_TOAST({
+              type: 'info',
+              canClose: true,
+              autoClose: {
+                duration: 3000,
+              },
+            }),
+          );
+        });
     },
     [dispatch, buttonDirection, options, currentIndex, roundIndex],
   );
