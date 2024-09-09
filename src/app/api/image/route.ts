@@ -7,7 +7,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
   console.log('params', params);
   const formData = new FormData();
-  formData.append('file', new Blob([image]));
+  formData.append('file', new Blob([image], { type: 'image/png' }));
 
   const res = await fetch(
     `${process.env.API_BASE_URL}/api/topics/share-image/${params.topicId}`,

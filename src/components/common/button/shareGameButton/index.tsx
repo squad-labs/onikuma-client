@@ -58,7 +58,7 @@ const ShareGameButton = ({
   const handleCopyImage = useCallback(
     async (data: ImageShareType) => {
       const image = await fetch(
-        'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/Topic/240909-083859-111',
+        'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/Topic/240909-083859-111.png',
         {
           method: 'GET',
           headers: {
@@ -67,6 +67,7 @@ const ShareGameButton = ({
         },
       ).then((res) => res.blob());
 
+      console.log(image);
       const blob = new Blob([image], { type: 'image/png' });
 
       const item = [
