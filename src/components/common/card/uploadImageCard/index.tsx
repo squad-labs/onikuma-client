@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import styles from '@/components/common/card/uploadImageCard/UploadImageCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -8,12 +8,18 @@ import { COLOR } from '@/shared/constants/COLOR';
 import { useMutation } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { postFlipImage } from '@/shared/api/Image';
+import { useDispatch } from 'react-redux';
+import { SET_TOAST } from '@/context/global/slice/toastSlice';
+import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
 
 const cn = classNames.bind(styles);
 
 type Props = {
   topicId: string;
   pickerName: string;
+  imageFile: File | Blob | null;
+  setImageFile: Dispatch<SetStateAction<File | Blob | null>>;
+  setSkip: () => void;
   withBorder: boolean;
   withbackGround: boolean;
 };
@@ -21,16 +27,31 @@ type Props = {
 const UploadImageCard = ({
   topicId,
   pickerName,
+  imageFile,
+  setImageFile,
+  setSkip,
   withBorder,
   withbackGround,
 }: Props) => {
   const [fileName, setFileName] = useState<string>('');
-  const [imageFile, setImageFile] = useState<File | Blob | null>(null);
+  const dispatch = useDispatch();
 
   const uploadImageMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_UPLOAD_IMAGE],
     mutationFn: postFlipImage,
-    onSuccess: () => {},
+    onSuccess: (data) => {
+      dispatch(
+        SET_TOAST({
+          type: 'success',
+          text: TOAST_RESPONSE.UPLOAD_IMAGE.SUCCESS,
+          canClose: true,
+          autoClose: {
+            duration: 3000,
+          },
+        }),
+      );
+      setFileName('');
+    },
   });
 
   const handleUploadImage = useCallback(() => {
@@ -52,7 +73,7 @@ const UploadImageCard = ({
       }}
     >
       <BaseText
-        text="You pooled in the biggest for Donald Trump!"
+        text={`You pooled in the biggest for ${pickerName}!`}
         color="DARK"
         size="large"
         weight="bold"
@@ -81,6 +102,7 @@ const UploadImageCard = ({
       </div>
       <div className={cn('button-wrapper')}>
         <BaseButton
+          disabled={!imageFile}
           text="Confirm"
           shape="shape-4"
           role="button"
@@ -100,7 +122,7 @@ const UploadImageCard = ({
           theme="outline"
           fontSize="large"
           fontWeight="regular"
-          onClick={() => {}}
+          onClick={() => setSkip()}
         />
       </div>
     </div>

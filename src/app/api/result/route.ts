@@ -1,25 +1,25 @@
 import { generateResultImage } from '@/shared/utils/canvas';
-import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const params = await req.json();
   const image = await generateResultImage(params);
-
   const formData = new FormData();
-  formData.append('file', new Blob([image]));
+  formData.append('file', new Blob([image], { type: 'image/png' }));
 
-  const res = await axios.post(
+  const res = await fetch(
     `${process.env.API_BASE_URL}/api/topics/share-image/${params.topicId}`,
-    formData,
     {
+      method: 'POST',
+      body: formData,
       headers: {
         Authorization: `Bearer ${params.token}`,
       },
     },
   );
 
-  return new NextResponse(JSON.stringify(res));
+  const data = await res.json();
+  return new NextResponse(JSON.stringify(data));
 }
 
 export async function POST(req: NextRequest): Promise<Response> {

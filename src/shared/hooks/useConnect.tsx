@@ -1,6 +1,6 @@
 'use client';
 import { WalletContext } from '@/context/partial/walletContext/WalletContext';
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useAccount, type Config, useClient } from 'wagmi';
 import { BrowserProvider } from 'ethers';
 import { chain as AppChain, config } from '@/config/web3Config';
@@ -8,10 +8,13 @@ import { disconnect, switchChain } from '@wagmi/core';
 import type { Chain, Client, Transport } from 'viem';
 import axios from 'axios';
 import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit';
+import { useRouter } from 'next/navigation';
 
 export const useConnect = () => {
+  const router = useRouter();
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
+  const [isClick, setIsClick] = useState<boolean>(false);
 
   const client = useClient<Config>({ chainId: AppChain.id });
   const { signer, setSigner, provider, setProvider } =
@@ -27,7 +30,14 @@ export const useConnect = () => {
     }
   };
 
+  useEffect(() => {
+    if (isClick && address && isConnected) {
+      router.push('/p/current');
+    }
+  }, [isClick, address, isConnected]);
+
   const handleConnectModal = () => {
+    setIsClick(true);
     try {
       if (openConnectModal) openConnectModal();
     } catch (e) {

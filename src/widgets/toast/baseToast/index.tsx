@@ -42,8 +42,6 @@ const BaseToast = ({
         return TOAST_SRC.ERROR;
       case 'info':
         return TOAST_SRC.INFO;
-      case 'link':
-        return TOAST_SRC.LINK;
       default:
         return TOAST_SRC.ERROR;
     }
@@ -75,10 +73,8 @@ const BaseToast = ({
         height={120}
       />
       <div className={cn('toast-message', `toast-message-${type}`)}>
-        <p>{text?.primaryText || preset.primaryText}</p>
-        <p className={cn('toast-secondary-message')}>
-          {text?.secondaryText || preset.secondaryText}
-        </p>
+        <p>{text?.primaryText}</p>
+        <p className={cn('toast-secondary-message')}>{text?.secondaryText}</p>
         {children}
       </div>
       {canClose && (

@@ -10,9 +10,9 @@
   min-width: 600px;
 
   th {
-    font-weight: lighter;
-    padding: 0.75rem;
-    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: var(--TEXT-SIZE-MEDIUM);
+    font-family: var(--FONT-DM-MONO-BOLD);
     background-color: var(--BASE-CREAM-1);
   }
 
@@ -20,6 +20,7 @@
   th {
     border-right: none;
     border-left: none;
+    padding: 0.75rem 1.5rem;
   }
 
   .th-name {
@@ -27,16 +28,15 @@
   }
 
   td {
-    font-size: 1rem;
+    font-size: var(--TEXT-SIZE-MEDIUM);
     text-align: center;
-    padding: 0.75rem;
     border-top: 1.5px solid var(--BASE-GRAY-2);
     background-color: var(--LIGHT);
   }
 
   .td-name {
     text-align: left;
-    max-width: 20rem;
+    font-family: var(--FONT-DM-MONO-BOLD);
   }
 
   .td-check-results {

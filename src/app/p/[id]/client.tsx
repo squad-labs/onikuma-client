@@ -140,19 +140,16 @@ const PlayClientPage = ({ id, topic }: Props) => {
         )}
       {modal.name === 'PoolInModal' &&
         modal.data &&
-        'poolAmount' in modal.data && (
+        'baseTicker' in modal.data && (
           <PoolInModal
             topicId={modal.data.topicId}
             title={modal.data.title}
             value={modal.data.value}
             imageUrl={modal.data.imageUrl}
-            poolAmount={modal.data.poolAmount}
             baseTicker={modal.data.baseTicker}
             baseTokenName={modal.data.baseTokenName}
-            baseTokenPrice={modal.data.baseTokenPrice}
             roundTicker={modal.data.roundTicker}
             roundTokenName={modal.data.roundTokenName}
-            roundTokenPrice={modal.data.roundTokenPrice}
           />
         )}
     </CommentProvider>

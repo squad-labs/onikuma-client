@@ -16,6 +16,8 @@ const nextConfig = {
     NEXT_PUBLIC_API_BASE_URL: process.env.API_BASE_URL,
     NEXT_PUBLIC_SOCKET_BASE_URL: process.env.SOCKET_BASE_URL,
     NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL,
+    NEXT_PUBLIC_STORAGE_BASE_URL: process.env.STORAGE_BASE_URL,
+    NEXT_PUBLIC_BERACHAIN_RPC_URL: process.env.BERACHAIN_RPC_URL,
   },
   webpack(config) {
     config.module.rules.push({

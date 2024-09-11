@@ -16,7 +16,8 @@ export type ButtonShapeType =
   | 'shape-4'
   | 'shape-5'
   | 'shape-6'
-  | 'shape-7';
+  | 'shape-7'
+  | 'shape-8';
 
 export type BaseButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;

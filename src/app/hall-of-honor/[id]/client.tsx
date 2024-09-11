@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from '@/app/hall-of-honor/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import { HonorType } from '@/shared/types/data/honor';
@@ -8,6 +8,10 @@ import { fetchDateFormat } from '@/shared/utils/date';
 import UploadImageCard from '@/components/common/card/uploadImageCard';
 import Image from 'next/image';
 import UploadVoiceCard from '@/components/common/card/uploadVoiceCard';
+import ImageUploadImage from '@/assets/images/image-upload.png';
+import IconButton from '@/widgets/button/iconButton';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import { getStaticSrc } from '@/shared/utils/etc';
 
 const cn = classNames.bind(styles);
 
@@ -17,6 +21,15 @@ type Props = {
 };
 
 const HallOfHonorClientPage = ({ id, honor }: Props) => {
+  const [imageFile, setImageFile] = useState<File | Blob | null>(null);
+  const [isFlipped, setIsFlipped] = useState<boolean>(true);
+  const [skipImage, setSkipImage] = useState<boolean>(false);
+  const [skipVoice, setSkipVoice] = useState<boolean>(false);
+
+  const handleFlip = useCallback(() => {
+    setIsFlipped(!isFlipped);
+  }, [isFlipped]);
+
   if (honor.competitors.length === 0) {
     return <div>error</div>;
   }
@@ -34,29 +47,79 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
           label={'Hall of Honor'}
           onlyDate
         />
-        <div className={cn('upload-image-wrapper')}>
-          <div className={cn('card-wrapper')}>
-            <UploadImageCard
-              topicId={id}
-              pickerName={honor.competitors[0].name}
+        {honor.competitors[0].isBiggestPickerPooler && (
+          <div className={cn('upload-image-wrapper', skipImage && 'skip')}>
+            <div className={cn('card-wrapper')}>
+              <UploadImageCard
+                topicId={id}
+                pickerName={honor.competitors[0].name}
+                imageFile={imageFile}
+                setImageFile={setImageFile}
+                setSkip={() => setSkipImage(true)}
+                withBorder={false}
+                withbackGround={false}
+              />
+            </div>
+            <div className={cn('image-wrapper', 'flip-wrapper')}>
+              <div className={cn('background')} />
+              {isFlipped ? (
+                <Image
+                  src={
+                    imageFile
+                      ? URL.createObjectURL(imageFile)
+                      : honor.competitors[0].biggestImgUrl.length === 0
+                        ? ImageUploadImage
+                        : honor.competitors[0].biggestImgUrl
+                  }
+                  alt={honor.competitors[0].name}
+                  width={1200}
+                  height={1200}
+                  priority
+                  className={cn('image', 'unflipped')}
+                />
+              ) : (
+                <Image
+                  src={honor.competitors[0].imgUrl}
+                  alt={honor.competitors[0].name}
+                  width={1200}
+                  height={1200}
+                  priority
+                  className={cn('image', 'flipped')}
+                />
+              )}
+              <div className={cn('button-container')}>
+                <IconButton
+                  name="flip-button"
+                  onClick={() => handleFlip()}
+                  shape="round"
+                  height={'small'}
+                  classNames={['button-blue']}
+                >
+                  <div className={cn('button-inner')}>
+                    <Image
+                      src={getStaticSrc('icon', ICON_SRC_PATH.SRC.FLIP)}
+                      alt="share"
+                      width={24}
+                      height={22}
+                      priority
+                      quality={100}
+                      className={cn('flip-icon')}
+                    />
+                  </div>
+                </IconButton>
+              </div>
+            </div>
+          </div>
+        )}
+        {honor.isBiggestTopicPooler && (
+          <div className={cn('upload-voice-wrapper', skipVoice && 'skip')}>
+            <UploadVoiceCard
               withBorder={false}
               withbackGround={false}
+              setSkip={() => setSkipVoice(true)}
             />
           </div>
-          <div className={cn('image-wrapper')}>
-            <Image
-              src={honor.competitors[0].imgUrl}
-              alt={honor.competitors[0].name}
-              width={1200}
-              height={1200}
-              priority
-              className={cn('image')}
-            />
-          </div>
-        </div>
-        <div className={cn('upload-voice-wrapper')}>
-          <UploadVoiceCard withBorder={false} withbackGround={false} />
-        </div>
+        )}
       </section>
     </div>
   );

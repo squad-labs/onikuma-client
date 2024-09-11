@@ -18,9 +18,25 @@
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
+      justify-content: space-between;
       background-color: transparent;
+      gap: 0.8rem;
+
+      .image {
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid var(--DARK-GRAY-1);
+      }
+    }
+
+    .input {
+      background-color: transparent;
+      font-size: var(--TEXT-SIZE-LARGE);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: right;
+      font-family: var(--FONT-DM-MONO-BOLD);
     }
   }
 

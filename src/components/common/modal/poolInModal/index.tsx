@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   useCallback,
   useContext,
   useEffect,
@@ -21,6 +22,7 @@ import { postPoolIn } from '@/shared/api/Activity';
 import { useMutation } from '@tanstack/react-query';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRouter } from 'next/navigation';
+import { handleNumberUpdate } from '@/shared/utils/number';
 
 const cn = classNames.bind(styles);
 
@@ -29,18 +31,16 @@ const PoolInModal = ({
   title,
   value,
   imageUrl,
-  poolAmount,
   baseTicker,
   baseTokenName,
-  baseTokenPrice,
   roundTicker,
   roundTokenName,
-  roundTokenPrice,
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [tokenPrice, setTokenPrice] = useState<string>(baseTokenPrice);
-  const { ticker, mintToken, getTokenPrice } = useContext(RoundContext);
+  const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
+  const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
+  const { mintToken, getTokenPrice } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleCloseModal = useCallback(() => {
@@ -57,13 +57,20 @@ const PoolInModal = ({
   });
 
   const handlePoolIn = useCallback(() => {
-    poolInMutation.mutate({
-      topicId: topicId,
-      topicToken: poolAmount,
-      reserveToken: 100,
-      pickerName: value,
-    });
-  }, [topicId, poolAmount, title, value]);
+    if (tokenAmount !== 0 && tokenAmount !== '' && tokenAmount !== undefined) {
+      poolInMutation.mutate({
+        topicId: topicId,
+        topicToken: tokenAmount,
+        reserveToken: parseInt(tokenPrice),
+        pickerName: value,
+      });
+    }
+  }, [topicId, tokenAmount, tokenPrice, title, value]);
+
+  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const _value = handleNumberUpdate(event.target.value);
+    setTokenAmount(_value);
+  }, []);
 
   useOnClickOutside({
     ref: modalRef,
@@ -72,13 +79,17 @@ const PoolInModal = ({
   });
 
   useEffect(() => {
-    if (poolAmount === undefined) return;
+    if (tokenAmount === undefined || tokenAmount === '' || tokenAmount === 0) {
+      setTokenPrice('0');
+      return;
+    }
     const _getTokenPrice = async () => {
-      const token = await getTokenPrice(poolAmount.toString());
-      setTokenPrice(String(token));
+      const token = await getTokenPrice(tokenAmount.toString());
+      if (token === undefined) setTokenPrice('0');
+      else setTokenPrice(String(token));
     };
     _getTokenPrice();
-  }, [poolAmount]);
+  }, [tokenAmount]);
 
   return (
     <BaseModal background="DARK_OPACITY_5">
@@ -105,24 +116,27 @@ const PoolInModal = ({
           </div>
           <div className={cn('card-container')}>
             <PriceInfoCard
-              type={'top'}
-              title={baseTokenName}
-              ticker={`$${baseTicker}`}
-              imageUrl="https://s2.coinmarketcap.com/static/img/coins/64x64/10948.png"
-              price={tokenPrice}
-            />
-            <PriceInfoCard
               type={'bottom'}
               title={roundTokenName}
               ticker={`$${roundTicker}`}
-              imageUrl="https://s2.coinmarketcap.com/static/img/coins/64x64/10948.png"
-              price={roundTokenPrice}
+              imageUrl={imageUrl}
+              price={tokenAmount.toString()}
+              setPrice={handleOnChange}
+            />
+            <PriceInfoCard
+              type={'top'}
+              title={baseTokenName}
+              ticker={`$${baseTicker}`}
+              imageUrl={imageUrl}
+              price={tokenPrice}
+              setPrice={handleOnChange}
             />
           </div>
         </div>
         <div className={cn('button-container')}>
           <BaseButton
             text={'Pool in'}
+            disabled={tokenAmount === 0 || tokenAmount === ''}
             label="pool-in-button"
             colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
             theme="fill"
@@ -130,7 +144,7 @@ const PoolInModal = ({
             fontWeight="regular"
             shape="shape-4"
             onClick={() => {
-              mintToken(ticker, handlePoolIn);
+              mintToken(handlePoolIn);
             }}
           />
           <BaseButton

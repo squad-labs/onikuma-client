@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';
 import MyDataTable from '@/widgets/table/myDataTable';
 import { MyData } from '@/shared/types/data/my-data';
+import { thousandFormat } from '@/shared/utils/number';
 
 const cn = classNames.bind(styles);
 
@@ -39,7 +40,7 @@ const MyClientPage = ({ myData }: Props) => {
         <div className={cn('highlights-container')}>
           <HighlightCard
             title="Total Pooled in Amount"
-            mainText={`$${total.myTotalPoolIn ?? '0.00'}`}
+            mainText={`$${total.myTotalPoolIn ? thousandFormat(total.myTotalPoolIn) : '0.00'}`}
             subText="0%"
           />
           <HighlightCard

@@ -6,6 +6,10 @@ import { mintclub, wei } from 'watchman-tool-sdk';
 import { getTopicTokenPrice } from '@/shared/api/Activity';
 import { TokenPriceType } from '@/shared/types/data/token';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { SET_TOAST } from '@/context/global/slice/toastSlice';
+import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
+import { ethers } from 'ethers';
 
 type RoundList = {
   first: number[];
@@ -20,11 +24,15 @@ type Props = {
 };
 
 const RoundProvider = ({ children, topic, round }: Props) => {
+  const dispatch = useDispatch();
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [ticker, setTicker] = useState<string>(topic.ticker);
   const [currentRound, setCurrentRound] = useState<8 | 4 | 2 | 1>(8);
   const [options, setOptions] = useState<Option[]>(topic.competitors);
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number[]>(round.first);
+  const network = mintclub.network('berachaintestnetbartio');
+  const token = network.token(topic.ticker);
 
   const next = useCallback(
     (optionName: string) => {
@@ -55,6 +63,24 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     [options, selectedOptions, currentIndex, currentRound],
   );
 
+  const waitTransaction = useCallback(async (txHash: string) => {
+    const provider = new ethers.JsonRpcProvider(
+      process.env.NEXT_PUBLIC_BERACHAIN_RPC_URL,
+    );
+
+    try {
+      const receipt = await provider.waitForTransaction(txHash);
+
+      if (receipt?.status === 1) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error(error);
+    }
+    return false;
+  }, []);
+
   const getTokenPrice = useCallback(async (amount: string) => {
     try {
       const token: TokenPriceType = await getTopicTokenPrice({
@@ -71,24 +97,59 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     }
   }, []);
 
-  const mintToken = async (symbol: string, callback: () => void) => {
-    const network = await mintclub.network('berachaintestnetbartio');
-    try {
-      const token = await network.token(symbol);
-      await token.buy({
-        amount: wei(1, 18),
-        onSuccess: () => {
-          callback();
-        },
-        onError: () => {},
-      });
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return;
+  const mintToken = useCallback(
+    async (callback: () => void) => {
+      setIsSending(true);
+
+      try {
+        await token.buy({
+          amount: wei(1, 18),
+          async onSigned(tx) {
+            const result = await waitTransaction(tx);
+            if (result) {
+              dispatch(
+                SET_TOAST({
+                  type: 'success',
+                  canClose: true,
+                  text: TOAST_RESPONSE.SEND_TRANSACTION.SUCCESS,
+                  autoClose: {
+                    duration: 3000,
+                  },
+                }),
+              );
+              callback();
+            } else {
+              dispatch(
+                SET_TOAST({
+                  type: 'error',
+                  text: TOAST_RESPONSE.SEND_TRANSACTION.ERROR,
+                  canClose: true,
+                  autoClose: {
+                    duration: 3000,
+                  },
+                }),
+              );
+            }
+          },
+        });
+      } catch (error) {
+        dispatch(
+          SET_TOAST({
+            type: 'error',
+            text: TOAST_RESPONSE.SEND_TRANSACTION.ERROR,
+            canClose: true,
+            autoClose: {
+              duration: 3000,
+            },
+          }),
+        );
+        if (axios.isAxiosError(error)) {
+          return;
+        }
       }
-      return;
-    }
-  };
+    },
+    [setIsSending, network, ticker, token],
+  );
 
   return (
     <RoundContext.Provider

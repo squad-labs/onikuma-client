@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import styles from '@/components/container/comment-container/CommentContainer.module.scss';
@@ -18,6 +19,8 @@ import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { getAllComments, postCommnets } from '@/shared/api/Comments';
 import CommentButton from '@/components/common/button/commentButton';
 import { fetchDateFormat, fetchTimeFormat } from '@/shared/utils/date';
+import { COLOR } from '@/shared/constants/COLOR';
+import { useDebounce } from '@/shared/hooks/useDebounce';
 
 const cn = classNames.bind(styles);
 
@@ -29,6 +32,32 @@ const CommentContainer = ({ topicId }: Props) => {
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const [pagination, setPagination] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { comment, setComment, socket } = useContext(CommentContext);
+
+  const handleSubmit = () => {
+    if (comment.length !== 0) {
+      postCommentMutation.mutate({
+        topicId,
+        contents: comment,
+      });
+    }
+  };
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (comment !== '\n' && comment.length > 1 && event.key === 'Enter') {
+        const _comment = comment.trim();
+        setComment('');
+        postCommentMutation.mutate({
+          topicId,
+          contents: _comment,
+        });
+      }
+    },
+    [comment, topicId],
+  );
+
+  const debounceSubmit = useDebounce(handleKeyDown, 10);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
@@ -41,11 +70,10 @@ const CommentContainer = ({ topicId }: Props) => {
     setIsLoading(false);
   }, [pagination]);
 
-  const { comment, setComment, socket } = useContext(CommentContext);
-
   const handleOnChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
-      setComment(event.target.value);
+      const comment = event.target.value.replace(/^[\t\n]+/, '');
+      setComment(comment);
     },
     [],
   );
@@ -53,28 +81,7 @@ const CommentContainer = ({ topicId }: Props) => {
   const postCommentMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_COMMENTS],
     mutationFn: postCommnets,
-    onSuccess: () => {
-      setComment('');
-    },
   });
-
-  const handleSubmit = () => {
-    if (comment.length !== 0) {
-      postCommentMutation.mutate({
-        topicId,
-        contents: comment,
-      });
-    }
-  };
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (comment.length !== 0 && event.key === 'Enter') {
-      postCommentMutation.mutate({
-        topicId,
-        contents: comment,
-      });
-    }
-  };
 
   useEffect(() => {
     socket?.on('comment', (data: Comment) => {
@@ -110,6 +117,10 @@ const CommentContainer = ({ topicId }: Props) => {
     fetchData();
   }, [pagination]);
 
+  const isCommentEmpty = useMemo(() => {
+    return !commentList || commentList.length === 0;
+  }, [comment, commentList]);
+
   return (
     <div className={cn('container')}>
       <BaseText text="Comments" color={'DARK'} size={'large'} weight="bold" />
@@ -117,13 +128,24 @@ const CommentContainer = ({ topicId }: Props) => {
         <CommentInput
           value={comment}
           onChange={(event) => handleOnChange(event)}
-          onKeyUp={(event) => handleKeyDown(event)}
+          onKeyUp={(event) => debounceSubmit(event)}
           role="comment-input"
           label="comment-input"
         />
         <CommentButton onClick={handleSubmit} />
       </div>
-      <div id="container" className={cn('comment-list')}>
+      <div
+        id="container"
+        className={cn('comment-list')}
+        style={{
+          borderTop: isCommentEmpty
+            ? 'none'
+            : `1px solid ${COLOR['DARK_GRAY_1']}`,
+          borderBottom: isCommentEmpty
+            ? 'none'
+            : `1px solid ${COLOR['DARK_GRAY_1']}`,
+        }}
+      >
         {commentList?.map((el: Comment, index: number) => {
           const isFirst = index === 0;
           const formatedDate = `${fetchDateFormat(el.createdAt)} ${fetchTimeFormat(el.createdAt)}`;

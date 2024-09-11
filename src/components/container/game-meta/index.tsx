@@ -4,14 +4,9 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import DateText from '@/widgets/text/dateText';
-import IconButton from '@/widgets/button/iconButton';
 import { useDispatch } from 'react-redux';
-import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRound } from '@/shared/hooks/useRound';
-import Image from 'next/image';
-import { getStaticSrc } from '@/shared/utils/etc';
-import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 import ShareGameButton from '@/components/common/button/shareGameButton';
 
 const cn = classNames.bind(styles);

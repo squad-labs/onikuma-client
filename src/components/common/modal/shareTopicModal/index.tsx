@@ -17,6 +17,7 @@ import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 import DateText from '@/widgets/text/dateText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
+import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
 
 const cn = classNames.bind(styles);
 
@@ -36,7 +37,11 @@ const ShareTopicModal = ({
       onSuccess: () => {
         dispatch(
           SET_TOAST({
-            type: 'link',
+            type: 'success',
+            text: {
+              primaryText: TOAST_RESPONSE.COPY_LINK.SUCCESS.primaryText,
+              secondaryText: TOAST_RESPONSE.COPY_LINK.SUCCESS.secondaryText,
+            },
             canClose: true,
             autoClose: {
               duration: 3000,
@@ -44,7 +49,21 @@ const ShareTopicModal = ({
           }),
         );
       },
-      onError: () => {},
+      onError: () => {
+        dispatch(
+          SET_TOAST({
+            type: 'error',
+            text: {
+              primaryText: TOAST_RESPONSE.COPY_LINK.ERROR.primaryText,
+              secondaryText: TOAST_RESPONSE.COPY_LINK.ERROR.secondaryText,
+            },
+            canClose: true,
+            autoClose: {
+              duration: 3000,
+            },
+          }),
+        );
+      },
     });
   }, []);
 

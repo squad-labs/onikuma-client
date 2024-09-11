@@ -1,0 +1,19 @@
+.bar-container {
+  background-color: var(--LIGHT);
+  border: 1px solid var(--DARK-GRAY-2);
+  padding: 0.4rem 1.2rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .icon {
+    margin-right: 0.8rem;
+  }
+
+  .text {
+    font-size: var(--TEXT-SIZE-MEDIUM);
+    font-family: var(--FONT-DM-MONO-REGULAR);
+    color: var(--DARK-GRAY-5);
+  }
+}

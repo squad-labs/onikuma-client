@@ -11,9 +11,10 @@ const cn = classNames.bind(styles);
 type Props = {
   withBorder: boolean;
   withbackGround: boolean;
+  setSkip: () => void;
 };
 
-const UploadVoiceCard = ({ withBorder, withbackGround }: Props) => {
+const UploadVoiceCard = ({ withBorder, withbackGround, setSkip }: Props) => {
   const [value, setValue] = useState<string>('');
 
   const handleOnChange = useCallback(
@@ -64,6 +65,7 @@ const UploadVoiceCard = ({ withBorder, withbackGround }: Props) => {
       </div>
       <div className={cn('button-wrapper')}>
         <BaseButton
+          disabled={!value.length || value.length < 20}
           text="Confirm"
           shape="shape-4"
           role="button"
@@ -83,7 +85,7 @@ const UploadVoiceCard = ({ withBorder, withbackGround }: Props) => {
           theme="outline"
           fontSize="large"
           fontWeight="regular"
-          onClick={() => {}}
+          onClick={() => setSkip()}
         />
       </div>
     </div>

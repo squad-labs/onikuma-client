@@ -103,13 +103,10 @@ const ImageOptionCard = ({
                       title: title,
                       value: text,
                       imageUrl: base,
-                      poolAmount: 100,
                       baseTicker: 'HONEY',
                       baseTokenName: 'HONEY',
-                      baseTokenPrice: 0.001,
                       roundTicker: ticker,
                       roundTokenName: ticker,
-                      roundTokenPrice: amount,
                     },
                   }),
                 );

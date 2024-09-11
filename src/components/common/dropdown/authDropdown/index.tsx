@@ -81,6 +81,7 @@ const AuthDropdown = () => {
           <button
             onClick={() => {
               logout();
+              router.replace('/');
               router.refresh();
             }}
             className={cn('list-item', { disable: true })}

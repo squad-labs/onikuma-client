@@ -5,6 +5,7 @@ import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { getResultImage, getShareImage } from '@/shared/api/Image';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
 import { useRound } from '@/shared/hooks/useRound';
 import { ImageShareType } from '@/shared/types/data/image';
 import { LinkShare } from '@/shared/types/data/link';
@@ -79,8 +80,8 @@ const ShareGameButton = ({
         dateText: startAt,
         token: cookie,
         option: {
-          name: options[0].name,
-          imageUrl: options[0].imgUrl,
+          // name: options[0].name,
+          // imageUrl: options[0].imgUrl,
         },
       }
     );
@@ -155,7 +156,11 @@ const ShareGameButton = ({
         .then(() => {
           dispatch(
             SET_TOAST({
-              type: 'link',
+              type: 'success',
+              text: {
+                primaryText: TOAST_RESPONSE.COPY_IMAGE.SUCCESS.primaryText,
+                secondaryText: TOAST_RESPONSE.COPY_IMAGE.SUCCESS.secondaryText,
+              },
               canClose: true,
               autoClose: {
                 duration: 3000,
@@ -166,7 +171,11 @@ const ShareGameButton = ({
         .catch(() => {
           dispatch(
             SET_TOAST({
-              type: 'info',
+              type: 'error',
+              text: {
+                primaryText: TOAST_RESPONSE.COPY_IMAGE.ERROR.primaryText,
+                secondaryText: TOAST_RESPONSE.COPY_IMAGE.ERROR.secondaryText,
+              },
               canClose: true,
               autoClose: {
                 duration: 3000,

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@/app/h/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import CanvasContainer from '@/components/container/canvas-container';
@@ -21,8 +21,11 @@ type Props = {
 
 const HonorClientPage = ({ id, honor }: Props) => {
   const modal = useSelector(getModal);
+  const [skipImage, setSkipImage] = useState<boolean>(false);
+  const [skipVoice, setSkipVoice] = useState<boolean>(false);
+  const [imageFile, setImageFile] = useState<File | Blob | null>(null);
 
-  if (honor.competitors.length === 0) {
+  if (!honor.competitors || honor.competitors.length === 0) {
     return <div>error</div>;
   }
 
@@ -47,19 +50,30 @@ const HonorClientPage = ({ id, honor }: Props) => {
           topicId={id}
           startAt={fetchDateFormat(honor.startAt)}
           endAt={fetchDateFormat(honor.endAt)}
-          title={'Donald Trump'}
+          title={honor.name}
           status={'finalist'}
           label={honor.name}
           isFinal={true}
         />
         <div className={cn('card-wrapper')}>
-          <UploadImageCard
-            topicId={id}
-            pickerName={honor.competitors[0].name}
-            withBorder
-            withbackGround
-          />
-          <UploadVoiceCard withBorder withbackGround />
+          <div className={cn('card', skipImage && 'skip')}>
+            <UploadImageCard
+              topicId={id}
+              pickerName={honor.competitors[0].name}
+              imageFile={imageFile}
+              setSkip={() => setSkipImage(true)}
+              setImageFile={setImageFile}
+              withBorder
+              withbackGround
+            />
+          </div>
+          <div className={cn('card', skipVoice && 'skip')}>
+            <UploadVoiceCard
+              withBorder
+              withbackGround
+              setSkip={() => setSkipVoice(true)}
+            />
+          </div>
         </div>
       </div>
       {modal.name === 'PoolResutlModal' &&

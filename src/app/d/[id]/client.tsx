@@ -14,6 +14,7 @@ import CommentContainer from '@/components/container/comment-container';
 import { CommentProvider } from '@/context/partial/commentContext/CommentProvider';
 import MyVoteContainer from '@/components/container/my-vote-container';
 import TopicDropdown from '@/components/common/dropdown/topicDropdown';
+import GameDateBar from '@/components/common/bar/gameDateBar';
 
 const cn = classNames.bind(styles);
 
@@ -35,6 +36,15 @@ const DashboardClientPage = ({ id }: Props) => {
             {topic && (
               <Suspense>
                 <TopicDropdown value={{ id: id, name: topic?.name }} />
+              </Suspense>
+            )}
+            {topic && (
+              <Suspense>
+                <GameDateBar
+                  id={id}
+                  startDate={topic.startAt}
+                  endDate={topic.endAt}
+                />
               </Suspense>
             )}
           </div>

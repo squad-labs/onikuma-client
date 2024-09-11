@@ -63,7 +63,7 @@ export const postFlipImage = async ({
   formData.append('pickerName', pickerName);
 
   try {
-    const token = getCookie('token');
+    const token = getCookie('accessToken');
     const res = await axios.post(
       `/api/topics/biggest-picker-image/${topicId}`,
       formData,

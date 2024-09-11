@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import BaseButton from '@/widgets/button/baseButton';
 import { useConnect } from '@/shared/hooks/useConnect';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const WalletConnectButton = ({ type, autoLogin }: Props) => {
+  const router = useRouter();
   const isHome = useMemo(() => type === 'home', [type]);
   useAuth({ autoLogin });
   const { handleModal } = useConnect();
