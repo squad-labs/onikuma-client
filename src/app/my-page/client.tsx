@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import styles from '@/app/my-page/client.module.scss';
 import classNames from 'classnames/bind';
 import HighlightCard from '@/widgets/card/highlightCard';
-import MyDataTable from '@/widgets/table/myDataTable';
 import { MyData } from '@/shared/types/data/my-data';
 import { thousandFormat } from '@/shared/utils/number';
+import MyDataTableContainer from '@/components/container/my-data-table-container';
 
 const cn = classNames.bind(styles);
 
@@ -70,7 +70,7 @@ const MyClientPage = ({ myData }: Props) => {
           />
         </div>
         <div className={cn('my-data-table-container')}>
-          <MyDataTable data={myData.result || []} />
+          <MyDataTableContainer data={myData.result || []} />
         </div>
       </div>
     </div>
