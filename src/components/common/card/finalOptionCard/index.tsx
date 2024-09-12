@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
 import styles from '@/components/common/card/finalOptionCard/FinalOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -6,7 +6,12 @@ import PriceInfoCard from '@/components/common/card/priceInfoCard';
 import BaseButton from '@/widgets/button/baseButton';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
+import { CLOSE_MODAL, OPEN_MODAL } from '@/context/global/slice/modalSlice';
+import { RoundContext } from '@/context/partial/roundContext/RoundContext';
+import { useMutation } from '@tanstack/react-query';
+import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
+import { postPoolIn } from '@/shared/api/Activity';
+import { handleNumberUpdate } from '@/shared/utils/number';
 
 const cn = classNames.bind(styles);
 
@@ -38,6 +43,22 @@ const FinalOptionCard = ({
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
+  const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
+
+  const poolInMutation = useMutation({
+    mutationKey: [MUTATION_KEY.POST_POOL_IN],
+    mutationFn: postPoolIn,
+    onSuccess: () => {
+      dispatch(CLOSE_MODAL());
+    },
+    onError: () => {},
+  });
+
+  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const _value = handleNumberUpdate(event.target.value);
+    setTokenAmount(_value);
+  }, []);
 
   return (
     <div className={cn('card-container')}>
@@ -67,18 +88,20 @@ const FinalOptionCard = ({
       </div>
       <div className={cn('info-container')}>
         <PriceInfoCard
-          type={'top'}
-          title={baseTokenName}
-          ticker={`$${baseTicker}`}
-          imageUrl="https://s2.coinmarketcap.com/static/img/coins/64x64/10948.png"
-          price={baseTokenPrice}
-        />
-        <PriceInfoCard
           type={'bottom'}
           title={roundTokenName}
           ticker={`$${roundTicker}`}
-          imageUrl="https://s2.coinmarketcap.com/static/img/coins/64x64/10948.png"
-          price={roundTokenPrice}
+          imageUrl={imageUrl}
+          price={tokenAmount.toString()}
+          setPrice={handleOnChange}
+        />
+        <PriceInfoCard
+          type={'top'}
+          title={baseTokenName}
+          ticker={`$${baseTicker}`}
+          imageUrl={imageUrl}
+          price={tokenPrice}
+          setPrice={handleOnChange}
         />
       </div>
       <div className={cn('button-container')}>
