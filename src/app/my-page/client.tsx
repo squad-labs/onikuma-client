@@ -19,9 +19,9 @@ const MyClientPage = ({ myData }: Props) => {
 
   const total = useMemo(() => {
     return {
-      myTotalPoolIn: myData.myTotalPoolIn,
-      totalCostPnL: myData.totalCostPnL,
-      myTotalPnL: myData.myTotalPnL,
+      myTotalPoolIn: myData.myTotalPoolIn ?? 0,
+      totalCostPnL: myData.totalCostPnL ?? 0,
+      myTotalPnL: myData.myTotalPnL ?? 0,
     };
   }, [myData]);
 
