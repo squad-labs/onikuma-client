@@ -32,11 +32,9 @@ const GameCurrentPage = async () => {
 
     return (
       <main className={cn('container')}>
-        <div className={cn('inner')}>
-          <RoundProvider topic={data} round={round}>
-            <PlayClientPage id={data._id} topic={data} />
-          </RoundProvider>
-        </div>
+        <RoundProvider topic={data} round={round}>
+          <PlayClientPage id={data._id} topic={data} />
+        </RoundProvider>
       </main>
     );
   } catch (err) {

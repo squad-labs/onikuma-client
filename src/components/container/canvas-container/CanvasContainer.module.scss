@@ -1,38 +1,60 @@
 .single-container {
-  width: 50%;
-  height: 100%;
+  flex: 1;
+  aspect-ratio: 1/1;
 }
 
 .double-container {
-  flex: 1;
+  width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
-  gap: 3rem;
+  gap: 5rem;
 
   .option-container {
-    width: 100%;
-    height: 50%;
+    width: 50%;
+    height: 100%;
+    aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .selected {
+  .selected-left {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation-name: scaleIn;
+    animation-name: scaleInLeft;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease;
   }
 
-  .unselected {
+  .selected-right {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: scaleInRight;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  .unselected-left {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation-name: scaleOut;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
+  .unselected-right {
     width: 100%;
     display: flex;
     align-items: center;
@@ -60,23 +82,31 @@
   }
 }
 
-@keyframes scaleIn {
+@keyframes scaleInLeft {
   0% {
-    height: 50%;
+    transform: translate(0%, 0) scale(1);
   }
   100% {
-    height: 100%;
+    transform: translate(50%, 5%) scale(1.1);
+  }
+}
+
+@keyframes scaleInRight {
+  0% {
+    transform: translate(0%, 0) scale(1);
+  }
+  100% {
+    transform: translate(-50%, 5%) scale(1.1);
   }
 }
 
 @keyframes scaleOut {
   0% {
-    height: 50%;
+    transform: translate(0%, 0) scale(1);
     opacity: 1;
   }
   100% {
-    height: 0;
     opacity: 0;
-    display: none;
+    transform: translate(0, 100%) scale(0);
   }
 }

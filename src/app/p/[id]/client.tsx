@@ -43,116 +43,120 @@ const PlayClientPage = ({ id, topic }: Props) => {
   }, []);
 
   return (
-    <CommentProvider id={id}>
-      {isFinal ? (
-        <div className={cn(`final-container`)}>
-          <CanvasContainer
-            type={'single'}
-            title={topic.name}
-            topicId={id}
-            roundText={roundStatus}
-            dateText={fetchDateFormat(topic.startAt)}
-            source={[
-              {
-                text: options[0].name,
-                base: options[0].imgUrl,
-                flip: options[0].biggestImgUrl,
-              },
-            ]}
-            amount={tokenPrice}
-          />
-          <div className={cn('info-container')}>
-            <GameMetaContainer
-              topicId={id}
-              startAt={fetchDateFormat(topic.startAt)}
-              endAt={fetchDateFormat(topic.endAt)}
-              title={options[0].name}
-              status={roundStatus}
-              label={topic.name}
-              isFinal={isFinal}
-            />
-            <Suspense>
-              <FinalOptionCard
-                topicId={id}
-                title={topic.name}
-                value={options[0].name}
-                imageUrl={options[0].imgUrl}
-                poolAmount={1000}
-                baseTokenName={'HONEY'}
-                baseTicker={'HONEY'}
-                baseTokenPrice={'1'}
-                roundTokenName={ticker}
-                roundTicker={ticker}
-                roundTokenPrice={tokenPrice}
-              />
-            </Suspense>
-          </div>
-        </div>
-      ) : (
-        <div className={cn('container')}>
-          <GameMetaContainer
-            topicId={id}
-            startAt={fetchDateFormat(topic.startAt)}
-            endAt={fetchDateFormat(topic.endAt)}
-            title={topic.name}
-            label={topic.name}
-            status={roundStatus}
-            isFinal={isFinal}
-          />
-          <div className={cn('game-container')}>
+    <section className={cn(isFinal ? 'wrapper-final' : 'wrapper')}>
+      <CommentProvider id={id}>
+        {isFinal ? (
+          <div className={cn(`final-container`)}>
             <CanvasContainer
-              type="double"
+              type={'single'}
               title={topic.name}
               topicId={id}
               roundText={roundStatus}
               dateText={fetchDateFormat(topic.startAt)}
               source={[
                 {
-                  text: options[currentIndex[roundIndex]].name,
-                  base: options[currentIndex[roundIndex]].imgUrl,
-                  flip: options[currentIndex[roundIndex]].biggestImgUrl,
-                },
-                {
-                  text: options[currentIndex[options.length - 1 - roundIndex]]
-                    .name,
-                  base: options[currentIndex[options.length - 1 - roundIndex]]
-                    .imgUrl,
-                  flip: options[currentIndex[options.length - 1 - roundIndex]]
-                    .biggestImgUrl,
+                  text: options[0].name,
+                  base: options[0].imgUrl,
+                  flip: options[0].biggestImgUrl,
                 },
               ]}
               amount={tokenPrice}
             />
-            <CommentContainer topicId={id} />
+            <div className={cn('info-container')}>
+              <GameMetaContainer
+                topicId={id}
+                startAt={fetchDateFormat(topic.startAt)}
+                endAt={fetchDateFormat(topic.endAt)}
+                title={options[0].name}
+                status={roundStatus}
+                label={topic.name}
+                isFinal={isFinal}
+              />
+              <Suspense>
+                <FinalOptionCard
+                  topicId={id}
+                  title={topic.name}
+                  value={options[0].name}
+                  imageUrl={options[0].imgUrl}
+                  poolAmount={1000}
+                  baseTokenName={'HONEY'}
+                  baseTicker={'HONEY'}
+                  baseTokenPrice={'1'}
+                  roundTokenName={ticker}
+                  roundTicker={ticker}
+                  roundTokenPrice={tokenPrice}
+                />
+              </Suspense>
+            </div>
           </div>
-        </div>
-      )}
-      {modal.name === 'ShareTopicModal' &&
-        modal.data &&
-        'options' in modal.data && (
-          <ShareTopicModal
-            topicId={modal.data.topicId}
-            title={modal.data.title}
-            roundText={modal.data.roundText}
-            dateText={modal.data.dateText}
-            options={modal.data.options}
-          />
+        ) : (
+          <div className={cn('container')}>
+            <GameMetaContainer
+              topicId={id}
+              startAt={fetchDateFormat(topic.startAt)}
+              endAt={fetchDateFormat(topic.endAt)}
+              title={topic.name}
+              label={topic.name}
+              status={roundStatus}
+              isFinal={isFinal}
+            />
+            <div className={cn('game-container')}>
+              <CanvasContainer
+                type="double"
+                title={topic.name}
+                topicId={id}
+                roundText={roundStatus}
+                dateText={fetchDateFormat(topic.startAt)}
+                source={[
+                  {
+                    text: options[currentIndex[roundIndex]].name,
+                    base: options[currentIndex[roundIndex]].imgUrl,
+                    flip: options[currentIndex[roundIndex]].biggestImgUrl,
+                  },
+                  {
+                    text: options[currentIndex[options.length - 1 - roundIndex]]
+                      .name,
+                    base: options[currentIndex[options.length - 1 - roundIndex]]
+                      .imgUrl,
+                    flip: options[currentIndex[options.length - 1 - roundIndex]]
+                      .biggestImgUrl,
+                  },
+                ]}
+                amount={tokenPrice}
+              />
+              <div className={cn('comment-wrapper')}>
+                <CommentContainer topicId={id} />
+              </div>
+            </div>
+          </div>
         )}
-      {modal.name === 'PoolInModal' &&
-        modal.data &&
-        'baseTicker' in modal.data && (
-          <PoolInModal
-            topicId={modal.data.topicId}
-            title={modal.data.title}
-            value={modal.data.value}
-            imageUrl={modal.data.imageUrl}
-            baseTicker={modal.data.baseTicker}
-            baseTokenName={modal.data.baseTokenName}
-            roundTicker={modal.data.roundTicker}
-            roundTokenName={modal.data.roundTokenName}
-          />
-        )}
-    </CommentProvider>
+        {modal.name === 'ShareTopicModal' &&
+          modal.data &&
+          'options' in modal.data && (
+            <ShareTopicModal
+              topicId={modal.data.topicId}
+              title={modal.data.title}
+              roundText={modal.data.roundText}
+              dateText={modal.data.dateText}
+              options={modal.data.options}
+            />
+          )}
+        {modal.name === 'PoolInModal' &&
+          modal.data &&
+          'baseTicker' in modal.data && (
+            <PoolInModal
+              topicId={modal.data.topicId}
+              title={modal.data.title}
+              value={modal.data.value}
+              imageUrl={modal.data.imageUrl}
+              baseTicker={modal.data.baseTicker}
+              baseTokenName={modal.data.baseTokenName}
+              roundTicker={modal.data.roundTicker}
+              roundTokenName={modal.data.roundTokenName}
+            />
+          )}
+      </CommentProvider>
+    </section>
   );
 };
 

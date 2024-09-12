@@ -36,7 +36,6 @@ const FinalOptionCard = ({
   baseTicker,
   value,
   baseTokenName,
-  baseTokenPrice,
   roundTicker,
   roundTokenName,
   roundTokenPrice,
@@ -45,6 +44,7 @@ const FinalOptionCard = ({
   const router = useRouter();
   const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
   const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
+  const { mintToken, getTokenPrice } = useContext(RoundContext);
 
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],

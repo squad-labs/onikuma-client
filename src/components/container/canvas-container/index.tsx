@@ -93,7 +93,12 @@ const CanvasContainer = ({
   }
   return (
     <div className={cn(`${type}-container`)}>
-      <div className={cn('option-container', isSelected(rest.source[1].text))}>
+      <div
+        className={cn(
+          'option-container',
+          `${isSelected(rest.source[1].text)}-left`,
+        )}
+      >
         <ImageOptionCard
           type={'double'}
           topicId={topicId}
@@ -110,7 +115,12 @@ const CanvasContainer = ({
         />
       </div>
       {selected ? null : <span className={cn('text')}>VS</span>}
-      <div className={cn('option-container', isSelected(rest.source[0].text))}>
+      <div
+        className={cn(
+          'option-container',
+          `${isSelected(rest.source[0].text)}-right`,
+        )}
+      >
         <ImageOptionCard
           type={'double'}
           topicId={topicId}
