@@ -2,7 +2,7 @@
 import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useAccount, type Config, useClient } from 'wagmi';
-import { BrowserProvider } from 'ethers';
+import { JsonRpcProvider } from 'ethers';
 import { chain as AppChain, config } from '@/config/web3Config';
 import { disconnect, switchChain } from '@wagmi/core';
 import type { Chain, Client, Transport } from 'viem';
@@ -17,8 +17,7 @@ export const useConnect = () => {
   const [isClick, setIsClick] = useState<boolean>(false);
 
   const client = useClient<Config>({ chainId: AppChain.id });
-  const { signer, setSigner, provider, setProvider } =
-    useContext(WalletContext);
+  const { provider, setProvider } = useContext(WalletContext);
   const { address, isConnected, isConnecting, isDisconnected, isReconnecting } =
     useAccount();
 
@@ -62,17 +61,17 @@ export const useConnect = () => {
       name: chain.name,
     };
 
-    const provider = new BrowserProvider(window.ethereum, network);
-
+    const provider = new JsonRpcProvider(
+      chain.rpcUrls.default.http[0],
+      network,
+    );
+    setProvider(provider);
     return provider;
-  };
-
-  const getAsyncSigner = async (provider: BrowserProvider, address: string) => {
-    return await provider.getSigner(address);
   };
 
   useEffect(() => {
     if (client && address && isConnected) {
+      clientToProvider(client);
       try {
         if (client?.chain.id !== AppChain.id) {
           switchChain(config, { chainId: AppChain.id });
@@ -91,39 +90,8 @@ export const useConnect = () => {
     isReconnecting,
   ]);
 
-  useEffect(() => {
-    if (client && address && isConnected) {
-      const provider = clientToProvider(client);
-      setProvider(provider);
-
-      const _getSigner = async () => {
-        const signer = await getAsyncSigner(provider, address);
-        setSigner(signer);
-      };
-      _getSigner();
-    }
-  }, [
-    client,
-    address,
-    isConnected,
-    isConnecting,
-    isDisconnected,
-    isReconnecting,
-  ]);
-
   const getProvider = useCallback(() => {
     return provider;
-  }, [
-    client,
-    address,
-    isConnected,
-    isConnecting,
-    isDisconnected,
-    isReconnecting,
-  ]);
-
-  const getSigner = useCallback(() => {
-    return signer;
   }, [
     client,
     address,
@@ -170,7 +138,6 @@ export const useConnect = () => {
     handleConnectModal,
     handleAccountModal,
     getProvider,
-    getSigner,
     getConnect,
     getChain,
     handleDisconnect,

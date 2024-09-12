@@ -13,6 +13,7 @@ import {
   ShareResultModalProps,
   ShareTopicModalProps,
 } from '@/shared/types/ui/Modal';
+import { Copy } from '@/shared/utils/clipboard';
 import { getStaticSrc } from '@/shared/utils/etc';
 import ShareButton from '@/widgets/button/shareButton';
 import { useMutation } from '@tanstack/react-query';
@@ -24,7 +25,9 @@ type Props = {
   topicId: string;
   title: string;
   status: string;
+  name: string;
   startAt: string;
+  imageUrl: string;
   buttonDirection: 'left' | 'down';
 };
 
@@ -33,6 +36,8 @@ const ShareGameButton = ({
   title,
   status,
   startAt,
+  name,
+  imageUrl,
   buttonDirection,
 }: Props) => {
   const dispatch = useDispatch();
@@ -80,8 +85,8 @@ const ShareGameButton = ({
         dateText: startAt,
         token: cookie,
         option: {
-          // name: options[0].name,
-          // imageUrl: options[0].imgUrl,
+          name: name,
+          imageUrl: imageUrl,
         },
       }
     );
@@ -157,11 +162,7 @@ const ShareGameButton = ({
           dispatch(
             SET_TOAST({
               type: 'success',
-              text: {
-                primaryText: TOAST_RESPONSE.COPY_IMAGE.SUCCESS.primaryText,
-                secondaryText: TOAST_RESPONSE.COPY_IMAGE.SUCCESS.secondaryText,
-              },
-              canClose: true,
+              text: TOAST_RESPONSE.COPY_IMAGE.SUCCESS,
               autoClose: {
                 duration: 3000,
               },
@@ -172,10 +173,7 @@ const ShareGameButton = ({
           dispatch(
             SET_TOAST({
               type: 'error',
-              text: {
-                primaryText: TOAST_RESPONSE.COPY_IMAGE.ERROR.primaryText,
-                secondaryText: TOAST_RESPONSE.COPY_IMAGE.ERROR.secondaryText,
-              },
+              text: TOAST_RESPONSE.COPY_IMAGE.ERROR,
               canClose: true,
               autoClose: {
                 duration: 3000,
@@ -236,6 +234,23 @@ const ShareGameButton = ({
         }),
       );
     } else {
+      Copy({
+        value: window.location.href,
+        onSuccess: () => {
+          dispatch(
+            SET_TOAST({
+              type: 'success',
+              text: TOAST_RESPONSE.COPY_LINK.SUCCESS,
+              canClose: true,
+              autoClose: {
+                duration: 3000,
+              },
+            }),
+          );
+        },
+        onError: () => {},
+      });
+
       dispatch(
         OPEN_MODAL({
           name: 'ShareResultModal',

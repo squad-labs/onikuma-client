@@ -4,7 +4,6 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import DateText from '@/widgets/text/dateText';
-import { useDispatch } from 'react-redux';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRound } from '@/shared/hooks/useRound';
 import ShareGameButton from '@/components/common/button/shareGameButton';
@@ -32,7 +31,6 @@ const GameMetaContainer = ({
   label,
   onlyDate = false,
 }: Props) => {
-  const dispatch = useDispatch();
   const { options, currentIndex } = useContext(RoundContext);
   const { roundIndex } = useRound(RoundContext);
 
@@ -88,6 +86,8 @@ const GameMetaContainer = ({
               title={title}
               status={status}
               startAt={startAt}
+              name={options[currentIndex[roundIndex]].name}
+              imageUrl={options[currentIndex[roundIndex]].imgUrl}
               buttonDirection="left"
             />
           ))}

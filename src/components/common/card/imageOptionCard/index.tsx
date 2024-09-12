@@ -119,6 +119,8 @@ const ImageOptionCard = ({
               title={title}
               status={roundText}
               startAt={dateText}
+              imageUrl={base}
+              name={text}
               buttonDirection="down"
             />
           )}
