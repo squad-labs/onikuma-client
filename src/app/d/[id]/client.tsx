@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import styles from '@/app/d/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GraphContainer from '@/components/container/graph-container';
@@ -27,6 +27,14 @@ const DashboardClientPage = ({ id }: Props) => {
   const topic = useTopic();
   const myVote = useMyVote();
 
+  const isBlurred = useMemo(() => {
+    return (
+      myVote != null &&
+      Array.isArray(myVote.competitors) &&
+      myVote.competitors.every((vote) => vote.reserveToken === 0)
+    );
+  }, [myVote]);
+
   return (
     <CommentProvider id={id}>
       <div className={cn('container')}>
@@ -50,7 +58,11 @@ const DashboardClientPage = ({ id }: Props) => {
           </div>
         </section>
         <section className={cn('mid-inner')}>
-          <Suspense>{myVote && <MyVoteContainer myVote={myVote} />}</Suspense>
+          <Suspense>
+            {myVote && (
+              <MyVoteContainer myVote={myVote} isBlurred={isBlurred} />
+            )}
+          </Suspense>
         </section>
         <section className={cn('mid-inner')}>
           <Suspense>

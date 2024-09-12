@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from '@/components/container/activity-container/ActivityContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -22,6 +22,9 @@ const ActivityContainer = ({ topicId }: Props) => {
     queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
     queryFn: () => getRecentActivity({ topicId }),
   });
+
+  const isBlurred = useMemo(() => !data || data.length === 0, [data]);
+
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
@@ -76,6 +79,13 @@ const ActivityContainer = ({ topicId }: Props) => {
             </div>
           );
         })}
+        {isBlurred && (
+          <div className={cn('overlay')}>
+            <div className={cn('message')}>
+              <p>No transaction yet!</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -7,14 +7,16 @@ import Image from 'next/image';
 import { thousandFormat } from '@/shared/utils/number';
 import { getStaticSrc } from '@/shared/utils/etc';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
+import PlayGameButton from '@/components/common/button/playGameButton';
 
 const cn = classNames.bind(styles);
 
 type Props = {
   myVote: MyVote;
+  isBlurred: Boolean;
 };
 
-const MyVoteContainer = ({ myVote }: Props) => {
+const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
   return (
     <div className={cn('container')}>
       <div className={cn('top-container')}>
@@ -149,6 +151,18 @@ const MyVoteContainer = ({ myVote }: Props) => {
             </div>
           );
         })}
+        {isBlurred && (
+          <div className={cn('body-container')}>
+            <div className={cn('overlay')}>
+              <div className={cn('message')}>
+                <p className={cn('text')}>
+                  You have not pooled in anything yet! Explore Onikuma Game
+                </p>
+                <PlayGameButton />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
