@@ -169,6 +169,22 @@ const nextConfig = {
         source: '/api/poll-result',
         destination: `${process.env.CLIENT_SERVER_URL}/api/poll-result`,
       },
+      {
+        source: '/api/dashboards/leader-board',
+        has: [
+          {
+            type: 'query',
+            key: 'page',
+            value: '(?<page>.*)',
+          },
+          {
+            type: 'query',
+            key: 'pageSize',
+            value: '(?<pageSize>.*)',
+          },
+        ],
+        destination: `${process.env.API_BASE_URL}/api/dashboards/leader-board?page=:page&pageSize=:pageSize`,
+      },
     ];
   },
 };

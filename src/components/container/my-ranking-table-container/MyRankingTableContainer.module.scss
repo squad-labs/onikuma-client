@@ -1,0 +1,91 @@
+.container {
+  border: 1.5px solid var(--BORDER-GRAY-1);
+  border-radius: 7px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .table-header {
+    width: 100%;
+    padding: 0.75rem 0 0.75rem 0;
+    border-bottom: 1.5px solid var(--BORDER-GRAY-1);
+    border-radius: 8px 8px 0 0;
+    background-color: var(--BASE-CREAM-1);
+
+    .header-wrapper {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      flex-direction: row;
+
+      .header-inner-left {
+        display: flex;
+        width: 75%;
+        align-items: center;
+        justify-content: flex-start;
+
+        .h-my-ranking {
+          display: flex;
+          width: 33%;
+          padding-left: 1rem;
+        }
+
+        .h-wallet-address {
+          display: flex;
+          width: 67%;
+          padding-left: 1rem;
+        }
+      }
+
+      .header-inner-right {
+        display: flex;
+        width: 25%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  .table-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .list-item {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      padding: 1.5rem 0 1.5rem 0;
+
+      .item-inner-left {
+        width: 75%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        .i-my-ranking {
+          display: flex;
+          justify-content: center;
+          width: 33%;
+        }
+
+        .i-wallet-address {
+          width: 67%;
+          display: flex;
+          justify-content: flex-start;
+          padding-left: 1rem;
+        }
+      }
+
+      .item-inner-right {
+        width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

@@ -55,14 +55,20 @@ export const postVote = async ({ topicId, winner, loser }: PostVoteParams) => {
 
 type GetRecentActivity = {
   topicId: string;
+  page: number;
+  pageSize: number;
 };
 
-export const getRecentActivity = async ({ topicId }: GetRecentActivity) => {
+export const getRecentActivity = async ({
+  topicId,
+  page,
+  pageSize,
+}: GetRecentActivity) => {
   const token = getCookie('accessToken');
 
   try {
     const res = await axios.get(
-      `/api/activities/all/${topicId}?page=${1}&pageSize=${10}`,
+      `/api/activities/all/${topicId}?page=${page}&pageSize=${pageSize}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

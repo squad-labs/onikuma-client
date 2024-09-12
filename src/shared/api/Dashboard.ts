@@ -20,3 +20,27 @@ export const getPollResult = async ({ topicId }: GetPollResultParams) => {
     return err;
   }
 };
+
+type Props = {
+  page: number;
+  pageSize: number;
+};
+
+export const getLeaderboard = async ({ page, pageSize }: Props) => {
+  const token = getCookie('accessToken');
+
+  try {
+    const res = await axios.get(
+      `/api/dashboards/leader-board?page=${page}&pageSize=${pageSize}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
