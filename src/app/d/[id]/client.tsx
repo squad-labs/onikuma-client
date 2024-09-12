@@ -27,6 +27,13 @@ const DashboardClientPage = ({ id }: Props) => {
   const topic = useTopic();
   const myVote = useMyVote();
 
+  console.log(myVote);
+
+  const isBlurred =
+    myVote != null &&
+    Array.isArray(myVote.competitors) &&
+    myVote.competitors.every((vote) => vote.reserveToken === 0);
+
   return (
     <CommentProvider id={id}>
       <div className={cn('container')}>
@@ -50,7 +57,11 @@ const DashboardClientPage = ({ id }: Props) => {
           </div>
         </section>
         <section className={cn('mid-inner')}>
-          <Suspense>{myVote && <MyVoteContainer myVote={myVote} />}</Suspense>
+          <Suspense>
+            {myVote && (
+              <MyVoteContainer myVote={myVote} isBlurred={isBlurred} />
+            )}
+          </Suspense>
         </section>
         <section className={cn('mid-inner')}>
           <Suspense>
