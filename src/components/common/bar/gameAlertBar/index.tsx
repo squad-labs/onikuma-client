@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import { useDispatch } from 'react-redux';
 import { REMOVE_ALERT_DATA } from '@/context/global/slice/alertSlice';
+import { getShortenAddress } from '@/shared/utils/format';
 
 const cn = classNames.bind(styles);
 
@@ -44,7 +45,7 @@ const GameAlertBar = ({
     <div className={cn('bar-wrapper', isHide && 'bar-wrapper-hide')}>
       <div className={cn('bar-container')}>
         <BaseText
-          text={`${address} pooled in `}
+          text={`${getShortenAddress(address)} pooled in `}
           color={'DARK_GRAY_5'}
           size={'medium'}
           weight={'regular'}

@@ -120,11 +120,12 @@ const ShareGameButton = ({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'twitter'],
     mutationFn: getShareImage,
     onSuccess: async (data: ImageShareType) => {
-      const tweetText = encodeURIComponent('Check this match out at Onikuma!');
+      const tweetText = encodeURIComponent(
+        'Check this match out at Onikuma!\n',
+      );
       const tweetUrl = encodeURIComponent(window.location.href);
-      const tweetImage = encodeURIComponent(data.imageUrl);
-      const tweetHashTag = encodeURIComponent('Onikuma,Game');
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%20${tweetImage}`;
+      const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
       window.open(twitterUrl, '_blank');
     },
   });
@@ -133,11 +134,12 @@ const ShareGameButton = ({
     mutationKey: [MUTATION_KEY.POST_IMAGE, 'twitter'],
     mutationFn: getResultImage,
     onSuccess: async (data: ImageShareType) => {
-      const tweetText = encodeURIComponent('Check this match out at Onikuma!');
+      const tweetText = encodeURIComponent(
+        'Check this match out at Onikuma!\n',
+      );
       const tweetUrl = encodeURIComponent(window.location.href);
-      const tweetImage = encodeURIComponent(data.imageUrl);
-      const tweetHashTag = encodeURIComponent('Onikuma,Game');
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%20${tweetImage}`;
+      const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
       window.open(twitterUrl, '_blank');
     },
   });

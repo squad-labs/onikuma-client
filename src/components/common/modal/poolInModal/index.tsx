@@ -50,7 +50,8 @@ const PoolInModal = ({
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log('data', data);
       dispatch(CLOSE_MODAL());
     },
     onError: () => {},

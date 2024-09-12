@@ -1,12 +1,16 @@
-import React, { ChangeEvent, useCallback, useContext, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styles from '@/components/common/card/finalOptionCard/FinalOptionCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import PriceInfoCard from '@/components/common/card/priceInfoCard';
 import BaseButton from '@/widgets/button/baseButton';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { CLOSE_MODAL, OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useMutation } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
@@ -38,9 +42,7 @@ const FinalOptionCard = ({
   baseTokenName,
   roundTicker,
   roundTokenName,
-  roundTokenPrice,
 }: Props) => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
   const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
@@ -49,8 +51,8 @@ const FinalOptionCard = ({
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
-    onSuccess: () => {
-      dispatch(CLOSE_MODAL());
+    onSuccess: (data) => {
+      console.log(data);
     },
     onError: () => {},
   });
@@ -59,6 +61,30 @@ const FinalOptionCard = ({
     const _value = handleNumberUpdate(event.target.value);
     setTokenAmount(_value);
   }, []);
+
+  const handlePoolIn = useCallback(() => {
+    if (tokenAmount !== 0 && tokenAmount !== '' && tokenAmount !== undefined) {
+      poolInMutation.mutate({
+        topicId: topicId,
+        topicToken: tokenAmount,
+        reserveToken: parseInt(tokenPrice),
+        pickerName: value,
+      });
+    }
+  }, [topicId, tokenAmount, tokenPrice, title, value]);
+
+  useEffect(() => {
+    if (tokenAmount === undefined || tokenAmount === '' || tokenAmount === 0) {
+      setTokenPrice('0');
+      return;
+    }
+    const _getTokenPrice = async () => {
+      const token = await getTokenPrice(tokenAmount.toString());
+      if (token === undefined) setTokenPrice('0');
+      else setTokenPrice(String(token));
+    };
+    _getTokenPrice();
+  }, [tokenAmount]);
 
   return (
     <div className={cn('card-container')}>
@@ -114,24 +140,7 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => {
-            dispatch(
-              OPEN_MODAL({
-                name: 'PoolInModal',
-                data: {
-                  topicId: topicId,
-                  title: title,
-                  value: value,
-                  imageUrl: imageUrl,
-                  poolAmount: 100,
-                  baseTicker: 'HONEY',
-                  baseTokenName: 'HONEY',
-                  baseTokenPrice: 0.002,
-                  roundTicker: roundTicker,
-                  roundTokenName: roundTokenName,
-                  roundTokenPrice: roundTokenPrice,
-                },
-              }),
-            );
+            mintToken(handlePoolIn);
           }}
         />
         <BaseButton
