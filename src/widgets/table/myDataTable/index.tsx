@@ -3,13 +3,11 @@ import styles from '@/widgets/table/myDataTable/MyDataTable.module.scss';
 import classNames from 'classnames/bind';
 import CheckResultsButton from '@/components/common/button/checkResultsButton';
 import StatusBar from '@/widgets/bar/statusBar';
-<<<<<<< HEAD
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
-=======
 import PlayGameButton from '@/components/common/button/playGameButton';
->>>>>>> f01cf11 (fix: adjust blur filter to exclude table headers for dashboard my votings)
+import { fetchDateFormat } from '@/shared/utils/date';
 
 const cn = classNames.bind(styles);
 
@@ -33,39 +31,26 @@ type MyDataTableProps = {
   data: TableRow[];
 };
 
-const formatDateString = (dateString: string) => {
-  const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  };
-  return date.toLocaleDateString(undefined, options);
-};
-
-const formatDollar = (value: number) => {
-  const formattedNumber = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  }).format(value);
-  return formattedNumber;
-};
-
-const formatSign = (value: number) => {
-  return value >= 0 ? '+' : '';
-};
-
 const MyDataTable = ({ data }: MyDataTableProps) => {
-<<<<<<< HEAD
   const router = useRouter();
   const dispatch = useDispatch();
-=======
+  const formatDollar = (value: number) => {
+    const formattedNumber = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(value);
+    return formattedNumber;
+  };
+
+  const formatSign = (value: number) => {
+    return value >= 0 ? '+' : '';
+  };
+
   const isBlurred = useMemo(() => {
     return data.length !== 10;
   }, [data]);
->>>>>>> f01cf11 (fix: adjust blur filter to exclude table headers for dashboard my votings)
 
   return (
     <table className={cn('my-table')}>
@@ -87,7 +72,7 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
             <td>
               <StatusBar label={item.status} />
             </td>
-            <td>{`${formatDateString(item.startAt)}`}</td>
+            <td>{`${item.startAt}`}</td>
             <td>
               {formatSign(item.totalPoolIn)}
               {formatDollar(item.totalPoolIn)}
