@@ -9,6 +9,37 @@
   width: 100%;
   min-width: 600px;
 
+  .table-body {
+    position: relative;
+    z-index: 0;
+
+    .overlay-row {
+      position: relative;
+
+      .overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--DARK-GRAY-1);
+        border-radius: 3px;
+        backdrop-filter: blur(5px);
+
+        .message {
+          height: 100%;
+          gap: 1.5rem;
+          color: var(black);
+          font-size: 1rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+
   th {
     padding: 0.75rem 1.5rem;
     font-size: var(--TEXT-SIZE-MEDIUM);

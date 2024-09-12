@@ -55,6 +55,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
       </div>
 
       <div className={cn('body-container')}>
+<<<<<<< HEAD
         {isBlurred && (
           <div className={cn('overlay')}>
             <div className={cn('message')}>
@@ -89,6 +90,37 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
               weight="bold"
               text="Pooled In"
             />
+=======
+        <div className={cn('table-header')}>
+          <div className={cn('header-wrapper')}>
+            <div className={cn('header-inner-left')}>
+              <BaseText
+                size="medium"
+                color="BASE_BLUE_1"
+                weight="bold"
+                text="Name"
+              />
+              <DownloadSvg viewBox="0 0 16 16" className={cn('icon')} />
+            </div>
+            <div className={cn('header-inner-right')}>
+              <div className={cn('inner-text')}>
+                <BaseText
+                  size="medium"
+                  color="BASE_BLUE_1"
+                  weight="bold"
+                  text="Pooled In"
+                />
+              </div>
+              <div className={cn('inner-text')}>
+                <BaseText
+                  size="medium"
+                  color="BASE_BLUE_1"
+                  weight="bold"
+                  text="# of Tokens"
+                />
+              </div>
+            </div>
+>>>>>>> f01cf11 (fix: adjust blur filter to exclude table headers for dashboard my votings)
           </div>
           <div className={cn('inner-text')}>
             <BaseText
@@ -100,6 +132,14 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
           </div>
         </div>
         <div className={cn('table-body')}>
+          {isBlurred && (
+            <div className={cn('overlay')}>
+              <div className={cn('message')}>
+                <p>You have not pooled in anything yet! Explore Onikuma Game</p>
+                <PlayGameButton />
+              </div>
+            </div>
+          )}
           {myVote.competitors.map((competitor, index) => {
             return (
               <div key={index} className={cn('list-item')}>

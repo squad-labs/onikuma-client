@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from '@/widgets/table/myDataTable/MyDataTable.module.scss';
 import classNames from 'classnames/bind';
 import CheckResultsButton from '@/components/common/button/checkResultsButton';
 import StatusBar from '@/widgets/bar/statusBar';
+<<<<<<< HEAD
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
+=======
+import PlayGameButton from '@/components/common/button/playGameButton';
+>>>>>>> f01cf11 (fix: adjust blur filter to exclude table headers for dashboard my votings)
 
 const cn = classNames.bind(styles);
 
@@ -54,8 +58,14 @@ const formatSign = (value: number) => {
 };
 
 const MyDataTable = ({ data }: MyDataTableProps) => {
+<<<<<<< HEAD
   const router = useRouter();
   const dispatch = useDispatch();
+=======
+  const isBlurred = useMemo(() => {
+    return data.length !== 10;
+  }, [data]);
+>>>>>>> f01cf11 (fix: adjust blur filter to exclude table headers for dashboard my votings)
 
   return (
     <table className={cn('my-table')}>
@@ -70,7 +80,7 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
           <th>Check Results</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={cn('table-body')}>
         {data.map((item, index) => (
           <tr key={index}>
             <td className={cn('td-name')}>{item.name}</td>

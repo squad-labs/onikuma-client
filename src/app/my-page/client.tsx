@@ -6,7 +6,6 @@ import HighlightCard from '@/widgets/card/highlightCard';
 import MyDataTable from '@/widgets/table/myDataTable';
 import { MyData } from '@/shared/types/data/my-data';
 import { thousandFormat } from '@/shared/utils/number';
-import PlayGameButton from '@/components/common/button/playGameButton';
 
 const cn = classNames.bind(styles);
 
@@ -15,8 +14,6 @@ type Props = {
 };
 
 const MyClientPage = ({ myData }: Props) => {
-  console.log('Received myData:', myData);
-
   const total = useMemo(() => {
     return {
       myTotalPoolIn: myData.myTotalPoolIn ?? 0,
@@ -37,10 +34,6 @@ const MyClientPage = ({ myData }: Props) => {
 
     return { signTotalGain, signPnL, formattedTotalGain };
   }, [total]);
-
-  const isBlurred = useMemo(() => {
-    return myData.result?.length !== 10;
-  }, [myData.result]);
 
   return (
     <div className={cn('page-container')}>
@@ -77,14 +70,6 @@ const MyClientPage = ({ myData }: Props) => {
           />
         </div>
         <div className={cn('my-data-table-container')}>
-          {isBlurred && (
-            <div className={cn('overlay')}>
-              <div className={cn('message')}>
-                <p>You have not pooled in anything yet! Explore Onikuma Game</p>
-                <PlayGameButton />
-              </div>
-            </div>
-          )}
           <MyDataTable data={myData.result || []} />
         </div>
       </div>
