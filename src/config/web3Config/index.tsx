@@ -1,5 +1,5 @@
 import { berachainTestnetbArtio } from 'wagmi/chains';
-import { cookieStorage, createStorage } from 'wagmi';
+import { cookieStorage, createStorage, http } from 'wagmi';
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 
 export const PROJECT_ID = process.env.NEXT_PUBLIC_WAGMI_PROJECT_ID;
@@ -27,4 +27,7 @@ export const config = getDefaultConfig({
   storage: createStorage({
     storage: cookieStorage,
   }),
+  transports: {
+    [chain.id]: http(),
+  },
 });
