@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from '@/components/container/if-you-are-table-container/IfYouAreTableContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -7,14 +7,6 @@ import { getStaticSrc } from '@/shared/utils/etc';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
-
-const Data = [
-  { ifYouAre: 'ONIKUMA GENESIS NFT HOLDER', multipliers: 'x2' },
-  { ifYouAre: 'Holding more than 2 ONIKUMA GENESIS NFT', multipliers: 'x3' },
-  { ifYouAre: 'Holding Berachain NFT', multipliers: '1.5x' },
-  { ifYouAre: 'Winner of the Contest', multipliers: '100x' },
-  { ifYouAre: 'Participation', multipliers: '1.15x' },
-];
 
 const IfYouAreTableContainer = () => {
   return (

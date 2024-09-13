@@ -12,10 +12,11 @@ import PriceInfoCard from '@/components/common/card/priceInfoCard';
 import BaseButton from '@/widgets/button/baseButton';
 import { useRouter } from 'next/navigation';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
-import { postPoolIn } from '@/shared/api/Activity';
+import { getTokenData, postPoolIn } from '@/shared/api/Activity';
 import { handleNumberUpdate } from '@/shared/utils/number';
+import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 
 const cn = classNames.bind(styles);
 
@@ -47,6 +48,11 @@ const FinalOptionCard = ({
   const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
   const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
   const { mintToken, getTokenPrice } = useContext(RoundContext);
+
+  const { data } = useQuery({
+    queryKey: [QUERY_KEY.GET_PRICE, topicId],
+    queryFn: () => getTokenData({ topicId }),
+  });
 
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
@@ -120,6 +126,14 @@ const FinalOptionCard = ({
           imageUrl={imageUrl}
           price={tokenAmount.toString()}
           setPrice={handleOnChange}
+          meta={{
+            price: data.price,
+            balance: data.myBalance,
+            percent: (
+              ((data.price - data.initialPrice) / data.initialPrice) *
+              100
+            ).toString(),
+          }}
         />
         <PriceInfoCard
           type={'top'}
@@ -128,6 +142,11 @@ const FinalOptionCard = ({
           imageUrl={imageUrl}
           price={tokenPrice}
           setPrice={handleOnChange}
+          meta={{
+            price: '1',
+            balance: '0',
+            percent: '0',
+          }}
         />
       </div>
       <div className={cn('button-container')}>
