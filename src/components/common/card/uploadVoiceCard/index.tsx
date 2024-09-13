@@ -56,7 +56,6 @@ const UploadVoiceCard = ({
     mutationKey: [MUTATION_KEY],
     mutationFn: confirmTopicVoice,
     onSuccess: (data) => {
-      console.log(data);
       dispatch(
         SET_TOAST({
           type: 'success',

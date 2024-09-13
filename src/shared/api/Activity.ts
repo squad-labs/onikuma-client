@@ -6,8 +6,17 @@ type GetTokenDataParams = {
 };
 
 export const getTokenData = async ({ topicId }: GetTokenDataParams) => {
+  const token = getCookie('accessToken');
   try {
-    const res = await axios.post(`/api/activities/token-price/${topicId}`);
+    const res = await axios.post(
+      `/api/activities/token-price/${topicId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     return res.data;
   } catch (err) {

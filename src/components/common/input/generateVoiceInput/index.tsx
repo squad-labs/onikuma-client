@@ -50,7 +50,6 @@ const GenerateVoiceInput = ({
     mutationKey: [MUTATION_KEY.POST_VOICE],
     mutationFn: postTopicVoice,
     onSuccess: (data) => {
-      console.log(data);
       setAudioUrl(data.biggestTopicVoiceUrl);
       dispatch(
         SET_TOAST({

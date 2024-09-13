@@ -1,5 +1,5 @@
 'use client';
-import React, { ReactNode, useCallback, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { Option, Topic } from '@/shared/types/data/topic';
 import { mintclub, wei } from 'watchman-tool-sdk';
@@ -26,6 +26,7 @@ type Props = {
 const RoundProvider = ({ children, topic, round }: Props) => {
   const dispatch = useDispatch();
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [honeyBalance, setHoneyBalance] = useState<number>(0);
   const [ticker, setTicker] = useState<string>(topic.ticker);
   const [currentRound, setCurrentRound] = useState<8 | 4 | 2 | 1>(8);
   const [options, setOptions] = useState<Option[]>(topic.competitors);
@@ -33,6 +34,8 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const [currentIndex, setCurrentIndex] = useState<number[]>(round.first);
   const network = mintclub.network('berachaintestnetbartio');
   const token = network.token(topic.ticker);
+
+  useEffect(() => {}, []);
 
   const next = useCallback(
     (optionName: string) => {
@@ -155,6 +158,8 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     <RoundContext.Provider
       value={{
         next,
+        honeyBalance,
+        setHoneyBalance,
         ticker,
         setTicker,
         getTokenPrice,

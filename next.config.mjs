@@ -201,6 +201,10 @@ const nextConfig = {
         source: '/api/topics/share-point',
         destination: `${process.env.API_BASE_URL}/api/topics/share-point`,
       },
+      {
+        source: `/api/activities/token-price/:id*`,
+        destination: `${process.env.API_BASE_URL}/api/activities/token-price/:id*`,
+      },
     ];
   },
 };

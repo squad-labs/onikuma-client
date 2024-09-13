@@ -18,11 +18,12 @@ import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 import { useDispatch } from 'react-redux';
 import useOnClickOutside from '@/shared/hooks/useOnClick';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
-import { postPoolIn } from '@/shared/api/Activity';
-import { useMutation } from '@tanstack/react-query';
+import { getTokenData, postPoolIn } from '@/shared/api/Activity';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRouter } from 'next/navigation';
 import { handleNumberUpdate } from '@/shared/utils/number';
+import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 
 const cn = classNames.bind(styles);
 
@@ -38,10 +39,15 @@ const PoolInModal = ({
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
+  const [tokenAmount, setTokenAmount] = useState<number | ''>('');
   const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
   const { mintToken, getTokenPrice } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const { data } = useQuery({
+    queryKey: [QUERY_KEY.GET_PRICE, topicId],
+    queryFn: () => getTokenData({ topicId }),
+  });
 
   const handleCloseModal = useCallback(() => {
     dispatch(CLOSE_MODAL());
@@ -51,7 +57,6 @@ const PoolInModal = ({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
-      console.log('data', data);
       dispatch(CLOSE_MODAL());
     },
     onError: () => {},
@@ -123,6 +128,14 @@ const PoolInModal = ({
               imageUrl={imageUrl}
               price={tokenAmount.toString()}
               setPrice={handleOnChange}
+              meta={{
+                price: data.price,
+                balance: data.myBalance,
+                percent: (
+                  ((data.price - data.initialPrice) / data.initialPrice) *
+                  100
+                ).toString(),
+              }}
             />
             <PriceInfoCard
               type={'top'}
@@ -131,6 +144,11 @@ const PoolInModal = ({
               imageUrl={imageUrl}
               price={tokenPrice}
               setPrice={handleOnChange}
+              meta={{
+                price: '1',
+                balance: '0',
+                percent: '0',
+              }}
             />
           </div>
         </div>

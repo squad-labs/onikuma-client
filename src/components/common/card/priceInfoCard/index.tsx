@@ -14,6 +14,11 @@ type Props = {
   imageUrl: string;
   price: string;
   setPrice: (event: ChangeEvent<HTMLInputElement>) => void;
+  meta?: {
+    price: string;
+    balance: string;
+    percent: string;
+  };
 };
 
 const PriceInfoCard = ({
@@ -23,6 +28,7 @@ const PriceInfoCard = ({
   imageUrl,
   price,
   setPrice,
+  meta,
 }: Props) => {
   return (
     <div className={cn('card-container')}>
@@ -51,8 +57,9 @@ const PriceInfoCard = ({
         <input
           value={price}
           type="text"
+          placeholder="0.0"
           onChange={(event) => setPrice(event)}
-          className={cn('input')}
+          className={cn('input', type)}
           disabled={type === 'top'}
         />
       </div>
@@ -65,19 +72,13 @@ const PriceInfoCard = ({
             color="DARK_GRAY_5"
           />
           <BaseText
-            text={`$1 HONEY`}
+            text={`$${meta?.price} HONEY`}
             size="medium"
             weight="light"
             color="DARK"
           />
           <BaseText
-            text={`$2,027.87`}
-            size="medium"
-            weight="light"
-            color="DARK_GRAY_5"
-          />
-          <BaseText
-            text={`+0%`}
+            text={`+${meta?.percent}%`}
             size="medium"
             weight="regular"
             color="BASE_RED_1"
@@ -91,25 +92,17 @@ const PriceInfoCard = ({
             color="DARK_GRAY_5"
           />
           <BaseText
-            text={`$1 ${title}`}
+            text={`${title}`}
             size="medium"
             weight="light"
             color="DARK"
           />
           <BaseText
-            text={`$2,027.87 HONEY`}
+            text={`${meta?.balance}`}
             size="medium"
             weight="regular"
             color="DARK_GRAY_5"
           />
-          {type === 'top' && (
-            <BaseText
-              text={`max`}
-              size="medium"
-              weight="regular"
-              color="BASE_RED_1"
-            />
-          )}
         </div>
       </div>
     </div>
