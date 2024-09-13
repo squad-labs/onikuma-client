@@ -9,7 +9,10 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
 import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
-import { ethers } from 'ethers';
+import { ethers, JsonRpcProvider } from 'ethers';
+import { Config, useClient } from 'wagmi';
+import { chain as AppChain } from '@/config/web3Config';
+import type { Chain, Client, Transport } from 'viem';
 
 type RoundList = {
   first: number[];
@@ -33,6 +36,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const [currentIndex, setCurrentIndex] = useState<number[]>(round.first);
   const network = mintclub.network('berachaintestnetbartio');
   const token = network.token(topic.ticker);
+  const client = useClient<Config>({ chainId: AppChain.id });
 
   const next = useCallback(
     (optionName: string) => {
@@ -97,12 +101,25 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     }
   }, []);
 
+  const clientToProvider = (client: any) => {
+    const { chain } = client;
+    const network = {
+      chainId: chain.id,
+      name: chain.name,
+    };
+
+    const provider = new JsonRpcProvider(
+      chain.rpcUrls.default.http[0],
+      network,
+    );
+    return provider;
+  };
+
   const mintToken = useCallback(
     async (callback: () => void) => {
-      const provider = new ethers.JsonRpcProvider(
-        process.env.NEXT_PUBLIC_BERACHAIN_RPC_URL,
-      );
-      await mintclub.wallet.connect(provider);
+      const provider = clientToProvider(client);
+
+      await mintclub.wallet.connect(window.ethereum);
       try {
         await token.buy({
           amount: wei(1, 18),
