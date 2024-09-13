@@ -151,6 +151,7 @@ const FinalOptionCard = ({
       </div>
       <div className={cn('button-container')}>
         <BaseButton
+          disabled={tokenAmount === 0 || tokenAmount === ''}
           text={'Pool in'}
           shape="shape-4"
           label="pool-in-button"
