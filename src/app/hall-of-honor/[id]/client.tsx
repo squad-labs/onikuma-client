@@ -25,6 +25,7 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(true);
   const [skipImage, setSkipImage] = useState<boolean>(false);
   const [skipVoice, setSkipVoice] = useState<boolean>(false);
+  const [audioUrl, setAudioUrl] = useState<string>('');
 
   const handleFlip = useCallback(() => {
     setIsFlipped(!isFlipped);
@@ -114,8 +115,11 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
         {honor.isBiggestTopicPooler && (
           <div className={cn('upload-voice-wrapper', skipVoice && 'skip')}>
             <UploadVoiceCard
+              topicId={id}
               withBorder={false}
               withbackGround={false}
+              setAudioUrl={setAudioUrl}
+              audioUrl={audioUrl}
               setSkip={() => setSkipVoice(true)}
             />
           </div>

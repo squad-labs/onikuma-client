@@ -185,6 +185,22 @@ const nextConfig = {
         ],
         destination: `${process.env.API_BASE_URL}/api/dashboards/leader-board?page=:page&pageSize=:pageSize`,
       },
+      {
+        source: '/api/topics/topic-voice',
+        destination: `${process.env.API_BASE_URL}/api/topics/topic-voice`,
+      },
+      {
+        source: '/api/topics/create-topic-voice/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/create-topic-voice/:id*`,
+      },
+      {
+        source: '/api/topics/confirm-topic-voice/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/confirm-topic-voice/:id*`,
+      },
+      {
+        source: '/api/topics/share-point',
+        destination: `${process.env.API_BASE_URL}/api/topics/share-point`,
+      },
     ];
   },
 };

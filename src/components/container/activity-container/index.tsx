@@ -29,9 +29,7 @@ const ActivityContainer = ({ topicId }: Props) => {
       page,
       pageSize: 10,
     });
-    console.log(activities);
     if (activities.length === 0) {
-      console.log('isLast');
       setIsLast(true);
     }
     setActivityItems([...activityItems, ...activities]);
@@ -44,7 +42,6 @@ const ActivityContainer = ({ topicId }: Props) => {
     const target = entries[0];
 
     if (target.isIntersecting && !loading && !isLast) {
-      console.log('fetch more');
       setPage((prev) => prev + 1);
     }
   };

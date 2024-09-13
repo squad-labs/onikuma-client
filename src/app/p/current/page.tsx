@@ -29,7 +29,6 @@ const GameCurrentPage = async () => {
     );
 
     const data: Topic = await res.json();
-
     return (
       <main className={cn('container')}>
         <RoundProvider topic={data} round={round}>

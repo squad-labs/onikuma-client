@@ -4,10 +4,11 @@ import classNames from 'classnames/bind';
 import HeaderLogo from '@/components/common/logo/headerLogo';
 import DashBoardButton from '@/components/common/button/dashBoardButton';
 import PlayGameButton from '@/components/common/button/playGameButton';
-import { getTopicByStatus } from '@/shared/api/Topics';
+import { getTopicByStatus, getTopicVoice } from '@/shared/api/Topics';
 import { TopicMetadata } from '@/shared/types/data/topic';
 import dynamic from 'next/dynamic';
 import AuthDropdown from '@/components/common/dropdown/authDropdown';
+import OnVoiceButton from '@/components/common/button/onVoiceButton';
 
 const GameRelayBar = dynamic(
   () => import('@/components/common/bar/gameRelayBar'),
@@ -31,6 +32,7 @@ const Header = async () => {
         </div>
         <div className={cn('header-inner')}>
           <AuthDropdown />
+          <OnVoiceButton />
           <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
           <PlayGameButton />
         </div>

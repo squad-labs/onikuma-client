@@ -54,4 +54,24 @@ export const TOAST_RESPONSE = {
       secondaryText: 'An error occurred while uploading the image',
     },
   },
+  UPLOAD_VOICE: {
+    SUCCESS: {
+      primaryText: 'Voice uploaded successfully',
+      secondaryText: 'The voice has been successfully uploaded',
+    },
+    ERROR: {
+      primaryText: 'Upload failed',
+      secondaryText: 'An error occurred while uploading the voice',
+    },
+  },
+  GENERATE_VOICE: {
+    SUCCESS: {
+      primaryText: 'Generated successfully',
+      secondaryText: 'The voice has been successfully generated',
+    },
+    ERROR: {
+      primaryText: 'Generation failed',
+      secondaryText: 'An error occurred while generating the voice',
+    },
+  },
 } as const;

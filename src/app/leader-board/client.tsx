@@ -45,7 +45,6 @@ const LeaderboardClientPage = () => {
     const target = entries[0];
 
     if (target.isIntersecting && !isLoading && !loading && !isLast) {
-      console.log('fetch more');
       setPage((prev) => prev + 1);
     }
   };

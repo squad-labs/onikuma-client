@@ -24,6 +24,7 @@ const HonorClientPage = ({ id, honor }: Props) => {
   const [skipImage, setSkipImage] = useState<boolean>(false);
   const [skipVoice, setSkipVoice] = useState<boolean>(false);
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string>('');
 
   if (!honor.competitors || honor.competitors.length === 0) {
     return <div>error</div>;
@@ -69,7 +70,10 @@ const HonorClientPage = ({ id, honor }: Props) => {
           </div>
           <div className={cn('card', skipVoice && 'skip')}>
             <UploadVoiceCard
+              topicId={id}
               withBorder
+              setAudioUrl={setAudioUrl}
+              audioUrl={audioUrl}
               withbackGround
               setSkip={() => setSkipVoice(true)}
             />

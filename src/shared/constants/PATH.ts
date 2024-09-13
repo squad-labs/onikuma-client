@@ -19,6 +19,7 @@ export const ICON_SRC_PATH = {
     CLOSE_TOAST: '/close-toast.svg',
     FLAG: '/flag.svg',
     ONIGIRI: '/onigiri.svg',
+    VOICE: '/voice.svg',
   },
 } as const;
 

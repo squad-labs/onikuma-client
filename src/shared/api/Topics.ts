@@ -2,6 +2,16 @@ import { TopicStatus } from '@/shared/types/data/topic';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+export const getTopicVoice = async () => {
+  try {
+    const res = await axios.get(`/api/topics/topic-voice`);
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const getTopicById = async (id: string, token: string) => {
   try {
     const res = await fetch(

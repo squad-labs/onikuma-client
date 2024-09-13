@@ -1,6 +1,20 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+type GetTokenDataParams = {
+  topicId: string;
+};
+
+export const getTokenData = async ({ topicId }: GetTokenDataParams) => {
+  try {
+    const res = await axios.post(`/api/activities/token-price/${topicId}`);
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 type PostPoolInParams = {
   topicId: string;
   topicToken: number;
@@ -97,6 +111,64 @@ export const getTopicTokenPrice = async ({
       `/api/activities/buy-estimation/${topicId}`,
       {
         amount,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+type PostTopicVoiceParams = {
+  topicId: string;
+  text: string;
+};
+
+export const postTopicVoice = async ({
+  topicId,
+  text,
+}: PostTopicVoiceParams) => {
+  const token = getCookie('accessToken');
+
+  try {
+    const res = await axios.post(
+      `/api/topics/create-topic-voice/${topicId}`,
+      { text },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+type ConfirmTopicVoiceParams = {
+  topicId: string;
+  biggestTopicVoiceUrl: string;
+};
+
+export const confirmTopicVoice = async ({
+  topicId,
+  biggestTopicVoiceUrl,
+}: ConfirmTopicVoiceParams) => {
+  const token = getCookie('accessToken');
+
+  try {
+    const res = await axios.post(
+      `/api/topics/confirm-topic-voice/${topicId}`,
+      {
+        biggestTopicVoiceUrl,
       },
       {
         headers: {
