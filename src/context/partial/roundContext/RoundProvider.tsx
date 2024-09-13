@@ -99,7 +99,10 @@ const RoundProvider = ({ children, topic, round }: Props) => {
 
   const mintToken = useCallback(
     async (callback: () => void) => {
-      await mintclub.wallet.connect();
+      const provider = new ethers.JsonRpcProvider(
+        process.env.NEXT_PUBLIC_BERACHAIN_RPC_URL,
+      );
+      await mintclub.wallet.connect(provider);
       try {
         await token.buy({
           amount: wei(1, 18),
