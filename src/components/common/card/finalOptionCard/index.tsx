@@ -118,37 +118,39 @@ const FinalOptionCard = ({
           weight={'regular'}
         />
       </div>
-      <div className={cn('info-container')}>
-        <PriceInfoCard
-          type={'bottom'}
-          title={roundTokenName}
-          ticker={`$${roundTicker}`}
-          imageUrl={imageUrl}
-          price={tokenAmount.toString()}
-          setPrice={handleOnChange}
-          meta={{
-            price: data.price,
-            balance: data.myBalance,
-            percent: (
-              ((data.price - data.initialPrice) / data.initialPrice) *
-              100
-            ).toString(),
-          }}
-        />
-        <PriceInfoCard
-          type={'top'}
-          title={baseTokenName}
-          ticker={`$${baseTicker}`}
-          imageUrl={imageUrl}
-          price={tokenPrice}
-          setPrice={handleOnChange}
-          meta={{
-            price: '1',
-            balance: '0',
-            percent: '0',
-          }}
-        />
-      </div>
+      {data && (
+        <div className={cn('info-container')}>
+          <PriceInfoCard
+            type={'bottom'}
+            title={roundTokenName}
+            ticker={`$${roundTicker}`}
+            imageUrl={imageUrl}
+            price={tokenAmount.toString()}
+            setPrice={handleOnChange}
+            meta={{
+              price: data.price,
+              balance: data.myBalance,
+              percent: (
+                ((data.price - data.initialPrice) / data.initialPrice) *
+                100
+              ).toString(),
+            }}
+          />
+          <PriceInfoCard
+            type={'top'}
+            title={baseTokenName}
+            ticker={`$${baseTicker}`}
+            imageUrl={imageUrl}
+            price={tokenPrice}
+            setPrice={handleOnChange}
+            meta={{
+              price: '1',
+              balance: data.myBalanceHoney,
+              percent: data.myBalanceHoney,
+            }}
+          />
+        </div>
+      )}
       <div className={cn('button-container')}>
         <BaseButton
           disabled={tokenAmount === 0 || tokenAmount === ''}

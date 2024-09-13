@@ -147,8 +147,8 @@ const PoolInModal = ({
                 setPrice={handleOnChange}
                 meta={{
                   price: '1',
-                  balance: '0',
-                  percent: '0',
+                  balance: data.myBalanceHoney,
+                  percent: data.myBalanceHoney,
                 }}
               />
             </div>
