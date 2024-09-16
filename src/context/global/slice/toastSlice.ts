@@ -6,6 +6,10 @@ export type ToastType = {
   toastId: number;
   index: number;
   type: Type;
+  text: {
+    primaryText: string;
+    secondaryText: string;
+  };
   canClose: boolean;
   autoClose: {
     duration: number;
@@ -33,6 +37,10 @@ const toastSlice = createSlice({
         toastId: state.total,
         index: state.data.length + 1,
         type: action.payload.type,
+        text: {
+          primaryText: action.payload.text.primaryText,
+          secondaryText: action.payload.text.secondaryText,
+        },
         canClose: action.payload.canClose,
         autoClose: action.payload.autoClose,
       };

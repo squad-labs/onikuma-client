@@ -39,13 +39,10 @@ export type PoolInModalProps = {
   value: string;
   title: string;
   imageUrl: string;
-  poolAmount: number;
   baseTicker: string;
-  baseTokenPrice: string;
   baseTokenName: string;
   roundTokenName: string;
   roundTicker: string;
-  roundTokenPrice: string;
 };
 
 export type PoolResultModalProps = PollResult & {};

@@ -37,3 +37,9 @@ export const getNumberSign = (
       ? { result: true, sign: '+', color: 'BASE_GREEN_1' }
       : { result: false, sign: '-', color: 'BASE_RED_1' };
 };
+
+export const handleNumberUpdate = (text: string | number): number | '' => {
+  const value = typeof text !== 'number' ? parseInt(text) : text;
+  if (Number.isNaN(value) || typeof value !== 'number' || value < 0) return '';
+  return value;
+};

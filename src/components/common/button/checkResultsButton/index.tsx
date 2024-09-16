@@ -6,12 +6,14 @@ type CheckResultsButtonProps = {
   text: string;
   primaryColor: 'BASE_BLUE_1' | 'DARK_GRAY_5' | 'BASE_RED_1';
   secondaryColor: 'BASE_CREAM_1';
+  onClick: () => void;
 };
 
 const CheckResultsButton = ({
   text,
   primaryColor,
   secondaryColor,
+  onClick,
 }: CheckResultsButtonProps) => {
   return (
     <BaseButton
@@ -20,11 +22,11 @@ const CheckResultsButton = ({
       colors={{ primary: primaryColor, secondary: secondaryColor }}
       label="check-results-button"
       role={'button'}
-      shape={'shape-4'}
+      shape={'shape-8'}
       fontSize={'medium'}
       fontWeight={'regular'}
       loading={false}
-      onClick={() => {}}
+      onClick={() => onClick()}
       classNames={[]}
     />
   );

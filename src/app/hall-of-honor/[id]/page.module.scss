@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,8 +7,8 @@
 
   .inner {
     position: relative;
+    min-height: 100vh;
     width: calc(100vw - 8rem);
-    height: calc(100vh - 8rem - 72px);
     background-color: var(--LIGHT-CREAM-1);
     border: 3px solid var(--DARK-GRAY-4);
     border-radius: 1rem;

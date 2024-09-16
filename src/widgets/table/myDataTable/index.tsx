@@ -3,6 +3,9 @@ import styles from '@/widgets/table/myDataTable/MyDataTable.module.scss';
 import classNames from 'classnames/bind';
 import CheckResultsButton from '@/components/common/button/checkResultsButton';
 import StatusBar from '@/widgets/bar/statusBar';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -51,6 +54,9 @@ const formatSign = (value: number) => {
 };
 
 const MyDataTable = ({ data }: MyDataTableProps) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   return (
     <table className={cn('my-table')}>
       <thead>
@@ -71,7 +77,7 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
             <td>
               <StatusBar label={item.status} />
             </td>
-            <td>{`${formatDateString(item.startAt)} ~ ${formatDateString(item.endAt)}`}</td>
+            <td>{`${formatDateString(item.startAt)}`}</td>
             <td>
               {formatSign(item.totalPoolIn)}
               {formatDollar(item.totalPoolIn)}
@@ -97,6 +103,24 @@ const MyDataTable = ({ data }: MyDataTableProps) => {
                       : 'BASE_BLUE_1'
                 }
                 secondaryColor="BASE_CREAM_1"
+                onClick={() => {
+                  if (item.isBiggestTopicPooler) {
+                    router.push(`/hall-of-honor/${item.topicId}`);
+                  } else {
+                    dispatch(
+                      OPEN_MODAL({
+                        name: 'PoolResultModalProps',
+                        data: {
+                          topicId: item.topicId,
+                          totalGain: item.totalCostPnL,
+                          totalPnl: item.totalPercentPnL,
+                          totalPoolIn: item.totalPoolIn,
+                          competitors: item.competitors,
+                        },
+                      }),
+                    );
+                  }
+                }}
               />
             </td>
           </tr>

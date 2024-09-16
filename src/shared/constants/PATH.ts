@@ -17,6 +17,9 @@ export const ICON_SRC_PATH = {
     TEXT: '/text.svg',
     X: '/x.svg',
     CLOSE_TOAST: '/close-toast.svg',
+    FLAG: '/flag.svg',
+    ONIGIRI: '/onigiri.svg',
+    VOICE: '/voice.svg',
   },
 } as const;
 
@@ -30,5 +33,7 @@ export const IMAGE_SRC_PATH = {
     TOAST_ACTIONREQ: '/toast-actionreq.svg',
     TOAST_ERROR: '/toast-error.svg',
     TOAST_SUCCESS: '/toast-success.svg',
+    CHARACTER: '/character.svg',
+    TEXT_LOGO: '/text-logo.svg',
   },
 } as const;

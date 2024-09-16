@@ -3,17 +3,12 @@ import styles from '@/components/common/modal/shareResultModal/ShareResultModal.
 import classNames from 'classnames/bind';
 import { ShareResultModalProps } from '@/shared/types/ui/Modal';
 import { useDispatch } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
-import { getResultImage } from '@/shared/api/Image';
 import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 import useOnClickOutside from '@/shared/hooks/useOnClick';
-import { Copy } from '@/shared/utils/clipboard';
 import BaseModal from '@/widgets/modal/baseModal';
-import BaseText from '@/widgets/text/baseText';
 import Image from 'next/image';
-import BaseButton from '@/widgets/button/baseButton';
-import { getCookie } from 'cookies-next';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { IMAGE_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -25,32 +20,11 @@ const ShareResultModal = ({
   option,
 }: ShareResultModalProps) => {
   const dispatch = useDispatch();
-  const cookie = getCookie('accessToken') ?? '';
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const { data } = useQuery({
-    queryKey: [QUERY_KEY.GET_RESULT_IMAGE],
-    queryFn: () =>
-      getResultImage({
-        topicId,
-        title,
-        roundText,
-        dateText,
-        option,
-        token: cookie,
-      }),
-  });
 
   const handleCloseModal = useCallback(() => {
     dispatch(CLOSE_MODAL());
   }, [dispatch]);
-
-  const handleCopy = useCallback(() => {
-    Copy({
-      value: window.location.href,
-      onSuccess: () => {},
-      onError: () => {},
-    });
-  }, []);
 
   useOnClickOutside({
     ref: modalRef,
@@ -60,39 +34,46 @@ const ShareResultModal = ({
   return (
     <BaseModal background={'DARK_OPACITY_5'}>
       <div className={cn('modal-inner')} ref={modalRef}>
-        <p className={cn('modal-title')}>{'Share with your friends'}</p>
-        <div className={cn('text-container')}>
-          <BaseText
-            text="Share it wherever you want including your X, TG, and etc."
-            size="large"
-            color="DARK_GRAY_2"
-            weight="regular"
-          />
-        </div>
-        <div className={cn('button-container')}>
-          <BaseButton
-            text="Copy Link"
-            shape="shape-4"
-            colors={{ primary: 'BASE_BLUE_1', secondary: 'LIGHT' }}
-            theme="fill"
-            type="button"
-            role="button"
-            fontSize="large"
-            fontWeight="bold"
-            label="copy-link-button"
-            onClick={() => handleCopy()}
-          />
-        </div>
         <div className={cn('image-container')}>
-          {data && (
+          <div className={cn('header')}>
+            <span className={cn('text')}>{title}</span>
             <Image
-              src={data}
-              alt="share"
-              fill={true}
-              priority={true}
-              className={cn('image')}
+              src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CHARACTER)}
+              width={40}
+              height={40}
+              alt="character"
+              className={cn(`character-left`)}
             />
-          )}
+            <Image
+              src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.CHARACTER)}
+              width={40}
+              height={40}
+              alt="character"
+              className={cn(`character-right`)}
+            />
+          </div>
+          <div className={cn('image-inner')}>
+            <div className={cn('inner')}>
+              <Image
+                src={option.imageUrl}
+                alt={option.name}
+                priority
+                quality={100}
+                width={1200}
+                height={1200}
+                className={cn('image')}
+              />
+              <Image
+                src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.TEXT_LOGO)}
+                width={120}
+                height={40}
+                alt="text-logo"
+                className={cn('text-logo')}
+                priority
+                quality={100}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </BaseModal>

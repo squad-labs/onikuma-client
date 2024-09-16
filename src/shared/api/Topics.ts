@@ -2,10 +2,20 @@ import { TopicStatus } from '@/shared/types/data/topic';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
+export const getTopicVoice = async () => {
+  try {
+    const res = await axios.get(`/api/topics/topic-voice`);
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
 export const getTopicById = async (id: string, token: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/66bb07efff419cee8c3888e1`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/topics/detail/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

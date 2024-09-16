@@ -6,7 +6,7 @@ export interface IRoundContext {
   ticker: string;
   setTicker: Dispatch<SetStateAction<string>>;
   getTokenPrice: (amount: string) => Promise<number | string>;
-  mintToken: (symbol: string, callback: () => void) => void;
+  mintToken: (callback: () => void) => void;
   currentRound: 8 | 4 | 2 | 1;
   setCurrentRound: Dispatch<SetStateAction<8 | 4 | 2 | 1>>;
   options: Option[];

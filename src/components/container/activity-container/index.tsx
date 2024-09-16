@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from '@/components/container/activity-container/ActivityContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import TableHeader from '@/components/common/etc/tableHeader';
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 import { getRecentActivity } from '@/shared/api/Activity';
 import { ActivityType } from '@/shared/types/data/activity';
 import { fetchRelatedTime } from '@/shared/utils/date';
@@ -18,10 +16,60 @@ type Props = {
 };
 
 const ActivityContainer = ({ topicId }: Props) => {
-  const { data } = useQuery({
-    queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
-    queryFn: () => getRecentActivity({ topicId }),
-  });
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isLast, setIsLast] = useState<boolean>(false);
+
+  const [activityItems, setActivityItems] = useState<ActivityType[]>([]);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    const activities = await getRecentActivity({
+      topicId,
+      page,
+      pageSize: 10,
+    });
+    if (activities.length === 0) {
+      setIsLast(true);
+    }
+    setActivityItems([...activityItems, ...activities]);
+    setLoading(false);
+  }, [page]);
+
+  const onIntersection: IntersectionObserverCallback = (
+    entries: IntersectionObserverEntry[],
+  ) => {
+    const target = entries[0];
+
+    if (target.isIntersecting && !loading && !isLast) {
+      setPage((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(onIntersection, {
+      root: document.querySelector('#container'),
+      threshold: 0,
+    });
+
+    const observerTarget = document.querySelector('#observer-block');
+
+    if (observerTarget) observer.observe(observerTarget);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [activityItems]);
+
+  useEffect(() => {
+    fetchData();
+  }, [page]);
+
+  const isBlurred = useMemo(
+    () => !activityItems || activityItems.length === 0,
+    [activityItems],
+  );
+
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
@@ -35,9 +83,9 @@ const ActivityContainer = ({ topicId }: Props) => {
       <div className={cn('table-header')}>
         <TableHeader onlyName={true} />
       </div>
-      <div className={cn('table-body')}>
-        {data?.map((item: ActivityType, index: number) => {
-          const isLastRow = index === data.length - 1;
+      <div className={cn('table-body')} id="container">
+        {activityItems?.map((item: ActivityType, index: number) => {
+          const isLastRow = index === activityItems.length - 1;
 
           return (
             <div
@@ -76,6 +124,14 @@ const ActivityContainer = ({ topicId }: Props) => {
             </div>
           );
         })}
+        <div id="observer-block" />;
+        {isBlurred && (
+          <div className={cn('overlay')}>
+            <div className={cn('message')}>
+              <p>No transaction yet!</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

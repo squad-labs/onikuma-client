@@ -109,6 +109,7 @@ const AppProvider = ({ children }: Props) => {
           <BaseToast
             key={item.toastId}
             type={item.type}
+            text={item.text}
             index={item.index}
             toastId={item.toastId}
             canClose={item.canClose}

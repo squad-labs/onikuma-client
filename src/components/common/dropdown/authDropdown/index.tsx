@@ -80,7 +80,28 @@ const AuthDropdown = () => {
           </button>
           <button
             onClick={() => {
+              router.push('/leader-board');
+            }}
+            className={cn('list-item', { disable: true })}
+          >
+            <Image
+              src={getStaticSrc('icon', ICON_SRC_PATH.SRC.FLAG)}
+              alt="flag"
+              width={24}
+              height={24}
+              className={cn('icon')}
+            />
+            <BaseText
+              text={'Leaderboard'}
+              size={'medium'}
+              weight={'regular'}
+              color={'DARK'}
+            />
+          </button>
+          <button
+            onClick={() => {
               logout();
+              router.replace('/');
               router.refresh();
             }}
             className={cn('list-item', { disable: true })}

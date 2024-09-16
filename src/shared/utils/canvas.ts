@@ -223,7 +223,7 @@ export const generateResultImage = async ({
   dateText,
   option,
 }: ShareResultModalProps) => {
-  const canvas = createCanvas(2200, 1200);
+  const canvas = createCanvas(700, 700);
   const ctx = canvas.getContext('2d');
 
   registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
@@ -243,8 +243,58 @@ export const generateResultImage = async ({
     family: 'RubikMono-Regular',
   });
 
-  ctx.fillStyle = COLOR.LIGHT;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  const background = await loadStaticImage(
+    path.resolve('./public/images/image-background.png'),
+    1400,
+    1400,
+  );
+  ctx.drawImage(background, 0, 0);
+
+  ctx.fillStyle = COLOR['DARK_GRAY_2'];
+  drawRoundedRect(ctx, 38, 38, canvas.width - 84, canvas.height - 84, 20);
+  ctx.fill();
+
+  ctx.fillStyle = COLOR['BASE_CREAM_1'];
+  drawRoundedRect(ctx, 40, 40, canvas.width - 80, canvas.height - 80, 10);
+  ctx.fill();
+
+  ctx.fillStyle = COLOR['DARK'];
+  drawRoundedRect(ctx, 119, 139, canvas.width - 238, canvas.height - 208, 15);
+  ctx.fill();
+
+  ctx.fillStyle = COLOR['LIGHT'];
+  drawRoundedRect(ctx, 120, 140, canvas.width - 240, canvas.height - 210, 15);
+  ctx.fill();
+
+  ctx.textAlign = 'center';
+  ctx.font = '24px DMMono-Medium';
+  ctx.fillStyle = COLOR.DARK;
+  ctx.fillText(title, canvas.width / 2, 96);
+
+  const character = await loadStaticImage(
+    path.resolve('./public/images/character.png'),
+    1200,
+    1200,
+  );
+
+  ctx.drawImage(character, 60, 70, 60, 60);
+
+  ctx.drawImage(character, canvas.width - 110, 70, 60, 60);
+
+  ctx.font = ctx.fillStyle = COLOR['DARK'];
+  drawRoundedRect(ctx, 138, 158, canvas.width - 276, canvas.height - 246, 15);
+  ctx.fill();
+
+  ctx.fillStyle = COLOR['LIGHT'];
+  drawRoundedRect(ctx, 139, 159, canvas.width - 278, canvas.height - 248, 15);
+  ctx.fill();
+
+  const optionImage = await loadRemoteImage(
+    option.name,
+    option.imageUrl,
+    false,
+  );
+  ctx.drawImage(optionImage, 139, 159, canvas.width - 278, canvas.height - 248);
 
   ctx.beginPath();
   ctx.lineWidth = 8;
@@ -252,33 +302,13 @@ export const generateResultImage = async ({
   ctx.rect(0, 0, canvas.width, canvas.height);
   ctx.stroke();
 
-  ctx.textAlign = 'start';
-  ctx.font = '32px DMMono-Light';
-  ctx.fillStyle = COLOR.DARK_GRAY_2;
-  ctx.fillText(roundText, 120, 96);
+  const textLogo = await loadStaticImage(
+    path.resolve('./public/images/text-logo.png'),
+    151,
+    64,
+  );
 
-  ctx.lineWidth = 2;
-  ctx.fillStyle = COLOR.DARK;
-  ctx.moveTo(315, 69);
-  ctx.lineTo(315, 100);
-  ctx.rect(220, 0, 200, 0);
-  ctx.stroke();
-
-  const myOption = await loadOptionImage(option.name, option.imageUrl);
-  ctx.drawImage(myOption, 120, 270);
-
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
-  ctx.drawImage(calendar, 355, 60);
-
-  ctx.textAlign = 'start';
-  ctx.font = '32px DMMono-Light';
-  ctx.fillStyle = COLOR.DARK_GRAY_2;
-  ctx.fillText(dateText, 420, 96);
-
-  ctx.textAlign = 'start';
-  ctx.font = '52px DMMono-Medium';
-  ctx.fillStyle = COLOR.DARK;
-  ctx.fillText(title, 120, 200);
+  ctx.drawImage(textLogo, 420, 550, 131, 54);
 
   const buffer = canvas.toBuffer('image/png');
 
@@ -332,7 +362,11 @@ export const generateShareImage = async ({
   ctx.rect(220, 0, 200, 0);
   ctx.stroke();
 
-  const calendar = await loadStaticImage('./public/icons/calendar.png');
+  const calendar = await loadStaticImage(
+    path.resolve('./public/icons/calendar.png'),
+    50,
+    50,
+  );
   ctx.drawImage(calendar, 525, 60);
 
   ctx.textAlign = 'start';
@@ -371,13 +405,49 @@ export const generateShareImage = async ({
   return buffer;
 };
 
-export const loadStaticImage = async (path: string) => {
-  const canvas = createCanvas(50, 50);
+export const loadStaticImage = async (
+  path: string,
+  width: number,
+  height: number,
+) => {
+  const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
   const imageBuffer = await loadImage(path);
 
   ctx.drawImage(imageBuffer, 0, 0);
+
+  return canvas;
+};
+
+export const loadResultImage = async (title: string, imageUrl: string) => {
+  const canvas = createCanvas(960, 960);
+  const ctx = canvas.getContext('2d');
+
+  registerFont(path.resolve('./public/fonts/RubikMonoOne-Regular.ttf'), {
+    family: 'RubikMono-Regular',
+  });
+
+  drawRoundedRect(ctx, 0, 0, canvas.width, canvas.height, 30);
+  ctx.clip();
+
+  const image = await loadRemoteImage(title, imageUrl, true);
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = COLOR.DARK;
+  ctx.rect(0, 0, canvas.width, canvas.height);
+  ctx.stroke();
+
+  ctx.drawImage(image, 20, 20, canvas.width - 40, canvas.height - 40);
+
+  ctx.textAlign = 'center';
+  ctx.font = '48px RubikMono-Regular';
+  ctx.fillStyle = COLOR.LIGHT;
+  ctx.lineWidth = 4;
+  ctx.fillText(title, canvas.width / 2, canvas.height / 2);
+
+  ctx.strokeStyle = COLOR.BASE_RED_1;
+  ctx.strokeText(title, canvas.width / 2, canvas.height / 2);
 
   return canvas;
 };

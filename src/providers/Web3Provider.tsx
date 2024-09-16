@@ -4,8 +4,15 @@ import React, { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 import { config } from '@/config/web3Config';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { structuralSharing } from '@wagmi/core/query';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      structuralSharing,
+    },
+  },
+});
 
 type Props = {
   children: ReactNode;

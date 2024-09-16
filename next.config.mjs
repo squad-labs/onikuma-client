@@ -3,28 +3,28 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   sassOptions: {
-    includePaths: ["styles"],
+    includePaths: ['styles'],
   },
   images: {
     domains: [
       'dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com',
-      's2.coinmarketcap.com'
-    ]
+      's2.coinmarketcap.com',
+    ],
   },
   env: {
     NEXT_PUBLIC_WAGMI_PROJECT_ID: process.env.WAGMI_PROJECT_ID,
     NEXT_PUBLIC_API_BASE_URL: process.env.API_BASE_URL,
     NEXT_PUBLIC_SOCKET_BASE_URL: process.env.SOCKET_BASE_URL,
-    NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL
+    NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL,
+    NEXT_PUBLIC_STORAGE_BASE_URL: process.env.STORAGE_BASE_URL,
+    NEXT_PUBLIC_BERACHAIN_RPC_URL: process.env.BERACHAIN_RPC_URL,
   },
-  webpack(
-    config,
-    ) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
       use: ['@svgr/webpack'],
     });
-    config.externals.push("pino-pretty", "lokijs", "encoding");
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
   async headers() {
@@ -44,13 +44,14 @@ const nextConfig = {
           },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+            value:
+              'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
           },
         ],
       },
-    ]
+    ];
   },
-  rewrites: async() => {
+  rewrites: async () => {
     return [
       {
         source: '/api/users/login',
@@ -108,7 +109,7 @@ const nextConfig = {
             type: 'query',
             key: 'pageSize',
             value: '(?<pageSize>.*)',
-          }
+          },
         ],
         destination: `${process.env.API_BASE_URL}/api/activities/all/:id*?page=:page&pageSize=:pageSize`,
       },
@@ -136,7 +137,7 @@ const nextConfig = {
             type: 'query',
             key: 'pageSize',
             value: '(?<pageSize>.*)',
-          }
+          },
         ],
         destination: `${process.env.API_BASE_URL}/api/comments/all/:id*?page=:page&pageSize=:pageSize`,
       },
@@ -167,9 +168,45 @@ const nextConfig = {
       {
         source: '/api/poll-result',
         destination: `${process.env.CLIENT_SERVER_URL}/api/poll-result`,
-      }
-    ]
-  }
+      },
+      {
+        source: '/api/dashboards/leader-board',
+        has: [
+          {
+            type: 'query',
+            key: 'page',
+            value: '(?<page>.*)',
+          },
+          {
+            type: 'query',
+            key: 'pageSize',
+            value: '(?<pageSize>.*)',
+          },
+        ],
+        destination: `${process.env.API_BASE_URL}/api/dashboards/leader-board?page=:page&pageSize=:pageSize`,
+      },
+      {
+        source: '/api/topics/topic-voice',
+        destination: `${process.env.API_BASE_URL}/api/topics/topic-voice`,
+      },
+      {
+        source: '/api/topics/create-topic-voice/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/create-topic-voice/:id*`,
+      },
+      {
+        source: '/api/topics/confirm-topic-voice/:id*',
+        destination: `${process.env.API_BASE_URL}/api/topics/confirm-topic-voice/:id*`,
+      },
+      {
+        source: '/api/topics/share-point',
+        destination: `${process.env.API_BASE_URL}/api/topics/share-point`,
+      },
+      {
+        source: `/api/activities/token-price/:id*`,
+        destination: `${process.env.API_BASE_URL}/api/activities/token-price/:id*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import styles from '@/app/d/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GraphContainer from '@/components/container/graph-container';
@@ -14,6 +14,7 @@ import CommentContainer from '@/components/container/comment-container';
 import { CommentProvider } from '@/context/partial/commentContext/CommentProvider';
 import MyVoteContainer from '@/components/container/my-vote-container';
 import TopicDropdown from '@/components/common/dropdown/topicDropdown';
+import GameDateBar from '@/components/common/bar/gameDateBar';
 
 const cn = classNames.bind(styles);
 
@@ -26,6 +27,14 @@ const DashboardClientPage = ({ id }: Props) => {
   const topic = useTopic();
   const myVote = useMyVote();
 
+  const isBlurred = useMemo(() => {
+    return (
+      myVote != null &&
+      Array.isArray(myVote.competitors) &&
+      myVote.competitors.every((vote) => vote.reserveToken === 0)
+    );
+  }, [myVote]);
+
   return (
     <CommentProvider id={id}>
       <div className={cn('container')}>
@@ -37,10 +46,23 @@ const DashboardClientPage = ({ id }: Props) => {
                 <TopicDropdown value={{ id: id, name: topic?.name }} />
               </Suspense>
             )}
+            {topic && (
+              <Suspense>
+                <GameDateBar
+                  id={id}
+                  startDate={topic.startAt}
+                  endDate={topic.endAt}
+                />
+              </Suspense>
+            )}
           </div>
         </section>
         <section className={cn('mid-inner')}>
-          <Suspense>{myVote && <MyVoteContainer myVote={myVote} />}</Suspense>
+          <Suspense>
+            {myVote && (
+              <MyVoteContainer myVote={myVote} isBlurred={isBlurred} />
+            )}
+          </Suspense>
         </section>
         <section className={cn('mid-inner')}>
           <Suspense>

@@ -21,13 +21,13 @@ type GraphColorMapType = {
 
 export const GraphColorMap: GraphColorMapType = {
   1: 'BASE_GREEN_1',
-  2: 'BASE_GRAY_3',
-  3: 'BASE_GRAY_3',
+  2: 'DARK_RED_2',
+  3: 'DARK_RED_2',
   4: 'DARK_RED_2',
   5: 'DARK_RED_2',
   6: 'DARK_RED_2',
-  7: 'BASE_GRAY_3',
-  8: 'BASE_GREEN_1',
+  7: 'DARK_RED_2',
+  8: 'DARK_RED_2',
 };
 
 const GraphContainer = ({ type, dashboard }: Props) => {

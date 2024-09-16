@@ -4,24 +4,74 @@ import { IMAGE_SRC_PATH } from '@/shared/constants/PATH';
 export const TOAST_SRC = {
   SUCCESS: {
     imageSrc: getStaticSrc('image', IMAGE_SRC_PATH.SRC.TOAST_SUCCESS),
-    primaryText: 'Saved successfully',
-    secondaryText: 'Your changes have been saved successfully',
   },
   ERROR: {
     imageSrc: getStaticSrc('image', IMAGE_SRC_PATH.SRC.TOAST_ERROR),
-    primaryText: 'Error occurred',
-    secondaryText:
-      'Connection error. Unable to connect to the server at present',
   },
   INFO: {
     imageSrc: getStaticSrc('image', IMAGE_SRC_PATH.SRC.TOAST_ACTIONREQ),
-    primaryText: 'Action required',
-    secondaryText:
-      'Incomplete fields. Please fill in all required information now',
   },
-  LINK: {
-    imageSrc: getStaticSrc('image', IMAGE_SRC_PATH.SRC.TOAST_SUCCESS),
-    primaryText: 'Copied successfully',
-    secondaryText: 'The link has been copied to your clipboard',
+} as const;
+
+export const TOAST_RESPONSE = {
+  COPY_LINK: {
+    SUCCESS: {
+      primaryText: 'Link Copied successfully',
+      secondaryText: 'The link has been copied to your clipboard',
+    },
+    ERROR: {
+      primaryText: 'Copy failed',
+      secondaryText: 'An error occurred while copying the link',
+    },
+  },
+  COPY_IMAGE: {
+    SUCCESS: {
+      primaryText: 'Image Copied successfully',
+      secondaryText: 'The image has been copied to your clipboard',
+    },
+    ERROR: {
+      primaryText: 'Copy failed',
+      secondaryText: 'An error occurred while copying the image',
+    },
+  },
+  SEND_TRANSACTION: {
+    SUCCESS: {
+      primaryText: 'Transaction successful',
+      secondaryText: 'Your transaction has been successfully processed',
+    },
+    ERROR: {
+      primaryText: 'Transaction failed',
+      secondaryText: 'An error occurred while processing your transaction',
+    },
+  },
+  UPLOAD_IMAGE: {
+    SUCCESS: {
+      primaryText: 'Image uploaded successfully',
+      secondaryText: 'The image has been successfully uploaded',
+    },
+    ERROR: {
+      primaryText: 'Upload failed',
+      secondaryText: 'An error occurred while uploading the image',
+    },
+  },
+  UPLOAD_VOICE: {
+    SUCCESS: {
+      primaryText: 'Voice uploaded successfully',
+      secondaryText: 'The voice has been successfully uploaded',
+    },
+    ERROR: {
+      primaryText: 'Upload failed',
+      secondaryText: 'An error occurred while uploading the voice',
+    },
+  },
+  GENERATE_VOICE: {
+    SUCCESS: {
+      primaryText: 'Generated successfully',
+      secondaryText: 'The voice has been successfully generated',
+    },
+    ERROR: {
+      primaryText: 'Generation failed',
+      secondaryText: 'An error occurred while generating the voice',
+    },
   },
 } as const;

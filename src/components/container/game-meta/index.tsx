@@ -4,14 +4,8 @@ import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
 import BaseDivider from '@/widgets/divider/baseDivider';
 import DateText from '@/widgets/text/dateText';
-import IconButton from '@/widgets/button/iconButton';
-import { useDispatch } from 'react-redux';
-import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRound } from '@/shared/hooks/useRound';
-import Image from 'next/image';
-import { getStaticSrc } from '@/shared/utils/etc';
-import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 import ShareGameButton from '@/components/common/button/shareGameButton';
 
 const cn = classNames.bind(styles);
@@ -37,7 +31,6 @@ const GameMetaContainer = ({
   label,
   onlyDate = false,
 }: Props) => {
-  const dispatch = useDispatch();
   const { options, currentIndex } = useContext(RoundContext);
   const { roundIndex } = useRound(RoundContext);
 
@@ -93,6 +86,8 @@ const GameMetaContainer = ({
               title={title}
               status={status}
               startAt={startAt}
+              name={options[currentIndex[roundIndex]].name}
+              imageUrl={options[currentIndex[roundIndex]].imgUrl}
               buttonDirection="left"
             />
           ))}
