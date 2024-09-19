@@ -113,7 +113,12 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     async (callback: () => void) => {
       setIsSending(true);
 
-      await mintclub.wallet.connect(window.okxwallet);
+      if (!window.okxwallet) {
+        await mintclub.wallet.connect(window.okxwallet);
+      } else {
+        await mintclub.wallet.connect(window.ethereum);
+      }
+
       try {
         await token.buy({
           amount: wei(1, 18),
