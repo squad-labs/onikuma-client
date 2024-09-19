@@ -67,10 +67,19 @@ const FinalOptionCard = ({
     onError: () => {},
   });
 
-  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const _value = handleNumberUpdate(event.target.value);
-    setTokenAmount(_value);
-  }, []);
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const _value = handleNumberUpdate(event.target.value);
+
+      if (
+        (typeof _value === 'number' && _value <= 1_000_000) ||
+        _value === ''
+      ) {
+        setTokenAmount(_value);
+      }
+    },
+    [tokenPrice],
+  );
 
   const handlePoolIn = useCallback(() => {
     if (tokenAmount !== 0 && tokenAmount !== '' && tokenAmount !== undefined) {

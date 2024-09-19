@@ -76,10 +76,19 @@ const PoolInModal = ({
     }
   }, [topicId, tokenAmount, tokenPrice, title, value]);
 
-  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const _value = handleNumberUpdate(event.target.value);
-    setTokenAmount(_value);
-  }, []);
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const _value = handleNumberUpdate(event.target.value);
+
+      if (
+        (typeof _value === 'number' && _value <= 1_000_000) ||
+        _value === ''
+      ) {
+        setTokenAmount(_value);
+      }
+    },
+    [tokenPrice],
+  );
 
   useOnClickOutside({
     ref: modalRef,
