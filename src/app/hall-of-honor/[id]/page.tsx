@@ -5,6 +5,7 @@ import { getMetadata } from '@/shared/utils/metadata';
 import { HonorType } from '@/shared/types/data/honor';
 import HallOfHonorClientPage from '@/app/hall-of-honor/[id]/client';
 import { cookies } from 'next/headers';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 const cn = classNames.bind(styles);
 
@@ -47,7 +48,13 @@ const HallOfHonorPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    return err;
+    return (
+      <main className={cn('container')}>
+        <div className={cn('error-inner')}>
+          <UnAuthorizedError />
+        </div>
+      </main>
+    );
   }
 };
 

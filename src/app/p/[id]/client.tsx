@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useContext, useEffect, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import styles from '@/app/p/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GameMetaContainer from '@/components/container/game-meta';

@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
 import PlayClientPage from '@/app/p/[id]/client';
 import { cookies } from 'next/headers';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 export const generateMetadata = async () => {
   return getMetadata({});
@@ -37,7 +38,11 @@ const GameCurrentPage = async () => {
       </main>
     );
   } catch (err) {
-    return err;
+    <main className={cn('container')}>
+      <div className={cn('inner')}>
+        <UnAuthorizedError />
+      </div>
+    </main>;
   }
 };
 

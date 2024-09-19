@@ -35,5 +35,6 @@ export const IMAGE_SRC_PATH = {
     TOAST_SUCCESS: '/toast-success.svg',
     CHARACTER: '/character.svg',
     TEXT_LOGO: '/text-logo.svg',
+    UNAUTHORIZED_ERROR: '/unauthorized-error.svg',
   },
 } as const;

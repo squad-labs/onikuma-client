@@ -7,6 +7,7 @@ import { Dashboard, MyVote } from '@/shared/types/data/dashboard';
 import { Topic } from '@/shared/types/data/topic';
 import { DashboardProvider } from '@/context/partial/dashboardContext/DashboardProvider';
 import { cookies } from 'next/headers';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 const cn = classNames.bind(styles);
 
@@ -55,6 +56,7 @@ const DashboardPage = async ({ params }: Props) => {
     const dashboardData: Dashboard = await dashboardRes.json();
     const topicData: Topic = await topicRes.json();
     const myData: MyVote = await myRes.json();
+
     return (
       <main className={cn('container')}>
         <div className={cn('inner')}>
@@ -69,7 +71,13 @@ const DashboardPage = async ({ params }: Props) => {
       </main>
     );
   } catch (err) {
-    return err;
+    return (
+      <main className={cn('container')}>
+        <div className={cn('error-inner')}>
+          <UnAuthorizedError />
+        </div>
+      </main>
+    );
   }
 };
 

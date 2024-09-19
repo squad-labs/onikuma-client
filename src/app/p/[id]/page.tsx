@@ -7,6 +7,7 @@ import { RoundProvider } from '@/context/partial/roundContext/RoundProvider';
 import { cookies } from 'next/headers';
 import { Topic } from '@/shared/types/data/topic';
 import { generateRound } from '@/shared/utils/random';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 const cn = classNames.bind(styles);
 
@@ -39,12 +40,16 @@ const PlayPage = async ({ params }: Props) => {
     return (
       <main className={cn('container')}>
         <RoundProvider topic={data} round={round}>
-          <PlayClientPage id={id} topic={data} />
+          <PlayClientPage id={data._id} topic={data} />
         </RoundProvider>
       </main>
     );
   } catch (err) {
-    return err;
+    return (
+      <main className={cn('container')}>
+        <UnAuthorizedError />
+      </main>
+    );
   }
 };
 
