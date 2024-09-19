@@ -4,6 +4,7 @@ export type Topic = {
   ticker: string;
   biggestTopicVoiceUrl: string;
   status: TopicStatus;
+  tokenName: string;
   startAt: string;
   endAt: string;
   competitors: Option[];

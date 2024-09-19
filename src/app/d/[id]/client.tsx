@@ -78,9 +78,11 @@ const DashboardClientPage = ({ id }: Props) => {
               {dashboard && <TvlTableContaienr dashboard={dashboard} />}
             </Suspense>
           </div>
-          <div className={cn('activity-wrapper')}>
-            <ActivityContainer topicId={id} />
-          </div>
+          {topic && (
+            <div className={cn('activity-wrapper')}>
+              <ActivityContainer topicId={id} tokenName={topic.tokenName} />
+            </div>
+          )}
         </section>
         <section className={cn('comment-wrapper')}>
           <CommentContainer topicId={id} />

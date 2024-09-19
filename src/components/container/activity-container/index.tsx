@@ -13,9 +13,10 @@ const cn = classNames.bind(styles);
 
 type Props = {
   topicId: string;
+  tokenName: string;
 };
 
-const ActivityContainer = ({ topicId }: Props) => {
+const ActivityContainer = ({ topicId, tokenName }: Props) => {
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLast, setIsLast] = useState<boolean>(false);
@@ -70,6 +71,8 @@ const ActivityContainer = ({ topicId }: Props) => {
     [activityItems],
   );
 
+  console.log(activityItems);
+
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
@@ -104,7 +107,7 @@ const ActivityContainer = ({ topicId }: Props) => {
                 weight={'regular'}
               />
               <BaseText
-                text={`$${item.poolIn} ${'HONEY'}`}
+                text={`${item.poolIn} ${tokenName}`}
                 color={'DARK_GRAY_5'}
                 size={'medium'}
                 weight={'bold'}
