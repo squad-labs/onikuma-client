@@ -42,7 +42,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
   }, [dashboard]);
 
   const title = useMemo(() => {
-    return type === 'tvl' ? 'Total Value Locked' : 'Total Votings';
+    return type === 'tvl' ? 'Total Value Locked' : 'Total Votes';
   }, [type]);
 
   const description = useMemo(() => {

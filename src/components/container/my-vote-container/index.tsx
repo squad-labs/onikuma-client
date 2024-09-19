@@ -21,7 +21,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
     <div className={cn('container')}>
       <div className={cn('top-container')}>
         <BaseText
-          text={'My Votings'}
+          text={'My Votes'}
           size={'large'}
           weight={'bold'}
           color={'DARK'}
