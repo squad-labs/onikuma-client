@@ -1,4 +1,5 @@
 import { Eip1193Provider } from 'eip1193-provider';
+import type { WindowProvider } from 'wagmi/window';
 
 export interface ExtendEthereum extends Eip1193Provider {
   isSafePal?: true;

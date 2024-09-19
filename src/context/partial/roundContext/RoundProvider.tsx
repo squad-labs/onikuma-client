@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
 import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
-import { BrowserProvider, ethers, JsonRpcProvider } from 'ethers';
+import { ethers } from 'ethers';
 import { Config, useClient } from 'wagmi';
 import { chain as AppChain } from '@/config/web3Config';
 
@@ -109,26 +109,11 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     }
   }, []);
 
-  const clientToProvider = (client: any) => {
-    const { chain } = client;
-    const network = {
-      chainId: chain.id,
-      name: chain.name,
-    };
-
-    if (window.okxwallet) {
-      return window.okxwallet;
-    } else {
-      return window.ethereum;
-    }
-  };
-
   const mintToken = useCallback(
     async (callback: () => void) => {
       setIsSending(true);
-      const provider = clientToProvider(client);
 
-      await mintclub.wallet.connect(window.ethereum);
+      await mintclub.wallet.connect(window.okxwallet);
       try {
         await token.buy({
           amount: wei(1, 18),
