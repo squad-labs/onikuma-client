@@ -69,7 +69,7 @@ const LeaderboardClientPage = () => {
     fetchData();
   }, [page]);
 
-  if (error) {
+  if (!data?.userRank || !leaderItems || leaderItems.length === 0 || error) {
     return (
       <div className={cn('container')}>
         <UnAuthorizedError />

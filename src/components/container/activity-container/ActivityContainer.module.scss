@@ -32,7 +32,7 @@
 
   .table-body {
     width: 100%;
-    max-height: 48.1rem;
+    min-height: 48.1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

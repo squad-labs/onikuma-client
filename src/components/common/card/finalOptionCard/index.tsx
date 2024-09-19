@@ -12,7 +12,7 @@ import PriceInfoCard from '@/components/common/card/priceInfoCard';
 import BaseButton from '@/widgets/button/baseButton';
 import { useRouter } from 'next/navigation';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { getTokenData, postPoolIn } from '@/shared/api/Activity';
 import { handleNumberUpdate } from '@/shared/utils/number';
@@ -47,6 +47,7 @@ const FinalOptionCard = ({
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [isSending, setIsSending] = useState<boolean>(false);
   const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
   const [tokenAmount, setTokenAmount] = useState<number | ''>('');
@@ -62,6 +63,9 @@ const FinalOptionCard = ({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
+      });
       dispatch(CLOSE_MODAL());
       setIsSending(false);
       console.log(data);

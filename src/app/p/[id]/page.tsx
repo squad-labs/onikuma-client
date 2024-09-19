@@ -36,6 +36,10 @@ const PlayPage = async ({ params }: Props) => {
       },
     );
 
+    if (!res.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
     const data: Topic = await res.json();
     return (
       <main className={cn('container')}>

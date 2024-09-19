@@ -53,6 +53,10 @@ const DashboardPage = async ({ params }: Props) => {
       },
     );
 
+    if (!dashboardRes.ok || !topicRes.ok || !myRes.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
     const dashboardData: Dashboard = await dashboardRes.json();
     const topicData: Topic = await topicRes.json();
     const myData: MyVote = await myRes.json();

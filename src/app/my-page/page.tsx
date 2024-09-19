@@ -26,6 +26,10 @@ const MyPage = async () => {
       },
     );
 
+    if (res.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
     const data: MyData = await res.json();
 
     return (

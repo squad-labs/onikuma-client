@@ -38,6 +38,10 @@ const HallOfHonorPage = async ({ params }: Props) => {
       },
     );
 
+    if (!res.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
     const data: HonorType = await res.json();
 
     return (
