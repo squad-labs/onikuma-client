@@ -1,6 +1,6 @@
-import type { WindowProvider } from 'wagmi/window';
+import { Eip1193Provider } from 'eip1193-provider';
 
-export interface ExtendEthereum extends WindowProvider {
+export interface ExtendEthereum extends Eip1193Provider {
   isSafePal?: true;
   isCoin98?: true;
   isBlocto?: true;
@@ -23,7 +23,7 @@ export declare global {
     okxwallet?: WindowProvider;
     coin98?: true;
     mercuryoWidget?: any;
-    ethereum?: ExtendEthereum;
+    ethereum?: Eip1193Provider;
     BinanceChain?: {
       bnbSign?: (
         address: string,
