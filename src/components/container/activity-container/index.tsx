@@ -74,7 +74,7 @@ const ActivityContainer = ({ topicId }: Props) => {
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
         <BaseText
-          text="Latist Activities"
+          text="Latest Activities"
           color={'DARK'}
           size={'large'}
           weight="regular"
