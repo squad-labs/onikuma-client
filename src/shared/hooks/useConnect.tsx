@@ -9,9 +9,27 @@ import type { Chain, Client, Transport } from 'viem';
 import axios from 'axios';
 import { useAccountModal, useConnectModal } from '@rainbow-me/rainbowkit';
 import { useRouter } from 'next/navigation';
+import { useConnect as useWagmiConnect } from 'wagmi';
+
+export enum ConnectorNames {
+  MetaMask = 'metaMask',
+  Injected = 'injected',
+  WalletConnect = 'walletConnect',
+  WalletConnectV1 = 'walletConnectLegacy',
+  // BSC = 'bsc',
+  BinanceW3W = 'BinanceW3WSDK',
+  Blocto = 'blocto',
+  WalletLink = 'coinbaseWalletSDK',
+  // Ledger = 'ledger',
+  TrustWallet = 'trust',
+  CyberWallet = 'cyberWallet',
+  okxwallet = 'okxwallet',
+}
 
 export const useConnect = () => {
   const router = useRouter();
+  const { connectAsync, connectors } = useWagmiConnect();
+
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const [isClick, setIsClick] = useState<boolean>(false);
