@@ -22,9 +22,9 @@ const RuleCard = ({
     <div className={cn('card')}>
       <div className={cn('photo')}>{children}</div>
       <div className={cn('text')}>
-        <p>{textLine1}</p>
-        <h2>{textLine2}</h2>
-        <p>{textLine3}</p>
+        <p className={cn('step')}>{textLine1}</p>
+        <h2 className={cn('title')}>{textLine2}</h2>
+        <p className={cn('content')}>{textLine3}</p>
       </div>
     </div>
   );

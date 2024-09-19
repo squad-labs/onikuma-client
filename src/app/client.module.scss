@@ -9,9 +9,17 @@
 .main-header {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+
+  .title {
+    color: var(--BASE-BLUE-1);
+    font-family: var(--FONT-DM-MONO-BOLD);
+    font-weight: bold;
+    margin-left: 2rem;
+  }
 }
 
 .sub-header {
+  font-size: var(--TEXT-SIZE-LARGE);
   margin-bottom: 2rem;
 }
 
@@ -19,10 +27,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  justify-content: center;
-  max-width: 700px;
-  align-items: center;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .card-image {
@@ -33,4 +39,11 @@
 
 .card {
   width: 100%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(-3rem);
 }

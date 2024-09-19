@@ -37,5 +37,17 @@ export const IMAGE_SRC_PATH = {
     CHARACTER: '/character.svg',
     TEXT_LOGO: '/text-logo.svg',
     UNAUTHORIZED_ERROR: '/unauthorized-error.svg',
+    RULE_1: '/rule-1.svg',
+    RULE_2: '/rule-2.svg',
+    RULE_3: '/rule-3.svg',
+    RULE_4: '/rule-4.svg',
+  },
+} as const;
+
+export const LOGO_SRC_PATH = {
+  BASE_DIR: '/logo',
+  SRC: {
+    BASE_LOGO: '/logo.svg',
+    LOGO_TITLE: '/logo-title.svg',
   },
 } as const;
