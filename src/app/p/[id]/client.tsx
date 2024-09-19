@@ -24,23 +24,9 @@ type Props = {
 };
 
 const PlayClientPage = ({ id, topic }: Props) => {
-  const [tokenPrice, setTokenPrice] = useState<string>('');
-  const { ticker, getTokenPrice, options, currentIndex } =
-    useContext(RoundContext);
+  const { ticker, options, currentIndex } = useContext(RoundContext);
   const { roundIndex, roundStatus, isFinal } = useRound(RoundContext);
   const modal = useSelector(getModal);
-
-  useEffect(() => {
-    const _getTokenPrice = async () => {
-      try {
-        const token = await getTokenPrice('1');
-        setTokenPrice(String(token));
-      } catch (err) {
-        return err;
-      }
-    };
-    _getTokenPrice();
-  }, []);
 
   return (
     <section className={cn(isFinal ? 'wrapper-final' : 'wrapper')}>
@@ -60,7 +46,6 @@ const PlayClientPage = ({ id, topic }: Props) => {
                   flip: options[0].biggestImgUrl,
                 },
               ]}
-              amount={tokenPrice}
             />
             <div className={cn('info-container')}>
               <GameMetaContainer
@@ -84,7 +69,6 @@ const PlayClientPage = ({ id, topic }: Props) => {
                   baseTokenPrice={'1'}
                   roundTokenName={ticker}
                   roundTicker={ticker}
-                  roundTokenPrice={tokenPrice}
                 />
               </Suspense>
             </div>
@@ -122,7 +106,6 @@ const PlayClientPage = ({ id, topic }: Props) => {
                       .biggestImgUrl,
                   },
                 ]}
-                amount={tokenPrice}
               />
               <div className={cn('comment-wrapper')}>
                 <CommentContainer topicId={id} />

@@ -33,7 +33,6 @@ type Props = {
   baseTokenName: string;
   roundTokenName: string;
   roundTicker: string;
-  roundTokenPrice: string;
 };
 
 const FinalOptionCard = ({
