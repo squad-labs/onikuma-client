@@ -27,8 +27,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  width: 90%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 2rem auto 0 auto;
 }
 
 .card-image {
@@ -43,7 +43,6 @@
 
 .image {
   position: absolute;
-  top: 0;
+  top: -2rem;
   right: 0;
-  transform: translateX(-3rem);
 }
