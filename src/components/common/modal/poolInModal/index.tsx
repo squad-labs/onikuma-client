@@ -67,7 +67,7 @@ const PoolInModal = ({
       poolInMutation.mutate({
         topicId: topicId,
         topicToken: tokenAmount,
-        reserveToken: parseInt(tokenPrice),
+        reserveToken: parseFloat(tokenPrice),
         pickerName: value,
       });
     }
