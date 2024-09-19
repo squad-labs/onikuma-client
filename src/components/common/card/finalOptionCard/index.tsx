@@ -17,6 +17,8 @@ import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { getTokenData, postPoolIn } from '@/shared/api/Activity';
 import { handleNumberUpdate } from '@/shared/utils/number';
 import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
+import { useDispatch } from 'react-redux';
+import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -44,6 +46,7 @@ const FinalOptionCard = ({
   roundTicker,
   roundTokenName,
 }: Props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
   const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
@@ -58,6 +61,7 @@ const FinalOptionCard = ({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
+      dispatch(CLOSE_MODAL());
       console.log(data);
     },
     onError: () => {},
@@ -73,7 +77,7 @@ const FinalOptionCard = ({
       poolInMutation.mutate({
         topicId: topicId,
         topicToken: tokenAmount,
-        reserveToken: parseInt(tokenPrice),
+        reserveToken: parseFloat(tokenPrice),
         pickerName: value,
       });
     }
