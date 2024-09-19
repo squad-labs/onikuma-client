@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
 import styles from '@/app/p/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GameMetaContainer from '@/components/container/game-meta';
@@ -11,8 +11,8 @@ import { Topic } from '@/shared/types/data/topic';
 import { fetchDateFormat } from '@/shared/utils/date';
 import FinalOptionCard from '@/components/common/card/finalOptionCard';
 import { useRound } from '@/shared/hooks/useRound';
-import { useSelector } from 'react-redux';
-import { getModal } from '@/context/global/slice/modalSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { CLOSE_MODAL, getModal } from '@/context/global/slice/modalSlice';
 import ShareTopicModal from '@/components/common/modal/shareTopicModal';
 import PoolInModal from '@/components/common/modal/poolInModal';
 
@@ -24,9 +24,16 @@ type Props = {
 };
 
 const PlayClientPage = ({ id, topic }: Props) => {
+  const dispatch = useDispatch();
   const { ticker, options, currentIndex } = useContext(RoundContext);
   const { roundIndex, roundStatus, isFinal } = useRound(RoundContext);
   const modal = useSelector(getModal);
+
+  useEffect(() => {
+    return () => {
+      dispatch(CLOSE_MODAL());
+    };
+  }, [dispatch]);
 
   return (
     <section className={cn(isFinal ? 'wrapper-final' : 'wrapper')}>

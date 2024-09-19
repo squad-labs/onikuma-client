@@ -71,8 +71,6 @@ const ActivityContainer = ({ topicId, tokenName }: Props) => {
     [activityItems],
   );
 
-  console.log(activityItems);
-
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>

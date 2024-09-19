@@ -24,6 +24,7 @@ import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { useRouter } from 'next/navigation';
 import { handleNumberUpdate } from '@/shared/utils/number';
 import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
+import { usePreventRefresh } from '@/shared/hooks/usePreventRefresh';
 
 const cn = classNames.bind(styles);
 
@@ -39,28 +40,30 @@ const PoolInModal = ({
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
   const [tokenAmount, setTokenAmount] = useState<number | ''>('');
   const [tokenPrice, setTokenPrice] = useState<number>(0);
   const { mintToken, getToken } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
-
+  usePreventRefresh({ active: isSending });
+  // usePreventBack({ active: true });
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_PRICE, topicId],
     queryFn: () => getTokenData({ topicId }),
   });
 
-  console.log(data);
-
   const handleCloseModal = useCallback(() => {
+    if (isSending) return;
     dispatch(CLOSE_MODAL());
-  }, [dispatch]);
+  }, [dispatch, isSending]);
 
   const poolInMutation = useMutation({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
       dispatch(CLOSE_MODAL());
+      setIsSending(false);
     },
     onError: () => {},
   });
@@ -74,6 +77,7 @@ const PoolInModal = ({
         pickerName: value,
       });
     }
+    setIsSending(false);
   }, [topicId, tokenAmount, tokenPrice, title, value]);
 
   const handleOnChange = useCallback(
@@ -164,6 +168,7 @@ const PoolInModal = ({
                   balance: data.myBalanceHoney,
                   percent: data.myBalanceHoney,
                 }}
+                disabled={true}
               />
             </div>
           )}
@@ -183,8 +188,10 @@ const PoolInModal = ({
             fontWeight="regular"
             shape="shape-4"
             onClick={() => {
+              setIsSending(true);
               mintToken(handlePoolIn);
             }}
+            loading={isSending}
           />
           <BaseButton
             text={'Dashboard'}
@@ -195,6 +202,7 @@ const PoolInModal = ({
             fontSize="large"
             fontWeight="regular"
             onClick={() => router.push(`/d/${topicId}`)}
+            disabled={isSending}
           />
         </div>
       </div>

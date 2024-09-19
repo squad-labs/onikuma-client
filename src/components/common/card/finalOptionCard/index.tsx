@@ -47,6 +47,7 @@ const FinalOptionCard = ({
 }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
   const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
   const [tokenPrice, setTokenPrice] = useState<number>(0);
@@ -62,6 +63,7 @@ const FinalOptionCard = ({
     mutationFn: postPoolIn,
     onSuccess: (data) => {
       dispatch(CLOSE_MODAL());
+      setIsSending(false);
       console.log(data);
     },
     onError: () => {},
@@ -150,6 +152,7 @@ const FinalOptionCard = ({
                 100
               ).toString(),
             }}
+            disabled={isSending}
           />
           <PriceInfoCard
             type={'top'}
@@ -163,6 +166,7 @@ const FinalOptionCard = ({
               balance: data.myBalanceHoney,
               percent: data.myBalanceHoney,
             }}
+            disabled={true}
           />
         </div>
       )}
@@ -181,8 +185,10 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => {
+            setIsSending(true);
             mintToken(handlePoolIn);
           }}
+          loading={isSending}
         />
         <BaseButton
           text={'Dashboard'}
@@ -193,6 +199,7 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => router.push(`/d/${topicId}`)}
+          disabled={isSending}
         />
       </div>
     </div>

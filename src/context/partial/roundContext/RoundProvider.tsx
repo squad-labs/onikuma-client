@@ -27,6 +27,7 @@ type Props = {
 
 const RoundProvider = ({ children, topic, round }: Props) => {
   const dispatch = useDispatch();
+  const [isSending, setIsSending] = useState<boolean>(false);
   const [ticker, setTicker] = useState<string>(topic.ticker);
   const [currentRound, setCurrentRound] = useState<8 | 4 | 2 | 1>(8);
   const [options, setOptions] = useState<Option[]>(topic.competitors);
@@ -89,7 +90,6 @@ const RoundProvider = ({ children, topic, round }: Props) => {
         topicId: topic._id,
         amount,
       });
-      console.log('token', token);
 
       return {
         price: parseFloat(token.estimation),
@@ -126,7 +126,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const mintToken = useCallback(
     async (callback: () => void) => {
       const provider = clientToProvider(client);
-
+      setIsSending(true);
       await mintclub.wallet.connect(window.ethereum);
       try {
         await token.buy({
@@ -174,6 +174,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
           return;
         }
       }
+      setIsSending(false);
     },
     [network, ticker, token],
   );
@@ -182,6 +183,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     <RoundContext.Provider
       value={{
         next,
+        isSending,
         ticker,
         setTicker,
         getToken,
