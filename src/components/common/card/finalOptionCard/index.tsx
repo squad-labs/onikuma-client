@@ -49,7 +49,7 @@ const FinalOptionCard = ({
   const router = useRouter();
   const [isSending, setIsSending] = useState<boolean>(false);
   const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
-  const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
+  const [tokenAmount, setTokenAmount] = useState<number | ''>('');
   const [tokenPrice, setTokenPrice] = useState<number>(0);
   const { mintToken, getToken } = useContext(RoundContext);
 
