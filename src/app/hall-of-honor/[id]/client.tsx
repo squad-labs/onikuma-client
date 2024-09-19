@@ -94,11 +94,16 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
                   onClick={() => handleFlip()}
                   shape="round"
                   height={'small'}
-                  classNames={['button-blue']}
+                  classNames={[isFlipped ? 'button-white' : 'button-blue']}
                 >
                   <div className={cn('button-inner')}>
                     <Image
-                      src={getStaticSrc('icon', ICON_SRC_PATH.SRC.FLIP)}
+                      src={getStaticSrc(
+                        'icon',
+                        isFlipped
+                          ? ICON_SRC_PATH.SRC.FLIP_FILL
+                          : ICON_SRC_PATH.SRC.FLIP,
+                      )}
                       alt="share"
                       width={24}
                       height={22}
