@@ -120,6 +120,7 @@ const PoolResultModal = ({
         <div className={cn('table-body')}>
           <div className={cn('list-container')}>
             {competitors.map((item: Competitor, index: number) => {
+              console.log(item);
               const rankText = index + 1;
               const chunk = (tvlSum / 100).toFixed(0);
               const ratio = Math.floor(item.poolTvl / parseInt(chunk));

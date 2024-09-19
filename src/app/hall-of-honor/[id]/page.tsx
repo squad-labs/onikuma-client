@@ -44,6 +44,8 @@ const HallOfHonorPage = async ({ params }: Props) => {
 
     const data: HonorType = await res.json();
 
+    console.log(data);
+
     return (
       <main className={cn('container')}>
         <div className={cn('inner')}>
