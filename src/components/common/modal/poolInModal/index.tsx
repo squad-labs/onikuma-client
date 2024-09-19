@@ -50,6 +50,8 @@ const PoolInModal = ({
     queryFn: () => getTokenData({ topicId }),
   });
 
+  console.log(data);
+
   const handleCloseModal = useCallback(() => {
     dispatch(CLOSE_MODAL());
   }, [dispatch]);

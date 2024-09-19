@@ -77,12 +77,14 @@ const PriceInfoCard = ({
             weight="light"
             color="DARK"
           />
-          <BaseText
-            text={`+${meta?.percent}%`}
-            size="medium"
-            weight="regular"
-            color="BASE_RED_1"
-          />
+          {type === 'bottom' && (
+            <BaseText
+              text={`+${meta?.percent}%`}
+              size="medium"
+              weight="regular"
+              color="BASE_RED_1"
+            />
+          )}
         </div>
         <div className={cn('text-wrapper')}>
           <BaseText
