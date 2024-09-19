@@ -5,7 +5,7 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 export interface IRoundContext {
   ticker: string;
   setTicker: Dispatch<SetStateAction<string>>;
-  getTokenPrice: (amount: string) => Promise<number | string>;
+  getToken: (amount: string) => Promise<{ price: number; royalty: number }>;
   mintToken: (callback: () => void) => void;
   currentRound: 8 | 4 | 2 | 1;
   setCurrentRound: Dispatch<SetStateAction<8 | 4 | 2 | 1>>;
@@ -20,7 +20,7 @@ export interface IRoundContext {
 const defaultValue: IRoundContext = {
   ticker: '',
   setTicker: () => {},
-  getTokenPrice: async () => 0,
+  getToken: async () => ({ price: 0, royalty: 0 }),
   mintToken: () => {},
   currentRound: 8,
   setCurrentRound: () => {},

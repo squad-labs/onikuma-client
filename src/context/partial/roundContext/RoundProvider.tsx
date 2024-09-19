@@ -12,7 +12,6 @@ import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
 import { ethers, JsonRpcProvider } from 'ethers';
 import { Config, useClient } from 'wagmi';
 import { chain as AppChain } from '@/config/web3Config';
-import type { Chain, Client, Transport } from 'viem';
 
 type RoundList = {
   first: number[];
@@ -28,7 +27,6 @@ type Props = {
 
 const RoundProvider = ({ children, topic, round }: Props) => {
   const dispatch = useDispatch();
-  const [isSending, setIsSending] = useState<boolean>(false);
   const [ticker, setTicker] = useState<string>(topic.ticker);
   const [currentRound, setCurrentRound] = useState<8 | 4 | 2 | 1>(8);
   const [options, setOptions] = useState<Option[]>(topic.competitors);
@@ -85,19 +83,29 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     return false;
   }, []);
 
-  const getTokenPrice = useCallback(async (amount: string) => {
+  const getToken = useCallback(async (amount: string) => {
     try {
       const token: TokenPriceType = await getTopicTokenPrice({
         topicId: topic._id,
         amount,
       });
+      console.log('token', token);
 
-      return token.estimation;
+      return {
+        price: parseFloat(token.estimation),
+        royalty: parseFloat(token.royalty),
+      };
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return 0;
+        return {
+          price: 0,
+          royalty: 0,
+        };
       }
-      return 0;
+      return {
+        price: 0,
+        royalty: 0,
+      };
     }
   }, []);
 
@@ -167,7 +175,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
         }
       }
     },
-    [setIsSending, network, ticker, token],
+    [network, ticker, token],
   );
 
   return (
@@ -176,7 +184,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
         next,
         ticker,
         setTicker,
-        getTokenPrice,
+        getToken,
         mintToken,
         selectedOptions,
         currentRound,

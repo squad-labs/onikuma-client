@@ -39,9 +39,10 @@ const PoolInModal = ({
 }: PoolInModalProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
   const [tokenAmount, setTokenAmount] = useState<number | ''>('');
-  const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
-  const { mintToken, getTokenPrice } = useContext(RoundContext);
+  const [tokenPrice, setTokenPrice] = useState<number>(0);
+  const { mintToken, getToken } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const { data } = useQuery({
@@ -67,7 +68,7 @@ const PoolInModal = ({
       poolInMutation.mutate({
         topicId: topicId,
         topicToken: tokenAmount,
-        reserveToken: parseFloat(tokenPrice),
+        reserveToken: tokenPrice - tokenRoyalty,
         pickerName: value,
       });
     }
@@ -86,13 +87,15 @@ const PoolInModal = ({
 
   useEffect(() => {
     if (tokenAmount === undefined || tokenAmount === '' || tokenAmount === 0) {
-      setTokenPrice('0');
+      setTokenPrice(0);
       return;
     }
     const _getTokenPrice = async () => {
-      const token = await getTokenPrice(tokenAmount.toString());
-      if (token === undefined) setTokenPrice('0');
-      else setTokenPrice(String(token));
+      const token = await getToken(tokenAmount.toString());
+      if (token.price === undefined) setTokenPrice(0);
+      else setTokenPrice(token.price);
+      if (token.royalty === undefined) setTokenPrice(0);
+      else setTokenRoyalty(token.royalty);
     };
     _getTokenPrice();
   }, [tokenAmount]);
@@ -143,7 +146,7 @@ const PoolInModal = ({
                 title={baseTokenName}
                 ticker={`$${baseTicker}`}
                 imageUrl={imageUrl}
-                price={tokenPrice}
+                price={tokenPrice.toString()}
                 setPrice={handleOnChange}
                 meta={{
                   price: '1',
