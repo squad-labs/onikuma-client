@@ -21,6 +21,8 @@ const Header = async () => {
   const res = await getTopicByStatus('onGoing');
   const data: TopicMetadata = res[0];
 
+  console.log(data);
+
   return (
     <header className={cn('header-container')}>
       <div className={cn('header-wrapper')}>

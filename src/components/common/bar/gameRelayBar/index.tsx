@@ -12,7 +12,7 @@ type Props = {
 };
 
 const GameRelayBar = ({ endDate }: Props) => {
-  const { date, hour, minute, second } = useTimer(endDate);
+  const { hour, minute, second } = useTimer(endDate);
 
   return (
     <ContainerBar
@@ -24,7 +24,7 @@ const GameRelayBar = ({ endDate }: Props) => {
         <span className={cn('text')}>{'Game end countdown: '}</span>
         <span
           className={cn('text-bold')}
-        >{`${date}d ${hour}h ${minute}m ${second}s`}</span>
+        >{`${hour}h ${minute}m ${second}s`}</span>
       </Fragment>
     </ContainerBar>
   );
