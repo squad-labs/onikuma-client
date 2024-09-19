@@ -141,7 +141,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
                 </div>
                 <div className={cn('inner-text')}>
                   <BaseText
-                    text={`$${thousandFormat(competitor.reserveToken)}`}
+                    text={`${thousandFormat(competitor.reserveToken)}`}
                     size={'medium'}
                     weight="regular"
                     color={'DARK'}
