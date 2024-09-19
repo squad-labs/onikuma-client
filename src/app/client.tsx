@@ -24,7 +24,6 @@ const MyClientPage = () => {
           />
         </span>
       </h1>
-      <p className={cn('sub-header')}>Seal Onikuma and save the village!</p>
       <div className={cn('card-container')}>
         <RuleCard
           textLine1="Step 1"
@@ -34,8 +33,7 @@ const MyClientPage = () => {
           <Image
             src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.RULE_1)}
             alt="rule-card"
-            width={160}
-            height={152}
+            fill={true}
             className={cn('card-image')}
             priority
             quality={100}
@@ -50,8 +48,7 @@ const MyClientPage = () => {
           <Image
             src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.RULE_2)}
             alt="rule-card"
-            width={160}
-            height={152}
+            fill={true}
             className={cn('card-image')}
             priority
             quality={100}
@@ -65,8 +62,7 @@ const MyClientPage = () => {
           <Image
             src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.RULE_3)}
             alt="rule-card"
-            width={160}
-            height={152}
+            fill={true}
             className={cn('card-image')}
             priority
             quality={100}
@@ -80,8 +76,7 @@ const MyClientPage = () => {
           <Image
             src={getStaticSrc('image', IMAGE_SRC_PATH.SRC.RULE_4)}
             alt="rule-card"
-            width={160}
-            height={152}
+            fill={true}
             className={cn('card-image')}
             priority
             quality={100}

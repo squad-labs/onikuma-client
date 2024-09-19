@@ -160,7 +160,11 @@ const PoolInModal = ({
         <div className={cn('button-container')}>
           <BaseButton
             text={'Pool in'}
-            disabled={tokenAmount === 0 || tokenAmount === ''}
+            disabled={
+              tokenAmount === 0 ||
+              tokenAmount === '' ||
+              parseFloat(data.myBalanceHoney) < tokenPrice
+            }
             label="pool-in-button"
             colors={{ primary: 'BASE_BLUE_1', secondary: 'BASE_CREAM_1' }}
             theme="fill"

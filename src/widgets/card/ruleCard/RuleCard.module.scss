@@ -2,21 +2,23 @@
   display: flex;
   border: 1px solid var(--DARK-GRAY-1);
   width: 100%;
-  height: 16rem;
+  height: 14rem;
   padding: 1rem;
   background-color: white;
   align-items: center;
 
   .photo {
+    width: 30%;
+    height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex;
     position: relative;
   }
 }
 
 .text {
-  width: 70%;
-  padding: 10px;
+  width: 80%;
+  padding-left: 10px;
   flex-direction: column;
   align-items: start;
   height: 100%;
@@ -29,13 +31,13 @@
 
   .title {
     margin-top: 0.4rem;
-    font-size: var(--TEXT-SIZE-LARGE);
+    font-size: 1.4rem;
   }
 
   .content {
     margin-top: 0.8rem;
-    line-height: 2rem;
-    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-size: var(--TEXT-SIZE-MEDIUM);
     font-family: var(--FONT-DM-MONO-LIGHT);
   }
 }
