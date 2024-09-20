@@ -44,7 +44,7 @@ const MyClientPage = ({ myData }: Props) => {
         <div className={cn('highlights-container')}>
           <HighlightCard
             title="Total Pooled in Amount"
-            mainText={`$${total.myTotalPoolIn ? thousandFormat(total.myTotalPoolIn) : '0.00'}`}
+            mainText={`$${total.myTotalPoolIn ? thousandFormat(parseFloat(total.myTotalPoolIn.toFixed(2))) : '0.00'}`}
             subText="0%"
           />
           <HighlightCard
