@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
 import { getLeaderboard } from '@/shared/api/Dashboard';
 import { LeaderItems } from '@/shared/types/data/leaderboard';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 const cn = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ const LeaderboardClientPage = () => {
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [isLast, setIsLast] = useState<boolean>(false);
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEY.GET_ALL_RANKINGS],
     queryFn: () =>
       getLeaderboard({
@@ -67,6 +68,14 @@ const LeaderboardClientPage = () => {
   useEffect(() => {
     fetchData();
   }, [page]);
+
+  if (!data?.userRank || !leaderItems || leaderItems.length === 0 || error) {
+    return (
+      <div className={cn('container')}>
+        <UnAuthorizedError />
+      </div>
+    );
+  }
 
   return (
     <div className={cn('container')}>

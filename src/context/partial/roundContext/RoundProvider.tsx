@@ -9,10 +9,10 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
 import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
-import { ethers, JsonRpcProvider } from 'ethers';
+import { ethers } from 'ethers';
 import { Config, useClient } from 'wagmi';
 import { chain as AppChain } from '@/config/web3Config';
-import type { Chain, Client, Transport } from 'viem';
+import { useWalletConnector } from '@/shared/hooks/useWalletConnector';
 
 type RoundList = {
   first: number[];
@@ -37,6 +37,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const network = mintclub.network('berachaintestnetbartio');
   const token = network.token(topic.ticker);
   const client = useClient<Config>({ chainId: AppChain.id });
+  const { getProviderByPriority } = useWalletConnector();
 
   const next = useCallback(
     (optionName: string) => {
@@ -85,44 +86,40 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     return false;
   }, []);
 
-  const getTokenPrice = useCallback(async (amount: string) => {
+  const getToken = useCallback(async (amount: string) => {
     try {
       const token: TokenPriceType = await getTopicTokenPrice({
         topicId: topic._id,
         amount,
       });
 
-      return token.estimation;
+      return {
+        price: parseFloat(token.estimation),
+        royalty: parseFloat(token.royalty),
+      };
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return 0;
+        return {
+          price: 0,
+          royalty: 0,
+        };
       }
-      return 0;
+      return {
+        price: 0,
+        royalty: 0,
+      };
     }
   }, []);
 
-  const clientToProvider = (client: any) => {
-    const { chain } = client;
-    const network = {
-      chainId: chain.id,
-      name: chain.name,
-    };
-
-    const provider = new JsonRpcProvider(
-      chain.rpcUrls.default.http[0],
-      network,
-    );
-    return provider;
-  };
-
   const mintToken = useCallback(
-    async (callback: () => void) => {
-      const provider = clientToProvider(client);
+    async (amount: number, callback: () => void) => {
+      setIsSending(true);
 
-      await mintclub.wallet.connect(window.ethereum);
+      const provider = getProviderByPriority();
+      await mintclub.wallet.connect(provider);
       try {
         await token.buy({
-          amount: wei(1, 18),
+          amount: wei(amount, 18),
           async onSigned(tx) {
             const result = await waitTransaction(tx);
             if (result) {
@@ -166,17 +163,19 @@ const RoundProvider = ({ children, topic, round }: Props) => {
           return;
         }
       }
+      setIsSending(false);
     },
-    [setIsSending, network, ticker, token],
+    [network, ticker, token],
   );
 
   return (
     <RoundContext.Provider
       value={{
         next,
+        isSending,
         ticker,
         setTicker,
-        getTokenPrice,
+        getToken,
         mintToken,
         selectedOptions,
         currentRound,

@@ -23,11 +23,13 @@ export const config = getDefaultConfig({
   appName: metadata.name,
   projectId: PROJECT_ID,
   chains: [chain],
+  syncConnectedChain: true,
   ssr: true,
   storage: createStorage({
     storage: cookieStorage,
   }),
   transports: {
     [chain.id]: http(),
+    connectedChain: http(),
   },
 });

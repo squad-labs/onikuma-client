@@ -1,7 +1,13 @@
 'use client';
 import { WalletContext } from '@/context/partial/walletContext/WalletContext';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { useAccount, type Config, useClient } from 'wagmi';
+import {
+  useAccount,
+  type Config,
+  useClient,
+  useSignMessage,
+  useConnections,
+} from 'wagmi';
 import { JsonRpcProvider } from 'ethers';
 import { chain as AppChain, config } from '@/config/web3Config';
 import { disconnect, switchChain } from '@wagmi/core';
@@ -12,6 +18,8 @@ import { useRouter } from 'next/navigation';
 
 export const useConnect = () => {
   const router = useRouter();
+  const connection = useConnections();
+  const { signMessageAsync } = useSignMessage();
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const [isClick, setIsClick] = useState<boolean>(false);
@@ -30,8 +38,21 @@ export const useConnect = () => {
   };
 
   useEffect(() => {
+    const handleSignMessage = async () => {
+      const res = await signMessageAsync({
+        account: address,
+        message: 'Onikuma games request your account.',
+      });
+      if (res) {
+        localStorage.setItem(
+          'onikuma-wallet-priority',
+          connection[0].connector.id,
+        );
+        router.push('/p/current');
+      }
+    };
     if (isClick && address && isConnected) {
-      router.push('/p/current');
+      handleSignMessage();
     }
   }, [isClick, address, isConnected]);
 

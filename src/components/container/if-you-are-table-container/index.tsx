@@ -78,13 +78,7 @@ const IfYouAreTableContainer = () => {
               size="medium"
               color="DARK"
               weight="bold"
-              text={'ONIKUMA'}
-            />
-            <BaseText
-              size="medium"
-              color="DARK"
-              weight="bold"
-              text={'GENESIS NFT'}
+              text={'ONIKUMA NFT'}
             />
           </div>
           <div className={cn('wrapper')} style={{ width: '20%' }}>
@@ -126,13 +120,7 @@ const IfYouAreTableContainer = () => {
               size="medium"
               color="DARK"
               weight="bold"
-              text={'ONIKUMA'}
-            />
-            <BaseText
-              size="medium"
-              color="DARK"
-              weight="bold"
-              text={'GENESIS NFT'}
+              text={'ONIKUMA NFT'}
             />
           </div>
           <div className={cn('wrapper')} style={{ width: '20%' }}>
@@ -175,13 +163,7 @@ const IfYouAreTableContainer = () => {
               size="medium"
               color="DARK"
               weight="bold"
-              text={'ONIKUMA'}
-            />
-            <BaseText
-              size="medium"
-              color="DARK"
-              weight="bold"
-              text={'GENESIS NFT'}
+              text={'ONIKUMA NFT'}
             />
           </div>
           <div className={cn('wrapper')} style={{ width: '20%' }}>

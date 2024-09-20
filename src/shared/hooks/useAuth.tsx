@@ -32,6 +32,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
 
   const logout = async () => {
     setCookie('accessToken', undefined);
+    localStorage.removeItem('onikuma-wallet-priority');
     handleDisconnect();
   };
 

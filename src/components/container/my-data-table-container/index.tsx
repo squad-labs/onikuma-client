@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styles from '@/components/container/my-data-table-container/MyDataTableContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -125,6 +125,19 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
           </div>
         )}
         {data.map((item, index) => {
+          const isPickerHonor = () => {
+            return item.competitors.some(
+              (competitor) => competitor.isBiggestPickerPooler,
+            );
+          };
+
+          const isHallofHonor = () => {
+            return (
+              (item.isBiggestTopicPooler || isPickerHonor()) &&
+              item.status === 'onGoing'
+            );
+          };
+
           return (
             <div key={index}>
               <div className={cn('list-item')}>
@@ -151,32 +164,28 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
                 </div>
                 <div className={cn('item-check-result')}>
                   <CheckResultsButton
-                    text={
-                      item.isBiggestTopicPooler
-                        ? 'Hall of Honor'
-                        : 'Check Results'
-                    }
+                    text={isHallofHonor() ? 'Hall of Honor' : 'Check Results'}
                     primaryColor={
-                      item.isBiggestTopicPooler
+                      isHallofHonor()
                         ? 'BASE_RED_1'
-                        : item.status.toLowerCase() === 'ongoing'
+                        : item.status === 'onGoing'
                           ? 'DARK_GRAY_5'
                           : 'BASE_BLUE_1'
                     }
                     secondaryColor="BASE_CREAM_1"
                     onClick={() => {
-                      if (item.isBiggestTopicPooler) {
+                      if (isHallofHonor()) {
                         router.push(`/hall-of-honor/${item.topicId}`);
                       } else {
                         dispatch(
                           OPEN_MODAL({
-                            name: 'PoolResultModalProps',
+                            name: 'PoolResutlModal',
                             data: {
                               topicId: item.topicId,
                               totalGain: item.totalCostPnL,
                               totalPnl: item.totalPercentPnL,
                               totalPoolIn: item.totalPoolIn,
-                              competitors: item.competitors,
+                              competitors: item,
                             },
                           }),
                         );

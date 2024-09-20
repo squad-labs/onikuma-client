@@ -4,9 +4,10 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface IRoundContext {
   ticker: string;
+  isSending: boolean;
   setTicker: Dispatch<SetStateAction<string>>;
-  getTokenPrice: (amount: string) => Promise<number | string>;
-  mintToken: (callback: () => void) => void;
+  getToken: (amount: string) => Promise<{ price: number; royalty: number }>;
+  mintToken: (amount: number, callback: () => void) => void;
   currentRound: 8 | 4 | 2 | 1;
   setCurrentRound: Dispatch<SetStateAction<8 | 4 | 2 | 1>>;
   options: Option[];
@@ -19,8 +20,9 @@ export interface IRoundContext {
 
 const defaultValue: IRoundContext = {
   ticker: '',
+  isSending: false,
   setTicker: () => {},
-  getTokenPrice: async () => 0,
+  getToken: async () => ({ price: 0, royalty: 0 }),
   mintToken: () => {},
   currentRound: 8,
   setCurrentRound: () => {},

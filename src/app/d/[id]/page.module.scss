@@ -15,4 +15,14 @@
     box-shadow: 5px 4px var(--DARK-GRAY-3);
     overflow-y: scroll;
   }
+
+  .error-inner {
+    position: relative;
+    width: calc(100vw - 8rem);
+    height: calc(100vh - 8rem - 72px);
+    background-color: var(--LIGHT-CREAM-1);
+    border: 3px solid var(--DARK-GRAY-4);
+    border-radius: 1rem;
+    box-shadow: 5px 4px var(--DARK-GRAY-3);
+  }
 }

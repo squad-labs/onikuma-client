@@ -31,6 +31,7 @@ type Props = {
 const CommentContainer = ({ topicId }: Props) => {
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const [pagination, setPagination] = useState<number>(1);
+  const [isLast, setIsLast] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { comment, setComment, socket } = useContext(CommentContext);
 
@@ -66,6 +67,9 @@ const CommentContainer = ({ topicId }: Props) => {
       page: pagination,
       pageSize: 20,
     });
+    if (response.length === 0) {
+      setIsLast(true);
+    }
     setCommentList([...commentList, ...response]);
     setIsLoading(false);
   }, [pagination]);
@@ -94,7 +98,12 @@ const CommentContainer = ({ topicId }: Props) => {
   ) => {
     const target = entries[0];
 
-    if (target.isIntersecting && !isLoading && commentList.length !== 0) {
+    if (
+      target.isIntersecting &&
+      !isLoading &&
+      commentList.length !== 0 &&
+      !isLast
+    ) {
       setPagination((prev) => prev + 1);
     }
   };
@@ -139,9 +148,6 @@ const CommentContainer = ({ topicId }: Props) => {
         className={cn('comment-list')}
         style={{
           borderTop: isCommentEmpty
-            ? 'none'
-            : `1px solid ${COLOR['DARK_GRAY_1']}`,
-          borderBottom: isCommentEmpty
             ? 'none'
             : `1px solid ${COLOR['DARK_GRAY_1']}`,
         }}

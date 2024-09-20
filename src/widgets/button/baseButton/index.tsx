@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styles from '@/widgets/button/baseButton/BaseButton.module.scss';
 import classNames from 'classnames/bind';
 import { BaseButtonProps } from '@/shared/types/ui/Button';
+import BaseSpinner from '@/widgets/spinner/baseSpinner';
 
 const cn = classNames.bind(styles);
 
@@ -39,7 +40,7 @@ const BaseButton = ({
       )}
     >
       {loading ? (
-        <Fragment></Fragment>
+        <BaseSpinner type="base" size={24} color="light" />
       ) : (
         <Fragment>
           {children && children}

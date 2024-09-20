@@ -36,7 +36,12 @@
       align-items: center;
       justify-content: flex-end;
       text-align: right;
+      color: var(--DARK);
       font-family: var(--FONT-DM-MONO-BOLD);
+
+      &::placeholder {
+        color: var(--DARK-OPACITY-5);
+      }
     }
 
     .top {

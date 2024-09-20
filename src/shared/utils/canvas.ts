@@ -27,12 +27,7 @@ export const generatePollResultImage = async ({
 }: PollResult) => {
   const canvas = createCanvas(2000, 1600);
   const ctx = canvas.getContext('2d');
-
-  const {
-    data: { poolIn },
-  } = competitors.reduce((prev, current) => {
-    return prev.data.poolIn > current.data.poolIn ? prev : current;
-  });
+  const biggestTvl = competitors[0].poolTvl;
 
   registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
     family: 'DMMono-Light',
@@ -72,7 +67,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = getNumberSign(totalGain).color;
   ctx.fillText(
-    `${getNumberSign(totalGain).sign}${totalGain} $HONEY (${getNumberSign(totalGain).sign}${totalPnL}%)`,
+    `${getNumberSign(totalGain).sign}${thousandFormat(parseFloat(totalGain.toFixed(2)))} $HONEY (${getNumberSign(totalGain).sign}${parseFloat(totalPnL.toFixed(2))}%)`,
     canvas.width / 2,
     176,
   );
@@ -110,7 +105,7 @@ export const generatePollResultImage = async ({
   const yGap = 130;
 
   competitors.forEach((competitor, index) => {
-    const sign = getNumberSign(competitor.data.poolIn);
+    const sign = getNumberSign(competitor.data.pnl);
 
     ctx.textAlign = 'start';
     ctx.font = '32px DMMono-Medium';
@@ -126,8 +121,8 @@ export const generatePollResultImage = async ({
     ctx.fillStyle = COLOR.DARK_GRAY_5;
     ctx.fillText(`${competitor.name}`, 200 + xGap, 430 + index * yGap);
 
-    const chunk = poolIn / 100;
-    const ratio = Math.floor(competitor.data.poolIn / chunk);
+    const chunk = biggestTvl / 100;
+    const ratio = Math.floor(competitor.poolTvl / chunk);
     const image = generateResultGraphImage(GraphColorMap[index + 1], ratio);
     ctx.drawImage(image, 550, 375 + index * yGap);
 
@@ -135,7 +130,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(competitor.data.poolIn)}`,
+      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.poolIn.toFixed(2)))}`,
       canvas.width - 560,
       430 + index * yGap,
     );
@@ -144,7 +139,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(competitor.data.gain)}`,
+      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.gain.toFixed(2)))}`,
       canvas.width - 340,
       430 + index * yGap,
     );
@@ -170,7 +165,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = COLOR[totalSign.color];
   ctx.fillText(
-    `${totalSign.sign}$${thousandFormat(totalPoolIn)}`,
+    `${totalSign.sign}$${thousandFormat(parseFloat(totalPoolIn.toFixed(2)))}`,
     canvas.width - 560,
     1480,
   );
@@ -181,7 +176,11 @@ export const generatePollResultImage = async ({
 
   ctx.textAlign = 'end';
   ctx.font = '32px DMMono-Medium';
-  ctx.fillText(`${totalSign.sign}%${totalPnL}`, canvas.width - 120, 1480);
+  ctx.fillText(
+    `${totalSign.sign}%${thousandFormat(parseFloat(totalPnL.toFixed(2)))}`,
+    canvas.width - 120,
+    1480,
+  );
 
   const buffer = canvas.toBuffer('image/png');
 
@@ -201,17 +200,6 @@ export const generateResultGraphImage = (color: ColorType, range: number) => {
   ctx.lineWidth = 2;
   ctx.fillStyle = COLOR.DARK_GRAY_2;
   ctx.rect(0, 0, canvas.width, canvas.height);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.lineWidth = 1;
-  ctx.fillStyle = COLOR.DARK_GRAY_4;
-  ctx.rect(
-    (canvas.width / 100) * range,
-    0,
-    (canvas.width / 100) * range + 1,
-    canvas.height,
-  );
   ctx.stroke();
 
   return canvas;

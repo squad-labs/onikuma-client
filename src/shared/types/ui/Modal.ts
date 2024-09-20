@@ -45,4 +45,6 @@ export type PoolInModalProps = {
   roundTicker: string;
 };
 
-export type PoolResultModalProps = PollResult & {};
+export type PoolResultModalProps = {
+  topicId: string;
+};
