@@ -3,9 +3,8 @@ import React, { useMemo } from 'react';
 import styles from '@/components/common/button/walletConnectButton/WalletConnectButton.module.scss';
 import classNames from 'classnames/bind';
 import BaseButton from '@/widgets/button/baseButton';
-import { ConnectorNames, useConnect } from '@/shared/hooks/useConnect';
+import { useConnect } from '@/shared/hooks/useConnect';
 import { useAuth } from '@/shared/hooks/useAuth';
-import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -15,7 +14,6 @@ type Props = {
 };
 
 const WalletConnectButton = ({ type, autoLogin }: Props) => {
-  const router = useRouter();
   const isHome = useMemo(() => type === 'home', [type]);
   useAuth({ autoLogin });
   const { handleModal } = useConnect();
