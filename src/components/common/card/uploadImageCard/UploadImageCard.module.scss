@@ -1,34 +1,155 @@
-.card-container {
+.upload-image-wrapper {
   width: 100%;
-  padding: 1.6rem 1rem;
+  margin-top: 2rem;
+  border: 1px solid var(--DARK);
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: center;
+  padding: 2rem;
   gap: 1rem;
 
-  .text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    gap: 0.3rem;
+  .card-wrapper {
+    flex: 7;
+
+    .card-container {
+      width: 100%;
+      padding: 1.6rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 1rem;
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 0.3rem;
+      }
+
+      .input-wrapper {
+        width: 100%;
+        margin-top: 0.4rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .button-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.8rem;
+      }
+    }
   }
 
-  .input-wrapper {
-    width: 100%;
-    margin-top: 0.4rem;
+  .image-wrapper {
+    width: 30%;
+    padding: 1rem;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border: 1px solid var(--DARK);
+    border-radius: 1rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
+    transition: tranform 0.3s;
+    grid-area: 1 / 1 / 1 / 1;
+    overflow: hidden;
+
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url('/images/image-background.png');
+      background-size: cover;
+    }
+
+    .image {
+      width: calc(100% - 1rem);
+      height: calc(100% - 1rem);
+      border-radius: 1rem;
+      border: 1px solid var(--DARK);
+      background-color: var(--LIGHT-CREAM-1);
+      z-index: 999999;
+    }
+
+    .button-container {
+      position: absolute;
+      top: 0%;
+      right: 3%;
+      transform: translate(0, 50%);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 999999;
+
+      .icon-button-container {
+        margin-left: 0.8rem;
+      }
+
+      .button-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .flip-icon {
+          object-fit: cover;
+        }
+      }
+    }
   }
 
-  .button-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0.8rem;
+  .flip-wrapper {
+    transform-style: preserve-3d;
+    transition: tranform 0.3s;
+    grid-area: 1 / 1 / 1 / 1;
+
+    .unflipped {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      object-fit: cover;
+      transition: all 0.5s;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateY(0deg);
+    }
+
+    .flipped {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      object-fit: cover;
+      transition: all 0.5s;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateY(180deg);
+    }
+  }
+}
+
+.skip {
+  animation-name: fadeout;
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeout {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+    display: none;
   }
 }
