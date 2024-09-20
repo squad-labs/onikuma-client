@@ -26,7 +26,9 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
   const [isFlipped, setIsFlipped] = useState<boolean>(true);
   const [skipImage, setSkipImage] = useState<boolean>(false);
-  const [skipVoice, setSkipVoice] = useState<boolean>(false);
+  const [skipVoice, setSkipVoice] = useState<boolean>(
+    !honor.isBiggestTopicPooler,
+  );
   const [audioUrl, setAudioUrl] = useState<string>('');
 
   const handleFlip = useCallback(() => {
