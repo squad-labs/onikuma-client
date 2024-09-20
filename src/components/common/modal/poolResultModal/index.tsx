@@ -11,17 +11,21 @@ import GraphBlock from '@/widgets/block/graphBlock';
 import { GraphColorMap } from '@/components/container/graph-container';
 import BaseButton from '@/widgets/button/baseButton';
 import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
+import { useQuery } from '@tanstack/react-query';
+import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
+import { getPollResult } from '@/shared/api/Dashboard';
+import useOnClickOutside from '@/shared/hooks/useOnClick';
+import ShareResultButton from '@/components/common/button/shareResultButton';
 
 const cn = classNames.bind(styles);
 
-const PoolResultModal = ({
-  totalGain,
-  totalPnL,
-  totalPoolIn,
-  competitors,
-}: PoolResultModalProps) => {
+const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const { data, isLoading } = useQuery({
+    queryKey: [QUERY_KEY.GET_POOL_RESULT, topicId],
+    queryFn: () => getPollResult({ topicId }),
+  });
 
   const getSign = useCallback((value: number) => {
     return value === 0
@@ -32,8 +36,8 @@ const PoolResultModal = ({
   }, []);
 
   const reward = useMemo(() => {
-    return getSign(totalGain);
-  }, [totalGain, totalPnL]);
+    return getSign(data?.totalGain || 0);
+  }, [data?.totalGain, data?.totalPnL]);
 
   const getTextColor = useCallback((value: number) => {
     return value === 0
@@ -44,12 +48,21 @@ const PoolResultModal = ({
   }, []);
 
   const sumTvl = useCallback(() => {
-    return competitors.reduce((acc, cur) => acc + cur.poolTvl, 0);
-  }, [competitors]);
+    if (data) {
+      return data.competitors[0].poolTvl;
+    }
+    return 0;
+  }, [data?.competitors]);
 
   const tvlSum = useMemo(() => {
     return sumTvl();
-  }, [competitors]);
+  }, [data?.competitors]);
+
+  useOnClickOutside({
+    ref: modalRef,
+    handler: () => dispatch(CLOSE_MODAL()),
+    mouseEvent: 'click',
+  });
 
   return (
     <BaseModal background={'DARK_OPACITY_5'}>
@@ -63,10 +76,10 @@ const PoolResultModal = ({
             color="DARK_GRAY_2"
           />
           <BaseText
-            text={`${reward.sign}${totalGain} $HONEY (${reward.sign}${totalPnL}%)`}
+            text={`${reward.sign}${data?.totalGain} $HONEY (${reward.sign}${data?.totalPnL}%)`}
             size="medium"
             weight="regular"
-            color={getTextColor(totalGain)}
+            color={getTextColor(data?.totalGain || 0)}
           />
           <BaseText
             text={'in total!'}
@@ -119,11 +132,10 @@ const PoolResultModal = ({
         </div>
         <div className={cn('table-body')}>
           <div className={cn('list-container')}>
-            {competitors.map((item: Competitor, index: number) => {
-              console.log(item);
+            {data?.competitors.map((item: Competitor, index: number) => {
               const rankText = index + 1;
-              const chunk = (tvlSum / 100).toFixed(0);
-              const ratio = Math.floor(item.poolTvl / parseInt(chunk));
+              const chunk = tvlSum / 100;
+              const ratio = Math.floor(item.poolTvl / chunk);
 
               return (
                 <div key={index} className={cn('list-item')}>
@@ -149,7 +161,7 @@ const PoolResultModal = ({
                   </div>
                   <div className={cn('text-wrapper')}>
                     <BaseText
-                      text={`${getSign(item.data.poolIn).sign}$${thousandFormat(item.data.poolIn)}`}
+                      text={`${getSign(item.data.poolIn).sign}$${thousandFormat(parseFloat(item.data.poolIn.toFixed(2) || '0'))}`}
                       size="medium"
                       weight="light"
                       color={getTextColor(item.data.gain)}
@@ -157,7 +169,7 @@ const PoolResultModal = ({
                   </div>
                   <div className={cn('text-wrapper')}>
                     <BaseText
-                      text={`${getSign(item.data.gain).sign}$${thousandFormat(item.data.gain)}`}
+                      text={`${getSign(item.data.gain).sign}$${thousandFormat(parseFloat(item.data.gain.toFixed(2) || '0'))}`}
                       size="medium"
                       weight="light"
                       color={getTextColor(item.data.gain)}
@@ -183,31 +195,38 @@ const PoolResultModal = ({
           <div className={cn('header-inner-right')}>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(totalPoolIn).sign}$${thousandFormat(totalPoolIn)}`}
+                text={`${getSign(data?.totalPoolIn || 0).sign}$${thousandFormat(parseFloat(data?.totalPoolIn.toFixed(2) || '0'))}`}
                 size="medium"
                 weight="bold"
-                color={getTextColor(totalGain)}
+                color={getTextColor(data?.totalGain || 0)}
               />
             </div>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(totalGain).sign}$${thousandFormat(totalGain)}`}
+                text={`${getSign(data?.totalGain || 0).sign}$${thousandFormat(parseFloat(data?.totalGain.toFixed(2) || '0'))}`}
                 size="medium"
                 weight="bold"
-                color={getTextColor(totalGain)}
+                color={getTextColor(data?.totalGain || 0)}
               />
             </div>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(totalPnL).sign}${totalPnL}%`}
+                text={`${getSign(data?.totalPnL || 0).sign}${data?.totalPnL}%`}
                 size="medium"
                 weight="bold"
-                color={getTextColor(totalGain)}
+                color={getTextColor(data?.totalGain || 0)}
               />
             </div>
           </div>
         </div>
         <div className={cn('button-container')}>
+          <ShareResultButton
+            topicId={topicId}
+            totalGain={data?.totalGain || 0}
+            totalPnL={data?.totalPnL || 0}
+            totalPoolIn={data?.totalPoolIn || 0}
+            competitors={data?.competitors || []}
+          />
           <BaseButton
             text="Close"
             shape="shape-4"

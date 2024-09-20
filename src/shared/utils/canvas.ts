@@ -72,7 +72,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = getNumberSign(totalGain).color;
   ctx.fillText(
-    `${getNumberSign(totalGain).sign}${totalGain} $HONEY (${getNumberSign(totalGain).sign}${totalPnL}%)`,
+    `${getNumberSign(totalGain).sign}${thousandFormat(parseFloat(totalGain.toFixed(2)))} $HONEY (${getNumberSign(totalGain).sign}${parseFloat(totalPnL.toFixed(2))}%)`,
     canvas.width / 2,
     176,
   );
@@ -135,7 +135,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(competitor.data.poolIn)}`,
+      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.poolIn.toFixed(2)))}`,
       canvas.width - 560,
       430 + index * yGap,
     );
@@ -144,7 +144,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(competitor.data.gain)}`,
+      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.gain.toFixed(2)))}`,
       canvas.width - 340,
       430 + index * yGap,
     );
@@ -170,7 +170,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = COLOR[totalSign.color];
   ctx.fillText(
-    `${totalSign.sign}$${thousandFormat(totalPoolIn)}`,
+    `${totalSign.sign}$${thousandFormat(parseFloat(totalPoolIn.toFixed(2)))}`,
     canvas.width - 560,
     1480,
   );
@@ -181,7 +181,11 @@ export const generatePollResultImage = async ({
 
   ctx.textAlign = 'end';
   ctx.font = '32px DMMono-Medium';
-  ctx.fillText(`${totalSign.sign}%${totalPnL}`, canvas.width - 120, 1480);
+  ctx.fillText(
+    `${totalSign.sign}%${thousandFormat(parseFloat(totalPnL.toFixed(2)))}`,
+    canvas.width - 120,
+    1480,
+  );
 
   const buffer = canvas.toBuffer('image/png');
 

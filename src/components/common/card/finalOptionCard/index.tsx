@@ -190,7 +190,9 @@ const FinalOptionCard = ({
           fontWeight="regular"
           onClick={() => {
             setIsSending(true);
-            mintToken(handlePoolIn);
+            if (typeof tokenAmount === 'number') {
+              mintToken(tokenAmount, handlePoolIn);
+            }
           }}
           loading={isSending}
         />

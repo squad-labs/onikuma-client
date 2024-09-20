@@ -48,7 +48,6 @@ const PoolInModal = ({
   const { mintToken, getToken } = useContext(RoundContext);
   const modalRef = useRef<HTMLDivElement | null>(null);
   usePreventRefresh({ active: isSending });
-  // usePreventBack({ active: true });
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_PRICE, topicId],
     queryFn: () => getTokenData({ topicId }),
@@ -193,7 +192,9 @@ const PoolInModal = ({
             shape="shape-4"
             onClick={() => {
               setIsSending(true);
-              mintToken(handlePoolIn);
+              if (typeof tokenAmount === 'number') {
+                mintToken(tokenAmount, handlePoolIn);
+              }
             }}
             loading={isSending}
           />

@@ -112,14 +112,14 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   }, []);
 
   const mintToken = useCallback(
-    async (callback: () => void) => {
+    async (amount: number, callback: () => void) => {
       setIsSending(true);
 
       const provider = getProviderByPriority();
       await mintclub.wallet.connect(provider);
       try {
         await token.buy({
-          amount: wei(1, 18),
+          amount: wei(amount, 18),
           async onSigned(tx) {
             const result = await waitTransaction(tx);
             if (result) {

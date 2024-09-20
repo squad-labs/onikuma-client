@@ -7,7 +7,7 @@ import { MyData } from '@/shared/types/data/my-data';
 import { thousandFormat } from '@/shared/utils/number';
 import MyDataTableContainer from '@/components/container/my-data-table-container';
 import { useSelector } from 'react-redux';
-import { CLOSE_MODAL, getModal } from '@/context/global/slice/modalSlice';
+import { getModal } from '@/context/global/slice/modalSlice';
 import PoolResultModal from '@/components/common/modal/poolResultModal';
 
 const cn = classNames.bind(styles);
@@ -18,9 +18,6 @@ type Props = {
 
 const MyClientPage = ({ myData }: Props) => {
   const modal = useSelector(getModal);
-
-  console.log(modal);
-
   const total = useMemo(() => {
     return {
       myTotalPoolIn: myData.myTotalPoolIn,
@@ -80,14 +77,8 @@ const MyClientPage = ({ myData }: Props) => {
       </div>
       {modal.name === 'PoolResutlModal' &&
         modal.data &&
-        'totalGain' in modal.data && (
-          <PoolResultModal
-            topicId={modal.data.topicId}
-            totalGain={modal.data.totalGain}
-            totalPnL={modal.data.totalPnL}
-            totalPoolIn={modal.data.totalPoolIn}
-            competitors={modal.data.competitors}
-          />
+        'topicId' in modal.data && (
+          <PoolResultModal topicId={modal.data.topicId} />
         )}
     </div>
   );
