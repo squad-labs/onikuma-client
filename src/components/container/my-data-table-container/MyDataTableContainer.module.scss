@@ -80,6 +80,7 @@
     position: relative;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    overflow-y: scroll;
 
     .overlay {
       position: absolute;
@@ -118,8 +119,8 @@
         justify-content: flex-start;
 
         .text {
-          font-size: 1.3rem;
-          font-family: var(--FONT-DM-MONO-BOLD);
+          font-size: 1.45rem;
+          font-family: var(--FONT-DM-MONO-REGULAR);
         }
       }
 

@@ -125,9 +125,19 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
           </div>
         )}
         {data.map((item, index) => {
-          const isHallofHonor = () => {
-            return item.isBiggestTopicPooler && item.status === 'onGoing';
+          const isPickerHonor = () => {
+            return item.competitors.some(
+              (competitor) => competitor.isBiggestPickerPooler,
+            );
           };
+
+          const isHallofHonor = () => {
+            return (
+              (item.isBiggestTopicPooler || isPickerHonor()) &&
+              item.status === 'onGoing'
+            );
+          };
+
           return (
             <div key={index}>
               <div className={cn('list-item')}>

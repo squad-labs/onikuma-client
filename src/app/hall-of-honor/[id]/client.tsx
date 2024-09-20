@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from '@/app/hall-of-honor/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import { HonorType } from '@/shared/types/data/honor';
@@ -12,6 +12,7 @@ import ImageUploadImage from '@/assets/images/image-upload.png';
 import IconButton from '@/widgets/button/iconButton';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 import { getStaticSrc } from '@/shared/utils/etc';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const HallOfHonorClientPage = ({ id, honor }: Props) => {
+  const router = useRouter();
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
   const [isFlipped, setIsFlipped] = useState<boolean>(true);
   const [skipImage, setSkipImage] = useState<boolean>(false);
@@ -30,6 +32,14 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const handleFlip = useCallback(() => {
     setIsFlipped(!isFlipped);
   }, [isFlipped]);
+
+  useEffect(() => {
+    if (skipImage && skipVoice) {
+      setTimeout(() => {
+        router.replace('/my-page');
+      }, 1000);
+    }
+  }, [skipImage, skipVoice]);
 
   if (honor.competitors.length === 0) {
     return <div>error</div>;
