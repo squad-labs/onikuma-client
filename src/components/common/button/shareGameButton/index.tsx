@@ -3,6 +3,7 @@ import { OPEN_MODAL } from '@/context/global/slice/modalSlice';
 import { SET_TOAST } from '@/context/global/slice/toastSlice';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { getResultImage, getShareImage } from '@/shared/api/Image';
+import { getSharePoint } from '@/shared/api/Topics';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
@@ -140,6 +141,7 @@ const ShareGameButton = ({
       const tweetUrl = encodeURIComponent(window.location.href);
       const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
       const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
+      await getSharePoint();
       window.open(twitterUrl, '_blank');
     },
   });
@@ -151,6 +153,7 @@ const ShareGameButton = ({
           'Content-Type': 'image/png',
         },
       }).then((res) => res.blob());
+      await getSharePoint();
 
       const item = [
         new ClipboardItem({
@@ -187,7 +190,7 @@ const ShareGameButton = ({
     [dispatch, buttonDirection, options, currentIndex, roundIndex],
   );
 
-  const handleShareTwitter = useCallback(() => {
+  const handleShareTwitter = useCallback(async () => {
     if (buttonDirection === 'left') {
       getTopicShareTwitter.mutate(
         topicParams as ShareTopicModalProps & { token: string },
@@ -197,6 +200,7 @@ const ShareGameButton = ({
         resultParams as ShareResultModalProps & { token: string },
       );
     }
+    await getSharePoint();
   }, [
     dispatch,
     options,
