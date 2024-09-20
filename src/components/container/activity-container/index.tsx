@@ -61,24 +61,28 @@ const ActivityContainer = ({ topicId, tokenName }: Props) => {
                 color={'DARK_GRAY_5'}
                 size={'medium'}
                 weight={'regular'}
+                classNames={['white-space']}
               />
               <BaseText
                 text={`${item.poolIn} ${tokenName}`}
                 color={'DARK_GRAY_5'}
                 size={'medium'}
                 weight={'bold'}
+                classNames={['white-space']}
               />
               <BaseText
                 text={`to`}
                 color={'DARK_GRAY_5'}
                 size={'medium'}
                 weight={'regular'}
+                classNames={['white-space']}
               />
               <BaseText
                 text={`${'...'} at ${fetchRelatedTime(item.createdAt)}`}
                 color={'DARK_GRAY_5'}
                 size={'medium'}
                 weight={'bold'}
+                classNames={['white-space']}
               />
             </div>
           );
