@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@/app/h/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import CanvasContainer from '@/components/container/canvas-container';
@@ -11,6 +11,7 @@ import PoolResultModal from '@/components/common/modal/poolResultModal';
 import { getModal } from '@/context/global/slice/modalSlice';
 import { useSelector } from 'react-redux';
 import { HonorType } from '@/shared/types/data/honor';
+import { useRouter } from 'next/navigation';
 
 const cn = classNames.bind(styles);
 
@@ -21,10 +22,17 @@ type Props = {
 
 const HonorClientPage = ({ id, honor }: Props) => {
   const modal = useSelector(getModal);
+  const router = useRouter();
   const [skipImage, setSkipImage] = useState<boolean>(false);
   const [skipVoice, setSkipVoice] = useState<boolean>(false);
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
   const [audioUrl, setAudioUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (skipImage && skipVoice) {
+      router.replace('/my-page');
+    }
+  }, [skipImage, skipVoice]);
 
   if (!honor.competitors || honor.competitors.length === 0) {
     return <div>error</div>;
@@ -83,13 +91,7 @@ const HonorClientPage = ({ id, honor }: Props) => {
       {modal.name === 'PoolResutlModal' &&
         modal.data &&
         'totalGain' in modal.data && (
-          <PoolResultModal
-            topicId={modal.data.topicId}
-            totalGain={modal.data.totalGain}
-            totalPoolIn={modal.data.totalPnL}
-            totalPnL={modal.data.totalPoolIn}
-            competitors={modal.data.competitors}
-          />
+          <PoolResultModal topicId={modal.data.topicId} />
         )}
     </div>
   );

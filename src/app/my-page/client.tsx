@@ -6,6 +6,9 @@ import HighlightCard from '@/widgets/card/highlightCard';
 import { MyData } from '@/shared/types/data/my-data';
 import { thousandFormat } from '@/shared/utils/number';
 import MyDataTableContainer from '@/components/container/my-data-table-container';
+import { useSelector } from 'react-redux';
+import { getModal } from '@/context/global/slice/modalSlice';
+import PoolResultModal from '@/components/common/modal/poolResultModal';
 
 const cn = classNames.bind(styles);
 
@@ -14,6 +17,7 @@ type Props = {
 };
 
 const MyClientPage = ({ myData }: Props) => {
+  const modal = useSelector(getModal);
   const total = useMemo(() => {
     return {
       myTotalPoolIn: myData.myTotalPoolIn,
@@ -40,7 +44,7 @@ const MyClientPage = ({ myData }: Props) => {
         <div className={cn('highlights-container')}>
           <HighlightCard
             title="Total Pooled in Amount"
-            mainText={`$${total.myTotalPoolIn ? thousandFormat(total.myTotalPoolIn) : '0.00'}`}
+            mainText={`$${total.myTotalPoolIn ? thousandFormat(parseFloat(total.myTotalPoolIn.toFixed(2))) : '0.00'}`}
             subText="0%"
           />
           <HighlightCard
@@ -71,6 +75,11 @@ const MyClientPage = ({ myData }: Props) => {
           <MyDataTableContainer data={myData.result || []} />
         </div>
       </div>
+      {modal.name === 'PoolResutlModal' &&
+        modal.data &&
+        'topicId' in modal.data && (
+          <PoolResultModal topicId={modal.data.topicId} />
+        )}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import HeaderLogo from '@/components/common/logo/headerLogo';
 import DashBoardButton from '@/components/common/button/dashBoardButton';
 import PlayGameButton from '@/components/common/button/playGameButton';
-import { getTopicByStatus, getTopicVoice } from '@/shared/api/Topics';
+import { getTopicByStatus } from '@/shared/api/Topics';
 import { TopicMetadata } from '@/shared/types/data/topic';
 import dynamic from 'next/dynamic';
 import AuthDropdown from '@/components/common/dropdown/authDropdown';

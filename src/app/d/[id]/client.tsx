@@ -1,5 +1,5 @@
 'use client';
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import styles from '@/app/d/[id]/client.module.scss';
 import classNames from 'classnames/bind';
 import GraphContainer from '@/components/container/graph-container';
@@ -15,6 +15,8 @@ import { CommentProvider } from '@/context/partial/commentContext/CommentProvide
 import MyVoteContainer from '@/components/container/my-vote-container';
 import TopicDropdown from '@/components/common/dropdown/topicDropdown';
 import GameDateBar from '@/components/common/bar/gameDateBar';
+import { useDispatch } from 'react-redux';
+import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -23,6 +25,7 @@ type Props = {
 };
 
 const DashboardClientPage = ({ id }: Props) => {
+  const dispatch = useDispatch();
   const dashboard = useDashboard();
   const topic = useTopic();
   const myVote = useMyVote();
@@ -34,6 +37,12 @@ const DashboardClientPage = ({ id }: Props) => {
       myVote.competitors.every((vote) => vote.reserveToken === 0)
     );
   }, [myVote]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(CLOSE_MODAL());
+    };
+  }, [dispatch]);
 
   return (
     <CommentProvider id={id}>
@@ -78,9 +87,11 @@ const DashboardClientPage = ({ id }: Props) => {
               {dashboard && <TvlTableContaienr dashboard={dashboard} />}
             </Suspense>
           </div>
-          <div className={cn('activity-wrapper')}>
-            <ActivityContainer topicId={id} />
-          </div>
+          {topic && (
+            <div className={cn('activity-wrapper')}>
+              <ActivityContainer topicId={id} tokenName={topic.tokenName} />
+            </div>
+          )}
         </section>
         <section className={cn('comment-wrapper')}>
           <CommentContainer topicId={id} />

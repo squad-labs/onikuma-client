@@ -116,6 +116,10 @@
   &:disabled {
     background-color: var(--DARK-GRAY-5);
     border-color: var(--DARK-GRAY-5);
+
+    .text {
+      color: var(--LIGHT-OPACITY-9);
+    }
   }
 
   .text {

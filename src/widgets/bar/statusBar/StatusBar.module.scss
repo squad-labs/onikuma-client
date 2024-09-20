@@ -1,14 +1,18 @@
 .bar-container {
   border: 2px solid var(--BASE-BLUE-1);
-  border-radius: 15px;
-  padding: 0.25rem;
+  border-radius: 20px;
+  width: 8rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   p {
-    font-weight: 100;
+    font-family: var(--TEXT-SIZE-MEDIUM);
     padding: 0.05rem;
   }
 
-  &.bar-ongoing {
+  &.bar-onGoing {
     background-color: var(--BASE-BLUE-1);
     color: var(--BASE-CREAM-1);
   }

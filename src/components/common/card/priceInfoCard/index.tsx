@@ -19,6 +19,7 @@ type Props = {
     balance: string;
     percent: string;
   };
+  disabled?: boolean;
 };
 
 const PriceInfoCard = ({
@@ -29,6 +30,7 @@ const PriceInfoCard = ({
   price,
   setPrice,
   meta,
+  disabled,
 }: Props) => {
   return (
     <div className={cn('card-container')}>
@@ -60,7 +62,7 @@ const PriceInfoCard = ({
           placeholder="0.0"
           onChange={(event) => setPrice(event)}
           className={cn('input', type)}
-          disabled={type === 'top'}
+          disabled={disabled}
         />
       </div>
       <div className={cn('bot-container')}>
@@ -77,12 +79,14 @@ const PriceInfoCard = ({
             weight="light"
             color="DARK"
           />
-          <BaseText
-            text={`+${meta?.percent}%`}
-            size="medium"
-            weight="regular"
-            color="BASE_RED_1"
-          />
+          {type === 'bottom' && (
+            <BaseText
+              text={`+${meta?.percent}%`}
+              size="medium"
+              weight="regular"
+              color="BASE_RED_1"
+            />
+          )}
         </div>
         <div className={cn('text-wrapper')}>
           <BaseText

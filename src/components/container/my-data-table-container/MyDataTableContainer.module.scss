@@ -27,7 +27,7 @@
       font-size: var(--TEXT-SIZE-MEDIUM);
 
       .header-name {
-        width: 23%;
+        width: 40%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -80,6 +80,7 @@
     position: relative;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    overflow-y: scroll;
 
     .overlay {
       position: absolute;
@@ -95,7 +96,7 @@
         height: 100%;
         gap: 1.5rem;
         color: var(--LIGHT-CREAM-1);
-        font-size: 1rem;
+        font-size: var(--TEXT-SIZE-MEDIUM);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -112,14 +113,14 @@
       font-size: var(--TEXT-SIZE-MEDIUM);
 
       .item-name {
-        width: 23%;
+        width: 40%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
 
         .text {
-          font-size: 1.3rem;
-          font-family: var(--FONT-DM-MONO-BOLD);
+          font-size: 1.45rem;
+          font-family: var(--FONT-DM-MONO-REGULAR);
         }
       }
 

@@ -39,7 +39,7 @@ export const getNumberSign = (
 };
 
 export const handleNumberUpdate = (text: string | number): number | '' => {
-  const value = typeof text !== 'number' ? parseInt(text) : text;
+  const value = typeof text !== 'number' ? parseFloat(text) : text;
   if (Number.isNaN(value) || typeof value !== 'number' || value < 0) return '';
   return value;
 };

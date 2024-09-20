@@ -5,7 +5,25 @@ type GetPollResultParams = {
   topicId: string;
 };
 
-export const getPollResult = async ({ topicId }: GetPollResultParams) => {
+export type GetPollResultResponse = {
+  topicId: string;
+  totalGain: number;
+  totalPnL: number;
+  totalPoolIn: number;
+  competitors: {
+    name: string;
+    poolTvl: number;
+    data: {
+      gain: number;
+      pnl: number;
+      poolIn: number;
+    };
+  }[];
+};
+
+export const getPollResult = async ({
+  topicId,
+}: GetPollResultParams): Promise<GetPollResultResponse | undefined> => {
   const token = getCookie('accessToken');
 
   try {
@@ -15,9 +33,9 @@ export const getPollResult = async ({ topicId }: GetPollResultParams) => {
       },
     });
 
-    return res.data;
+    return res.data as GetPollResultResponse;
   } catch (err) {
-    return err;
+    return undefined;
   }
 };
 

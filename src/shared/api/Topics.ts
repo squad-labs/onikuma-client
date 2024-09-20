@@ -66,3 +66,19 @@ export const getTopicList = async () => {
     return err;
   }
 };
+
+export const getSharePoint = async () => {
+  const token = getCookie('accessToken');
+
+  try {
+    const res = await axios.get('/api/topics/share-point', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};

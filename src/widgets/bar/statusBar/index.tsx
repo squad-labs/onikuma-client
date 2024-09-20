@@ -8,7 +8,7 @@ const cn = classNames.bind(styles);
 const BaseBar = ({ label, classNames = [] }: StatusBarProps) => {
   return (
     <div className={cn('bar-container', `bar-${label}`, ...classNames)}>
-      <p>{label}</p>
+      <p>{label === 'onGoing' ? 'Ongoing' : 'Ended'}</p>
     </div>
   );
 };

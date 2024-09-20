@@ -12,11 +12,13 @@ import PriceInfoCard from '@/components/common/card/priceInfoCard';
 import BaseButton from '@/widgets/button/baseButton';
 import { useRouter } from 'next/navigation';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
 import { getTokenData, postPoolIn } from '@/shared/api/Activity';
 import { handleNumberUpdate } from '@/shared/utils/number';
 import { QUERY_KEY } from '@/shared/constants/QUERY_KEY';
+import { useDispatch } from 'react-redux';
+import { CLOSE_MODAL } from '@/context/global/slice/modalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -31,7 +33,6 @@ type Props = {
   baseTokenName: string;
   roundTokenName: string;
   roundTicker: string;
-  roundTokenPrice: string;
 };
 
 const FinalOptionCard = ({
@@ -44,10 +45,14 @@ const FinalOptionCard = ({
   roundTicker,
   roundTokenName,
 }: Props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
-  const [tokenAmount, setTokenAmount] = useState<number | ''>(0);
-  const [tokenPrice, setTokenPrice] = useState<string>(tokenAmount.toString());
-  const { mintToken, getTokenPrice } = useContext(RoundContext);
+  const queryClient = useQueryClient();
+  const [isSending, setIsSending] = useState<boolean>(false);
+  const [tokenRoyalty, setTokenRoyalty] = useState<number>(0);
+  const [tokenAmount, setTokenAmount] = useState<number | ''>('');
+  const [tokenPrice, setTokenPrice] = useState<number>(0);
+  const { mintToken, getToken } = useContext(RoundContext);
 
   const { data } = useQuery({
     queryKey: [QUERY_KEY.GET_PRICE, topicId],
@@ -58,22 +63,35 @@ const FinalOptionCard = ({
     mutationKey: [MUTATION_KEY.POST_POOL_IN],
     mutationFn: postPoolIn,
     onSuccess: (data) => {
-      console.log(data);
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.GET_RECENT_ACTIVITIES, topicId],
+      });
+      dispatch(CLOSE_MODAL());
+      setIsSending(false);
     },
     onError: () => {},
   });
 
-  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const _value = handleNumberUpdate(event.target.value);
-    setTokenAmount(_value);
-  }, []);
+  const handleOnChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const _value = handleNumberUpdate(event.target.value);
+
+      if (
+        (typeof _value === 'number' && _value <= 1_000_000) ||
+        _value === ''
+      ) {
+        setTokenAmount(_value);
+      }
+    },
+    [tokenPrice],
+  );
 
   const handlePoolIn = useCallback(() => {
     if (tokenAmount !== 0 && tokenAmount !== '' && tokenAmount !== undefined) {
       poolInMutation.mutate({
         topicId: topicId,
         topicToken: tokenAmount,
-        reserveToken: parseInt(tokenPrice),
+        reserveToken: tokenPrice - tokenRoyalty,
         pickerName: value,
       });
     }
@@ -81,13 +99,15 @@ const FinalOptionCard = ({
 
   useEffect(() => {
     if (tokenAmount === undefined || tokenAmount === '' || tokenAmount === 0) {
-      setTokenPrice('0');
+      setTokenPrice(0);
       return;
     }
     const _getTokenPrice = async () => {
-      const token = await getTokenPrice(tokenAmount.toString());
-      if (token === undefined) setTokenPrice('0');
-      else setTokenPrice(String(token));
+      const token = await getToken(tokenAmount.toString());
+      if (token.price === undefined) setTokenPrice(0);
+      else setTokenPrice(token.price);
+      if (token.royalty === undefined) setTokenPrice(0);
+      else setTokenRoyalty(token.royalty);
     };
     _getTokenPrice();
   }, [tokenAmount]);
@@ -135,25 +155,31 @@ const FinalOptionCard = ({
                 100
               ).toString(),
             }}
+            disabled={isSending}
           />
           <PriceInfoCard
             type={'top'}
             title={baseTokenName}
             ticker={`$${baseTicker}`}
             imageUrl={imageUrl}
-            price={tokenPrice}
+            price={tokenPrice.toString()}
             setPrice={handleOnChange}
             meta={{
               price: '1',
               balance: data.myBalanceHoney,
               percent: data.myBalanceHoney,
             }}
+            disabled={true}
           />
         </div>
       )}
       <div className={cn('button-container')}>
         <BaseButton
-          disabled={tokenAmount === 0 || tokenAmount === ''}
+          disabled={
+            tokenAmount === 0 ||
+            tokenAmount === '' ||
+            parseFloat(data.myBalanceHoney) < tokenPrice
+          }
           text={'Pool in'}
           shape="shape-4"
           label="pool-in-button"
@@ -162,8 +188,12 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => {
-            mintToken(handlePoolIn);
+            setIsSending(true);
+            if (typeof tokenAmount === 'number') {
+              mintToken(tokenAmount, handlePoolIn);
+            }
           }}
+          loading={isSending}
         />
         <BaseButton
           text={'Dashboard'}
@@ -174,6 +204,7 @@ const FinalOptionCard = ({
           fontSize="large"
           fontWeight="regular"
           onClick={() => router.push(`/d/${topicId}`)}
+          disabled={isSending}
         />
       </div>
     </div>

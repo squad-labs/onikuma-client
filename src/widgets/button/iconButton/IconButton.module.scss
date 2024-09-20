@@ -71,6 +71,23 @@
   }
 }
 
+.button-white {
+  color: var(--DARK-BLUE-1);
+  border: 2px solid var(--DARK-BLUE-1);
+  background-color: var(--BASE-BLUE-1);
+
+  &:disabled {
+    background-color: var(--BASE-CREAM-1);
+  }
+
+  &:enabled {
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0.3em 0.3em var(--DARK-BLUE-1);
+    }
+  }
+}
+
 .button-red {
   color: var(--BASE-RED-1);
   border: 2px solid var(--BASE-RED-1);

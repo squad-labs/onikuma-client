@@ -5,6 +5,7 @@ import MyClientPage from '@/app/my-page/client';
 import { getMetadata } from '@/shared/utils/metadata';
 import { cookies } from 'next/headers';
 import { MyData } from '@/shared/types/data/my-data';
+import UnAuthorizedError from '@/components/common/error/unAuthorizedError';
 
 const cn = classNames.bind(styles);
 
@@ -25,6 +26,10 @@ const MyPage = async () => {
       },
     );
 
+    if (!res.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
     const data: MyData = await res.json();
 
     return (
@@ -35,7 +40,13 @@ const MyPage = async () => {
       </main>
     );
   } catch (err) {
-    return err;
+    return (
+      <main className={cn('container')}>
+        <div className={cn('inner')}>
+          <UnAuthorizedError />
+        </div>
+      </main>
+    );
   }
 };
 
