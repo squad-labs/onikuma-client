@@ -104,7 +104,6 @@ const CommentContainer = ({ topicId }: Props) => {
       commentList.length !== 0 &&
       !isLast
     ) {
-      console.log('fetch');
       setPagination((prev) => prev + 1);
     }
   };

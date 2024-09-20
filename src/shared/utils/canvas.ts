@@ -27,12 +27,7 @@ export const generatePollResultImage = async ({
 }: PollResult) => {
   const canvas = createCanvas(2000, 1600);
   const ctx = canvas.getContext('2d');
-
-  const {
-    data: { poolIn },
-  } = competitors.reduce((prev, current) => {
-    return prev.data.poolIn > current.data.poolIn ? prev : current;
-  });
+  const biggestTvl = competitors[0].poolTvl;
 
   registerFont(path.resolve('./public/fonts/DMMono-Light.ttf'), {
     family: 'DMMono-Light',
@@ -110,7 +105,7 @@ export const generatePollResultImage = async ({
   const yGap = 130;
 
   competitors.forEach((competitor, index) => {
-    const sign = getNumberSign(competitor.data.poolIn);
+    const sign = getNumberSign(competitor.data.pnl);
 
     ctx.textAlign = 'start';
     ctx.font = '32px DMMono-Medium';
@@ -126,8 +121,8 @@ export const generatePollResultImage = async ({
     ctx.fillStyle = COLOR.DARK_GRAY_5;
     ctx.fillText(`${competitor.name}`, 200 + xGap, 430 + index * yGap);
 
-    const chunk = poolIn / 100;
-    const ratio = Math.floor(competitor.data.poolIn / chunk);
+    const chunk = biggestTvl / 100;
+    const ratio = Math.floor(competitor.poolTvl / chunk);
     const image = generateResultGraphImage(GraphColorMap[index + 1], ratio);
     ctx.drawImage(image, 550, 375 + index * yGap);
 
@@ -205,17 +200,6 @@ export const generateResultGraphImage = (color: ColorType, range: number) => {
   ctx.lineWidth = 2;
   ctx.fillStyle = COLOR.DARK_GRAY_2;
   ctx.rect(0, 0, canvas.width, canvas.height);
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.lineWidth = 1;
-  ctx.fillStyle = COLOR.DARK_GRAY_4;
-  ctx.rect(
-    (canvas.width / 100) * range,
-    0,
-    (canvas.width / 100) * range + 1,
-    canvas.height,
-  );
   ctx.stroke();
 
   return canvas;

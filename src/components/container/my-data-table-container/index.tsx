@@ -45,8 +45,6 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
     return formattedNumber;
   };
 
-  console.log(data);
-
   const formatSign = (value: number) => {
     return value >= 0 ? '+' : '';
   };
@@ -166,22 +164,22 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
                     }
                     secondaryColor="BASE_CREAM_1"
                     onClick={() => {
-                      // if (isHallofHonor()) {
-                      //   router.push(`/hall-of-honor/${item.topicId}`);
-                      // } else {
-                      dispatch(
-                        OPEN_MODAL({
-                          name: 'PoolResutlModal',
-                          data: {
-                            topicId: item.topicId,
-                            totalGain: item.totalCostPnL,
-                            totalPnl: item.totalPercentPnL,
-                            totalPoolIn: item.totalPoolIn,
-                            competitors: item,
-                          },
-                        }),
-                      );
-                      // }
+                      if (isHallofHonor()) {
+                        router.push(`/hall-of-honor/${item.topicId}`);
+                      } else {
+                        dispatch(
+                          OPEN_MODAL({
+                            name: 'PoolResutlModal',
+                            data: {
+                              topicId: item.topicId,
+                              totalGain: item.totalCostPnL,
+                              totalPnl: item.totalPercentPnL,
+                              totalPoolIn: item.totalPoolIn,
+                              competitors: item,
+                            },
+                          }),
+                        );
+                      }
                     }}
                   />
                 </div>

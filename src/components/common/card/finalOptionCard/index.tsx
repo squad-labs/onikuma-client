@@ -68,7 +68,6 @@ const FinalOptionCard = ({
       });
       dispatch(CLOSE_MODAL());
       setIsSending(false);
-      console.log(data);
     },
     onError: () => {},
   });

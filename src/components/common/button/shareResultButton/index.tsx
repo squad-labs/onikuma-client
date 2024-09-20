@@ -21,7 +21,6 @@ const ShareResultButton = ({
   totalPoolIn,
   competitors,
 }: PollResult) => {
-  console.log('competitors', competitors);
   const dispatch = useDispatch();
   const cookie = getCookie('accessToken') ?? '';
 
