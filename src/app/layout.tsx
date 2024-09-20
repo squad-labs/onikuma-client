@@ -7,6 +7,7 @@ import AppProvider from '@/providers/AppProvider';
 import Web3Provider from '@/providers/Web3Provider';
 import { WalletProvider } from '@/context/partial/walletContext/WalletProvider';
 import Layout from '@/layout';
+import { HydrationBoundary } from '@tanstack/react-query';
 
 export const APP_STATE = process.env.STAGE;
 

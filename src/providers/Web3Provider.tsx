@@ -1,5 +1,9 @@
 'use client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import React, { ReactNode } from 'react';
 import { WagmiProvider } from 'wagmi';
 import { config } from '@/config/web3Config';
@@ -22,7 +26,9 @@ const Web3Provider = ({ children }: Props) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
+        <HydrationBoundary>
+          <RainbowKitProvider>{children}</RainbowKitProvider>
+        </HydrationBoundary>
       </QueryClientProvider>
     </WagmiProvider>
   );

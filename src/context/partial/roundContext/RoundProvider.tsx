@@ -12,6 +12,7 @@ import { TOAST_RESPONSE } from '@/shared/constants/TOAST_SRC';
 import { ethers } from 'ethers';
 import { Config, useClient } from 'wagmi';
 import { chain as AppChain } from '@/config/web3Config';
+import { useWalletConnector } from '@/shared/hooks/useWalletConnector';
 
 type RoundList = {
   first: number[];
@@ -36,6 +37,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const network = mintclub.network('berachaintestnetbartio');
   const token = network.token(topic.ticker);
   const client = useClient<Config>({ chainId: AppChain.id });
+  const { getProviderByPriority } = useWalletConnector();
 
   const next = useCallback(
     (optionName: string) => {
@@ -113,12 +115,8 @@ const RoundProvider = ({ children, topic, round }: Props) => {
     async (callback: () => void) => {
       setIsSending(true);
 
-      if (window.okxwallet) {
-        await mintclub.wallet.connect(window.okxwallet);
-      } else {
-        await mintclub.wallet.connect(window.ethereum);
-      }
-
+      const provider = getProviderByPriority();
+      await mintclub.wallet.connect(provider);
       try {
         await token.buy({
           amount: wei(1, 18),
