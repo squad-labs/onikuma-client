@@ -83,13 +83,7 @@ const HonorClientPage = ({ id, honor }: Props) => {
       {modal.name === 'PoolResutlModal' &&
         modal.data &&
         'totalGain' in modal.data && (
-          <PoolResultModal
-            topicId={modal.data.topicId}
-            totalGain={modal.data.totalGain}
-            totalPoolIn={modal.data.totalPnL}
-            totalPnL={modal.data.totalPoolIn}
-            competitors={modal.data.competitors}
-          />
+          <PoolResultModal topicId={modal.data.topicId} />
         )}
     </div>
   );
