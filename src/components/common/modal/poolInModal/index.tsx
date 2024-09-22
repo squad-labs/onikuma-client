@@ -68,7 +68,9 @@ const PoolInModal = ({
       dispatch(CLOSE_MODAL());
       setIsSending(false);
     },
-    onError: () => {},
+    onError: () => {
+      setIsSending(false);
+    },
   });
 
   const handlePoolIn = useCallback(() => {
@@ -79,8 +81,9 @@ const PoolInModal = ({
         reserveToken: tokenPrice - tokenRoyalty,
         pickerName: value,
       });
+    } else {
+      setIsSending(false);
     }
-    setIsSending(false);
   }, [topicId, tokenAmount, tokenPrice, title, value]);
 
   const handleOnChange = useCallback(
@@ -193,7 +196,7 @@ const PoolInModal = ({
             onClick={() => {
               setIsSending(true);
               if (typeof tokenAmount === 'number') {
-                mintToken(tokenAmount, handlePoolIn);
+                mintToken(tokenAmount, handlePoolIn, setIsSending);
               }
             }}
             loading={isSending}
