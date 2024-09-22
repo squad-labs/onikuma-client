@@ -29,7 +29,7 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const [voiceManager, setVoiceManager] = useState<{
     isFlip: boolean;
     isSkip: boolean;
-  }>({ isFlip: false, isSkip: honor.isBiggestTopicPooler ? true : false });
+  }>({ isFlip: false, isSkip: honor.isBiggestTopicPooler ? false : true });
 
   const isSkippedAll = useMemo(() => {
     return (
