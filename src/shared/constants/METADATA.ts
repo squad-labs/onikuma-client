@@ -16,6 +16,7 @@ export const BASE_METADATA = {
     'Bet',
   ],
   url: 'https://onikuma.world',
-  image: 'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/Hero.png',
+  image:
+    'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma.png?raw=true',
   ogImage: '/metadata/og-image.png',
 };
