@@ -59,9 +59,7 @@ const MyClientPage = ({ myData }: Props) => {
           <HighlightCard
             title="PnL (%)"
             mainText={
-              signPnL && total.myTotalPnL
-                ? `${signPnL}${total.myTotalPnL}%`
-                : '0'
+              total.myTotalPnL !== 0 ? `${signPnL}${total.myTotalPnL}%` : '0%'
             }
             subText="0%"
           />

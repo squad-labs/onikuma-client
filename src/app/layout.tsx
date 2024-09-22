@@ -7,9 +7,11 @@ import AppProvider from '@/providers/AppProvider';
 import Web3Provider from '@/providers/Web3Provider';
 import { WalletProvider } from '@/context/partial/walletContext/WalletProvider';
 import Layout from '@/layout';
-import { HydrationBoundary } from '@tanstack/react-query';
+import { GoogleAnalytics } from '@/shared/libs/ga';
 
 export const APP_STATE = process.env.STAGE;
+
+export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
 export default function RootLayout({
   children,
@@ -23,6 +25,7 @@ export default function RootLayout({
           <Web3Provider>
             <WalletProvider>
               <AppProvider>
+                {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
                 <Layout>{children}</Layout>
                 <section id="modal-root" />
               </AppProvider>

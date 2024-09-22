@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import styles from '@/components/common/card/uploadVoiceCard/UploadVoiceCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -27,8 +21,6 @@ type Props = {
   withBorder: boolean;
   withbackGround: boolean;
   setSkip: () => void;
-  audioUrl: string;
-  setAudioUrl: Dispatch<SetStateAction<string>>;
 };
 
 const UploadVoiceCard = ({

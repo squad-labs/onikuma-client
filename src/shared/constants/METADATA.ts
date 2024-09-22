@@ -1,8 +1,7 @@
 export const BASE_METADATA = {
   title: 'Onikuma',
   siteName: 'Onikuma | On-Chain Social Game',
-  description:
-    'Onikuma, On-Chain Social Game on berachain. Bet on what you believe.',
+  description: 'Redefining Gaming on Berachain.',
   keywords: [
     'Onikuma',
     'Crypto',
@@ -11,6 +10,10 @@ export const BASE_METADATA = {
     'Social',
     'Game',
     'Berachain',
+    'Strategize',
+    'Influence',
+    'Dominate',
+    'Bet',
   ],
   url: 'https://onikuma.world',
   image: 'https://dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com/Hero.png',

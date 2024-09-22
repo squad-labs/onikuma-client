@@ -1,5 +1,5 @@
 export type HonorType = {
-  topidId: string;
+  topicId: string;
   name: string;
   startAt: string;
   endAt: string;
