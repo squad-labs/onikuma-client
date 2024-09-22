@@ -18,6 +18,7 @@ const nextConfig = {
     NEXT_PUBLIC_CLIENT_SERVER_URL: process.env.CLIENT_SERVER_URL,
     NEXT_PUBLIC_STORAGE_BASE_URL: process.env.STORAGE_BASE_URL,
     NEXT_PUBLIC_BERACHAIN_RPC_URL: process.env.BERACHAIN_RPC_URL,
+    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
   },
   webpack(config) {
     config.module.rules.push({

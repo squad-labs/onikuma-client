@@ -69,7 +69,9 @@ const FinalOptionCard = ({
       dispatch(CLOSE_MODAL());
       setIsSending(false);
     },
-    onError: () => {},
+    onError: () => {
+      setIsSending(false);
+    },
   });
 
   const handleOnChange = useCallback(
@@ -94,6 +96,8 @@ const FinalOptionCard = ({
         reserveToken: tokenPrice - tokenRoyalty,
         pickerName: value,
       });
+    } else {
+      setIsSending(false);
     }
   }, [topicId, tokenAmount, tokenPrice, title, value]);
 
@@ -190,7 +194,7 @@ const FinalOptionCard = ({
           onClick={() => {
             setIsSending(true);
             if (typeof tokenAmount === 'number') {
-              mintToken(tokenAmount, handlePoolIn);
+              mintToken(tokenAmount, handlePoolIn, setIsSending);
             }
           }}
           loading={isSending}

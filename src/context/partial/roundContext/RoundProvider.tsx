@@ -1,5 +1,12 @@
 'use client';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { RoundContext } from '@/context/partial/roundContext/RoundContext';
 import { Option, Topic } from '@/shared/types/data/topic';
 import { mintclub, wei } from 'watchman-tool-sdk';
@@ -37,6 +44,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   const network = mintclub.network('berachaintestnetbartio');
   const token = network.token(topic.ticker);
   const client = useClient<Config>({ chainId: AppChain.id });
+
   const { getProviderByPriority } = useWalletConnector();
 
   const next = useCallback(
@@ -112,7 +120,11 @@ const RoundProvider = ({ children, topic, round }: Props) => {
   }, []);
 
   const mintToken = useCallback(
-    async (amount: number, callback: () => void) => {
+    async (
+      amount: number,
+      callback: () => void,
+      setTransition: Dispatch<SetStateAction<boolean>>,
+    ) => {
       setIsSending(true);
 
       const provider = getProviderByPriority();
@@ -148,6 +160,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
             }
           },
         });
+        setTransition(false);
       } catch (error) {
         dispatch(
           SET_TOAST({
@@ -164,6 +177,7 @@ const RoundProvider = ({ children, topic, round }: Props) => {
         }
       }
       setIsSending(false);
+      setTransition(false);
     },
     [network, ticker, token],
   );
