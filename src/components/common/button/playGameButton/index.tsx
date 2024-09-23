@@ -1,7 +1,7 @@
 'use client';
 import BaseButton from '@/widgets/button/baseButton';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAccount } from 'wagmi';
 import WalletConnectButton from '@/components/common/button/walletConnectButton';
 
@@ -9,6 +9,14 @@ const PlayGameButton = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { address, isConnected } = useAccount();
+  const [mounting, setMounting] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (mounting) {
+      setMounting(false);
+    }
+    return () => setMounting(true);
+  }, []);
 
   const renderButton = useMemo(() => {
     if (address && isConnected) return true;
@@ -16,6 +24,7 @@ const PlayGameButton = () => {
   }, [address, isConnected]);
 
   const handleRenderByRoute = useCallback(() => {
+    if (mounting) return null;
     if (pathname === '/') {
       return (
         <BaseButton
@@ -54,7 +63,7 @@ const PlayGameButton = () => {
         return <WalletConnectButton type={'header'} autoLogin={false} />;
       }
     }
-  }, [router, address, isConnected]);
+  }, [mounting, router, address, isConnected]);
 
   return handleRenderByRoute();
 };

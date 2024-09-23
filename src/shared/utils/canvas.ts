@@ -16,8 +16,6 @@ import {
   numberSuffix,
   thousandFormat,
 } from '@/shared/utils/number';
-import { ColorType } from '@/shared/types/ui/Color';
-import { GraphColorMap } from '@/components/container/graph-container';
 
 export const generatePollResultImage = async ({
   competitors,
@@ -67,7 +65,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = getNumberSign(totalGain).color;
   ctx.fillText(
-    `${getNumberSign(totalGain).sign}${thousandFormat(parseFloat(totalGain.toFixed(2)))} $HONEY (${getNumberSign(totalGain).sign}${parseFloat(totalPnL.toFixed(2))}%)`,
+    `${getNumberSign(totalGain).sign}${thousandFormat(Math.abs(parseFloat(totalGain.toFixed(2))))} $HONEY (${getNumberSign(totalGain).sign}${Math.abs(parseFloat(totalPnL.toFixed(2)))}%)`,
     canvas.width / 2,
     176,
   );
@@ -123,14 +121,15 @@ export const generatePollResultImage = async ({
 
     const chunk = biggestTvl / 100;
     const ratio = Math.floor(competitor.poolTvl / chunk);
-    const image = generateResultGraphImage(GraphColorMap[index + 1], ratio);
+    const color = index === 0 ? COLOR.BASE_GREEN_1 : COLOR.DARK_RED_2;
+    const image = generateResultGraphImage(color, ratio);
     ctx.drawImage(image, 550, 375 + index * yGap);
 
     ctx.textAlign = 'end';
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.poolIn.toFixed(2)))}`,
+      `${sign.sign}$${thousandFormat(Math.abs(parseFloat(competitor.data.poolIn.toFixed(2))))}`,
       canvas.width - 560,
       430 + index * yGap,
     );
@@ -139,7 +138,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}$${thousandFormat(parseFloat(competitor.data.gain.toFixed(2)))}`,
+      `${sign.sign}$${thousandFormat(Math.abs(parseFloat(competitor.data.gain.toFixed(2))))}`,
       canvas.width - 340,
       430 + index * yGap,
     );
@@ -148,7 +147,7 @@ export const generatePollResultImage = async ({
     ctx.font = '32px DMMono-Medium';
     ctx.fillStyle = COLOR[sign.color];
     ctx.fillText(
-      `${sign.sign}%${thousandFormat(competitor.data.pnl)}`,
+      `${sign.sign}%${thousandFormat(Math.abs(competitor.data.pnl))}`,
       canvas.width - 120,
       430 + index * yGap,
     );
@@ -165,7 +164,7 @@ export const generatePollResultImage = async ({
   ctx.font = '32px DMMono-Medium';
   ctx.fillStyle = COLOR[totalSign.color];
   ctx.fillText(
-    `${totalSign.sign}$${thousandFormat(parseFloat(totalPoolIn.toFixed(2)))}`,
+    `${totalSign.sign}$${thousandFormat(Math.abs(parseFloat(totalPoolIn.toFixed(2))))}`,
     canvas.width - 560,
     1480,
   );
@@ -177,7 +176,7 @@ export const generatePollResultImage = async ({
   ctx.textAlign = 'end';
   ctx.font = '32px DMMono-Medium';
   ctx.fillText(
-    `${totalSign.sign}%${thousandFormat(parseFloat(totalPnL.toFixed(2)))}`,
+    `${totalSign.sign}%${thousandFormat(Math.abs(parseFloat(totalPnL.toFixed(2))))}`,
     canvas.width - 120,
     1480,
   );
@@ -187,14 +186,13 @@ export const generatePollResultImage = async ({
   return buffer;
 };
 
-export const generateResultGraphImage = (color: ColorType, range: number) => {
+export const generateResultGraphImage = (color: string, range: number) => {
   const canvas = createCanvas(550, 90);
   const ctx = canvas.getContext('2d');
 
   ctx.fillStyle = COLOR.BASE_CREAM_1;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = range === 0 ? COLOR['BASE_CREAM_1'] : COLOR[color];
+  ctx.fillStyle = color;
   ctx.fillRect(0, 0, (canvas.width / 100) * range, canvas.height);
 
   ctx.lineWidth = 2;
