@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@/widgets/logo/baseLogo/BaseLogo.module.scss';
 import classNames from 'classnames/bind';
-import TextLogo from '@/assets/logo/text-logo.svg';
+import TextLogo from '@/public/logo/text-logo.svg';
 import { BaseLogoProps } from '@/shared/types/ui/Logo';
 
 const cn = classNames.bind(styles);
