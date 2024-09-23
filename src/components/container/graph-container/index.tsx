@@ -115,7 +115,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
               className={cn('image')}
               priority={true}
             />
-            {width > 768 && (
+            {width < 768 && (
               <BaseText
                 text={item.name}
                 size={'medium'}
