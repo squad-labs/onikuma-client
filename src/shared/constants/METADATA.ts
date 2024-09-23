@@ -17,6 +17,6 @@ export const BASE_METADATA = {
   ],
   url: 'https://onikuma.world',
   image:
-    'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma.png?raw=true',
+    'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-game.png?raw=true',
   ogImage: '/metadata/og-image.png',
 };
