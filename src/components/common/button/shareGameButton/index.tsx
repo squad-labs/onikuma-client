@@ -122,11 +122,15 @@ const ShareGameButton = ({
     mutationFn: getShareImage,
     onSuccess: async (data: ImageShareType) => {
       const tweetText = encodeURIComponent(
-        'Check this match out at Onikuma!\n',
+        'Curious about what i picked? \nCheck it now at Onikuma!!\n',
       );
       const tweetUrl = encodeURIComponent(window.location.href);
       const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
+      const tweetImage = encodeURIComponent(
+        'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-twitter.png?raw=true',
+      );
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A${tweetImage}`;
+      await getSharePoint();
       window.open(twitterUrl, '_blank');
     },
   });
@@ -136,11 +140,14 @@ const ShareGameButton = ({
     mutationFn: getResultImage,
     onSuccess: async (data: ImageShareType) => {
       const tweetText = encodeURIComponent(
-        'Check this match out at Onikuma!\n',
+        'Curious about what i picked? \nCheck it now at Onikuma!!\n',
       );
       const tweetUrl = encodeURIComponent(window.location.href);
       const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
+      const tweetImage = encodeURIComponent(
+        'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-twitter.png?raw=true',
+      );
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A${tweetImage}`;
       await getSharePoint();
       window.open(twitterUrl, '_blank');
     },
