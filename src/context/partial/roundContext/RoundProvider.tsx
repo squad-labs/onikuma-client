@@ -160,7 +160,6 @@ const RoundProvider = ({ children, topic, round }: Props) => {
             }
           },
         });
-        setTransition(false);
       } catch (error) {
         dispatch(
           SET_TOAST({
@@ -172,12 +171,12 @@ const RoundProvider = ({ children, topic, round }: Props) => {
             },
           }),
         );
+        setIsSending(false);
+        setTransition(false);
         if (axios.isAxiosError(error)) {
           return;
         }
       }
-      setIsSending(false);
-      setTransition(false);
     },
     [network, ticker, token],
   );

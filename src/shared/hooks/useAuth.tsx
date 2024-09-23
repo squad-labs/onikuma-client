@@ -19,6 +19,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
     mutationKey: [MUTATION_KEY.POST_LOGIN, address],
     mutationFn: userLogin,
     onSuccess: (data) => {
+      console.log(data);
       setCookie('accessToken', data.accessToken);
     },
   });
@@ -26,6 +27,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   const login = async () => {
     if (!address) return;
     const timezone = getTimezone();
+    console.log(address, timezone);
 
     loginMutation.mutate({ wallet: address, timezone });
   };
@@ -39,6 +41,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   useEffect(() => {
     if (autoLogin) {
       const token = getCookie('accessToken');
+      console.log(token, isConnected, address);
 
       if (isConnected && address) {
         if (!token || token === 'undefined') {

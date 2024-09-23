@@ -125,7 +125,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
             )}
           </div>
           <div
-            className={cn(width < 786 ? 'vote-block-wrapper' : 'block-wrapper')}
+            className={cn(width > 768 ? 'vote-block-wrapper' : 'block-wrapper')}
           >
             <GraphBlock fillColor={'BASE_BLUE_1'} fillRatio={ratio} />
           </div>

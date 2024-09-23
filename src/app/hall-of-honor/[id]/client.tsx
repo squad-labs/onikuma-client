@@ -26,7 +26,6 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const [pickerManager, setPickerManager] = useState<
     { isFlip: boolean; isSkip: boolean }[]
   >(new Array(pickerLength).fill({ isFlip: false, isSkip: false }));
-  console.log(pickerLength, pickerManager);
 
   const [voiceManager, setVoiceManager] = useState<{
     isFlip: boolean;

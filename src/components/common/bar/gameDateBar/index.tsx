@@ -15,7 +15,6 @@ type Props = {
 const cn = classNames.bind(styles);
 
 const GameDateBar = ({ id, startDate, endDate }: Props) => {
-  console.log('start', startDate);
   const month = useMemo(() => {
     const key = startDate.slice(5, 7);
     return monthTextMap[key as keyof typeof monthTextMap] ?? '';
