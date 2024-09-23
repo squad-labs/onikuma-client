@@ -5,18 +5,20 @@
   border: 1px solid var(--DARK-GRAY-1);
   width: 100%;
   padding: 0.8rem 1.2rem;
-  background-color: white;
+  background-color: var(--LIGHT);
   align-items: center;
   justify-content: flex-start;
+  height: 100%;
 
   .photo {
-    width: 33%;
+    height: 100%;
     aspect-ratio: 1;
     position: relative;
   }
 
   .text {
-    width: 60%;
+    flex: 1;
+    flex-grow: 1;
     padding-left: 1rem;
     flex-direction: column;
     align-items: start;
@@ -25,19 +27,16 @@
     margin-top: 2.25rem;
 
     .step {
-      font-size: var(--TEXT-SIZE-MEDIUM);
+      font-size: var(--TEXT-SIZE-SMALL);
     }
 
     .title {
-      margin-top: 0.4rem;
-      font-size: 1.4rem;
+      font-size: 1.375rem;
     }
 
     .content {
-      margin-top: 0.8rem;
-      line-height: 2.2rem;
-      font-size: 1.35rem;
-      font-family: var(--FONT-DM-MONO-LIGHT);
+      font-size: 1.275rem;
+      margin-top: 0.4rem;
     }
   }
 }

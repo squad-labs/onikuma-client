@@ -103,7 +103,7 @@ const AllRankingTableContainer = ({ leaders }: Props) => {
                     size="medium"
                     color="DARK"
                     weight="regular"
-                    text={getShortenAddress(item.wallet)}
+                    text={item.wallet ? getShortenAddress(item.wallet) : '-'}
                   />
                 </div>
               </div>
