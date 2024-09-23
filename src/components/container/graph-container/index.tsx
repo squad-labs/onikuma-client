@@ -91,7 +91,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
         </div>
       );
     });
-  }, [type, dashboard]);
+  }, [type, dashboard, width]);
 
   const renderVoteGraph = useCallback(() => {
     return dashboard.totalData.map((item: DashboardDataType, index: number) => {
@@ -115,7 +115,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
               className={cn('image')}
               priority={true}
             />
-            {width < 768 && (
+            {width > 768 && (
               <BaseText
                 text={item.name}
                 size={'medium'}
@@ -125,7 +125,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
             )}
           </div>
           <div
-            className={cn(width > 768 ? 'vote-block-wrapper' : 'block-wrapper')}
+            className={cn(width < 768 ? 'vote-block-wrapper' : 'block-wrapper')}
           >
             <GraphBlock fillColor={'BASE_BLUE_1'} fillRatio={ratio} />
           </div>
@@ -140,7 +140,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
         </div>
       );
     });
-  }, [type, dashboard]);
+  }, [type, dashboard, width]);
 
   return (
     <div className={cn('container')}>
