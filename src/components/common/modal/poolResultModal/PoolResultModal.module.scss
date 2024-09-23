@@ -176,3 +176,62 @@
     }
   }
 }
+
+@include tablet {
+  .modal-inner {
+    width: 90%;
+    overflow-y: auto;
+    height: 58%;
+    padding: 1rem 0.5rem;
+
+    .modal-title {
+      font-size: 1.6rem;
+    }
+
+    .modal-text-container {
+      margin-top: 0.8rem;
+    }
+
+    .table-body {
+      margin-top: 2.2rem;
+      width: 100%;
+      padding: 0 1rem;
+
+      .list-container {
+        .list-item {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .option-text {
+            white-space: nowrap;
+            margin-left: 1rem;
+          }
+
+          .block-wrapper {
+            padding: 0rem;
+            flex: 3;
+          }
+        }
+      }
+    }
+
+    .table-wrapper {
+      margin-top: 2.2rem;
+      padding: 0 1rem;
+
+      .header-inner-right {
+        flex: 4;
+        gap: 1.8rem;
+      }
+    }
+
+    .button-container {
+      margin-top: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

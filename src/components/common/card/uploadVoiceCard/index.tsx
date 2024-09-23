@@ -82,7 +82,7 @@ const UploadVoiceCard = ({
         backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
       }}
     >
-      {width > 768 ? (
+      {width > 820 ? (
         <BaseText
           text="You pooled in the biggest for the entire Onikuma!"
           color="DARK"

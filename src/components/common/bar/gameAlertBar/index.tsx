@@ -49,24 +49,28 @@ const GameAlertBar = ({
           color={'DARK_GRAY_5'}
           size={'medium'}
           weight={'regular'}
+          classNames={['white-space']}
         />
         <BaseText
           text={`$${amount} ${ticker}`}
           color={'DARK_GRAY_5'}
           size={'medium'}
           weight={'bold'}
+          classNames={['white-space']}
         />
         <BaseText
           text={`to`}
           color={'DARK_GRAY_5'}
           size={'medium'}
           weight={'regular'}
+          classNames={['white-space']}
         />
         <BaseText
           text={`${pickerName} at ${createAt}`}
           color={'DARK_GRAY_5'}
           size={'medium'}
           weight={'bold'}
+          classNames={['white-space']}
         />
       </div>
     </div>

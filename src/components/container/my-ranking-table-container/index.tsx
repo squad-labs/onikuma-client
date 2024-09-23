@@ -37,7 +37,7 @@ const MyRankingTableContainer = ({ myItem }: Props) => {
         <div className={cn('header-wrapper')}>
           <div className={cn('header-inner-left')}>
             <div className={cn('h-my-ranking')}>
-              {width > 768 ? (
+              {width > 820 ? (
                 <BaseText
                   size="medium"
                   color="BASE_BLUE_1"

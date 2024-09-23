@@ -89,7 +89,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
       <div className={cn('modal-inner')} ref={modalRef}>
         <p className={cn('modal-title')}>{'Your poll results'}</p>
         <div className={cn('modal-text-container')}>
-          {width > 768 && (
+          {width > 415 && (
             <BaseText
               text={'You have won'}
               size="medium"
@@ -105,7 +105,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
             color={getTextColor(data?.totalGain || 0)}
             classNames={['white-space']}
           />
-          {width > 768 && (
+          {width > 415 && (
             <BaseText
               text={'in total!'}
               size="medium"
@@ -117,7 +117,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
         </div>
         <div className={cn('table-wrapper')}>
           <div className={cn('header-inner-left')}>
-            {width > 768 ? (
+            {width > 415 ? (
               <Fragment>
                 <BaseText
                   text="Total volume locked"
@@ -141,7 +141,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
               />
             )}
           </div>
-          {width > 768 && (
+          {width > 415 && (
             <div className={cn('header-inner-right')}>
               <div className={cn('text-wrapper')}>
                 <BaseText
@@ -149,6 +149,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                   size="medium"
                   weight="bold"
                   color="DARK_GRAY_5"
+                  classNames={['white-space']}
                 />
               </div>
               <div className={cn('text-wrapper')}>
@@ -157,6 +158,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                   size="medium"
                   weight="bold"
                   color="DARK_GRAY_5"
+                  classNames={['white-space']}
                 />
               </div>
               <div className={cn('text-wrapper')}>
@@ -165,6 +167,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                   size="medium"
                   weight="bold"
                   color="DARK_GRAY_5"
+                  classNames={['white-space']}
                 />
               </div>
             </div>
@@ -203,7 +206,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                       fillRatio={ratio}
                     />
                   </div>
-                  {width > 768 && (
+                  {width > 415 && (
                     <Fragment>
                       <div className={cn('text-wrapper')}>
                         <BaseText
@@ -240,7 +243,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
           <div className={cn('header-inner-left')}>
             <BaseText
               text="Total"
-              size={width > 768 ? 'large' : 'medium'}
+              size={width > 820 ? 'large' : 'medium'}
               weight="bold"
               color="DARK"
             />

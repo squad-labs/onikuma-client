@@ -39,13 +39,13 @@ const TvlTableContaienr = ({ dashboard }: Props) => {
       </div>
       <div className={cn('table-header')}>
         <TableHeader onlyName={false} />
-        {width > 768 && <TableHeader onlyName={false} />}
+        {width > 820 && <TableHeader onlyName={false} />}
       </div>
       <div className={cn('table-body')}>
         {dashboard.totalData.map((item, index) => {
           const isLastRow =
             index === dashboard.totalData.length - 1 ||
-            (width > 768 && index === dashboard.totalData.length - 2);
+            (width > 820 && index === dashboard.totalData.length - 2);
 
           return (
             <div

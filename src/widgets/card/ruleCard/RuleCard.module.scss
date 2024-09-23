@@ -67,3 +67,29 @@
     }
   }
 }
+
+@include tablet {
+  .card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+
+    .photo {
+      width: 30%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    .text {
+      width: 100%;
+      padding-left: 1rem;
+      margin: 1rem 0 0 0;
+      height: auto;
+    }
+  }
+}

@@ -99,7 +99,7 @@ const UploadImageCard = ({
             backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
           }}
         >
-          {width > 768 ? (
+          {width > 820 ? (
             <BaseText
               text={`You pooled in the biggest for ${pickerName}!`}
               color="DARK"

@@ -112,3 +112,39 @@
     }
   }
 }
+
+@include tablet {
+  .modal-inner {
+    width: 80%;
+    padding: 1.4rem 1rem;
+
+    .modal-title {
+      font-size: 1.5rem;
+      text-align: start;
+    }
+
+    .text-container {
+      display: none;
+    }
+
+    .mid-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      .image-container {
+        width: 8rem;
+        .image {
+          border-radius: 50%;
+        }
+        border-radius: 50%;
+      }
+
+      .card-container {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -86,12 +86,12 @@ const GameMetaContainer = ({
         <BaseText
           text={title}
           color={'DARK_GRAY_2'}
-          size={width > 768 ? 'extra-large' : 'large'}
+          size={width > 820 ? 'extra-large' : 'large'}
           weight={'bold'}
         />
         {isFinal ||
           onlyDate ||
-          (width > 768 && status && (
+          (width > 820 && status && (
             <ShareGameButton
               topicId={topicId}
               title={title}

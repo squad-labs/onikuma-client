@@ -35,7 +35,7 @@ const AllRankingTableContainer = ({ leaders }: Props) => {
         <div className={cn('header-wrapper')}>
           <div className={cn('header-inner-left')}>
             <div className={cn('h-my-ranking')}>
-              {width > 768 ? (
+              {width > 820 ? (
                 <Fragment>
                   <BaseText
                     size="medium"

@@ -86,3 +86,37 @@
     }
   }
 }
+
+@include tablet {
+  .container {
+    width: calc(100% - 2.5rem);
+    height: calc(100% - 2rem);
+    margin: 1rem 1.25rem;
+
+    .top-inner {
+      .dropdown-wrapper {
+        margin-top: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+    }
+
+    .mid-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      .table-wrapper {
+        width: 100%;
+      }
+
+      .activity-wrapper {
+        width: 100%;
+      }
+    }
+  }
+}

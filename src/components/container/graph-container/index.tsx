@@ -115,7 +115,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
               className={cn('image')}
               priority={true}
             />
-            {width > 768 && (
+            {width > 415 && (
               <BaseText
                 text={item.name}
                 size={'medium'}
@@ -125,7 +125,7 @@ const GraphContainer = ({ type, dashboard }: Props) => {
             )}
           </div>
           <div
-            className={cn(width < 768 ? 'vote-block-wrapper' : 'block-wrapper')}
+            className={cn(width < 820 ? 'vote-block-wrapper' : 'block-wrapper')}
           >
             <GraphBlock fillColor={'BASE_BLUE_1'} fillRatio={ratio} />
           </div>

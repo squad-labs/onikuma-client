@@ -194,3 +194,27 @@
     }
   }
 }
+
+@include tablet {
+  .container {
+    width: 100%;
+    .table-header {
+      width: 100%;
+      min-width: 96rem;
+    }
+
+    .table-body {
+      width: 100%;
+      min-width: 96rem;
+
+      .list-item {
+        width: 100%;
+        .item-name {
+          .text {
+            font-size: 1.15rem;
+          }
+        }
+      }
+    }
+  }
+}
