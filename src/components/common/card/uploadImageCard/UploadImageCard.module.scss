@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .upload-image-wrapper {
   width: 100%;
   margin-top: 2rem;
@@ -151,5 +153,29 @@
     transform: translateX(100%);
     opacity: 0;
     display: none;
+  }
+}
+
+@include mobile {
+  .upload-image-wrapper {
+    margin-top: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .card-wrapper {
+      width: 100%;
+
+      .card-container {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    .image-wrapper {
+      display: none;
+    }
   }
 }

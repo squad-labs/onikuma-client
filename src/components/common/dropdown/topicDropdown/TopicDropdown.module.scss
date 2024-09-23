@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .dropdown-container {
   display: flex;
   align-items: center;
@@ -80,6 +82,34 @@
           .item-text {
             color: var(--LIGHT);
           }
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .dropdown-container {
+    .dropdown-header {
+      padding: 0.8rem 1rem;
+      border-radius: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .dropdown-list {
+      width: 100%;
+      border-radius: 0.8rem;
+      overflow: hidden;
+
+      .list-item {
+        width: 100%;
+        padding: 0.8rem;
+
+        .item-text {
+          white-space: wrap;
+          word-break: break-all;
         }
       }
     }

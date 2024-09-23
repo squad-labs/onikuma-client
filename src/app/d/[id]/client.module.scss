@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .container {
   width: calc(100% - 10rem);
   height: calc(100% - 8rem);
@@ -48,5 +50,39 @@
     width: 100%;
     height: 80rem;
     margin-top: 2rem;
+  }
+}
+
+@include mobile {
+  .container {
+    width: calc(100% - 2.5rem);
+    height: calc(100% - 2rem);
+    margin: 1rem 1.25rem;
+
+    .top-inner {
+      .dropdown-wrapper {
+        margin-top: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+    }
+
+    .mid-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      .table-wrapper {
+        width: 100%;
+      }
+
+      .activity-wrapper {
+        width: 100%;
+      }
+    }
   }
 }

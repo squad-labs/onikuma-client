@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from '@/components/common/card/uploadImageCard/UploadImageCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -45,6 +45,7 @@ const UploadImageCard = ({
   baseImage,
   flipImage,
 }: Props) => {
+  const [width, setWidth] = useState<number>(0);
   const [imageFile, setImageFile] = useState<File | Blob | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const dispatch = useDispatch();
@@ -77,6 +78,17 @@ const UploadImageCard = ({
     }
   }, [fileName, pickerName, imageFile, index]);
 
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={cn('upload-image-wrapper', isSkip && 'skip')}>
       <div className={cn('card-wrapper')}>
@@ -87,12 +99,21 @@ const UploadImageCard = ({
             backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
           }}
         >
-          <BaseText
-            text={`You pooled in the biggest for ${pickerName}!`}
-            color="DARK"
-            size="large"
-            weight="bold"
-          />
+          {width > 768 ? (
+            <BaseText
+              text={`You pooled in the biggest for ${pickerName}!`}
+              color="DARK"
+              size="large"
+              weight="bold"
+            />
+          ) : (
+            <BaseText
+              text={`You pooled in the biggest for ${pickerName}!`}
+              color="DARK"
+              size="medium"
+              weight="bold"
+            />
+          )}
           <div className={cn('text-container')}>
             <BaseText
               text="Celebrate your contribution with custom images!"

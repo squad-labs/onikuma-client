@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .card-container {
   width: 100%;
   display: flex;
@@ -25,5 +27,12 @@
     justify-content: flex-end;
     margin-top: 1.2rem;
     gap: 1.2rem;
+  }
+}
+
+@include mobile {
+  .card-container {
+    width: 100%;
+    margin-top: 1rem;
   }
 }

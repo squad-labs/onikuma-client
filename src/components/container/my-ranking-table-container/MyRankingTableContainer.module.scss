@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .container {
   border: 1.5px solid var(--BORDER-GRAY-1);
   border-radius: 7px;
@@ -85,6 +87,51 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .container {
+    .table-header {
+      .header-wrapper {
+        .header-inner-left {
+          .h-my-ranking {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 0;
+          }
+
+          .h-wallet-address {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+        }
+      }
+    }
+
+    .table-body {
+      .list-item {
+        .item-inner-left {
+          .i-my-ranking {
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .i-wallet-address {
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+        }
       }
     }
   }

@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .page-container {
   width: 100%;
   height: 100%;
@@ -34,5 +36,22 @@
   .my-data-table-container {
     height: 100%;
     overflow-x: auto;
+  }
+}
+
+@include mobile {
+  .page-container {
+    padding: 1rem;
+
+    .data-container {
+      width: 100%;
+      padding: 1.5rem 1rem 1.5rem 1rem;
+      margin-bottom: 1rem;
+
+      .highlights-container {
+        display: grid;
+        grid: '. .';
+      }
+    }
   }
 }

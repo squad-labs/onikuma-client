@@ -1,43 +1,69 @@
+@import '@/styles/_mix.scss';
+
 .card {
   display: flex;
   border: 1px solid var(--DARK-GRAY-1);
   width: 100%;
-  height: 14rem;
-  padding: 1rem;
-  background-color: white;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--LIGHT);
   align-items: center;
+  justify-content: flex-start;
+  height: 100%;
 
   .photo {
-    width: 30%;
     height: 100%;
-    display: flex;
-    align-items: flex;
+    aspect-ratio: 1;
     position: relative;
+  }
+
+  .text {
+    flex: 1;
+    flex-grow: 1;
+    padding-left: 1rem;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    margin-bottom: 1rem;
+    margin-top: 2.25rem;
+
+    .step {
+      font-size: var(--TEXT-SIZE-SMALL);
+    }
+
+    .title {
+      font-size: 1.375rem;
+    }
+
+    .content {
+      font-size: 1.275rem;
+      margin-top: 0.4rem;
+    }
   }
 }
 
-.text {
-  width: 80%;
-  padding-left: 10px;
-  flex-direction: column;
-  align-items: start;
-  height: 100%;
-  margin-bottom: 1rem;
+@include mobile {
+  .card {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
 
-  .step {
-    margin-top: 0.2rem;
-    font-size: var(--TEXT-SIZE-MEDIUM);
-  }
+    .photo {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: relative;
+    }
 
-  .title {
-    margin-top: 0.4rem;
-    font-size: 1.4rem;
-  }
-
-  .content {
-    margin-top: 0.8rem;
-    line-height: 1.8rem;
-    font-size: var(--TEXT-SIZE-MEDIUM);
-    font-family: var(--FONT-DM-MONO-LIGHT);
+    .text {
+      width: 100%;
+      padding-left: 0;
+      margin: 1rem 0 0 0;
+      height: auto;
+    }
   }
 }

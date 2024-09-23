@@ -21,6 +21,11 @@ export const ICON_SRC_PATH = {
     ONIGIRI: '/onigiri.svg',
     VOICE: '/voice.svg',
     FLIP_FILL: '/flip-fill.svg',
+    MENU: '/menu.svg',
+    WALLET: '/wallet.svg',
+    PLAY: '/play.svg',
+    DASHBOARD: '/dashboard.svg',
+    MEDAL: '/medal.svg',
   },
 } as const;
 

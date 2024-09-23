@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .container {
   width: 100%;
   display: flex;
@@ -16,5 +18,11 @@
       justify-content: center;
       margin-left: 0.8rem;
     }
+  }
+}
+
+@include mobile {
+  .container {
+    padding: 0 1rem;
   }
 }

@@ -15,14 +15,13 @@ const MyClientPage = () => {
     <div className={cn('page-container')}>
       <h1 className={cn('main-header')}>
         Welcome to
-        <span className={cn('title')}>
-          <Image
-            src={getStaticSrc('logo', LOGO_SRC_PATH.SRC.LOGO_TITLE)}
-            alt="logo"
-            width={207}
-            height={39}
-          />
-        </span>
+        <Image
+          src={getStaticSrc('logo', LOGO_SRC_PATH.SRC.LOGO_TITLE)}
+          alt="logo"
+          width={207}
+          height={39}
+          className={cn('onikuma-image')}
+        />
       </h1>
       <div className={cn('card-container')}>
         <RuleCard
@@ -39,7 +38,6 @@ const MyClientPage = () => {
             quality={100}
           />
         </RuleCard>
-
         <RuleCard
           textLine1="Step 2"
           textLine2="Strategize"
@@ -83,9 +81,7 @@ const MyClientPage = () => {
           />
         </RuleCard>
       </div>
-      <div className={cn('wallet-connect-button')}>
-        <WalletConnectButton type={'home'} autoLogin={true} />
-      </div>
+      <WalletConnectButton type={'home'} autoLogin={true} />
       <Image
         src={getStaticSrc('logo', LOGO_SRC_PATH.SRC.BASE_LOGO)}
         alt="logo"

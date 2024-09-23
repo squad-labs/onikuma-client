@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .card {
   border: 1px solid var(--DARK-GRAY-1);
   width: 25%;
@@ -26,5 +28,22 @@
   .sub-text {
     color: var(--DARK-GRAY-5);
     font-size: 1rem;
+  }
+}
+
+@include mobile {
+  .card {
+    width: 100%;
+    padding: 0.7rem;
+
+    .non-title {
+      .main-text {
+        font-size: 1.25rem;
+      }
+
+      .sub-text {
+        font-size: 0.95rem;
+      }
+    }
   }
 }

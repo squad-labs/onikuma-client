@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from '@/components/container/my-ranking-table-container/MyRankingTableContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -18,18 +18,42 @@ type Props = {
 };
 
 const MyRankingTableContainer = ({ myItem }: Props) => {
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={cn('container')}>
       <div className={cn('table-header')}>
         <div className={cn('header-wrapper')}>
           <div className={cn('header-inner-left')}>
             <div className={cn('h-my-ranking')}>
-              <BaseText
-                size="medium"
-                color="BASE_BLUE_1"
-                weight="bold"
-                text="My Ranking"
-              />
+              {width > 768 ? (
+                <BaseText
+                  size="medium"
+                  color="BASE_BLUE_1"
+                  weight="bold"
+                  text="My Ranking"
+                />
+              ) : (
+                <Image
+                  src={getStaticSrc('icon', ICON_SRC_PATH.SRC.MEDAL)}
+                  alt="ranking"
+                  width={24}
+                  height={24}
+                  priority
+                  className={cn('icon')}
+                />
+              )}
             </div>
             <div className={cn('h-wallet-address')}>
               <BaseText

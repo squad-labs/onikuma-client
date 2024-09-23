@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .card-container {
   width: 100%;
   background-color: var(--BASE-CREAM-1);
@@ -65,6 +67,35 @@
       align-items: center;
       justify-content: flex-start;
       gap: 0.8rem;
+    }
+  }
+}
+
+@include mobile {
+  .card-container {
+    padding: 1rem 0.8rem;
+
+    .top-inner {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-shrink: 1;
+
+      .tag-inner {
+        height: 22px;
+        .image {
+          display: none;
+        }
+      }
+
+      .input {
+        width: 100%;
+      }
+    }
+
+    .bot-container {
+      margin-top: 1.2rem;
+      padding-left: 0.4rem;
     }
   }
 }
