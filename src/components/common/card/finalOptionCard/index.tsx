@@ -68,6 +68,7 @@ const FinalOptionCard = ({
       });
       dispatch(CLOSE_MODAL());
       setIsSending(false);
+      router.push(`/d/${topicId}`);
     },
     onError: () => {
       setIsSending(false);

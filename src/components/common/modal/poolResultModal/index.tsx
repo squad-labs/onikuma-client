@@ -1,4 +1,12 @@
-import React, { useCallback, useMemo, useRef } from 'react';
+'use client';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import styles from '@/components/common/modal/poolResultModal/PoolResultModal.module.scss';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
@@ -20,12 +28,24 @@ import ShareResultButton from '@/components/common/button/shareResultButton';
 const cn = classNames.bind(styles);
 
 const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
+  const [width, setWidth] = useState<number>(0);
   const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEY.GET_POOL_RESULT, topicId],
     queryFn: () => getPollResult({ topicId }),
   });
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const getSign = useCallback((value: number) => {
     return value === 0
@@ -69,66 +89,86 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
       <div className={cn('modal-inner')} ref={modalRef}>
         <p className={cn('modal-title')}>{'Your poll results'}</p>
         <div className={cn('modal-text-container')}>
+          {width > 768 && (
+            <BaseText
+              text={'You have won'}
+              size="medium"
+              weight="regular"
+              color="DARK_GRAY_2"
+              classNames={['white-space']}
+            />
+          )}
           <BaseText
-            text={'You have won'}
-            size="medium"
-            weight="regular"
-            color="DARK_GRAY_2"
-          />
-          <BaseText
-            text={`${reward.sign}${data?.totalGain} $HONEY (${reward.sign}${data?.totalPnL}%)`}
+            text={`${reward.sign}${Math.abs(data?.totalGain ?? 0)} $HONEY (${reward.sign}${Math.abs(data?.totalPnL ?? 0)}%)`}
             size="medium"
             weight="regular"
             color={getTextColor(data?.totalGain || 0)}
+            classNames={['white-space']}
           />
-          <BaseText
-            text={'in total!'}
-            size="medium"
-            weight="regular"
-            color="DARK_GRAY_2"
-          />
+          {width > 768 && (
+            <BaseText
+              text={'in total!'}
+              size="medium"
+              weight="regular"
+              color="DARK_GRAY_2"
+              classNames={['white-space']}
+            />
+          )}
         </div>
         <div className={cn('table-wrapper')}>
           <div className={cn('header-inner-left')}>
-            <BaseText
-              text="Total volume locked"
-              size="large"
-              weight="bold"
-              color="DARK"
-            />
-            <BaseText
-              text="($HONEY)"
-              size="large"
-              weight="light"
-              color="DARK_GRAY_5"
-            />
+            {width > 768 ? (
+              <Fragment>
+                <BaseText
+                  text="Total volume locked"
+                  size="large"
+                  weight="bold"
+                  color="DARK"
+                />
+                <BaseText
+                  text="($HONEY)"
+                  size="large"
+                  weight="light"
+                  color="DARK_GRAY_5"
+                />
+              </Fragment>
+            ) : (
+              <BaseText
+                text="TVL ($HONEY)"
+                size="medium"
+                weight="bold"
+                color="DARK"
+              />
+            )}
           </div>
-          <div className={cn('header-inner-right')}>
-            <div className={cn('text-wrapper')}>
-              <BaseText
-                text="My Pool"
-                size="medium"
-                weight="bold"
-                color="DARK_GRAY_5"
-              />
+          {width > 768 && (
+            <div className={cn('header-inner-right')}>
+              <div className={cn('text-wrapper')}>
+                <BaseText
+                  text="My Pool"
+                  size="medium"
+                  weight="bold"
+                  color="DARK_GRAY_5"
+                />
+              </div>
+              <div className={cn('text-wrapper')}>
+                <BaseText
+                  text="PnL($)"
+                  size="medium"
+                  weight="bold"
+                  color="DARK_GRAY_5"
+                />
+              </div>
+              <div className={cn('text-wrapper')}>
+                <BaseText
+                  text="PnL(%)"
+                  size="medium"
+                  weight="bold"
+                  color="DARK_GRAY_5"
+                />
+              </div>
             </div>
-            <div className={cn('text-wrapper')}>
-              <BaseText
-                text="PnL($)"
-                size="medium"
-                weight="bold"
-                color="DARK_GRAY_5"
-              />
-            </div>
-            <div className={cn('text-wrapper')}>
-              <BaseText
-                text="PnL(%)"
-                size="medium"
-                weight="bold"
-                color="DARK_GRAY_5"
-              />
-            </div>
-          </div>
+          )}
         </div>
         <div className={cn('table-body')}>
           <div className={cn('list-container')}>
@@ -147,7 +187,11 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                   />
                   <div className={cn('option-text')}>
                     <BaseText
-                      text={item.name}
+                      text={
+                        item.name.length > 8
+                          ? `${item.name.slice(0, 8)}..`
+                          : item.name
+                      }
                       size={'medium'}
                       weight="light"
                       color={'DARK'}
@@ -159,30 +203,34 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
                       fillRatio={ratio}
                     />
                   </div>
-                  <div className={cn('text-wrapper')}>
-                    <BaseText
-                      text={`${getSign(item.data.poolIn).sign}$${thousandFormat(parseFloat(item.data.poolIn.toFixed(2) || '0'))}`}
-                      size="medium"
-                      weight="light"
-                      color={getTextColor(item.data.gain)}
-                    />
-                  </div>
-                  <div className={cn('text-wrapper')}>
-                    <BaseText
-                      text={`${getSign(item.data.gain).sign}$${thousandFormat(parseFloat(item.data.gain.toFixed(2) || '0'))}`}
-                      size="medium"
-                      weight="light"
-                      color={getTextColor(item.data.gain)}
-                    />
-                  </div>
-                  <div className={cn('text-wrapper')}>
-                    <BaseText
-                      text={`${getSign(item.data.pnl).sign}${item.data.pnl}%`}
-                      size="medium"
-                      weight="light"
-                      color={getTextColor(item.data.gain)}
-                    />
-                  </div>
+                  {width > 768 && (
+                    <Fragment>
+                      <div className={cn('text-wrapper')}>
+                        <BaseText
+                          text={`${getSign(item.data.poolIn).sign}$${thousandFormat(Math.abs(parseFloat(item.data.poolIn.toFixed(2))) || '0')}`}
+                          size="medium"
+                          weight="light"
+                          color={getTextColor(item.data.gain)}
+                        />
+                      </div>
+                      <div className={cn('text-wrapper')}>
+                        <BaseText
+                          text={`${getSign(item.data.gain).sign}$${thousandFormat(Math.abs(parseFloat(item.data.gain.toFixed(2))) || '0')}`}
+                          size="medium"
+                          weight="light"
+                          color={getTextColor(item.data.gain)}
+                        />
+                      </div>
+                      <div className={cn('text-wrapper')}>
+                        <BaseText
+                          text={`${getSign(item.data.pnl).sign}${Math.abs(item.data.pnl)}%`}
+                          size="medium"
+                          weight="light"
+                          color={getTextColor(item.data.gain)}
+                        />
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
               );
             })}
@@ -190,12 +238,17 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
         </div>
         <div className={cn('table-wrapper')}>
           <div className={cn('header-inner-left')}>
-            <BaseText text="Total" size="large" weight="bold" color="DARK" />
+            <BaseText
+              text="Total"
+              size={width > 768 ? 'large' : 'medium'}
+              weight="bold"
+              color="DARK"
+            />
           </div>
           <div className={cn('header-inner-right')}>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(data?.totalPoolIn || 0).sign}$${thousandFormat(parseFloat(data?.totalPoolIn.toFixed(2) || '0'))}`}
+                text={`${getSign(data?.totalPoolIn || 0).sign}$${thousandFormat(Math.abs(parseFloat(data?.totalPoolIn.toFixed(2) || '0')))}`}
                 size="medium"
                 weight="bold"
                 color={getTextColor(data?.totalGain || 0)}
@@ -203,7 +256,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
             </div>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(data?.totalGain || 0).sign}$${thousandFormat(parseFloat(data?.totalGain.toFixed(2) || '0'))}`}
+                text={`${getSign(data?.totalGain || 0).sign}$${thousandFormat(Math.abs(parseFloat(data?.totalGain.toFixed(2) || '0')))}`}
                 size="medium"
                 weight="bold"
                 color={getTextColor(data?.totalGain || 0)}
@@ -211,7 +264,7 @@ const PoolResultModal = ({ topicId }: PoolResultModalProps) => {
             </div>
             <div className={cn('text-wrapper')}>
               <BaseText
-                text={`${getSign(data?.totalPnL || 0).sign}${data?.totalPnL}%`}
+                text={`${getSign(data?.totalPnL || 0).sign}${Math.abs(data?.totalPnL ?? 0)}%`}
                 size="medium"
                 weight="bold"
                 color={getTextColor(data?.totalGain || 0)}

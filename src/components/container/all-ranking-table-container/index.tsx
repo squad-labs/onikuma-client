@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styles from '@/components/container/all-ranking-table-container/AllRankingTableContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -16,26 +16,52 @@ type Props = {
 };
 
 const AllRankingTableContainer = ({ leaders }: Props) => {
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={cn('container')}>
       <div className={cn('table-header')}>
         <div className={cn('header-wrapper')}>
           <div className={cn('header-inner-left')}>
             <div className={cn('h-my-ranking')}>
-              <BaseText
-                size="medium"
-                color="BASE_BLUE_1"
-                weight="bold"
-                text="Ranking"
-              />
-              <Image
-                src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DOWNLOAD)}
-                alt="download"
-                width={14}
-                height={14}
-                priority
-                className={cn('icon')}
-              />
+              {width > 768 ? (
+                <Fragment>
+                  <BaseText
+                    size="medium"
+                    color="BASE_BLUE_1"
+                    weight="bold"
+                    text="Ranking"
+                  />
+                  <Image
+                    src={getStaticSrc('icon', ICON_SRC_PATH.SRC.DOWNLOAD)}
+                    alt="download"
+                    width={14}
+                    height={14}
+                    priority
+                    className={cn('icon')}
+                  />
+                </Fragment>
+              ) : (
+                <Image
+                  src={getStaticSrc('icon', ICON_SRC_PATH.SRC.MEDAL)}
+                  alt="ranking"
+                  width={24}
+                  height={24}
+                  priority
+                  className={cn('icon')}
+                />
+              )}
             </div>
             <div className={cn('h-wallet-address')}>
               <BaseText

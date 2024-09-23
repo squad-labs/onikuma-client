@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import styles from '@/components/common/card/uploadVoiceCard/UploadVoiceCard.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -29,6 +29,7 @@ const UploadVoiceCard = ({
   withbackGround,
   setSkip,
 }: Props) => {
+  const [width, setWidth] = useState<number>(0);
   const router = useRouter();
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
@@ -62,6 +63,17 @@ const UploadVoiceCard = ({
     },
   });
 
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div
       className={cn('card-container')}
@@ -70,12 +82,21 @@ const UploadVoiceCard = ({
         backgroundColor: withbackGround ? COLOR['LIGHT'] : 'transparent',
       }}
     >
-      <BaseText
-        text="You pooled in the biggest for the entire Onikuma!"
-        color="DARK"
-        size="large"
-        weight="bold"
-      />
+      {width > 768 ? (
+        <BaseText
+          text="You pooled in the biggest for the entire Onikuma!"
+          color="DARK"
+          size="large"
+          weight="bold"
+        />
+      ) : (
+        <BaseText
+          text="You pooled in the biggest for the entire Onikuma!"
+          color="DARK"
+          size="medium"
+          weight="bold"
+        />
+      )}
       <div className={cn('text-container')}>
         <BaseText
           text="Celebrate your contribution with custom Onikuma AI powered voices."

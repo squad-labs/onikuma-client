@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@/components/container/tvl-table-container/TvlTableContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -14,6 +14,19 @@ type Props = {
 };
 
 const TvlTableContaienr = ({ dashboard }: Props) => {
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={cn('container')}>
       <div className={cn('top-inner')}>
@@ -26,13 +39,13 @@ const TvlTableContaienr = ({ dashboard }: Props) => {
       </div>
       <div className={cn('table-header')}>
         <TableHeader onlyName={false} />
-        <TableHeader onlyName={false} />
+        {width > 768 && <TableHeader onlyName={false} />}
       </div>
       <div className={cn('table-body')}>
         {dashboard.totalData.map((item, index) => {
           const isLastRow =
             index === dashboard.totalData.length - 1 ||
-            index === dashboard.totalData.length - 2;
+            (width > 768 && index === dashboard.totalData.length - 2);
 
           return (
             <div
@@ -57,6 +70,7 @@ const TvlTableContaienr = ({ dashboard }: Props) => {
                 color="DARK"
                 size="medium"
                 weight="bold"
+                classNames={['text-start']}
               />
               <BaseText
                 text={`${item.winningRate}%`}

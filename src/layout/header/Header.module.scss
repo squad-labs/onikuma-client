@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .header-container {
   width: 100%;
   height: 72px;
@@ -16,7 +18,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ˇ &:first-child .header-inner {
+    &:first-child .header-inner {
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -31,6 +33,49 @@
       align-items: center;
       justify-content: flex-end;
       gap: 1.5rem;
+
+      .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .header-container {
+    .header-wrapper {
+      &:first-child .header-inner {
+        .bar-wrapper {
+          display: none;
+        }
+      }
+
+      &:last-child .header-inner {
+        .button-container {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .header-container {
+    .header-wrapper {
+      &:first-child .header-inner {
+        .bar-wrapper {
+          display: none;
+        }
+      }
+
+      &:last-child .header-inner {
+        .button-container {
+          display: none;
+        }
+      }
     }
   }
 }

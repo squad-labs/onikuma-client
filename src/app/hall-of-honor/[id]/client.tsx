@@ -26,6 +26,8 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
   const [pickerManager, setPickerManager] = useState<
     { isFlip: boolean; isSkip: boolean }[]
   >(new Array(pickerLength).fill({ isFlip: false, isSkip: false }));
+  console.log(pickerLength, pickerManager);
+
   const [voiceManager, setVoiceManager] = useState<{
     isFlip: boolean;
     isSkip: boolean;
@@ -79,24 +81,25 @@ const HallOfHonorClientPage = ({ id, honor }: Props) => {
           label={'Hall of Honor'}
           onlyDate
         />
-        {honor?.competitors?.map((competitor, index) => {
-          return (
-            <UploadImageCard
-              key={index}
-              index={index}
-              topicId={id}
-              pickerName={competitor.name}
-              setSkip={() => handleSkip(index)}
-              withBorder={false}
-              withbackGround={false}
-              isFlip={pickerManager[index].isFlip}
-              baseImage={competitor.imgUrl}
-              isSkip={pickerManager[index].isSkip}
-              flipImage={competitor.biggestImgUrl}
-              setFlip={() => handleFlip(index)}
-            />
-          );
-        })}
+        {pickerManager &&
+          honor?.competitors?.map((competitor, index) => {
+            return (
+              <UploadImageCard
+                key={index}
+                index={index}
+                topicId={id}
+                pickerName={competitor.name}
+                setSkip={() => handleSkip(index)}
+                withBorder={false}
+                withbackGround={false}
+                isFlip={pickerManager[index].isFlip}
+                baseImage={competitor.imgUrl}
+                isSkip={pickerManager[index].isSkip}
+                flipImage={competitor.biggestImgUrl}
+                setFlip={() => handleFlip(index)}
+              />
+            );
+          })}
         {honor.isBiggestTopicPooler && (
           <div
             className={cn(
