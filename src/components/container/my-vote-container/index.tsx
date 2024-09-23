@@ -70,7 +70,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
             </div>
           </div>
         </div>
-        <div className={cn('header-wrapper')}>
+        <div className={cn('header-wrapper', 'header-wrapper-mobile')}>
           <div className={cn('header-inner-left')}>
             <BaseText
               size="medium"
@@ -151,7 +151,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
             </div>
           );
         })}
-        {isBlurred && (
+        {false && (
           <div className={cn('body-container')}>
             <div className={cn('overlay')}>
               <div className={cn('message')}>

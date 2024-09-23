@@ -1,6 +1,26 @@
+@import '@/styles/_mix.scss';
+
 .button-wrapper {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translate(-50%, 0%);
+}
+
+@include mobile {
+  .button-wrapper {
+    position: static;
+    margin: 2rem auto;
+    transform: translate(0, 0);
+    padding-bottom: 2rem;
+  }
+}
+
+@include tablet {
+  .button-wrapper {
+    position: static;
+    margin: 2rem auto;
+    transform: translate(0, 0);
+    padding-bottom: 2rem;
+  }
 }

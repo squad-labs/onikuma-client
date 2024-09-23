@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .card-container {
   width: 100%;
   padding: 1.6rem 1rem;
@@ -27,5 +29,11 @@
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0.8rem;
+  }
+}
+
+@include mobile {
+  .card-container {
+    padding: 0rem;
   }
 }

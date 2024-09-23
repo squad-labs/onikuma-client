@@ -52,6 +52,7 @@ const TopicDropdown = ({ value }: Props) => {
           size={'medium'}
           weight={'regular'}
           color={'LIGHT'}
+          classNames={['text-start']}
         />
         <Image
           src={getStaticSrc('icon', ICON_SRC_PATH.SRC.ARROW_DOWN)}

@@ -7,11 +7,15 @@ import PlayGameButton from '@/components/common/button/playGameButton';
 import { getTopicByStatus } from '@/shared/api/Topics';
 import { TopicMetadata } from '@/shared/types/data/topic';
 import dynamic from 'next/dynamic';
-import AuthDropdown from '@/components/common/dropdown/authDropdown';
 import OnVoiceButton from '@/components/common/button/onVoiceButton';
 
 const GameRelayBar = dynamic(
   () => import('@/components/common/bar/gameRelayBar'),
+  { ssr: false },
+);
+
+const DynamicAuthDropdown = dynamic(
+  () => import('@/components/common/dropdown/authDropdown'),
   { ssr: false },
 );
 
@@ -31,10 +35,12 @@ const Header = async () => {
           </div>
         </div>
         <div className={cn('header-inner')}>
-          <AuthDropdown />
+          <Suspense>{data && <DynamicAuthDropdown id={data._id} />}</Suspense>
           <OnVoiceButton />
-          <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
-          <PlayGameButton />
+          <div className={cn('button-container')}>
+            <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
+            <PlayGameButton />
+          </div>
         </div>
       </div>
     </header>

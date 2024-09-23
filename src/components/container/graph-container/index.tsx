@@ -1,4 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
+'use client';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from '@/components/container/graph-container/GraphContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -31,6 +32,19 @@ export const GraphColorMap: GraphColorMapType = {
 };
 
 const GraphContainer = ({ type, dashboard }: Props) => {
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const largestVote = useMemo(() => {
     return dashboard.totalData.reduce((prev, current) => {
       return prev.vote > current.vote ? prev : current;
@@ -101,14 +115,18 @@ const GraphContainer = ({ type, dashboard }: Props) => {
               className={cn('image')}
               priority={true}
             />
-            <BaseText
-              text={item.name}
-              size={'medium'}
-              weight={'light'}
-              color={'DARK'}
-            />
+            {width > 768 && (
+              <BaseText
+                text={item.name}
+                size={'medium'}
+                weight={'light'}
+                color={'DARK'}
+              />
+            )}
           </div>
-          <div className={cn('block-wrapper')}>
+          <div
+            className={cn(width < 786 ? 'vote-block-wrapper' : 'block-wrapper')}
+          >
             <GraphBlock fillColor={'BASE_BLUE_1'} fillRatio={ratio} />
           </div>
           <div className={cn('text-wrapper')}>

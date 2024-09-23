@@ -1,3 +1,5 @@
+@import '@/styles/_mix.scss';
+
 .container {
   width: calc(100% - 10rem);
   height: calc(100% - 8rem);
@@ -53,5 +55,30 @@
     transform: translateX(100%);
     opacity: 0;
     display: none;
+  }
+}
+
+@include mobile {
+  .container {
+    width: calc(100% - 2.5rem);
+    height: calc(100% - 2rem);
+    margin: 1rem 1.25rem;
+
+    .top-inner {
+      .top-title {
+        font-size: 1.45rem;
+      }
+    }
+
+    .mid-inner {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.8rem;
+
+      .upload-voice-wrapper {
+        padding: 1rem;
+        margin-top: 1rem;
+      }
+    }
   }
 }

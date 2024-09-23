@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import styles from '@/components/container/game-meta/GameMetaContainer.module.scss';
 import classNames from 'classnames/bind';
 import BaseText from '@/widgets/text/baseText';
@@ -31,8 +31,20 @@ const GameMetaContainer = ({
   label,
   onlyDate = false,
 }: Props) => {
+  const [width, setWidth] = useState<number>(0);
   const { options, currentIndex } = useContext(RoundContext);
   const { roundIndex } = useRound(RoundContext);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <section className={cn('meta-container')}>
@@ -65,7 +77,6 @@ const GameMetaContainer = ({
         )}
         <DateText
           startDate={startAt}
-          endDate={endAt}
           color={'DARK_GRAY_2'}
           size={'medium'}
           weight={'regular'}
@@ -75,12 +86,12 @@ const GameMetaContainer = ({
         <BaseText
           text={title}
           color={'DARK_GRAY_2'}
-          size={'extra-large'}
+          size={width > 768 ? 'extra-large' : 'large'}
           weight={'bold'}
         />
         {isFinal ||
           onlyDate ||
-          (status && (
+          (width > 768 && status && (
             <ShareGameButton
               topicId={topicId}
               title={title}
