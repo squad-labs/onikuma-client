@@ -126,10 +126,7 @@ const ShareGameButton = ({
       );
       const tweetUrl = encodeURIComponent(window.location.href);
       const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
-      const tweetImage = encodeURIComponent(
-        'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-twitter.png?raw=true',
-      );
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A${tweetImage}`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
       await getSharePoint();
       window.open(twitterUrl, '_blank');
     },
@@ -144,10 +141,7 @@ const ShareGameButton = ({
       );
       const tweetUrl = encodeURIComponent(window.location.href);
       const tweetHashTag = encodeURIComponent('Onikuma,Game,Berachain');
-      const tweetImage = encodeURIComponent(
-        'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-twitter.png?raw=true',
-      );
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A${tweetImage}`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}&hashtags=${tweetHashTag}&url=${tweetUrl}%0A`;
       await getSharePoint();
       window.open(twitterUrl, '_blank');
     },
