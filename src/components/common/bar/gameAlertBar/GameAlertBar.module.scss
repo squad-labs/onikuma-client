@@ -1,7 +1,7 @@
 .bar-wrapper {
   left: 50%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   animation-name: appearFromBottom;
   animation-duration: 0.2s;
   animation-timing-function: ease;
@@ -12,7 +12,7 @@
 .bar-wrapper-hide {
   left: 50%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   animation-name: disappearToBottom;
   animation-duration: 0.5s;
   animation-timing-function: ease;
