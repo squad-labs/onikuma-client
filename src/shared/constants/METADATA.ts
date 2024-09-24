@@ -15,7 +15,7 @@ export const BASE_METADATA = {
     'Dominate',
     'Bet',
   ],
-  url: 'https://app.onikuma.world',
+  url: 'https://onikuma.vercel.app',
   image:
     'https://github.com/squad-labs/onikuma-client/blob/main/public/assets/onikuma-game.png?raw=true',
   ogImage: '/metadata/og-image.png',
