@@ -8,7 +8,7 @@ const nextConfig = {
   images: {
     domains: [
       'dev-onikuma-s3.s3.ap-northeast-2.amazonaws.com',
-      's2.coinmarketcap.com',
+      'prod-onikuma-s3.s3.ap-northeast-2.amazonaws.com',
     ],
   },
   env: {
