@@ -174,8 +174,13 @@ const MyDataTableContainer = ({ data }: MyDataTableProps) => {
                     }
                     secondaryColor="BASE_CREAM_1"
                     onClick={() => {
-                      if (isHallofHonor()) {
+                      if (isHallofHonor() && item.status === 'onGoing') {
                         router.push(`/hall-of-honor/${item.topicId}`);
+                      } else if (
+                        isHallofHonor() === false &&
+                        item.status === 'onGoing'
+                      ) {
+                        return;
                       } else {
                         dispatch(
                           OPEN_MODAL({
