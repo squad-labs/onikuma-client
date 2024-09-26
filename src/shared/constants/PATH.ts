@@ -26,6 +26,7 @@ export const ICON_SRC_PATH = {
     PLAY: '/play.svg',
     DASHBOARD: '/dashboard.svg',
     MEDAL: '/medal.svg',
+    HONEY: '/honey.svg',
   },
 } as const;
 

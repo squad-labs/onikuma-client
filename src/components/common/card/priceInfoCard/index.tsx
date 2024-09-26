@@ -4,6 +4,8 @@ import classNames from 'classnames/bind';
 import BaseBedge from '@/widgets/bedge/baseBedge';
 import BaseText from '@/widgets/text/baseText';
 import Image from 'next/image';
+import { getStaticSrc } from '@/shared/utils/etc';
+import { ICON_SRC_PATH } from '@/shared/constants/PATH';
 
 const cn = classNames.bind(styles);
 
@@ -41,7 +43,11 @@ const PriceInfoCard = ({
         >
           <div className={cn('tag-inner')}>
             <Image
-              src={imageUrl}
+              src={
+                type === 'top'
+                  ? getStaticSrc('icon', ICON_SRC_PATH.SRC.HONEY)
+                  : imageUrl
+              }
               width={28}
               height={28}
               alt="coin"

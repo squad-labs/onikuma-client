@@ -1,0 +1,56 @@
+@import '@/styles/_mix.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+
+  .inner {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-color: var(--LIGHT-CREAM-1);
+    border: 3px solid var(--DARK-GRAY-4);
+    border-radius: 1rem;
+    box-shadow: 5px 4px var(--DARK-GRAY-3);
+    overflow-y: scroll;
+  }
+
+  .error-inner {
+    position: relative;
+    width: calc(100vw - 8rem);
+    height: calc(100vh - 8rem - 72px);
+    background-color: var(--LIGHT-CREAM-1);
+    border: 3px solid var(--DARK-GRAY-4);
+    border-radius: 1rem;
+    box-shadow: 5px 4px var(--DARK-GRAY-3);
+  }
+}
+
+@include mobile {
+  .container {
+    padding: 1rem;
+
+    .inner {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      overflow-y: scroll;
+    }
+  }
+}
+
+@include tablet {
+  .container {
+    padding: 1rem;
+
+    .inner {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      overflow-y: scroll;
+    }
+  }
+}
