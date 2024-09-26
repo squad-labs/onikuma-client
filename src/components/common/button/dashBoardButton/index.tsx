@@ -21,7 +21,7 @@ const DashBoardButton = ({ id }: Props) => {
       fontSize={'large'}
       fontWeight={'regular'}
       loading={false}
-      onClick={() => router.push(`/d/${id}`)}
+      onClick={() => router.push(`/d/ongoing`)}
       classNames={[]}
     />
   );
