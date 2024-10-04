@@ -56,7 +56,7 @@ const DashboardPage = async ({ params }: Props) => {
 
     console.log(dashboardRes.ok, topicRes.ok, myRes.ok);
 
-    if (!dashboardRes.ok || !topicRes.ok || !myRes.ok) {
+    if (!dashboardRes.ok || !topicRes.ok) {
       throw new Error('Failed to fetch data');
     }
 

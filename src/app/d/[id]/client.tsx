@@ -32,7 +32,7 @@ const DashboardClientPage = ({ id }: Props) => {
 
   const isBlurred = useMemo(() => {
     return (
-      myVote != null &&
+      myVote !== null &&
       Array.isArray(myVote.competitors) &&
       myVote.competitors.every((vote) => vote.reserveToken === 0)
     );
@@ -68,7 +68,7 @@ const DashboardClientPage = ({ id }: Props) => {
         </section>
         <section className={cn('mid-inner')}>
           <Suspense>
-            {myVote && (
+            {myVote !== null && (
               <MyVoteContainer myVote={myVote} isBlurred={isBlurred} />
             )}
           </Suspense>

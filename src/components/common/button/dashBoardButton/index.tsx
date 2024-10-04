@@ -1,14 +1,18 @@
 'use client';
 import BaseButton from '@/widgets/button/baseButton';
+import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useAccount } from 'wagmi';
 
-type Props = {
-  id: string;
-};
-
-const DashBoardButton = ({ id }: Props) => {
+const DashBoardButton = () => {
+  const { isConnected, address } = useAccount();
   const router = useRouter();
+  const token = getCookie('accessToken');
+
+  const connected = useMemo(() => {
+    return isConnected && address && token && token != 'undefined';
+  }, [isConnected, address, token]);
 
   return (
     <BaseButton
@@ -23,6 +27,7 @@ const DashBoardButton = ({ id }: Props) => {
       loading={false}
       onClick={() => router.push(`/d/ongoing`)}
       classNames={[]}
+      disabled={!connected}
     />
   );
 };

@@ -2,7 +2,7 @@ import { useConnect } from '@/shared/hooks/useConnect';
 import { getTimezone } from '@/shared/utils/etc';
 import { useEffect } from 'react';
 import { userLogin } from '@/shared/api/Auth';
-import { getCookie, setCookie } from 'cookies-next';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { useAccount } from 'wagmi';
 import { useMutation } from '@tanstack/react-query';
 import { MUTATION_KEY } from '@/shared/constants/MUTATION_KEY';
@@ -24,14 +24,14 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   });
 
   const login = async () => {
-    if (!address) return;
+    if (!address || !isConnected) return;
     const timezone = getTimezone();
 
     loginMutation.mutate({ wallet: address, timezone });
   };
 
   const logout = async () => {
-    setCookie('accessToken', undefined);
+    deleteCookie('accessToken');
     localStorage.removeItem('onikuma-wallet-priority');
     handleDisconnect();
   };
@@ -39,14 +39,13 @@ export const useAuth = ({ autoLogin = false }: Props) => {
   useEffect(() => {
     if (autoLogin) {
       const token = getCookie('accessToken');
-
       if (isConnected && address) {
-        if (!token || token === 'undefined') {
+        if (!token || token == 'undefined' || token == '') {
           login();
         }
       }
     }
-  }, [isConnected, address]);
+  }, [isConnected, address, autoLogin]);
 
   return {
     login,
