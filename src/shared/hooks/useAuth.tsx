@@ -45,7 +45,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
         }
       }
     }
-  }, [isConnected, address]);
+  }, [isConnected, address, autoLogin]);
 
   return {
     login,

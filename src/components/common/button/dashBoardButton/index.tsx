@@ -12,7 +12,7 @@ const DashBoardButton = () => {
 
   const connected = useMemo(() => {
     return isConnected && address && token && token != 'undefined';
-  }, [isConnected, address]);
+  }, [isConnected, address, token]);
 
   return (
     <BaseButton
