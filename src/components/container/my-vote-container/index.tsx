@@ -108,7 +108,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
         </div>
       </div>
       <div className={cn('table-body')}>
-        {myVote.competitors.map((competitor, index) => {
+        {myVote?.competitors?.map((competitor, index) => {
           return (
             <div key={index} className={cn('list-item')}>
               <div className={cn('item-inner-left')}>
@@ -151,7 +151,7 @@ const MyVoteContainer = ({ myVote, isBlurred }: Props) => {
             </div>
           );
         })}
-        {false && (
+        {isBlurred && (
           <div className={cn('body-container')}>
             <div className={cn('overlay')}>
               <div className={cn('message')}>
