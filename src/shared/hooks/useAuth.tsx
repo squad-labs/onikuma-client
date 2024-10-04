@@ -40,7 +40,7 @@ export const useAuth = ({ autoLogin = false }: Props) => {
     if (autoLogin) {
       const token = getCookie('accessToken');
       if (isConnected && address) {
-        if (!token) {
+        if (!token || token == 'undefined' || token == '') {
           login();
         }
       }
