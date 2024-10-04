@@ -38,7 +38,7 @@ const Header = async () => {
           <Suspense>{data && <DynamicAuthDropdown id={data._id} />}</Suspense>
           <OnVoiceButton />
           <div className={cn('button-container')}>
-            <Suspense>{data && <DashBoardButton id={data._id} />}</Suspense>
+            <DashBoardButton />
             <PlayGameButton />
           </div>
         </div>
