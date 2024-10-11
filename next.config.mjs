@@ -52,6 +52,15 @@ const nextConfig = {
       },
     ];
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/:path*',
+        destination: 'https://onikuma.world',
+        permanent: true, // 영구 리디렉션 (301)
+      },
+    ];
+  },
   rewrites: async () => {
     return [
       {
